@@ -2,12 +2,14 @@ import { ValidatorFn, FormControl } from "@angular/forms";
 
 export const trimValidator: ValidatorFn = (control: FormControl) => {
     if (control.value != null) {
-        if (control.value.toString().startsWith(' ')) {
+        let validationRuleStart = /^\s/;
+        if (validationRuleStart.test(control.value.toString())) {
             return {
                 'trimBeginError': true
             };
         }
-        if (control.value.toString().endsWith(' ')) {
+        let validationRuleEnd = /\s$/;
+        if (validationRuleEnd.test(control.value.toString())) {
             return {
                 'trimEndError': true
             };

@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { trimValidator } from './../directives/trim.validator';
+import { Component, OnInit, ViewChild, TemplateRef, SimpleChanges } from '@angular/core';
 import { Skill } from 'src/entities/skill';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SkillType } from 'src/entities/skillType';
 import { FacadeService } from 'src/app/services/facade.service';
 import { AppComponent } from '../app.component';
-
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
@@ -45,8 +45,8 @@ export class SkillsComponent implements OnInit {
     this.getSkillTypes();
 
     this.skillForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      name: [null, [Validators.required, trimValidator]],
+      description: [null, [Validators.required, trimValidator]],
       type: [null, [Validators.required]],
     });
     this.app.hideLoading();
@@ -80,7 +80,6 @@ export class SkillsComponent implements OnInit {
     this.searchValue = '';
     this.search();
   }
-
   search(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchSkills.length ? this.listOfSearchSkills.some(skills => item.name.indexOf(skills) !== -1) : true) &&
@@ -101,7 +100,7 @@ export class SkillsComponent implements OnInit {
   showAddModal(modalContent: TemplateRef<{}>): void {
     //Add New Skill Modal
     this.skillForm.reset();
-
+    this.getSkillTypes();
     if(this.skillTypes.length > 0)
       this.skillForm.controls['type'].setValue(this.skillTypes[0].id);
 

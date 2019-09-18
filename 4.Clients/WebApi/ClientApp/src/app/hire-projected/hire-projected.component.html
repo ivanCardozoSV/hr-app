@@ -60,7 +60,7 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="value">Value</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input type="number" nz-input formControlName="value" id="value" placeholder="Please input the value">
+        <input numbersOnly pattern="[0-9]*" type="number" nz-input formControlName="value" id="value" placeholder="Please input the value">
         <nz-form-explain *ngIf="projectionForm.get('value').dirty && projectionForm.get('value').errors">Please
           input the value</nz-form-explain>
       </nz-form-control>

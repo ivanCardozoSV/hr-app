@@ -79,7 +79,7 @@ export class CompanyCalendarComponent implements OnInit {
     this.validateForm = this.fb.group({
         type: [null, [Validators.required]],
         date: [new Date(), [Validators.required]],
-        comments: [null, [Validators.required]],
+        comments: [null, [Validators.required, trimValidator]],
     });
   }
 

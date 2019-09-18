@@ -121,7 +121,7 @@ export class RoomComponent implements OnInit {
               }
               this.facade.RoomService.add<Room>(newRoom)
                 .subscribe(res => {          
-                  // this.settings.getRooms();
+                  this.settings.getRooms();
                   this.controlArray = [];
                   this.facade.toastrService.success('Room was successfully created !');
                   

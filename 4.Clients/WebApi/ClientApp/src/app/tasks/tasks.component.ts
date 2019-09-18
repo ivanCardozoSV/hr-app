@@ -48,7 +48,7 @@ export class TasksComponent implements OnInit {
   }
 
   constructor(private facade: FacadeService, private fb: FormBuilder, private config: AppConfig, private app: AppComponent) {
-    this.user = JSON.parse(localStorage.getItem("currentUser"));
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   getConsultants() {
@@ -63,6 +63,7 @@ export class TasksComponent implements OnInit {
 
   getTasks() {
     if (this.app.isUserRole(["HRManagement", "Admin"])) {
+      console.log()
       this.facade.taskService.get<Task>()
         .subscribe(res => {
           this.toDoList = res.sort((a, b) => (a.endDate < b.endDate ? 1 : -1));;
@@ -268,12 +269,17 @@ export class TasksComponent implements OnInit {
             let isCompleted: boolean = true;
             let items: any[] = [];
             if (!this.app.isUserRole(["HRManagement", "Admin"]))
-              this.validateForm.controls["consultant"].setValue(this.currentConsultant.id.toString());
+              this.validateForm.controls['consultant'].setValue(this.currentConsultant.id.toString());
             for (const i in this.validateForm.controls) {
               this.validateForm.controls[i].markAsDirty();
               this.validateForm.controls[i].updateValueAndValidity();
-              if (!this.validateForm.controls[i].valid) isCompleted = false;
-              if (i.includes('item')) items.push(this.validateForm.controls[i].value);
+              console.log(this.validateForm.controls[i].value);
+              console.log(this.validateForm.controls[i]);
+              if (this.validateForm.controls[i].valid==false)
+                isCompleted = false;
+                console.log(isCompleted);
+              if (i.includes('item'))
+                items.push(this.validateForm.controls[i].value);
             }
             if (isCompleted) {
               let newId: number = this.toDoList.length > 0 ? this.toDoList[this.toDoList.length - 1].id + 1 : 0;

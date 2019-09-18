@@ -5806,7 +5806,8 @@
           "Core": "1.0.0",
           "Core.Persistance": "1.0.0",
           "Domain.Model": "1.0.0",
-          "Google.Apis.Calendar.v3": "1.40.2.1643"
+          "Google.Apis.Calendar.v3": "1.40.2.1643",
+          "Microsoft.Extensions.Options": "2.2.0"
         },
         "compile": {
           "bin/placeholder/Domain.Services.dll": {}
@@ -9843,7 +9844,6 @@
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -9870,7 +9870,6 @@
       "path": "runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -9910,6 +9909,7 @@
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
@@ -10833,6 +10833,7 @@
       "path": "system.composition.attributedmodel/1.0.31",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/System.Composition.AttributedModel.dll",
@@ -12843,6 +12844,7 @@
       "path": "system.reflection.emit/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12878,6 +12880,7 @@
       "path": "system.reflection.emit.ilgeneration/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -13893,6 +13896,7 @@
       "path": "system.security.claims/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -14319,6 +14323,7 @@
       "path": "system.security.principal/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -15664,23 +15669,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\": {},
+    "C:\\Users\\Thomas Nazar\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
       "projectName": "ApiServer.Tests",
-      "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
-      "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\obj\\",
+      "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
+      "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -15693,11 +15698,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
-              "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
+            "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
+              "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
             },
-            "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj": {
-              "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj"
+            "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj": {
+              "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj"
             }
           }
         }
