@@ -1,8 +1,9 @@
 import { Component, OnInit, TemplateRef, ɵConsole, ViewChild } from '@angular/core';
 import { FacadeService } from 'src/app/services/facade.service';
 import { DaysOff } from 'src/entities/days-off';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { trimValidator } from '../directives/trim.validator';
+import { dniValidator } from "../directives/dni.validator";
 import { AppComponent } from '../app.component';
 import { Employee } from 'src/entities/employee';
 import { EmployeeService } from 'src/app/services/employee.service'
@@ -18,7 +19,7 @@ import { DaysOffStatusEnum } from '../../entities/enums/daysoff-status.enum';
   styleUrls: ['./days-off.component.css']
 })
 export class DaysOffComponent implements OnInit {
- 
+
   @ViewChild('dropdown') nameDropdown;
 
   validateForm: FormGroup;
@@ -34,41 +35,41 @@ export class DaysOffComponent implements OnInit {
   sortName = null;
   reasons: any[];
   showCalendarSelected: boolean = false;
-  isHr: boolean ;
+  isHr: boolean;
   today = new Date();
   currentUser: User;
   statusList: any[];
 
   constructor(private facade: FacadeService,
-              private fb: FormBuilder,
-              private app: AppComponent,
-              private daysOffService: DaysOffService,
-              private employeeService: EmployeeService,
-              private globals: Globals) {
-                this.reasons = globals.daysOffTypeList;
-                this.statusList = globals.daysOffStatusList;
-              }
+    private fb: FormBuilder,
+    private app: AppComponent,
+    private daysOffService: DaysOffService,
+    private employeeService: EmployeeService,
+    private globals: Globals) {
+    this.reasons = globals.daysOffTypeList;
+    this.statusList = globals.daysOffStatusList;
+  }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.isHr = this.currentUser.Role === 'Admin';
     this.employeeService.GetByEmail(this.currentUser.Email)
-          .subscribe(res => {
-            this.employee = res.body;
-            this.getDaysOff();
-            this.resetForm();
-          });
+      .subscribe(res => {
+        this.employee = res.body;
+        this.getDaysOff();
+        this.resetForm();
+      });
   }
 
-  getDaysOff(){
+  getDaysOff() {
     if (this.isHr) {
       this.facade.daysOffService.get<DaysOff>()
-      .subscribe(res => {
-        this.listOfDaysOff = res;
-        this.listOfDisplayData = res;
-      }, err => {
-        console.log(err);
-      });
+        .subscribe(res => {
+          this.listOfDaysOff = res;
+          this.listOfDisplayData = res;
+        }, err => {
+          console.log(err);
+        });
     } else {
       this.daysOffService.getByDNI(this.employee.dni)
         .subscribe(res => {
@@ -82,10 +83,10 @@ export class DaysOffComponent implements OnInit {
     this.showCalendarSelected = false;
   }
 
-  compareTwoDates(): boolean{
-    if (new Date(this.validateForm.controls['endDate'].value) < new Date(this.validateForm.controls['date'].value)){
-       this.facade.toastrService.error('End Date must be before start date');
-       return false;
+  compareTwoDates(): boolean {
+    if (new Date(this.validateForm.controls['endDate'].value) < new Date(this.validateForm.controls['date'].value)) {
+      this.facade.toastrService.error('End Date must be before start date');
+      return false;
     }
     return true;
   }
@@ -117,7 +118,7 @@ export class DaysOffComponent implements OnInit {
     return true;
   }
 
-  filterTasks(){
+  filterTasks() {
     // if(!this.showAllTasks){
     //   this.toDoListDisplay = this.toDoListDisplay.filter(todo => todo.consultant.emailAddress.toLowerCase() === this.currentConsultant.emailAddress.toLowerCase());
     // }
@@ -140,53 +141,59 @@ export class DaysOffComponent implements OnInit {
           onClick: () => {
             if (this.compareTwoDates()) {
               this.app.showLoading();
-              const dni: number = this.validateForm.controls.DNI.value == null || this.validateForm.controls.DNI.value === undefined ? 0
-                                    : this.validateForm.controls.DNI.value;
-              this.employeeService.GetByDNI(dni)
-              .subscribe(res => {
+              if (this.validateForm.controls.DNI.valid == false) {
+                this.facade.toastrService.error('Please input a valid DNI.');
                 this.app.hideLoading();
-                this.employee = res.body;
-                if(!this.employee || this.employee == null){
-                  this.facade.toastrService.error('There is no employee with that DNI.');
-                } else {
-                  let isCompleted: boolean = true;
-                  for (const i in this.validateForm.controls) {
-                    this.validateForm.controls[i].markAsDirty();
-                    this.validateForm.controls[i].updateValueAndValidity();
-                    if ((this.validateForm.controls[i].status != 'DISABLED' && !this.validateForm.controls[i].valid)) isCompleted = false;
-                  } 
-                  let newStatus = this.isHr ? this.validateForm.controls['status'].value : DaysOffStatusEnum.InReview
-                  if (isCompleted) {
-                    let newDayOff: DaysOff = {
-                      id: 0,
-                      date: this.validateForm.controls['date'].value.toISOString(),
-                      endDate: this.validateForm.controls['endDate'].value.toISOString(),
-                      type: this.validateForm.controls['type'].value.toString(),
-                      status: newStatus,
-                      employeeId: this.employee.id,
-                      employee : this.employee
-                    };
-                    this.facade.daysOffService.add(newDayOff)
-                    .subscribe(res => {
-                      this.app.hideLoading()
-                      this.getDaysOff(); 
-                      this.facade.toastrService.success("Day off was successfuly created !");
-                      modal.destroy();
-                    }, err => {
-                      this.app.hideLoading();
-                      // modal.nzFooter[1].loading = false;
-                      if (err.message != undefined) this.facade.toastrService.error(err.message);
-                      else this.facade.toastrService.error("The service is not available now. Try again later.");
-                    })
-                  }
-                  // else modal.nzFooter[1].loading = false;
-                  // this.app.hideLoading();
-                }
-              });
+              }
+              else {
+                const dni: number = this.validateForm.controls.DNI.value == null || this.validateForm.controls.DNI.value === undefined ? 0
+                  : this.validateForm.controls.DNI.value;
+                this.employeeService.GetByDNI(dni)
+                  .subscribe(res => {
+                    this.app.hideLoading();
+                    this.employee = res.body;
+                    if (!this.employee || this.employee == null) {
+                      this.facade.toastrService.error('There is no employee with that DNI.');
+                    } else {
+                      let isCompleted: boolean = true;
+                      for (const i in this.validateForm.controls) {
+                        this.validateForm.controls[i].markAsDirty();
+                        this.validateForm.controls[i].updateValueAndValidity();
+                        if ((this.validateForm.controls[i].status != 'DISABLED' && !this.validateForm.controls[i].valid)) isCompleted = false;
+                      }
+                      let newStatus = this.isHr ? this.validateForm.controls['status'].value : DaysOffStatusEnum.InReview
+                      if (isCompleted) {
+                        let newDayOff: DaysOff = {
+                          id: 0,
+                          date: this.validateForm.controls['date'].value.toISOString(),
+                          endDate: this.validateForm.controls['endDate'].value.toISOString(),
+                          type: this.validateForm.controls['type'].value.toString(),
+                          status: newStatus,
+                          employeeId: this.employee.id,
+                          employee: this.employee
+                        };
+                        this.facade.daysOffService.add(newDayOff)
+                          .subscribe(res => {
+                            this.app.hideLoading()
+                            this.getDaysOff();
+                            this.facade.toastrService.success("Day off was successfuly created !");
+                            modal.destroy();
+                          }, err => {
+                            this.app.hideLoading();
+                            // modal.nzFooter[1].loading = false;
+                            if (err.message != undefined) this.facade.toastrService.error(err.message);
+                            else this.facade.toastrService.error("The service is not available now. Try again later.");
+                          })
+                      }
+                      // else modal.nzFooter[1].loading = false;
+                      // this.app.hideLoading();
+                    }
+                  })
+              };
             }
-            }
+          }
         }],
-      });
+    });
   }
 
   showEditModal(modalContent: TemplateRef<{}>, id: number): void {
@@ -201,12 +208,12 @@ export class DaysOffComponent implements OnInit {
       nzContent: modalContent,
       nzClosable: true,
       nzFooter: [
-      {
+        {
           label: 'Cancel',
           shape: 'default',
           onClick: () => modal.destroy()
-      },
-      {
+        },
+        {
           label: 'Save',
           type: 'primary',
           loading: false,
@@ -214,26 +221,26 @@ export class DaysOffComponent implements OnInit {
             // modal.nzFooter[1].loading = true;
             this.app.showLoading();
             this.employeeService.GetByDNI(this.validateForm.controls.DNI.value)
-            .subscribe(res => {
-              this.employee = res.body;
-              this.app.hideLoading();
-            if(!this.employee || this.employee == null){
-              this.facade.toastrService.error("There is no employee with that DNI.");
-            }
-            })
-            if(this.employee){
+              .subscribe(res => {
+                this.employee = res.body;
+                this.app.hideLoading();
+                if (!this.employee || this.employee == null) {
+                  this.facade.toastrService.error("There is no employee with that DNI.");
+                }
+              })
+            if (this.employee) {
               let isCompleted: boolean = true;
               for (const i in this.validateForm.controls) {
                 this.validateForm.controls[i].markAsDirty();
                 this.validateForm.controls[i].updateValueAndValidity();
-                if ((this.validateForm.controls[i].status != 'DISABLED' && !this.validateForm.controls[i].valid) ) isCompleted = false;
+                if ((this.validateForm.controls[i].status != 'DISABLED' && !this.validateForm.controls[i].valid)) isCompleted = false;
               }
 
               let newDate; let newEndDate;
-              newDate = editedDayOff.date == this.validateForm.controls['date'].value? this.validateForm.controls['date'].value : new Date(this.validateForm.controls['date'].value).toISOString();
-              newEndDate = editedDayOff.endDate == this.validateForm.controls.endDate.value? this.validateForm.controls['endDate'].value : new Date(this.validateForm.controls['endDate'].value).toISOString();
+              newDate = editedDayOff.date == this.validateForm.controls['date'].value ? this.validateForm.controls['date'].value : new Date(this.validateForm.controls['date'].value).toISOString();
+              newEndDate = editedDayOff.endDate == this.validateForm.controls.endDate.value ? this.validateForm.controls['endDate'].value : new Date(this.validateForm.controls['endDate'].value).toISOString();
 
-              let newStatus = this.isHr? this.validateForm.controls['status'].value : DaysOffStatusEnum.InReview;
+              let newStatus = this.isHr ? this.validateForm.controls['status'].value : DaysOffStatusEnum.InReview;
 
               if (isCompleted) {
                 editedDayOff = {
@@ -243,7 +250,7 @@ export class DaysOffComponent implements OnInit {
                   type: this.validateForm.controls['type'].value,
                   status: newStatus,
                   employeeId: this.employee.id,
-                  employee : this.employee
+                  employee: this.employee
                 };
                 this.facade.daysOffService.update<DaysOff>(id, editedDayOff)
                   .subscribe(res => {
@@ -254,7 +261,7 @@ export class DaysOffComponent implements OnInit {
                   }, err => {
                     // this.app.hideLoading();
                     // modal.nzFooter[1].loading = false;
-                    if (err.message !== undefined) { this.facade.toastrService.error(err.message); } 
+                    if (err.message !== undefined) { this.facade.toastrService.error(err.message); }
                     else { this.facade.toastrService.error('The service is not available now. Try again later.'); }
                   })
               }
@@ -262,7 +269,7 @@ export class DaysOffComponent implements OnInit {
               // this.app.hideLoading();
             }
           }
-      }]
+        }]
     });
   }
 
@@ -289,8 +296,8 @@ export class DaysOffComponent implements OnInit {
     let dni = this.isHr ? null : this.employee.dni;
 
     this.validateForm = this.fb.group({
-      DNI: [dni, [Validators.required, trimValidator]],
-      type : [null, [Validators.required]],
+      DNI: [dni, [Validators.required, trimValidator, dniValidator]],
+      type: [null, [Validators.required]],
       date: [new Date(), [Validators.required]],
       endDate: [new Date(), [Validators.required]],
       status: [DaysOffStatusEnum.InReview]
@@ -306,16 +313,16 @@ export class DaysOffComponent implements OnInit {
   acceptPetition(daysOff: DaysOff) {
     daysOff.status = DaysOffStatusEnum.Accepted;
     this.facade.daysOffService.update<DaysOff>(daysOff.id, daysOff)
-                  .subscribe(res => {
-                    this.getDaysOff();
-                    // this.app.hideLoading();
-                    this.facade.toastrService.success('Petition was succesfully accepted !');
-                  }, err => {
-                    // this.app.hideLoading();
-                    // modal.nzFooter[1].loading = false;
-                    if (err.message != undefined) this.facade.toastrService.error(err.message);
-                    else this.facade.toastrService.error("The service is not available now. Try again later.");
-                  })
+      .subscribe(res => {
+        this.getDaysOff();
+        // this.app.hideLoading();
+        this.facade.toastrService.success('Petition was succesfully accepted !');
+      }, err => {
+        // this.app.hideLoading();
+        // modal.nzFooter[1].loading = false;
+        if (err.message != undefined) this.facade.toastrService.error(err.message);
+        else this.facade.toastrService.error("The service is not available now. Try again later.");
+      })
   }
 
   fillForm(daysOff: DaysOff) {

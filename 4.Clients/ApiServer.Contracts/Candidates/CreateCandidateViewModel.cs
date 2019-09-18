@@ -16,8 +16,7 @@ namespace ApiServer.Contracts.Candidates
         public string PhoneNumber { get; set; }
         public string LinkedInProfile { get; set; }
         public string AdditionalInformation { get; set; }
-        // public EnglishLevel EnglishLevel { get; set; }
-        public string EnglishLevel { get; set; }
+        public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
         public int Recruiter { get; set; }
         public DateTime ContactDay { get; set; }

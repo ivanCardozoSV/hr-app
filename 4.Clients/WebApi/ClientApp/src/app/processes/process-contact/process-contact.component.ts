@@ -124,8 +124,8 @@ export class ProcessContactComponent implements OnInit {
           label: 'NEW',
           type: 'primary',
           onClick: ()  => {
-            this.handleOk();
             modal.destroy();
+            this.handleOk();            
           }
         },
         { 

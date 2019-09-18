@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj": {}
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj",
         "projectName": "Core.Persistance",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj"
               }
             }
           }
@@ -60,20 +60,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -112,20 +112,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj",
         "projectName": "Domain.Model",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -138,8 +138,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj"
               }
             }
           }
@@ -168,20 +168,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj",
         "projectName": "Domain.Services.Impl",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -194,11 +194,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj"
               }
             }
           }
@@ -247,20 +247,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj",
         "projectName": "Domain.Services",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -273,17 +273,17 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
               }
             }
           }
@@ -305,6 +305,10 @@
               "target": "Package",
               "version": "[1.40.2.1643, )"
             },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -320,20 +324,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj",
         "projectName": "Domain.Services.ExternalServices",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -346,8 +350,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj"
               }
             }
           }
@@ -416,20 +420,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj",
         "projectName": "Domain.Services.Repositories.EF",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -442,17 +446,17 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core\\Core.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core\\Core.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj"
               }
             }
           }
@@ -495,20 +499,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj",
         "projectName": "Persistance.EF",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -521,8 +525,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
               }
             }
           }
@@ -561,20 +565,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\DependencyInjection.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\DependencyInjection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\DependencyInjection.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\DependencyInjection.csproj",
         "projectName": "DependencyInjection",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\DependencyInjection.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\DependencyInjection.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -587,23 +591,23 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\0.Core\\Core.Persistance\\Core.Persistance.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj"
               }
             }
           }
@@ -656,20 +660,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj",
         "projectName": "ApiServer.Contracts",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -682,8 +686,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Model\\Domain.Model.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Model\\Domain.Model.csproj"
               }
             }
           }
@@ -716,20 +720,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
         "projectName": "ApiServer.Tests",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Tests\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -742,11 +746,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj"
               }
             }
           }
@@ -799,20 +803,20 @@
         }
       }
     },
-    "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj": {
+    "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj",
+        "projectUniqueName": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj",
         "projectName": "ApiServer",
-        "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\ApiServer.csproj",
-        "packagesPath": "C:\\Users\\DamianFernandezUrroz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer\\obj\\",
+        "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\ApiServer.csproj",
+        "packagesPath": "C:\\Users\\Thomas Nazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DamianFernandezUrroz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Thomas Nazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -825,14 +829,14 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\1.Domain\\Domain.Services\\Domain.Services.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\1.Domain\\Domain.Services\\Domain.Services.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\DependencyInjection.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\3.Application\\DependencyInjection\\DependencyInjection.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\DependencyInjection.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\3.Application\\DependencyInjection\\DependencyInjection.csproj"
               },
-              "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
-                "projectPath": "C:\\Users\\DamianFernandezUrroz\\Desktop\\git\\InterviewApp\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
+              "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj": {
+                "projectPath": "C:\\Users\\Thomas Nazar\\Documents\\GitHub\\hr-app\\4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj"
               }
             }
           }

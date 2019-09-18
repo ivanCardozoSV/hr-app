@@ -1,3 +1,4 @@
+import { trimValidator } from './../directives/trim.validator';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { SkillType } from 'src/entities/skillType';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -39,8 +40,8 @@ export class SkillTypeComponent implements OnInit {
     this.getSkillTypes();
 
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      name: [null, [Validators.required, trimValidator]],
+      description: [null, [Validators.required,trimValidator]],
     });
     this.app.hideLoading();
   }

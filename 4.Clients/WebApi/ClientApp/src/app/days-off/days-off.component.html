@@ -69,7 +69,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let daysOff of daysOffTable.data">
-                    <td>{{ daysOff.employee.dni }}</td>
+                    <td>{{ daysOff.employee.dni | number:'8.0-0' }}</td>
                     <td>{{ getType(daysOff.type) }}</td>
                     <td>{{ daysOff.date | date: 'dd/MM/yyyy' }}</td>
                     <td>{{ daysOff.endDate | date: 'dd/MM/yyyy' }}</td>
@@ -105,6 +105,12 @@
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('DNI')?.hasError('required')">
                                 Please input the DNI!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('DNI')?.hasError('dniTooLongError')">
+                                The DNI has more than 8 characters!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('DNI')?.hasError('dniTooShortError')">
+                                The DNI shouldn't be less than zero!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>

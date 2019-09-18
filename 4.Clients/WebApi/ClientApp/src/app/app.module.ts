@@ -120,6 +120,9 @@ import { NzCalendarComponent } from './nz-calendar/NzCalendar';
 import { NzPopoverModule } from 'ng-zorro-antd';
 import { NoticeCalendarComponent } from './notice-calendar/notice-calendar.component';
 import { Globals } from './app-globals/globals';
+import { NumbersOnlyDirective } from './directives/numbersOnlyDirective';
+
+
 
 registerLocaleData(en);
 
@@ -131,6 +134,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
 @NgModule({
   declarations: [
+    NumbersOnlyDirective,
     NzCalendarComponent,
     AppComponent,
     NavMenuComponent,

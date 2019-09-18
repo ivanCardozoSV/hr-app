@@ -1,14 +1,14 @@
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csprojAssemblyReference.cache
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csproj.CoreCompileInputs.cache
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.AssemblyInfoInputs.cache
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.AssemblyInfo.cs
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.deps.json
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.pdb
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Core.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Domain.Model.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Domain.Model.pdb
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Core.pdb
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csproj.CopyComplete
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.pdb
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.deps.json
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.dll
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\ApiServer.Contracts.pdb
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Core.dll
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Domain.Model.dll
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Domain.Model.pdb
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\bin\Debug\netstandard2.0\Core.pdb
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csprojAssemblyReference.cache
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.AssemblyInfoInputs.cache
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.AssemblyInfo.cs
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.csproj.CopyComplete
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.dll
+C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Contracts\obj\Debug\netstandard2.0\ApiServer.Contracts.pdb

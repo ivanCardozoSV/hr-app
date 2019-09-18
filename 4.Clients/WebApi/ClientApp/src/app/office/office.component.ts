@@ -1,3 +1,5 @@
+import { of } from 'rxjs';
+import { trimValidator } from 'src/app/directives/trim.validator';
 import { Component, OnInit, TemplateRef, ViewChild, Input,SimpleChanges } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { FacadeService } from '../services/facade.service';
@@ -93,9 +95,16 @@ export class OfficeComponent implements OnInit {
         })
     });
   }
+
+  resetForm(){
+    this.officeForm =  this.fb.group({
+      name: [null, [Validators.required, trimValidator]], //name: new FormControl(value, validator or array of validators)
+      description: [null, [Validators.required, trimValidator]]    
+    });
+  }
   
   showAddModal(modalContent: TemplateRef<{}>): void {
-    this.officeForm.reset();
+    this.resetForm();
     const modal = this.facade.modalService.create({
       nzTitle: 'Add New Office',
       nzContent: modalContent,
@@ -148,7 +157,7 @@ export class OfficeComponent implements OnInit {
   }
 
   showEditModal(modalContent: TemplateRef<{}>, officeId: number) {
-    this.officeForm.reset();
+    this.resetForm();
     let editOffice: Office = this._detailedOffice.filter(o => o.id === officeId)[0];
     this.fillOfficeForm(editOffice);
     const modal = this.facade.modalService.create({

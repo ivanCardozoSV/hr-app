@@ -93,7 +93,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="comments">Comments</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="comments" id="comments" placeholder="Please input the last name">
+                        <input type="text" nz-input formControlName="comments" id="comments" placeholder="Please input a comment regarding the festivity or reminder">
                         <nz-form-explain *ngIf="validateForm.get('comments').dirty && validateForm.get('comments').errors">
                             <ng-container *ngIf="validateForm.get('comments')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
