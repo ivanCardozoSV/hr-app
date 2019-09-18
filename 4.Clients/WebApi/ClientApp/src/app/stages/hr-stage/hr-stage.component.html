@@ -1,0 +1,129 @@
+<form nz-form [formGroup]="hrForm" [nzLayout]="'horizontal'">
+    <nz-divider nzText="HR STAGE"></nz-divider>
+    <br />
+    <nz-form-item>
+        <nz-form-control>
+            <input type="hidden" formControlName="id">
+
+        </nz-form-control>
+
+    </nz-form-item>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Status</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="status" (ngModelChange)="statusChanged()">
+                        <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hrForm.get('status').dirty && hrForm.get('status').errors">Please select a status</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24 " nzFor="date">Date</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
+                    <nz-form-explain *ngIf="hrForm.get('date').dirty && hrForm.get( 'date').errors">
+                        Please input a date
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="consultantOwnerId" nzPlaceHolder="Select the owner of the process">
+                        <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}} " [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hrForm.get( 'consultantOwnerId').dirty && hrForm.get( 'consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="consultantDelegateId">Delegate</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="consultantDelegateId" nzPlaceHolder="Select a delegate for the process">
+                        <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hrForm.get('consultantDelegateId').dirty && hrForm.get('consultantDelegateId').errors ">
+                        Please input the consultant</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="actualSalary">Actual Salary</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input type="number" nz-input formControlName="actualSalary" id="actualSalary" placeholder="Please input the actual salary" pattern="[0-9]+([\.,][0-9]+)?">
+                    <nz-form-explain *ngIf="hrForm.get('actualSalary').dirty && hrForm.get('actualSalary').errors">
+                        Please input the salary</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="wantedSalary">Wanted Salary</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input type="number" nz-input formControlName="wantedSalary" id="wantedSalary" placeholder="Please input the wanted salary" pattern="[0-9]+([\.,][0-9]+)?">
+                    <nz-form-explain *ngIf="hrForm.get('wantedSalary').dirty && hrForm.get('wantedSalary').errors">
+                        Please input the salary
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24 " nzFor="feedback">Feedback</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <textarea rows="1 " id="feedback" nz-input formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
+                </nz-form-control>
+                <nz-form-explain style="color: #f5222d " *ngIf="hrForm.get('feedback').dirty && hrForm.get('feedback').errors ">
+                    <ng-container *ngIf="hrForm.get('feedback')?.hasError('trimBeginError') ">
+                        The input has leading whitespace!
+                    </ng-container>
+                    <ng-container *ngIf="hrForm.get('feedback')?.hasError('trimEndError') ">
+                        The input has trailing whitespace!
+                    </ng-container>
+                </nz-form-explain>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Input the rejection reason"></textarea>
+                </nz-form-control>
+                <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && hrForm.get('rejectionReason').dirty && hrForm.get('rejectionReason').errors ">
+                    <ng-container *ngIf="hrForm.get('rejectionReason')?.dirty && hrForm.get('rejectionReason')?.errors ">
+                        Please input rejection reason!
+                    </ng-container>
+                </nz-form-explain>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="24">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="englishLevel">English Level</nz-form-label>
+                    <nz-radio-group formControlName="englishLevel">
+                        <label *ngFor="let level of englishLevelList" [nzDisabled]="disabled" nz-radio-button [nzValue]="level.id"><span>{{level.name}}</span></label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>

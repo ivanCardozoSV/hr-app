@@ -1,0 +1,70 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: keep-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+#logout {
+  color: #1890ff;  
+}
+
+#logout:hover {
+  color: #40a9ff;
+}
+
+.ant-card.ant-card-body{
+  padding: 0% !important;
+}
+
+.loggedUser {
+  border-radius: 50%; display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 5%;
+}
+
+nav {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  z-index: 3;
+}
+
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 15%;
+  padding-right: 30%;
+  font-size: 14px;
+  font-weight: bold;
+  
+  font-family: 'Roboto', sans-serif;
+}
+
+#loginBtn {
+  display: inline-block;
+  background: white;
+  color: #444;
+  width: 100%;
+  border-radius: 5px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+}
+#loginBtn:hover {
+  cursor: pointer;
+}

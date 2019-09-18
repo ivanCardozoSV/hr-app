@@ -1,0 +1,137 @@
+<br /><br />
+<nz-collapse>
+  <nz-collapse-panel [nzHeader]="'Candidate Filter'">
+    <form nz-form [nzLayout]="'inline'" [style.width.%]="90" [style.padding-left.%]="10"
+      [formGroup]="validateSkillsForm" (ngSubmit)="getCandidatesBySkill()">
+      <nz-form-item [style.width.%]="35">
+        <nz-form-control [style.width.%]="90" style="text-align: left;">
+          <nz-form-label nzFor="skillSelector">Skill</nz-form-label>
+          <nz-select formControlName="skillSelector" nzShowSearch nzAllowClear [nzAllowClear]="false"
+            nzPlaceHolder="Select a skill">
+            <nz-option *ngFor="let skill of skills" nzLabel="{{skill.name}}" nzValue="{{skill.id}}"></nz-option>
+          </nz-select>
+          <nz-form-explain
+            *ngIf="validateSkillsForm.get('skillSelector').dirty && validateSkillsForm.get('skillSelector').errors">
+            Please select a skill!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item [style.width.%]="35">
+        <nz-form-control [style.width.%]="100" style="text-align: center;">
+          <nz-form-label style="text-align: left; float:left" nzFor="skillRateSlidder">Rate</nz-form-label><br />
+          <nz-slider nzRange formControlName="skillRateSlidder"></nz-slider>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item [style.width.%]="20">
+        <nz-form-control style="float:right;">
+          <br />
+          <button nz-button nzType="primary" [disabled]="!validateSkillsForm.valid">
+            <i nz-icon type="search"></i>Search</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+
+    <br /><br />
+    <div nz-row>
+      <div nz-col nzSpan="13">
+        <nz-table #skillsTable [nzData]="listOfDisplayData" [nzPageSize]="5">
+          <thead>
+            <tr>
+              <th nzCustomFilter>Name
+                <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                  <i nz-icon nzType="search" class="ant-table-filter-icon"
+                    [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                  <div class="search-box">
+                    <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                    <button nz-button nzSize="small" nzType="primary" (click)="search()"
+                      class="search-button">Search</button>
+                    <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                  </div>
+                </nz-dropdown>
+              </th>
+              <th [style.text-align]="center">Phone</th>
+              <th [style.text-align]="center">E-mail</th>
+              <th [style.text-align]="center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let candidate of skillsTable.data">
+              <td>{{ candidate.name }} {{ candidate.lastName }}</td>
+              <td>{{ candidate.phoneNumber }}</td>
+              <td>{{ candidate.emailAddress }}</td>
+              <td [style.text-align]="center">
+                <i (click)="showDetailsModal(candidate.id, detailModal)" style="cursor: pointer;" nz-icon
+                  type="info-circle" theme="outline"></i>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="8">
+        <div style="background: #ECECEC; padding: 30px;">
+          <nz-row [nzGutter]="16">
+            <nz-col [nzSpan]="12">
+              <nz-card>
+                <nz-statistic [nzValue]="stadisticAbove | number: '1.0-2'" [nzTitle]="'Above 50% rate'"
+                  [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
+                </nz-statistic>
+                <ng-template #prefixTplOne><i nz-icon type="arrow-up"></i></ng-template>
+              </nz-card>
+            </nz-col>
+            <nz-col [nzSpan]="12">
+              <nz-card>
+                <nz-statistic [nzValue]="stadisticBelow | number: '1.0-2'" [nzTitle]="'Below 50%'"
+                  [nzPrefix]="prefixTplTwo" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#CF1322' }">
+                </nz-statistic>
+                <ng-template #prefixTplTwo><i nz-icon type="arrow-down"></i></ng-template>
+              </nz-card>
+            </nz-col>
+          </nz-row>
+        </div>
+      </div>
+    </div>
+  </nz-collapse-panel>
+</nz-collapse>
+<nz-collapse>
+  <nz-collapse-panel [nzHeader]="'Skills Report'" (click)="getSkillsPercentage()">
+    <div *ngIf="skills.length == 0 || candidates.length == 0">
+        <span style="margin-left: 25%;">
+            <strong>THERE IS NO DATA TO SHOW</strong>
+          </span>
+    </div>
+    <div *ngIf="skills.length > 0 && candidates.length > 0">
+      <div>
+        <div style="display: block">
+          <canvas baseChart [datasets]="skillsPercentage" [labels]="skillChartLabels" [options]="skillChartOptions"
+            [plugins]="skillChartPlugins" [legend]="skillChartLegend" [chartType]="skillChartType"
+            (chartHover)="chartHovered($event)" [colors]="skillsChartColors"></canvas>
+        </div>
+      </div>
+    </div>
+  </nz-collapse-panel>
+</nz-collapse>
+
+<nz-collapse>
+  <nz-collapse-panel [nzHeader]="'Processes report'">
+    <div *ngIf="!isPieData()">
+      <span style="margin-left: 25%;">
+        <strong>THERE IS NO DATA TO SHOW</strong>
+      </span>
+    </div>
+    <div *ngIf="isPieData()">
+      <div>
+        <div style="display: block">
+          <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="pieChartColors">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+  </nz-collapse-panel>
+</nz-collapse>
+
+<ng-template #detailModal>
+  <candidate-details [_detailedCandidate]="emptyCandidate"></candidate-details>
+</ng-template>

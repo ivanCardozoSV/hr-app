@@ -1,0 +1,16 @@
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Persistance.EF.deps.json
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Persistance.EF.runtimeconfig.json
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Persistance.EF.runtimeconfig.dev.json
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Persistance.EF.dll
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Persistance.EF.pdb
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Core.dll
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Core.Persistance.dll
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Core.Persistance.pdb
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\bin\Debug\netcoreapp2.2\Core.pdb
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.csprojAssemblyReference.cache
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.csproj.CoreCompileInputs.cache
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.AssemblyInfoInputs.cache
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.AssemblyInfo.cs
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.csproj.CopyComplete
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.dll
+C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\2.Infrastructure\Persistance.EF\obj\Debug\netcoreapp2.2\Persistance.EF.pdb

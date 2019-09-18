@@ -1,0 +1,121 @@
+<div nz-row>
+    <div nz-col nzSpan="20">
+        <button nz-button nzType="primary" (click)="showAddModal(CompanyCalendarModal)" nzShape="round">
+            <i nz-icon type="plus" theme="outline"></i>Add new Festivity/Reminder</button>
+    </div>
+    <div nz-col nzSpan="4">
+        <button nz-button nzShape="circle" nzType="dashed" nzType="info" (click)="showCalendarModal()">
+            <i nz-icon type="calendar"></i>
+        </button>
+        <!-- <div *ngIf="showCalendarSelected">
+            <label nz-radio-button (click)="hideCalendar()" style="border-color:rgb(179, 22, 179); border-width: 4px ; border-radius: 6px ; font-weight: bold">
+                <span>Hide Calendar</span>
+            </label>
+            <app-notice-calendar></app-notice-calendar>
+        </div>
+        <div *ngIf="!showCalendarSelected">
+            <label nz-radio-button [(ngModel)]="showCalendarSelected" style="border-color:rgb(179, 22, 179); border-width: 4px ; border-radius: 6px ; font-weight: bold">
+                <span>Show Calendar</span>
+            </label>
+        </div> -->
+    </div>
+
+</div>
+
+<br />
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <nz-table #CompanyCalendarTable [nzData]="listOfCompanyCalendar" [nzPageSize]="10">
+            <thead>
+                <tr>
+                    <th [style.text-align]="center">Type</th>
+                    <th [style.text-align]="center">Date</th>
+                    <th [style.text-align]="center">Comments</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let CompanyCalendar of CompanyCalendarTable.data">
+                    <td>{{ CompanyCalendar.type }}</td>
+                    <td>{{ CompanyCalendar.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ CompanyCalendar.comments | truncate:75 }}</td>
+                    <td [style.text-align]="center">
+                        <i (click)="showEditModal(CompanyCalendarModal, CompanyCalendar.id)" style="cursor: pointer;" nz-icon type="edit" theme="outline" nzTitle="Edit" nz-tooltip></i>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <i (click)="showDeleteConfirm(CompanyCalendar.id)" style="cursor: pointer;" nz-icon type="delete" theme="outline" nzTitle="Delete" nz-tooltip></i>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+
+
+<ng-template #CompanyCalendarModal>
+    <form nz-form [formGroup]="validateForm" [nzLayout]="'horizontal'">
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Type</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-radio-group #type formControlName="type" id="idType">
+                            <label nz-radio-button nzValue="Festivity"><span>Festivity</span></label>
+                            <label nz-radio-button nzValue="Reminder"><span>Reminder</span></label>
+                        </nz-radio-group>
+                        <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
+                            <ng-container *ngIf="validateForm.get('type')?.hasError('required')">
+                                Please input the type!
+                            </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date">Date</nz-form-label>
+                    <nz-form-control [nzSm]="18" [nzXs]="24">
+                        <nz-date-picker style="width: 100%;" formControlName="date" nzFormat="yyyy-MM-dd" [nzDisabledDate]="disabledDate">
+                        </nz-date-picker>
+                        <nz-form-explain *ngIf="validateForm.get('date').dirty && validateForm.get('date').errors">
+                            Please input a date
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="comments">Comments</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="comments" id="comments" placeholder="Please input the last name">
+                        <nz-form-explain *ngIf="validateForm.get('comments').dirty && validateForm.get('comments').errors">
+                            <ng-container *ngIf="validateForm.get('comments')?.hasError('trimBeginError')">
+                                The input has leading whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('comments')?.hasError('trimEndError')">
+                                The input has trailing whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('comments')?.hasError('required')">
+                                Please input the Comments!
+                            </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<!-- The Modal -->
+<div id="myModalCalendar" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeCalendarModal()">&times;</span>
+        <app-notice-calendar [listOfCompanyCalendar]="listOfCompanyCalendar"></app-notice-calendar>
+    </div>
+</div>

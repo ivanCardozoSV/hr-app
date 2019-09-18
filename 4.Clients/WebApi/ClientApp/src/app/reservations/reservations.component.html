@@ -1,0 +1,135 @@
+<div nz-row nzType="flex" nzJustify="center">
+  <nz-select (ngModelChange)="onChangeOffice()" [(ngModel)]="selectedOffice" style="width: 10%; margin: 0.5% 0% 0% 1%;">
+    <nz-option nzLabel="Almagro" nzValue="1"></nz-option>
+    <nz-option nzLabel="Vte Lopez" nzValue="2"></nz-option>
+  </nz-select>
+  <button nz-button nzType="primary" style="background-color: green; margin: 0.5% 0% 0% 1%;"
+    (click)="addReservationModal(newReservationModal)">New Reservation</button>
+</div>
+
+<nz-calendar [(ngModel)]="selectedDate" [(nzMode)]="calendarMode" (nzSelectChange)="getCurrentDayReservations()">
+  <ul *nzDateCell="let date" class="events">
+    <ng-container *ngFor="let reservation of reservations">
+      <li nz-popover *ngIf="reservation.sinceReservation.toString().substr(0, 10) == date.toISOString().substr(0, 10)"
+        nzTitle="{{reservation.description}}" nzContent="Room: {{reservation.room.name}} 
+        From: {{reservation.sinceReservation.toString().substr(11, 5)}}
+        To: {{reservation.untilReservation.toString().substr(11, 5)}}">
+        <nz-badge [nzStatus]="'success'" [nzText]="reservation.description"></nz-badge>
+      </li>
+    </ng-container>
+  </ul>
+</nz-calendar>
+
+<div *ngIf="currentDayReservations.length > 0">
+  <ul>
+    <li *ngFor="let reservation of currentDayReservations">
+      <nz-badge>{{reservation.description}} | Room: {{reservation.room.name}}, From:
+        {{reservation.sinceReservation.toString().substr(11, 5)}}hs
+        To: {{reservation.untilReservation.toString().substr(11, 5)}}hs
+      </nz-badge>
+      <nz-divider nzType="vertical"></nz-divider>
+      <i nzTitle="Edit" (click)="showEditModal(reservation, newReservationModal)" style="cursor: pointer;" nz-tooltip
+        nz-icon type="edit" theme="outline"></i>
+      <nz-divider nzType="vertical"></nz-divider>
+      <i nzTitle="Delete" (click)="showDeleteModal(reservation.id)" style="cursor: pointer;" nz-icon type="delete"
+        theme="outline" nz-tooltip></i>
+    </li>
+  </ul>
+</div>
+
+<ng-template #newReservationModal>
+  <form nz-form [formGroup]="reservationForm" [nzLayout]="'horizontal'">
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Office</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select formControlName="office" (ngModelChange)="officeChanged($event)">
+              <nz-option *ngFor="let k of offices" nzLabel="{{k.name}}" [nzValue]="k.id">
+              </nz-option>
+            </nz-select>
+            <nz-form-explain *ngIf="reservationForm.get('office').dirty && reservationForm.get('office').errors">Please
+              input the office</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Room</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select formControlName="roomId">
+              <nz-option *ngFor="let k of filteredRoom" nzLabel="{{k.name}}" [nzValue]="k.id">
+              </nz-option>>
+            </nz-select>
+            <nz-form-explain *ngIf="reservationForm.get('roomId').dirty && reservationForm.get('roomId').errors">Please
+              input the room</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input formControlName="description" id="description" placeholder="Please input the description">
+            <nz-form-explain
+              *ngIf="reservationForm.get('description').dirty && reservationForm.get('description').errors">
+              Please
+              input the description</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Recruiter</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select formControlName="recruiter">
+              <nz-option *ngFor="let r of recruiters" nzLabel="{{r.name}} {{r.lastName}}" [nzValue]="r.id">
+              </nz-option>
+            </nz-select>
+            <nz-form-explain *ngIf="reservationForm.get('recruiter').dirty && reservationForm.get('recruiter').errors">
+              Please
+              input the recruiter</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sinceReservation">Date</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-date-picker nzFormat="yyyy-MM-dd HH:mm" formControlName="sinceReservation"
+              (ngModelChange)="onStartChange($event)" [nzShowTime]="{ nzFormat: 'HH:mm' }"
+              [nzDisabledTime]="disabledDateTime" [nzDisabledDate]="disabledStartDate" [nzSize]="size"
+              nzPlaceHolder="Start">
+            </nz-date-picker>
+            <nz-form-explain
+              *ngIf="reservationForm.get('sinceReservation').dirty && reservationForm.get('sinceReservation').errors">
+              Please
+              input the date</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="untilReservation">To</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-date-picker nzFormat="yyyy-MM-dd HH:mm" formControlName="untilReservation"
+              (ngModelChange)="onEndChange($event)" [nzShowTime]="{ nzFormat: 'HH:mm' }"
+              [nzDisabledDate]="disabledEndDate" [nzDisabledTime]="disabledDateTime" [nzSize]="size"
+              nzPlaceHolder="End">
+            </nz-date-picker>
+            <nz-form-explain
+              *ngIf="reservationForm.get('untilReservation').dirty && reservationForm.get('untilReservation').errors">
+              Please
+              input the date</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row nzType="flex" nzJustify="center">
+    </div>
+  </form>
+</ng-template>

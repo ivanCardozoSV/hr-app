@@ -1,0 +1,79 @@
+<form nz-form [formGroup]="hireForm" [nzLayout]="'horizontal'">
+    <nz-divider nzText="HIRE STAGE"></nz-divider>
+    <br />
+    <nz-form-item>
+        <nz-form-control>
+            <input type="hidden" formControlName="id">
+        </nz-form-control>
+    </nz-form-item>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Status</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="status" (ngModelChange)="statusChanged()">
+                        <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hireForm.get('status').dirty && hireForm.get('status').errors">Please select a status</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date">Date</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
+                    <nz-form-explain *ngIf="hireForm.get('date').dirty && hireForm.get('date').errors">
+                        Please input a date
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="consultantOwnerId" nzPlaceHolder="Select the owner of the process">
+                        <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hireForm.get('consultantOwnerId').dirty && hireForm.get('consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="consultantDelegateId">Delegate</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="consultantDelegateId" nzPlaceHolder="Select a delegate for the process">
+                        <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="hireForm.get('consultantDelegateId').dirty && hireForm.get('consultantDelegateId').errors">
+                        Please input the consultant</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="feedback">Feedback</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <textarea rows="1" id="feedback" nz-input formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
+                </nz-form-control>
+                <nz-form-explain style="color: #f5222d" *ngIf="hireForm.get('feedback').dirty && hireForm.get('feedback').errors">
+                    <ng-container *ngIf="hireForm.get('feedback')?.hasError('trimBeginError')">
+                        The input has leading whitespace!
+                    </ng-container>
+                    <ng-container *ngIf="hireForm.get('feedback')?.hasError('trimEndError')">
+                        The input has trailing whitespace!
+                    </ng-container>
+                </nz-form-explain>
+            </nz-form-item>
+        </div>
+    </div>
+</form>

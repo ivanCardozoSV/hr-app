@@ -1,0 +1,14 @@
+@media (max-width: 767px) {
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 50px;
+  }
+}
+
+.container {
+  margin-top: 75px;
+}
+
+.backdrop[_ngcontent-c7] {
+  z-index: 0 !important;
+}

@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;INT;QA;UAT;PROD;IntegrationTest</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Interfaces\ExternalServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.40.2.1643" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\0.Core\Core.Persistance\Core.Persistance.csproj" />
+    <ProjectReference Include="..\..\4.Clients\ApiServer.Contracts\ApiServer.Contracts.csproj" />
+    <ProjectReference Include="..\Domain.Model\Domain.Model.csproj" />
+    <ProjectReference Include="..\..\0.Core\Core\Core.csproj" />
+  </ItemGroup>
+
+</Project>
