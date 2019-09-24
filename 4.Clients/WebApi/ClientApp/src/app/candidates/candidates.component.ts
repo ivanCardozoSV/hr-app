@@ -63,10 +63,10 @@ export class CandidatesComponent implements OnInit {
 
   constructor(private facade: FacadeService, private fb: FormBuilder, private detailsModal: CandidateDetailsComponent,
     private app: AppComponent, private globals: Globals) {
-      this.currentConsultant = JSON.parse(localStorage.getItem('currentUser'));
-      this.statusList = globals.candidateStatusList;
-      this.englishLevelList = globals.englishLevelList;
-     }
+    this.currentConsultant = JSON.parse(localStorage.getItem('currentUser'));
+    this.statusList = globals.candidateStatusList;
+    this.englishLevelList = globals.englishLevelList;
+  }
 
   ngOnInit() {
     this.app.showLoading();
@@ -77,7 +77,7 @@ export class CandidatesComponent implements OnInit {
     this.getSkills();
     this.resetForm();
     this.app.hideLoading();
-    
+
   }
 
   getCandidates() {
@@ -142,12 +142,49 @@ export class CandidatesComponent implements OnInit {
   }
 
   search(): void {
+    //Mult variable was added to save some code later on, when the sorting method is used.
+    let mult = 1;
+    if (this.sortValue === 'descend')
+      mult = -1;
     const filterFunc = (item) => {
       return (this.listOfSearchCandidates.length ? this.listOfSearchCandidates.some(candidates => item.name.indexOf(candidates) !== -1) : true) &&
         (item.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
     };
     const data = this.filteredCandidates.filter(item => filterFunc(item));
-    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+
+    //Sorting here will act depending on the firstname, if they are equals the lastname is checked,
+    //and if both names are equals, the dni is checked.
+    if (this.sortName === 'name' && this.sortValue) {
+      this.listOfDisplayData = data.sort((a, b) => {
+        if (a[this.sortName] > b[this.sortName])
+          return mult * 1;
+        if (a[this.sortName] < b[this.sortName])
+          return mult * -1;
+        if (a[this.sortName] === b[this.sortName]) {
+          if (a.lastName > b.lastName)
+            return mult * 1;
+          if (a.lastName < b.lastName)
+            return mult * -1;
+          if (a.lastName === b.lastName) {
+            if (a.dni > b.dni)
+              return mult * 1;
+            if (a.dni < b.dni)
+              return mult * -1;
+          }
+        }
+
+      }
+      );
+    }
+    if (this.sortName && this.sortValue) {
+      this.listOfDisplayData = data.sort((a, b) =>
+        a[this.sortName] > b[this.sortName]
+          ? mult * 1
+          : mult * -1
+      );
+    } else {
+      this.listOfDisplayData = data;
+    }
     this.searchValue = '';
     this.nameDropdown.nzVisible = false;
   }
@@ -163,9 +200,9 @@ export class CandidatesComponent implements OnInit {
     this.statusDropdown.nzVisible = false;
   }
 
-  sort(sortName: string, value: string): void {
-    this.sortName = sortName;
-    this.sortValue = value;
+  sort(sort: { key: string; value: string }): void {
+    this.sortName = sort.key;
+    this.sortValue = sort.value;
     this.search();
   }
 
@@ -400,15 +437,15 @@ export class CandidatesComponent implements OnInit {
     }
   }
 
-  dniChanged(){
+  dniChanged() {
     this.isDniValid = false;
     this.changeFormStatus(false);
   }
 
-  changeFormStatus(enable: boolean){
+  changeFormStatus(enable: boolean) {
     for (const i in this.validateForm.controls) {
-      if(this.validateForm.controls[i] != this.validateForm.controls['dni']){
-        if(enable) this.validateForm.controls[i].enable();
+      if (this.validateForm.controls[i] != this.validateForm.controls['dni']) {
+        if (enable) this.validateForm.controls[i].enable();
         else this.validateForm.controls[i].disable();
       }
     }
