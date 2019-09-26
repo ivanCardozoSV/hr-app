@@ -81,6 +81,7 @@ export class ProcessesComponent implements OnInit {
   selectedSeniority: SeniorityEnum;
 
   offices: Office[] = [];
+  stepIndex: number = 0;
 
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
@@ -89,6 +90,8 @@ export class ProcessesComponent implements OnInit {
       this.profileList = globals.profileList;
       this.statusList = globals.processStatusList;
      }
+
+    
 
   ngOnInit() {
     this.app.showLoading();
@@ -412,6 +415,7 @@ export class ProcessesComponent implements OnInit {
 
   wishedStage(choosenStage: number, elementName: string) {
     this.processCarousel.goTo(choosenStage);
+    this.stepIndex = choosenStage;
     // if (choosenStage !== 0) {
     //   var height = document.getElementById('hrStage').style.height;
     //   document.getElementById('idProcessCarousel').style.height = height;
@@ -423,6 +427,7 @@ export class ProcessesComponent implements OnInit {
   closeModal() {
     this.facade.modalService.openModals[0].destroy();
     this.isEdit = false;
+    this.stepIndex = 0;
   }
 
   getForms() {
@@ -593,6 +598,10 @@ export class ProcessesComponent implements OnInit {
 
   updateSeniority($event) {
     this.selectedSeniority = $event;
+  }
+
+  onStepIndexChange(index: number): void {
+    this.stepIndex = index;
   }
 
   createEmptyProcess(candidate: Candidate) {
