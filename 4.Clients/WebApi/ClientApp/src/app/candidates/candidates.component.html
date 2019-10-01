@@ -7,9 +7,9 @@
 <div nz-row>
     <div nz-col nzSpan="24">
         <nz-table #candidateTable [nzData]="listOfDisplayData" [nzPageSize]="10">
-            <thead (nzSortChange)="sort($event)" nzSingleSort>
+            <thead>
                 <tr>
-                    <th nzShowSort nzSortKey="name" nzCustomFilter>Name
+                    <th nzCustomFilter>Name
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
                             <div class="search-box">
@@ -19,10 +19,10 @@
                             </div>
                         </nz-dropdown>
                     </th>
-                    <th nzShowSort nzSortKey="dni" [style.text-align]="center">DNI</th>
+                    <th [style.text-align]="center">DNI</th>
                     <th [style.text-align]="center">E-mail</th>
                     <th [style.text-align]="center">Phone</th>
-                    <th nzShowSort nzSortKey="status" nzCustomFilter>Status
+                    <th nzCustomFilter>Status
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdownStatus>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdownStatus.nzVisible" nz-dropdown></i>
                             <div class="search-box">
