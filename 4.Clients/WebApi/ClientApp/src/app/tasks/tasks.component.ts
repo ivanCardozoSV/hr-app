@@ -450,6 +450,6 @@ export class TasksComponent implements OnInit {
     else{
       this.toDoListDisplay = this.toDoList;
     }
-    
+
   }
 }

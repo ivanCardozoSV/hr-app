@@ -21,10 +21,10 @@
 <br/>
 <div nz-row>
     <div nz-col nzSpan="24">
-        <nz-table #daysOffTable [nzData]="listOfDisplayData" [nzPageSize]="10" nzShowSizeChanger>
-            <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <nz-table #daysOffTable [nzData]="listOfDaysOff" [nzPageSize]="10" nzShowSizeChanger>
+            <thead>
                 <tr>
-                    <th nzShowSort nzSortKey="employee.dni" nzCustomFilter>D.N.I.
+                    <th nzCustomFilter>D.N.I.
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
                             <div class="search-box">
@@ -34,7 +34,7 @@
                             </div>
                         </nz-dropdown>
                     </th>
-                    <th nzShowSort nzSortKey="type" [style.text-align]="center" nzCustomFilter>Type
+                    <th [style.text-align]="center" nzCustomFilter>Type
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdownType>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdownType.nzVisible" nz-dropdown></i>
                             <div class="search-box">
@@ -48,9 +48,9 @@
                             </div>
                         </nz-dropdown>
                     </th>
-                    <th nzShowSort nzSortKey="date" [style.text-align]="center">Date</th>
-                    <th nzShowSort nzSortKey="endDate" [style.text-align]="center">End Date</th>
-                    <th nzShowSort nzSortKey="status" [style.text-align]="center" nzCustomFilter>Status
+                    <th [style.text-align]="center">Date</th>
+                    <th [style.text-align]="center">End Date</th>
+                    <th [style.text-align]="center" nzCustomFilter>Status
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdownType>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdownType.nzVisible" nz-dropdown></i>
                             <div class="search-box">
