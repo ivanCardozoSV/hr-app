@@ -17,4 +17,8 @@
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\1.Domain\Domain.Model\Domain.Model.csproj" />
+  </ItemGroup>
 </Project>
