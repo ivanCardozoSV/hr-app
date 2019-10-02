@@ -1,9 +1,0 @@
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\bin\Debug\DBProject.dacpac
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\bin\Debug\DBProject.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\bin\Debug\DBProject.pdb
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\DBProject.dll
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\DBProject.pdb
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\Model.xml
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\refactor.xml
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\postdeploy.sql
-C:\Users\DamianFernandezUrroz\Desktop\App Entrevistas Posta\DBProject\obj\Debug\predeploy.sql

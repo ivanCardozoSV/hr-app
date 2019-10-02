@@ -1,4 +1,0 @@
-C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Tests\obj\Debug\netcoreapp2.2\ApiServer.Tests.csprojAssemblyReference.cache
-C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Tests\obj\Debug\netcoreapp2.2\ApiServer.Tests.csproj.CoreCompileInputs.cache
-C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Tests\obj\Debug\netcoreapp2.2\ApiServer.Tests.AssemblyInfoInputs.cache
-C:\Users\Thomas Nazar\Source\Workspaces\Workspace\NetCoreApi\Src\4.Clients\ApiServer.Tests\obj\Debug\netcoreapp2.2\ApiServer.Tests.AssemblyInfo.cs
