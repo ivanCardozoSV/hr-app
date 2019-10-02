@@ -16,7 +16,7 @@ namespace ApiServer.Tests.Candidates.Builder
         private string emailAddress { get; set; }
         private string phoneNumber { get; set; }
         private string linkedInProfile { get; set; }
-        private string englishLevel { get; set; }
+        private EnglishLevel englishLevel { get; set; }
         private CandidateStatus status { get; set; }
         public DateTime contactDay { get; set; }
         private ICollection<CreateCandidateSkillViewModel> candidateSkills { get; set; }
@@ -32,7 +32,7 @@ namespace ApiServer.Tests.Candidates.Builder
             emailAddress = $"Email for {name}";
             phoneNumber = $"Phone number for {name}";
             linkedInProfile = $"Phone number for {name}";
-            englishLevel = "Advanced";
+            englishLevel = EnglishLevel.Advanced;
             status = CandidateStatus.InProgress;
             candidateSkills = null;
             contactDay = new DateTime(2019, 6, 1, 7, 47, 0);
