@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "0.Core\Core\Core.csproj", "{68873805-F865-492D-8853-82E6B4A85F46}"
 EndProject
@@ -49,6 +49,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer.Tests", "4.Clients\ApiServer.Tests\ApiServer.Tests.csproj", "{8F6CC0B7-E05C-47CF-A7DA-353F12FB823F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "4.Clients\WebApi\WebApi.csproj", "{29146226-DFC7-45F9-AFC7-EFD8528C1B17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Mobile", "5.Mobile", "{71CD2C2A-E0A3-486B-BB65-CD85BF27EAA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -299,71 +301,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9182871B-9D98-4E7F-855B-C984EE5AD602}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dev.azure.com/softvisiondotnet
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = 0.Core\\Core\\Core.csproj
-		SccProjectTopLevelParentUniqueName1 = Seed.sln
-		SccProjectName1 = 0.Core/Core
-		SccLocalPath1 = 0.Core\\Core
-		SccProjectUniqueName2 = 1.Domain\\Domain.Model\\Domain.Model.csproj
-		SccProjectTopLevelParentUniqueName2 = Seed.sln
-		SccProjectName2 = 1.Domain/Domain.Model
-		SccLocalPath2 = 1.Domain\\Domain.Model
-		SccProjectUniqueName3 = 1.Domain\\Domain.Services\\Domain.Services.csproj
-		SccProjectTopLevelParentUniqueName3 = Seed.sln
-		SccProjectName3 = 1.Domain/Domain.Services
-		SccLocalPath3 = 1.Domain\\Domain.Services
-		SccProjectUniqueName4 = 2.Infrastructure\\Persistance.EF\\Persistance.EF.csproj
-		SccProjectTopLevelParentUniqueName4 = Seed.sln
-		SccProjectName4 = 2.Infrastructure/Persistance.EF
-		SccLocalPath4 = 2.Infrastructure\\Persistance.EF
-		SccProjectUniqueName5 = 2.Infrastructure\\Domain.Services.ExternalServices\\Domain.Services.ExternalServices.csproj
-		SccProjectTopLevelParentUniqueName5 = Seed.sln
-		SccProjectName5 = 2.Infrastructure/Domain.Services.ExternalServices
-		SccLocalPath5 = 2.Infrastructure\\Domain.Services.ExternalServices
-		SccProjectUniqueName6 = 0.Core\\Core.Persistance\\Core.Persistance.csproj
-		SccProjectTopLevelParentUniqueName6 = Seed.sln
-		SccProjectName6 = 0.Core/Core.Persistance
-		SccLocalPath6 = 0.Core\\Core.Persistance
-		SccProjectUniqueName7 = 4.Clients\\ApiServer\\ApiServer.csproj
-		SccProjectTopLevelParentUniqueName7 = Seed.sln
-		SccProjectName7 = 4.Clients/ApiServer
-		SccLocalPath7 = 4.Clients\\ApiServer
-		SccProjectUniqueName8 = 2.Infrastructure\\Domain.Services.Repositories.EF\\Domain.Services.Repositories.EF.csproj
-		SccProjectTopLevelParentUniqueName8 = Seed.sln
-		SccProjectName8 = 2.Infrastructure/Domain.Services.Repositories.EF
-		SccLocalPath8 = 2.Infrastructure\\Domain.Services.Repositories.EF
-		SccProjectUniqueName9 = 3.Application\\DependencyInjection\\DependencyInjection.csproj
-		SccProjectTopLevelParentUniqueName9 = Seed.sln
-		SccProjectName9 = 3.Application/DependencyInjection
-		SccLocalPath9 = 3.Application\\DependencyInjection
-		SccProjectUniqueName10 = 1.Domain\\Domain.Services.Impl\\Domain.Services.Impl.csproj
-		SccProjectTopLevelParentUniqueName10 = Seed.sln
-		SccProjectName10 = 1.Domain/Domain.Services.Impl
-		SccLocalPath10 = 1.Domain\\Domain.Services.Impl
-		SccProjectUniqueName11 = DBProject\\DBProject.sqlproj
-		SccProjectTopLevelParentUniqueName11 = Seed.sln
-		SccProjectName11 = DBProject
-		SccLocalPath11 = DBProject
-		SccProjectUniqueName12 = 4.Clients\\ApiServer.Contracts\\ApiServer.Contracts.csproj
-		SccProjectTopLevelParentUniqueName12 = Seed.sln
-		SccProjectName12 = 4.Clients/ApiServer.Contracts
-		SccLocalPath12 = 4.Clients\\ApiServer.Contracts
-		SccProjectUniqueName13 = 1.Domain\\Domain.Services.Tests\\Domain.Services.Tests.csproj
-		SccProjectTopLevelParentUniqueName13 = Seed.sln
-		SccProjectName13 = 1.Domain/Domain.Services.Tests
-		SccLocalPath13 = 1.Domain\\Domain.Services.Tests
-		SccProjectUniqueName14 = 4.Clients\\ApiServer.Tests\\ApiServer.Tests.csproj
-		SccProjectTopLevelParentUniqueName14 = Seed.sln
-		SccProjectName14 = 4.Clients/ApiServer.Tests
-		SccLocalPath14 = 4.Clients\\ApiServer.Tests
-		SccProjectUniqueName15 = 4.Clients\\WebApi\\WebApi.csproj
-		SccProjectTopLevelParentUniqueName15 = Seed.sln
-		SccProjectName15 = 4.Clients/WebApi
-		SccLocalPath15 = 4.Clients\\WebApi
 	EndGlobalSection
 EndGlobal
