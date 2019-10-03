@@ -1,98 +1,94 @@
 <div nz-row>
-  <div nz-col nzSpan="24">
-    <button nz-button nzType="primary" (click)="showAddModal(communityModal)" nzShape="round">
+    <div nz-col nzSpan="23">
+        <button nz-button nzType="primary" (click)="showAddModal(communityModal)" nzShape="round">
       <i nz-icon type="plus" theme="outline"></i>Add new community</button>
-  </div>
+    </div>
 </div>
 
 <br />
 <div nz-row>
-  <div nz-col nzSpan="24">
-    <nz-table #communityTable [nzData]="_detailedCommunity" [nzPageSize]="10">
-      <thead>
-        <tr>
-          <th [style.text-align]="center">Name</th>
-          <th [style.text-align]="center">Description</th>
-          <th [style.text-align]="center">Profile</th>
-          <th [style.text-align]="center">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let community of communityTable.data">
-          <td>{{ community.name }}</td>
-          <td>{{ community.description }}</td>
-          <td>{{ getCProfileNameByID(community.profileId) }}</td>
-          <td [style.text-align]="center">
-            <nz-divider nzType="vertical"></nz-divider>
-            <i (click)="showEditModal(communityModal, community.id)" style="cursor: pointer;" nz-icon type="edit"
-              theme="outline" nzTitle="Edit" nz-tooltip></i>
-            <nz-divider nzType="vertical"></nz-divider>
-            <i (click)="showDeleteConfirm(community.id)" style="cursor: pointer;" nz-icon type="delete" theme="outline"
-              nzTitle="Delete" nz-tooltip></i>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </div>
+    <div nz-col nzSpan="23">
+        <nz-table #communityTable [nzData]="_detailedCommunity" [nzPageSize]="10">
+            <thead>
+                <tr>
+                    <th [style.text-align]="center">Name</th>
+                    <th [style.text-align]="center">Description</th>
+                    <th [style.text-align]="center">Profile</th>
+                    <th [style.text-align]="center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let community of communityTable.data">
+                    <td>{{ community.name }}</td>
+                    <td>{{ community.description }}</td>
+                    <td>{{ getCProfileNameByID(community.profileId) }}</td>
+                    <td [style.text-align]="center">
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <i (click)="showEditModal(communityModal, community.id)" style="cursor: pointer;" nz-icon type="edit" theme="outline" nzTitle="Edit" nz-tooltip></i>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <i (click)="showDeleteConfirm(community.id)" style="cursor: pointer;" nz-icon type="delete" theme="outline" nzTitle="Delete" nz-tooltip></i>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
 </div>
 
 <ng-template #communityModal>
-  <form nz-form [formGroup]="validateForm" [nzLayout]="'horizontal'">
-    <div nz-row>
-      <div nz-col nzSpan="24">
-        <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Name</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input type="text" nz-input formControlName="name" id="name" placeholder="Please input the Name">
-            <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-              <ng-container *ngIf="validateForm.get('name')?.hasError('trimBeginError')">
-                The input has leading whitespace!
-              </ng-container>
-              <ng-container *ngIf="validateForm.get('name')?.hasError('trimEndError')">
-                The input has trailing whitespace!
-              </ng-container>
-              <ng-container *ngIf="validateForm.get('name')?.hasError('required')">
-                Please input the name!
-              </ng-container>
-            </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <div nz-row>
-      <div nz-col nzSpan="24">
-        <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input type="text" nz-input formControlName="description" id="description"
-              placeholder="Please input the description">
-            <nz-form-explain *ngIf="validateForm.get('description').dirty && validateForm.get('description').errors">
-              <ng-container *ngIf="validateForm.get('description')?.hasError('trimBeginError')">
-                The input has leading whitespace!
-              </ng-container>
-              <ng-container *ngIf="validateForm.get('description')?.hasError('trimEndError')">
-                The input has trailing whitespace!
-              </ng-container>
-              <ng-container *ngIf="validateForm.get('description')?.hasError('required')">
-                Please input the description!
-              </ng-container>
-            </nz-form-explain>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Candidate Profile</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24">
-            <nz-select formControlName="profileId">
-              <nz-option *ngFor="let candidate of candidateprofiles" [nzLabel]="candidate.name"
-                [nzValue]="candidate.id">
-              </nz-option>
-            </nz-select>
-            <!-- <nz-form-explain *ngIf="validateForm.get('profileId').dirty && validateForm.get('profileId').errors">Please
+    <form nz-form [formGroup]="validateForm" [nzLayout]="'horizontal'">
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Name</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="name" id="name" placeholder="Please input the Name">
+                        <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+                            <ng-container *ngIf="validateForm.get('name')?.hasError('trimBeginError')">
+                                The input has leading whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('name')?.hasError('trimEndError')">
+                                The input has trailing whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('name')?.hasError('required')">
+                                Please input the name!
+                            </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="description" id="description" placeholder="Please input the description">
+                        <nz-form-explain *ngIf="validateForm.get('description').dirty && validateForm.get('description').errors">
+                            <ng-container *ngIf="validateForm.get('description')?.hasError('trimBeginError')">
+                                The input has leading whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('description')?.hasError('trimEndError')">
+                                The input has trailing whitespace!
+                            </ng-container>
+                            <ng-container *ngIf="validateForm.get('description')?.hasError('required')">
+                                Please input the description!
+                            </ng-container>
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Candidate Profile</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="profileId">
+                            <nz-option *ngFor="let candidate of candidateprofiles" [nzLabel]="candidate.name" [nzValue]="candidate.id">
+                            </nz-option>
+                        </nz-select>
+                        <!-- <nz-form-explain *ngIf="validateForm.get('profileId').dirty && validateForm.get('profileId').errors">Please
               input the candidate profile</nz-form-explain> -->
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
 
-  </form>
+    </form>
 </ng-template>
