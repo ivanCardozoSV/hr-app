@@ -32,11 +32,13 @@ namespace HrApp.API.Json
 
             foreach (var jObject in array)
             {
-                
+                var singleResponse = JsonConvert.DeserializeObject<CandidatesResponse>(jObject.ToString(),
+                    CandidateResponseJSONConverter.getInstance());
+
+                toRet.Candidates.Add(singleResponse);
             }
 
             return toRet;
-
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

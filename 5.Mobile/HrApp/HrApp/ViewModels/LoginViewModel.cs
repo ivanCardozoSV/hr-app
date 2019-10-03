@@ -1,10 +1,12 @@
 ﻿
+using Domain.Model;
 using HrApp.API;
 using HrApp.API.Beans;
 using HrApp.API.DTO;
 using HrApp.API.Json;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -59,6 +61,9 @@ namespace HrApp.ViewModels
                         var api = HRApi.getApi();
                         var command = new CandidateCommand();
                         var res = api.Execute(command);
+
+                        //var resultss = JsonConvert.DeserializeObject<IEnumerable<Candidate>>(res);
+
                         var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
                                 CandidateJSONResponseConverter.getInstance());
 

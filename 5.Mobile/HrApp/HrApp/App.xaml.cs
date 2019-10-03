@@ -1,4 +1,5 @@
-﻿using HrApp.Views;
+﻿using HrApp.API;
+using HrApp.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,12 +11,14 @@ namespace HrApp
         public App()
         {
             InitializeComponent();
-
-            MainPage = new LoginView();
+            HttpCommand.Setup("https://hr-app-api.azurewebsites.net/api/");
+            HRApi.getApi().Setup("AA", "bb");
+            MainPage = new CandidateView();
         }
 
         protected override void OnStart()
         {
+    
             // Handle when your app starts
         }
 

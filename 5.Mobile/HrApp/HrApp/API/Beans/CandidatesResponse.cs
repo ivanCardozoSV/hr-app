@@ -11,7 +11,7 @@ namespace HrApp.API.Beans
         public ResponseStatus status;
         public string Name { get; set; }
         public string LastName { get; set; }
-        public int DNI { get; set; }
+        public int ? DNI { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string LinkedInProfile { get; set; }
