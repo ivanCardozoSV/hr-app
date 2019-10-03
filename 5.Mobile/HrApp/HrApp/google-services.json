@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "456602862781",
+    "firebase_url": "https://hrapp-xamarin.firebaseio.com",
+    "project_id": "hrapp-xamarin",
+    "storage_bucket": "hrapp-xamarin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456602862781:android:875f72bdc9067364fd63d4",
+        "android_client_info": {
+          "package_name": "com.softvision.hrappxamarin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456602862781-74ndmnl7a4d5i6hfp56eovmk9428066v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softvision.hrappxamarin",
+            "certificate_hash": "77e19160e240534989a39231272a9827b85d340c"
+          }
+        },
+        {
+          "client_id": "456602862781-bktva4udu5don3tr6oqe018iib0olbl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMNq2LT5nzb6IpEJ6Rx53oGP5MBh89yEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456602862781-bktva4udu5don3tr6oqe018iib0olbl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
