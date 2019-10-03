@@ -121,6 +121,8 @@ import { NzPopoverModule } from 'ng-zorro-antd';
 import { NoticeCalendarComponent } from './notice-calendar/notice-calendar.component';
 import { Globals } from './app-globals/globals';
 import { NumbersOnlyDirective } from './directives/numbersOnlyDirective';
+import { LocationsComponent } from './locations/locations.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 
 
@@ -191,6 +193,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     OfficeComponent,
     CompanyCalendarComponent,
     NoticeCalendarComponent,
+    LocationsComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -234,7 +238,17 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
       { path: 'reports', component: ReportsComponent, canActivate: [ManagementGuard] },
 
-      { path: 'settings', component: SettingsComponent, canActivate: [ManagementGuard] },
+      { path: 'settings', component: SettingsComponent, canActivate: [ManagementGuard], children:[
+        {path: 'festivities', component: CompanyCalendarComponent},
+        {path: 'hire-projected', component: HireProjectedComponent},
+        {path: 'employee-casualties', component: EmployeeCasualtiesComponent},
+        {path: 'skills-list', component: SkillsComponent},
+        {path: 'skills-types', component: SkillTypeComponent},
+        {path: 'profiles/:tab', component: ProfilesComponent},
+        {path: 'locations/:tab', component: LocationsComponent},
+        {path: 'roles', component: RoleComponent},
+
+      ] },
 
       { path: 'daysOff', component: DaysOffComponent, canActivate: [ManagementGuard] },
 
