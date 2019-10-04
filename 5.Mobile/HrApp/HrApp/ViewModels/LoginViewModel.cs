@@ -28,7 +28,7 @@ namespace HrApp.ViewModels
         public string Email { get; set; }
         private string message;
         public bool IsLoggedIn { get; set; }
-        public string Token { get; set; }
+        public TokenViewModel Token { get; set; }
 
         public ICommand GoogleLoginCommand { get; set; }
         public ICommand GoogleLogoutCommand { get; set; }
@@ -143,14 +143,24 @@ namespace HrApp.ViewModels
                 var GivenName = googleUser.GivenName;
                 var FamilyName = googleUser.FamilyName;
 
+                var token = CrossGoogleClient.Current.ActiveToken;
+                Token = new TokenViewModel()
+                {
+                    Token = token
+                };
+
+                var api = HRApi.getApi();
+                var command = new ExternalAuthenticationCommand(Token);
+                var res = api.Execute(command);
+                var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
+                        CandidateJSONResponseConverter.getInstance());
 
                 // Log the current User email
                 Debug.WriteLine(User.Email);
                 IsLoggedIn = true;
                 OnPropertyChanged("IsLoggedIn");
 
-                var token = CrossGoogleClient.Current.ActiveToken;
-                Token = token;
+                
             }
             else
             {

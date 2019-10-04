@@ -13,7 +13,7 @@ namespace HrApp
             InitializeComponent();
             HttpCommand.Setup("https://hr-app-api.azurewebsites.net/api/");
             HRApi.getApi().Setup("AA", "bb");
-            MainPage = new NavigationPage(new CandidateView());
+            MainPage = new NavigationPage(new LoginView());
             
         }
 
