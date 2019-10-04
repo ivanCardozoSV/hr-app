@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:HrApp.ViewModels"
+             xmlns:Helpers="clr-namespace:HrApp.Helpers"
              mc:Ignorable="d"
              x:Class="HrApp.Views.LoginView"
              BackgroundColor="GhostWhite" Padding="20">
@@ -11,6 +12,7 @@
     <ContentPage.BindingContext>
         <vm:LoginViewModel />
     </ContentPage.BindingContext>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,8 +27,18 @@
             <Entry Text="{Binding UserName}" Placeholder="Username/Email" TextColor="Black" PlaceholderColor="Black" Margin="0,5,0,0" />
             <Entry Text="{Binding Password}" Placeholder="Password" TextColor="Black" PlaceholderColor="Black" IsPassword="True" Margin="0,5,0,0" />
             <Button Command="{Binding LoginCommand}" Text="Log In" TextColor="Black" Margin="0,5,0,0" />
+            <ImageButton Source="GoogleLogo.png"
+                    Margin="0,5,0,0"
+                    Command="{Binding GoogleLoginCommand}"
+                    IsVisible="{Binding IsLoggedIn, Converter={Helpers:NegateBooleanConverter}}"/>
+            <Button Text="Logout"
+                        IsVisible="{Binding IsLoggedIn}"
+                        Command="{Binding GoogleLogoutCommand}"
+                        BackgroundColor="LightCoral" Margin="0,5,0,0"/>
             <Label Text="{Binding Message,Mode=TwoWay}" TextColor="Black" FontSize="Default" Margin="0,5,0,0" />
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  Color="Black" />
+
+
         </StackLayout>
 
         <StackLayout VerticalOptions="End" Orientation="Vertical" Grid.Row="2">
