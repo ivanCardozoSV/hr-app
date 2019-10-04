@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HrApp.API
 {
-    class CandidateCommand : HttpCommand
+    public class CandidateCommand : HttpCommand
     {
         private readonly string endpoint;
 

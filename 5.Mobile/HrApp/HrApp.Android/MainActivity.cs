@@ -19,13 +19,13 @@ namespace HrApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            GoogleClientManager.Initialize(this, null, "456602862781-74ndmnl7a4d5i6hfp56eovmk9428066v.apps.googleusercontent.com");
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            //GoogleClientManager.Initialize(this, null, Constants.GoogleAndroidClientId);
+            GoogleClientManager.Initialize(this, Constants.GoogleAndroidClientId, Constants.GoogleAndroidClientId);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
             LoadApplication(new App());
-
-            var _googleClientManager = CrossGoogleClient.Current.LoginAsync();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
