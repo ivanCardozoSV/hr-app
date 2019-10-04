@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:fontawesome="clr-namespace:HrApp.Utils"
+             x:Class="HrApp.Views.CandidateDetailView">
+
+
+    
+    <StackLayout HorizontalOptions="Center">
+       
+        <Label Text="Candidate Details "/>
+       
+        <Label x:Name="Name" HorizontalTextAlignment="Center"/>
+        <Label x:Name="DNI"/>
+        <Label x:Name="PhoneNumber"/>
+        <Label x:Name="AdditionalInformation"/>
+        <Label x:Name="EnglishLevel"/>
+        <Label x:Name="ContactDay" />
+        <StackLayout Orientation="Horizontal">
+            <Button HorizontalOptions="Start" Clicked="OnButtonEmailClicked" Text="{x:Static fontawesome:FontAwesomeIcons.Envelope}"   FontFamily="{StaticResource FontAwesomeRegular}"  />
+            <Button HorizontalOptions="End" Clicked="OnButtonLinkedinClicked" Text="{x:Static fontawesome:FontAwesomeIcons.Linkedin}"  FontFamily="{StaticResource FontAwesomeBrands}"  />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

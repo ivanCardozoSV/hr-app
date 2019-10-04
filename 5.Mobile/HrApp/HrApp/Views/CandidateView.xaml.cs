@@ -1,6 +1,8 @@
-﻿using HrApp.API;
+﻿using Domain.Model;
+using HrApp.API;
 using HrApp.API.Beans;
 using HrApp.API.Json;
+using HrApp.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,23 +21,26 @@ namespace HrApp.Views
         public CandidateView()
         {
             InitializeComponent();
-            GetCandidates();
+            BindingContext = new CandidateViewModel();
+          
+        }
+
+        private async void OnItemSelected(Object sender, ItemTappedEventArgs e)
+        {
+            var mydetails = e.Item as CandidatesResponse;
+           await Navigation.PushAsync(new CandidateDetailView(mydetails),true);
 
         }
 
-        public void GetCandidates()
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            var api = HRApi.getApi();
-            var command = new CandidateCommand();
-         var res = api.Execute(command);
-
-            //var resultss = JsonConvert.DeserializeObject<IEnumerable<Candidate>>(res);
-
-            var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
-                    CandidateJSONResponseConverter.getInstance());
-
-            CandidateViw.ItemsSource = result.Candidates;
+            var _container = BindingContext as CandidateViewModel;
+            CandidateListView.BeginRefresh();
+            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                CandidateListView.ItemsSource = _container.CandidateList;
+            else
+                CandidateListView.ItemsSource = _container.CandidateList.Where(x => x.Name.ToLower().Contains(e.NewTextValue.ToLower()) || x.LastName.Contains(e.NewTextValue.ToLower()));
+            CandidateListView.EndRefresh();
         }
     }
 }

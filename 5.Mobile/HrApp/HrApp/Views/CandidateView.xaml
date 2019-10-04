@@ -6,24 +6,39 @@
              mc:Ignorable="d"
              x:Class="HrApp.Views.CandidateView">
     <ContentPage.Content>
-
-        <ListView x:Name="CandidateViw" Margin="20">
+        <StackLayout>   
+        <SearchBar TextChanged="SearchBar_TextChanged"></SearchBar>
+        <ListView ItemsSource="{Binding CandidateList}"
+                   HasUnevenRows="true"
+                   SeparatorVisibility="None"
+                   ItemTapped="OnItemSelected"
+                   x:Name="CandidateListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Name}" TextColor="Black"></Label>
-                            <Label Text="{Binding LastName}" TextColor="Black"></Label>
-                            <Label Text="{Binding DNI}" TextColor="Black"></Label>
-                            <Label Text="{Binding PhoneNumber}" TextColor="Black"></Label>
-                            <Label Text="{Binding EmailAddress}" TextColor="Black"></Label>
-                            <Label Text="{Binding LinkedInProfile}" TextColor="Black"></Label>
-                            <Label Text="{Binding AdditionalInformation}" TextColor="Black"></Label>
-                        </StackLayout>
+                        <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1"
+                                       Text="{Binding Name} "
+                                       VerticalOptions="End"/>
+                            <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalOptions="Start"
+                                       Text="{Binding LastName}"/>
+                        </Grid>
                     </ViewCell>
+                    <!-- <ViewCell Text="" TextColor="Black"/>-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
