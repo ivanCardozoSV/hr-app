@@ -20,27 +20,40 @@ namespace HrApp.Views
         {
             InitializeComponent();
             this.candidate = candidate;
-            Name.Text = "Name: " +candidate.Name+" "+ candidate.LastName;
-            DNI.Text = "DNI: "+candidate.DNI.ToString();
+            Name.Text = candidate.Name+" "+ candidate.LastName;
+            DNI.Text = candidate.DNI.ToString();
             PhoneNumber.Text = candidate.PhoneNumber;
-            AdditionalInformation.Text =   (candidate.AdditionalInformation == null)? "" : candidate.AdditionalInformation.ToString();
-            EnglishLevel.Text = candidate.EnglishLevel.ToString();
-            ContactDay.Text = candidate.ContactDay.ToString() ; 
+            AdditionalInformation.Text = (candidate.AdditionalInformation == null)? "Empty" :  candidate.AdditionalInformation.ToString();
+            EnglishLevel.Text =  candidate.EnglishLevel.ToString();
+            ContactDay.Text =candidate.ContactDay.ToString() ;
+            Status.Text = candidate.Status.ToString();
 
         }
 
         private void OnButtonEmailClicked(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("mailto:" + candidate.EmailAddress));
-    
         }
 
         private void OnButtonLinkedinClicked(object sender, EventArgs e)
         {
+                var button = ((Button)sender);
+            button.BackgroundColor = button.BackgroundColor.Equals(Color.Transparent)
+                ? Color.FromHex("#22ac38")
+                : Color.Transparent;
               if (candidate.LinkedInProfile!=null && candidate.LinkedInProfile!="")
                 Device.OpenUri(new Uri(candidate.LinkedInProfile));
               else
                 DependencyService.Get<IToastMessage>().LongAlert("There is no linkedin profile");
+        }
+
+        private void OnButtonPhoneClicked(object sender, EventArgs e)
+        {
+            if (candidate.PhoneNumber != null && candidate.PhoneNumber != "")
+                Device.OpenUri(new Uri(String.Format("tel:{0}", candidate.PhoneNumber)));
+            else
+                DependencyService.Get<IToastMessage>().LongAlert("There is no phonen number");
+          
         }
     }
 }
