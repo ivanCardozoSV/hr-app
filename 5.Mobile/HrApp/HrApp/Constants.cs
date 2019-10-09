@@ -22,5 +22,8 @@
         //-------------------------------------------------------------------------------------------------------
 
         public static string APIEndpoint = "https://hr-app-api.azurewebsites.net/api/";
+
+        // Magic strings
+        public static string ValidatedUserToken = "Token";
     }
 }

@@ -84,12 +84,18 @@ namespace HrApp.API
                 });
             }
 
-            if (res.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            switch (res.StatusCode)
             {
-                throw new InvalidCredentialsException("User is not authorized");
+                case System.Net.HttpStatusCode.Forbidden:
+                    throw new InvalidCredentialsException("Api is current unavailable or you don't have access");
+                case System.Net.HttpStatusCode.InternalServerError:
+                    throw new Exception("Server error");
+                case System.Net.HttpStatusCode.Unauthorized:
+                    throw new InvalidCredentialsException("User is not authorized");
+                default:
+                    break;
             }
-            if (res.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-                throw new Exception("Server error");
+                
 
             if (res.StatusCode != System.Net.HttpStatusCode.Created
                 && res.StatusCode != System.Net.HttpStatusCode.OK)

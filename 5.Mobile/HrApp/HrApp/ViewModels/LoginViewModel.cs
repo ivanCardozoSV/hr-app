@@ -153,11 +153,11 @@ namespace HrApp.ViewModels
                         Token = token
                     };
 
-                    var api = HRApi.getApi();
-                    var command = new ExternalAuthenticationCommand(Token);
-                    var res = api.Execute(command);
-                    var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
-                    Application.Current.Properties["Token"] = result.Token;
+                    //var api = HRApi.getApi();
+                    //var command = new ExternalAuthenticationCommand(Token);
+                    //var res = api.Execute(command);
+                    //var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
+                    //Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
 
                     // Log the current User email
                     Debug.WriteLine(User.Email);
@@ -166,18 +166,20 @@ namespace HrApp.ViewModels
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                    await Application.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
                 }
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
                 throw;
             }
-
-            _googleClientManager.OnLogin -= OnGoogleLoginCompleted;
-            if (IsLoggedIn)
-                await Application.Current.MainPage.Navigation.PushAsync(new CandidateView());
+            finally
+            {
+                _googleClientManager.OnLogin -= OnGoogleLoginCompleted;
+                if (IsLoggedIn)
+                    await Application.Current.MainPage.Navigation.PushAsync(new CandidateView());
+            }
 
         }
 

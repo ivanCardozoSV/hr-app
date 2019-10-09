@@ -52,7 +52,7 @@ namespace HrApp
 
             HttpCommand.Setup(Constants.APIEndpoint);
             HRApi.getApi().Setup("AA", "bb");
-            MainPage = new NavigationPage(new TabbedPage1());
+            MainPage = new NavigationPage(new LoginView());
             LoadItems();
         }
 
