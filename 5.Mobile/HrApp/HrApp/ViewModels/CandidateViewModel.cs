@@ -2,37 +2,26 @@
 using HrApp.API;
 using HrApp.API.Beans;
 using HrApp.API.Json;
+using HrApp.Services.Interfaces;
 using MvvmHelpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace HrApp.ViewModels
 {
     public class CandidateViewModel : BaseViewModel
     {
+        private readonly ICandidateService _candidateService;
         public List<CandidatesResponse> CandidateList { get; set; }
 
-        public CandidateViewModel()
+        public CandidateViewModel(ICandidateService candidateService)
         {
-            CandidateList = new List<CandidatesResponse>();
-            CandidateList = GetCandidates();
-        }
-
-
-        public List<CandidatesResponse> GetCandidates()
-        {
-
-            var api = HRApi.getApi();
-            var command = new CandidateCommand();
-            var res = api.Execute(command);
-            var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
-                    CandidateJSONResponseConverter.getInstance());
-
-
-            return result.Candidates;
+            _candidateService = candidateService;
+            CandidateList = _candidateService.Get().ToList();
         }
     }
             

@@ -21,7 +21,7 @@ namespace HrApp.Views
         public CandidateView()
         {
             InitializeComponent();
-            BindingContext = new CandidateViewModel();
+            //BindingContext = new CandidateViewModel();
           
         }
 

@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:HrApp.ViewModels"
+             BindingContext="{Binding CandidateVM, Source={StaticResource Locator}}"
              mc:Ignorable="d"
              x:Class="HrApp.Views.CandidateView">
     <ContentPage.Content>

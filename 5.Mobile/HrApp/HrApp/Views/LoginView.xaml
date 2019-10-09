@@ -5,14 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:HrApp.ViewModels"
              xmlns:Helpers="clr-namespace:HrApp.Helpers"
+             BindingContext="{Binding LoginVM, Source={StaticResource Locator}}"
              mc:Ignorable="d"
              x:Class="HrApp.Views.LoginView"
              BackgroundColor="GhostWhite" Padding="20">
-
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
-
 
     <Grid>
         <Grid.RowDefinitions>

@@ -17,6 +17,8 @@ using Domain.Model;
 using Plugin.GoogleClient;
 using HrApp.Models;
 using Plugin.GoogleClient.Shared;
+using Android.Content.Res;
+using HrApp.Views;
 
 namespace HrApp.ViewModels
 {
@@ -132,42 +134,50 @@ namespace HrApp.ViewModels
             }
         }
 
-        private void OnGoogleLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
+        private async void OnGoogleLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
-            if (loginEventArgs.Data != null)
+            try
             {
-                GoogleUser googleUser = loginEventArgs.Data;
-                User.Name = googleUser.Name;
-                User.Email = googleUser.Email;
-                User.Picture = googleUser.Picture;
-                var GivenName = googleUser.GivenName;
-                var FamilyName = googleUser.FamilyName;
-
-                var token = CrossGoogleClient.Current.ActiveToken;
-                Token = new TokenViewModel()
+                if (loginEventArgs.Data != null)
                 {
-                    Token = token
-                };
+                    GoogleUser googleUser = loginEventArgs.Data;
+                    User.Name = googleUser.Name;
+                    User.Email = googleUser.Email;
+                    User.Picture = googleUser.Picture;
+                    var GivenName = googleUser.GivenName;
+                    var FamilyName = googleUser.FamilyName;
 
-                var api = HRApi.getApi();
-                var command = new ExternalAuthenticationCommand(Token);
-                var res = api.Execute(command);
-                var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
-                        CandidateJSONResponseConverter.getInstance());
+                    var token = CrossGoogleClient.Current.ActiveToken;
+                    Token = new TokenViewModel()
+                    {
+                        Token = token
+                    };
 
-                // Log the current User email
-                Debug.WriteLine(User.Email);
-                IsLoggedIn = true;
-                OnPropertyChanged("IsLoggedIn");
+                    var api = HRApi.getApi();
+                    var command = new ExternalAuthenticationCommand(Token);
+                    var res = api.Execute(command);
+                    var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
+                    Application.Current.Properties["Token"] = result.Token;
 
-                
+                    // Log the current User email
+                    Debug.WriteLine(User.Email);
+                    IsLoggedIn = true;
+                    OnPropertyChanged("IsLoggedIn");
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                throw;
             }
 
             _googleClientManager.OnLogin -= OnGoogleLoginCompleted;
+            if (IsLoggedIn)
+                await Application.Current.MainPage.Navigation.PushAsync(new CandidateView());
 
         }
 

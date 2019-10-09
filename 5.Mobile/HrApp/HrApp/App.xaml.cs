@@ -1,4 +1,7 @@
-﻿using HrApp.API;
+﻿using Autofac;
+using HrApp.API;
+using HrApp.Services;
+using HrApp.Services.Interfaces;
 using HrApp.Views;
 using System;
 using Xamarin.Forms;

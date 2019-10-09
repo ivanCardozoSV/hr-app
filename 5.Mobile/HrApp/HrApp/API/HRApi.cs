@@ -86,10 +86,10 @@ namespace HrApp.API
 
             if (res.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                throw new InvalidCredentialsException("Problema de autentificación con API");
+                throw new InvalidCredentialsException("User is not authorized");
             }
             if (res.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-                throw new Exception("Error del servidor ");
+                throw new Exception("Server error");
 
             if (res.StatusCode != System.Net.HttpStatusCode.Created
                 && res.StatusCode != System.Net.HttpStatusCode.OK)
