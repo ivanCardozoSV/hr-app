@@ -25,10 +25,13 @@ namespace HrApp.Views
           
         }
 
+
+   
+
         private async void OnItemSelected(Object sender, ItemTappedEventArgs e)
         {
             var mydetails = e.Item as CandidatesResponse;
-           await Navigation.PushAsync(new CandidateDetailView(mydetails),true);
+            await Navigation.PushAsync(new CandidateDetailView(mydetails),true);
 
         }
 
@@ -39,8 +42,9 @@ namespace HrApp.Views
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
                 CandidateListView.ItemsSource = _container.CandidateList;
             else
-                CandidateListView.ItemsSource = _container.CandidateList.Where(x => x.Name.ToLower().Contains(e.NewTextValue.ToLower()) || x.LastName.Contains(e.NewTextValue.ToLower()));
+                    CandidateListView.ItemsSource = _container.CandidateList.Where(x=>x.Name.ToLower().Contains(e.NewTextValue.ToLower())|| x.LastName.ToLower().Contains(e.NewTextValue.ToLower()));
             CandidateListView.EndRefresh();
         }
+
     }
 }

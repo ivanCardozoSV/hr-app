@@ -85,7 +85,7 @@ namespace HrApp.ViewModels
                     async () =>
                     {
                         //API ENDPOINT
-                        HttpCommand.Setup("https://hr-app-api.azurewebsites.net/api/");
+                        HttpCommand.Setup(Constants.APIEndpoint);
                         HRApi.getApi().Setup(this.UserName,this.Password);
 
                         var api = HRApi.getApi();
