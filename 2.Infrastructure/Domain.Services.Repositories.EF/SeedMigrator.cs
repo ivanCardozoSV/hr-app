@@ -46,6 +46,8 @@ namespace Domain.Services.Repositories.EF
             var consultant11 = new Consultant { Name = "Adrian", LastName = "Rodriguez Renda", PhoneNumber = "(+54)9876543", EmailAddress = "adrian.rodriguezrenda@softvision.com" };
             var consultant12 = new Consultant { Name = "Kevin", LastName = "Zatel", PhoneNumber = "(+54)12359742", EmailAddress = "kevin.zatel@softvision.com" };
             var consultant13 = new Consultant { Name = "Tomas", LastName = "Rebollo", PhoneNumber = "(+54)12359742", EmailAddress = "tomas.rebollo@softvision.com" };
+            var consultant14 = new Consultant { Name = "Matias", LastName = "Otero", PhoneNumber = "(+54)12359742", EmailAddress = "matias.otero@softvision.com" };
+            var consultant15 = new Consultant { Name = "Matias", LastName = "Totaro", PhoneNumber = "(+54)12359742", EmailAddress = "matias.totaro@softvision.com" };
             context.Consultants.Add(consultant1);
             context.Consultants.Add(consultant2);
             context.Consultants.Add(consultant3);
@@ -59,6 +61,8 @@ namespace Domain.Services.Repositories.EF
             context.Consultants.Add(consultant11);
             context.Consultants.Add(consultant12);
             context.Consultants.Add(consultant13);
+            context.Consultants.Add(consultant14);
+            context.Consultants.Add(consultant15);
             context.SaveChanges();
             #endregion
 
@@ -570,6 +574,7 @@ namespace Domain.Services.Repositories.EF
             var user13 = new User { FirstName = "Javier", LastName = "Benavente", Username = "javier.benavente@softvision.com", Role = Roles.Admin, Token = "", Password = "03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" };
             var user14 = new User { FirstName = "Facundo", LastName = "Valeriano", Username = "facundo.valeriano@softvision.com", Role = Roles.Admin, Token = "", Password = "03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" };
             var user15 = new User { FirstName = "Matias", LastName = "Otero", Username = "matias.otero@softvision.com", Role = Roles.Admin, Token = "", Password = "03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" };
+            var user16 = new User { FirstName = "Matias", LastName = "Totaro", Username = "matias.totaro@softvision.com", Role = Roles.Admin, Token = "", Password = "03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4" };
             context.Users.Add(user2);
             context.Users.Add(user3);
             context.Users.Add(user4);
@@ -584,6 +589,7 @@ namespace Domain.Services.Repositories.EF
             context.Users.Add(user13);
             context.Users.Add(user14);
             context.Users.Add(user15);
+            context.Users.Add(user16);
             context.SaveChanges();
             #endregion
 
@@ -599,6 +605,7 @@ namespace Domain.Services.Repositories.EF
             var employee9 = new Employee { Name = "Javier", LastName = "Benavente", DNI = 42222223, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
             var employee10 = new Employee { Name = "Facundo", LastName = "Valeriano", DNI = 42222278, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
             var employee11 = new Employee { Name = "Matias", LastName = "Otero", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee12 = new Employee { Name = "Matias", LastName = "Totaro", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "matias.totaro@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
 
             context.Employees.Add(employee1);
             context.Employees.Add(employee2);
@@ -611,6 +618,7 @@ namespace Domain.Services.Repositories.EF
             context.Employees.Add(employee9);
             context.Employees.Add(employee10);
             context.Employees.Add(employee11);
+            context.Employees.Add(employee12);
 
             context.SaveChanges();
             #endregion
