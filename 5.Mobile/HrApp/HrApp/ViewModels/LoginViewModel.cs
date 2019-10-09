@@ -17,7 +17,7 @@ using Domain.Model;
 using Plugin.GoogleClient;
 using HrApp.Models;
 using Plugin.GoogleClient.Shared;
-using Android.Content.Res;
+
 using HrApp.Views;
 
 namespace HrApp.ViewModels
@@ -155,14 +155,24 @@ namespace HrApp.ViewModels
 
                     var api = HRApi.getApi();
                     var command = new ExternalAuthenticationCommand(Token);
-                    var res = api.Execute(command);
-                    var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
-                    Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
+                   
+                    try
+                    {
+                        var res = api.Execute(command);
+                        var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
+                        Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
 
-                    // Log the current User email
-                    Debug.WriteLine(User.Email);
-                    IsLoggedIn = true;
-                    OnPropertyChanged("IsLoggedIn");
+                        // Log the current User email
+                        Debug.WriteLine(User.Email);
+                        IsLoggedIn = true;
+                        OnPropertyChanged("IsLoggedIn");
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw;
+                    }
+                  
                 }
                 else
                 {
@@ -172,7 +182,7 @@ namespace HrApp.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-                throw;
+               
             }
             finally
             {
