@@ -19,6 +19,7 @@ using HrApp.Models;
 using Plugin.GoogleClient.Shared;
 using Android.Content.Res;
 using HrApp.Views;
+using HrApp.Services.Interfaces;
 
 namespace HrApp.ViewModels
 {
@@ -30,7 +31,8 @@ namespace HrApp.ViewModels
         public string Email { get; set; }
         private string message;
         public bool IsLoggedIn { get; set; }
-        public TokenViewModel Token { get; set; }
+
+        private ILoginService _loginService;
 
         public ICommand GoogleLoginCommand { get; set; }
         public ICommand GoogleLogoutCommand { get; set; }
@@ -65,8 +67,9 @@ namespace HrApp.ViewModels
             }
         }
 
-        public LoginViewModel()
+        public LoginViewModel(ILoginService loginService)
         {
+            _loginService = loginService;
             GoogleLoginCommand = new Command(GoogleLoginAsync);
             GoogleLogoutCommand = new Command(GoogleLogout);
 
@@ -84,19 +87,13 @@ namespace HrApp.ViewModels
                 return new Command(
                     async () =>
                     {
-                        //API ENDPOINT
-                        HttpCommand.Setup(Constants.APIEndpoint);
-                        HRApi.getApi().Setup(this.UserName,this.Password);
+                        Application.Current.Properties[Constants.ValidatedUserToken] = _loginService.Authenticate(this.UserName, this.Password);
 
-                        var api = HRApi.getApi();
-                        var command = new CandidateCommand();
-                        var res = api.Execute(command);
+                        IsLoggedIn = true;
+                        OnPropertyChanged("IsLoggedIn");
 
-                        //var resultss = JsonConvert.DeserializeObject<IEnumerable<Candidate>>(res);
-
-                        var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
-                                CandidateJSONResponseConverter.getInstance());
-
+                        if (IsLoggedIn)
+                            await Application.Current.MainPage.Navigation.PushAsync(new CandidateView());
                     });
             }
         }
@@ -148,19 +145,8 @@ namespace HrApp.ViewModels
                     var FamilyName = googleUser.FamilyName;
 
                     var token = CrossGoogleClient.Current.ActiveToken;
-                    Token = new TokenViewModel()
-                    {
-                        Token = token
-                    };
+                    Application.Current.Properties[Constants.ValidatedUserToken] = _loginService.AuthenticateExternal(token);
 
-                    var api = HRApi.getApi();
-                    var command = new ExternalAuthenticationCommand(Token);
-                    var res = api.Execute(command);
-                    var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
-                    Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
-
-                    // Log the current User email
-                    Debug.WriteLine(User.Email);
                     IsLoggedIn = true;
                     OnPropertyChanged("IsLoggedIn");
                 }
@@ -172,7 +158,6 @@ namespace HrApp.ViewModels
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-                throw;
             }
             finally
             {

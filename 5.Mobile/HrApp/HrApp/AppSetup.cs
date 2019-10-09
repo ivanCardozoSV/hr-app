@@ -17,6 +17,7 @@ namespace HrApp
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<LoginViewModel>().AsSelf();
             builder.RegisterType<CandidateViewModel>().AsSelf();
+            builder.RegisterType<LoginService>().As<ILoginService>();
             builder.RegisterType<CandidateService>().As<ICandidateService>();
 
             IContainer container = builder.Build();

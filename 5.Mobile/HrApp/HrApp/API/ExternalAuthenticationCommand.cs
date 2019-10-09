@@ -1,4 +1,5 @@
 ﻿using HrApp.API.DTO;
+using HrApp.Models.DTO;
 using HrApp.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -10,10 +11,10 @@ namespace HrApp.API
 {
     public class ExternalAuthenticationCommand : HttpCommand
     {
-        private readonly TokenViewModel token; 
+        private readonly TokenDTO token; 
         private readonly string endpoint;
 
-        public ExternalAuthenticationCommand(TokenViewModel token)
+        public ExternalAuthenticationCommand(TokenDTO token)
         {
             this.token = token;
             this.endpoint = api + "Auth/loginExternal";

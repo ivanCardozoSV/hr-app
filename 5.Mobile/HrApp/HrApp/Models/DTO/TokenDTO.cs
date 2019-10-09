@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HrApp.ViewModels
+namespace HrApp.Models.DTO
 {
-    public class TokenViewModel
+    public class TokenDTO
     {
         public string Token { get; set; }
     }
