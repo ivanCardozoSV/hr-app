@@ -123,7 +123,6 @@ export class TasksComponent implements OnInit {
           .subscribe(res => {
             if (index !== -1 && displayIndex !== -1) {
               this.toDoList.splice(index, 1);
-              this.toDoListDisplay.splice(displayIndex, 1);
             }
           }, err => {
             if (err.message != undefined) this.facade.toastrService.error(err.message);
