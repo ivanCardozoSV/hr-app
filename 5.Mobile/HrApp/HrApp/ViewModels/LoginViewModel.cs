@@ -153,11 +153,11 @@ namespace HrApp.ViewModels
                         Token = token
                     };
 
-                    //var api = HRApi.getApi();
-                    //var command = new ExternalAuthenticationCommand(Token);
-                    //var res = api.Execute(command);
-                    //var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
-                    //Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
+                    var api = HRApi.getApi();
+                    var command = new ExternalAuthenticationCommand(Token);
+                    var res = api.Execute(command);
+                    var result = JsonConvert.DeserializeObject<TokenViewModel>(res);
+                    Application.Current.Properties[Constants.ValidatedUserToken] = result.Token;
 
                     // Log the current User email
                     Debug.WriteLine(User.Email);
