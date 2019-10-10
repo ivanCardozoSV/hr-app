@@ -7,11 +7,11 @@ using System.Text;
 
 namespace HrApp.API
 {
-    public class CandidateCommand : HttpCommand
+    public class GetCandidatesQuery : HttpCommand
     {
         private readonly string endpoint;
 
-        public CandidateCommand ()
+        public GetCandidatesQuery ()
         {
             this.endpoint = api + "Candidates";
         }

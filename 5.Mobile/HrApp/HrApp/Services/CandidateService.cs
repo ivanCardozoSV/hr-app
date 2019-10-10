@@ -1,5 +1,6 @@
 ﻿using HrApp.API;
 using HrApp.API.Beans;
+using HrApp.API.Interfaces;
 using HrApp.API.Json;
 using HrApp.Services.Interfaces;
 using Newtonsoft.Json;
@@ -11,14 +12,16 @@ namespace HrApp.Services
 {
     public class CandidateService: ICandidateService
     {
+        private IHRApi _api;
+        public CandidateService(IHRApi api)
+        {
+            _api = api;
+        }
+        
         public IEnumerable<CandidatesResponse> Get()
         {
-            var api = HRApi.getApi();
-            var command = new CandidateCommand();
-            var res = api.Execute(command);
-            var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(res,
+            var result = JsonConvert.DeserializeObject<CandidatesBeanResponse>(_api.Execute(new GetCandidatesQuery()),
                     CandidateJSONResponseConverter.getInstance());
-
 
             return result.Candidates;
         }
