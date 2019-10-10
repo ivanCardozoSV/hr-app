@@ -13,13 +13,15 @@ using System.Diagnostics;
 
 namespace HrApp.Droid
 {
-    [Activity(Label = "HrApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "HrApp", Theme = "@style/splashscreen", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            base.Window.RequestFeature(WindowFeatures.ActionBar);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(savedInstanceState);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;

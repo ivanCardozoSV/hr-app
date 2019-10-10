@@ -22,7 +22,7 @@
         //-------------------------------------------------------------------------------------------------------
 
         //public static string APIEndpoint = "https://hr-app-api.azurewebsites.net/api/";
-        public static string APIEndpoint = "http://172.17.67.193:45455/api/";
+        public static string APIEndpoint = "http://172.31.24.83:45455/api/";
 
         // Magic strings
         public static string ValidatedUserToken = "Token";
