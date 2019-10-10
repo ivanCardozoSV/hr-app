@@ -13,11 +13,10 @@ using System.Windows.Input;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using System.Diagnostics;
-//using Domain.Model;
+using Domain.Model;
 using Plugin.GoogleClient;
 using HrApp.Models;
 using Plugin.GoogleClient.Shared;
-//using Android.Content.Res;
 using HrApp.Views;
 using HrApp.Services.Interfaces;
 
@@ -93,7 +92,9 @@ namespace HrApp.ViewModels
                         OnPropertyChanged("IsLoggedIn");
 
                         if (IsLoggedIn)
-                            await Application.Current.MainPage.Navigation.PushAsync(new CandidateView());
+                        {
+                          Application.Current.MainPage = new NavigationPage(new TabbedPage1());
+                        }
                     });
             }
         }
@@ -163,7 +164,7 @@ namespace HrApp.ViewModels
             {
                 _googleClientManager.OnLogin -= OnGoogleLoginCompleted;
                 if (IsLoggedIn)
-                    await Application.Current.MainPage.Navigation.PushAsync(new TabbedPage());
+                    await Application.Current.MainPage.Navigation.PushAsync(new TabbedPage1());
             }
 
         }
