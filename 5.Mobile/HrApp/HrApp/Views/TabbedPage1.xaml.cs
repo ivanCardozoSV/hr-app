@@ -16,7 +16,7 @@ namespace HrApp.Views
         public TabbedPage1()
         {
             SetValue(NavigationPage.HasNavigationBarProperty, false);
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Top);
             InitializeComponent();
         }
 
