@@ -7,7 +7,9 @@
              xmlns:vm="clr-namespace:HrApp.ViewModels"
              BindingContext="{Binding CandidateVM, Source={StaticResource Locator}}"
              mc:Ignorable="d"
-             x:Class="HrApp.Views.CandidateView">
+             x:Class="HrApp.Views.CandidateView"
+             Title="Candidates"
+             IconImageSource="CandidatesIcon">
     <ContentPage.Resources>
         <ResourceDictionary>
             <labelTextColor:StringToColorConverter x:Key="StringToColorConverter"/>

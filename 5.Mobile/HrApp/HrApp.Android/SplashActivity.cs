@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace HrApp.Droid
 {
-    [Activity(Label = "HrApp", Icon = "@drawable/icon", Theme = "@style/splashscreen", MainLauncher = true, NoHistory = true)]
+    [Activity(Label = "HrApp", Icon = "@drawable/icon", Theme = "@style/splashscreen", MainLauncher = false, NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         protected override void OnResume()
