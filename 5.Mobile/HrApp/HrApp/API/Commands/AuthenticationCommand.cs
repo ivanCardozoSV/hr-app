@@ -11,6 +11,7 @@ namespace HrApp.API
     {
         private readonly Credentials credentials; 
         private readonly string endpoint;
+        private readonly HRApi hrApi;
 
         public AuthenticationCommand (Credentials credentials)
         {

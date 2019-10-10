@@ -1,5 +1,6 @@
 ﻿using HrApp.API.DTO;
 using HrApp.API.Exceptions;
+using HrApp.API.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polly;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HrApp.API
 {
-    public class HRApi
+    public class HRApi : IHRApi
     {
         private static HRApi instance;
 
@@ -26,31 +27,29 @@ namespace HrApp.API
         private Credentials credentials;
         private Policy policy;
 
-        public void Setup (string user, string password)
+        private HRApi()
+        {
+            var retry = Policy
+                       .Handle<InvalidCredentialsException>().Retry(1);
+            var circuit = Policy.Handle<Exception>().CircuitBreaker(5, TimeSpan.FromMinutes(2));
+
+            policy = Policy.Wrap(retry, circuit);
+        }
+
+        public void Setup(string user, string password)
         {
             if (user == null || password == null)
                 throw new Exception("Error en usuario y contraseña");
             if (credentials != null && user == credentials.Username && password == credentials.Password)
                 return;
-            instance.credentials = new Credentials
+            credentials = new Credentials
             {
                 Password = password,
                 Username = user
             };
         }
 
-        private HRApi()
-        {
-            var retry = Policy
-                       .Handle<InvalidCredentialsException>()
-                       .Retry(1, (exception, retryCount) =>
-                       {
-                           GenerateToken();
-                       });
-            var circuit = Policy.Handle<Exception>().CircuitBreaker(5, TimeSpan.FromMinutes(2));
 
-            policy = Policy.Wrap(retry, circuit);
-        }
 
         public string Execute(HttpCommand httpCommand)
         {
@@ -77,7 +76,8 @@ namespace HrApp.API
             }
             catch (AggregateException ex)
             {
-                ex.Handle(e => {
+                ex.Handle(e =>
+                {
                     if (e is HttpRequestException) throw new ConnectionException("No se pudo conectar");
                     if (e is TaskCanceledException) throw new Exceptions.TimeoutException("Tiempo de espera agotado");
                     throw new Exception("Error en la conexión a la API ");
@@ -95,7 +95,7 @@ namespace HrApp.API
                 default:
                     break;
             }
-                
+
 
             if (res.StatusCode != System.Net.HttpStatusCode.Created
                 && res.StatusCode != System.Net.HttpStatusCode.OK)
