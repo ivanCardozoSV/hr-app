@@ -14,5 +14,6 @@ namespace Domain.Services.Interfaces.Services
         void Update(UpdateCandidateContract contract);
         void Delete(int id);
         IEnumerable<ReadedCandidateContract> List();
+        IEnumerable<ReadedCandidateAppContract> ListApp();
     }
 }

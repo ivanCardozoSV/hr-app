@@ -15,6 +15,7 @@ namespace ApiServer.Profiles
             CreateMap<CreateCandidateSkillViewModel, CreateCandidateSkillContract>();
             CreateMap<CreatedCandidateSkillContract, CreatedCandidateSkillViewModel>();
             CreateMap<ReadedCandidateSkillContract, ReadedCandidateSkillViewModel>();
+            CreateMap<ReadedCandidateAppSkillContract, ReadedCandidateAppSkillViewModel>();
             CreateMap<UpdateCandidateSkillViewModel, UpdateCandidateSkillContract>();
         }
     }

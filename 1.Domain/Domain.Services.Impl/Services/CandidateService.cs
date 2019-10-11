@@ -147,6 +147,16 @@ namespace Domain.Services.Impl.Services
             return _mapper.Map<List<ReadedCandidateContract>>(candidateResult);
         }
 
+
+        public IEnumerable<ReadedCandidateAppContract> ListApp()
+        {
+            var candidateQuery = _candidateRepository
+                .QueryEager();
+
+            var candidateResult = candidateQuery.ToList();
+            return _mapper.Map<List<ReadedCandidateAppContract>>(candidateResult);
+        }
+
         private void ValidateContract(CreateCandidateContract contract)
         {
             try
@@ -203,5 +213,7 @@ namespace Domain.Services.Impl.Services
 
             candidate.PreferredOffice = office;
         }
+
+       
     }
 }

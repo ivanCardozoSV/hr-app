@@ -18,6 +18,10 @@ namespace Domain.Services.Impl.Profiles
                 .ForMember(x => x.Recruiter, opt => opt.Ignore())
                 .ForMember(x => x.PreferredOffice, opt => opt.Ignore());
             CreateMap<Candidate, CreatedCandidateContract>();
+
+            CreateMap<Candidate, ReadedCandidateAppContract>().ForMember(x => x.Recruiter, opt => opt.MapFrom(r => r.Recruiter))
+           .ForMember(x => x.PreferredOffice, opt => opt.MapFrom(r => r.PreferredOffice));
+         
             CreateMap<UpdateCandidateContract, Candidate>()
                 .ForMember(destination => destination.EnglishLevel,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(EnglishLevel), source.EnglishLevel)))

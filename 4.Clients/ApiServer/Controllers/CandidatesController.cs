@@ -51,7 +51,7 @@ namespace ApiServer.Controllers
                     return NotFound(id);
                 }
 
-                var vm = _mapper.Map<ReadedCandidateViewModel>(candidate);
+                var vm = _mapper.Map<ReadedCandidateAppViewModel>(candidate);
                 return Accepted(vm);
             });
         }
@@ -91,6 +91,20 @@ namespace ApiServer.Controllers
                 return Accepted(vm);
             });
         }
+
+
+        [HttpGet("GetApp")]
+        //[Authorize(Policy = SecurityClaims.CAN_LIST_CANDIDATE)]
+        public IActionResult GetCandidateApp()
+        {
+            return ApiAction(() =>
+            {
+                var candidates = _candidateService.ListApp();
+
+                return Accepted(_mapper.Map<List<ReadedCandidateAppViewModel>>(candidates));
+            });
+        }
+
         // POST api/candidates
         // Creation
         [HttpPost]

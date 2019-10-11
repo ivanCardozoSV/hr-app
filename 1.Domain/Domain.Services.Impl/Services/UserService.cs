@@ -5,7 +5,6 @@ using Domain.Model;
 using Domain.Services.Contracts.User;
 using Domain.Services.Impl.Validators;
 using Domain.Services.Interfaces.Services;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;

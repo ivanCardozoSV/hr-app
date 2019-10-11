@@ -13,6 +13,7 @@ namespace ApiServer.Profiles
             CreateMap<CreateCandidateViewModel, CreateCandidateContract>();
             CreateMap<CreatedCandidateContract, CreatedCandidateViewModel>();
             CreateMap<ReadedCandidateContract, ReadedCandidateViewModel>();
+            CreateMap<ReadedCandidateAppContract, ReadedCandidateAppViewModel>();
             CreateMap<UpdateCandidateViewModel, UpdateCandidateContract>();
         }
 
