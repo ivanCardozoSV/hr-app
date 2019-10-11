@@ -42,15 +42,22 @@ namespace HrApp.API.Json
             res.EnglishLevel = (EnglishLevel)(int)jObject["englishLevel"];
             res.Status = (CandidateStatus)(int)jObject["status"];
             res.ContactDay = DateTime.Parse((string)jObject["contactDay"]);
-            List <CandidateSkill> CandidateSkillsList = new List<CandidateSkill>();
+            res.Recruiter = jObject["recruiter"].ToObject<Consultant>();
+            res.PreferredOffice = jObject["preferredOffice"].ToObject<Office>();
+          
+            List<CandidateSkill> CandidateSkillsList = new List<CandidateSkill>();
             JArray candidates = (JArray)jObject["candidateSkills"];
+
             if (candidates != null) {
              
                 foreach (var item in candidates)
                 {
                     var singleCandidateSkill = new CandidateSkill();
+                    var skill = new Skill();
+                    singleCandidateSkill.Skill = skill;
                     singleCandidateSkill.CandidateId = (int)item["candidateId"];
                     singleCandidateSkill.SkillId = (int)item["skillId"];
+                    singleCandidateSkill.Skill.Type= item["skill"].ToObject<SkillType>();
                     singleCandidateSkill.Rate = (int)item["rate"];
                     singleCandidateSkill.Comment = (string)item["comment"];
                     CandidateSkillsList.Add(singleCandidateSkill);

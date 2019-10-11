@@ -27,6 +27,7 @@ namespace HrApp.Views
             EnglishLevel.Text =  candidate.EnglishLevel.ToString();
             ContactDay.Text =candidate.ContactDay.ToString() ;
             Status.Text = candidate.Status.ToString();
+            Skills.Text = string.Join(",", candidate.CandidateSkills.Select(x => x.Skill.Type.Name));
 
         }
 

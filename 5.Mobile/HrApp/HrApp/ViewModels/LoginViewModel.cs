@@ -25,6 +25,7 @@ namespace HrApp.ViewModels
     public class LoginViewModel : INotifyPropertyChanged
     {
         public UserProfile User { get; set; } = new UserProfile();
+        public GoogleUser googleUser { get; set; } = new GoogleUser();
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
@@ -93,7 +94,7 @@ namespace HrApp.ViewModels
 
                         if (IsLoggedIn)
                         {
-                          Application.Current.MainPage = new NavigationPage(new TabbedPage1());
+                          Application.Current.MainPage = new NavigationPage(new TabbedPage1(googleUser));
                         }
                     });
             }
@@ -138,7 +139,7 @@ namespace HrApp.ViewModels
             {
                 if (loginEventArgs.Data != null)
                 {
-                    GoogleUser googleUser = loginEventArgs.Data;
+                    googleUser = loginEventArgs.Data;
                     User.Name = googleUser.Name;
                     User.Email = googleUser.Email;
                     User.Picture = googleUser.Picture;
@@ -164,7 +165,7 @@ namespace HrApp.ViewModels
             {
                 _googleClientManager.OnLogin -= OnGoogleLoginCompleted;
                 if (IsLoggedIn)
-                    await Application.Current.MainPage.Navigation.PushAsync(new TabbedPage1());
+                    await Application.Current.MainPage.Navigation.PushAsync(new TabbedPage1(googleUser));
             }
 
         }

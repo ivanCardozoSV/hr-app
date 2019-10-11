@@ -128,7 +128,39 @@
             </Label>
             
         </Grid>
+     
         </StackLayout>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Grid Padding="10" RowSpacing="5" ColumnSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label 
+                        Grid.Column="0" 
+                        Grid.Row="0" 
+                        Text="Skills:"
+                        FontAttributes="Bold"
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                </Label>
+
+                <Label 
+                        Grid.Column="1" 
+                        Grid.Row="0" 
+                        x:Name="Skills"
+                        FontAttributes="Bold"
+                        TextColor="Black" 
+                        VerticalOptions="Center">
+                </Label>
+            </Grid>
+        </StackLayout>
+
         <StackLayout Orientation="Horizontal"  VerticalOptions="End">
             <!-- bottom controls -->
             <Button  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="OnButtonEmailClicked" Text="{x:Static fontawesome:FontAwesomeIcons.Envelope}"   FontFamily="{StaticResource FontAwesomeRegular}" FontSize="25"  />

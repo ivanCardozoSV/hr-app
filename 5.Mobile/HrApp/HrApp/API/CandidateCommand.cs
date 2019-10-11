@@ -13,7 +13,7 @@ namespace HrApp.API
 
         public CandidateCommand ()
         {
-            this.endpoint = api + "Candidates";
+            this.endpoint = api + "Candidates/GetApp";
         }
     
         public override HttpResponseMessage Execute()

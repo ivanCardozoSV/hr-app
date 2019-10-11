@@ -35,7 +35,8 @@
                         </Grid.ColumnDefinitions>
                         <Label FontAttributes="Bold" FontSize="16" Text="Name"  Grid.Column="0" Grid.Row="0" />
                         <Label FontAttributes="Bold" FontSize="16" Text="Last Name"  Grid.Column="1" Grid.Row="0"/>
-                        <Label FontAttributes="Bold" FontSize="16" Text="Status"  Grid.Column="2" Grid.Row="0"/>
+                        <Label FontAttributes="Bold" FontSize="16" Text="Recruiter"  Grid.Column="2" Grid.Row="0"/>
+                        <Label FontAttributes="Bold" FontSize="16" Text="Status"  Grid.Column="3" Grid.Row="0"/>
                     </Grid>
                 </ListView.Header>
                 <ListView.ItemTemplate>
@@ -57,6 +58,9 @@
                                        Grid.Row="0"
                                        Text="{Binding LastName}"/>
                                 <Label Grid.Column="2"
+                                       Grid.Row="0"
+                                       Text="{Binding Recruiter.Name}"/>
+                                <Label Grid.Column="3"
                                        Grid.Row="0"
                                        x:Name="Status"
                                        Text="{Binding Status}"
