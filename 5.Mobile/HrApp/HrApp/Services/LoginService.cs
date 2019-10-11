@@ -20,7 +20,7 @@ namespace HrApp.Services
         public string Authenticate(string userName, string password)
         {
             //API ENDPOINT
-            HttpCommand.Setup(Constants.APIEndpoint);
+            HttpCommand.Setup(AppSettingsManager.Settings[Constants.BaseApiUrl]);
             _api.Setup(userName, password);
 
             var result = JsonConvert.DeserializeObject<TokenDTO>(_api.Execute(new GetCandidatesQuery()));
