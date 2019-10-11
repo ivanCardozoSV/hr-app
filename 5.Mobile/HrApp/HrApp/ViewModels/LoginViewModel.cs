@@ -102,7 +102,7 @@ namespace HrApp.ViewModels
         public async void GoogleLoginAsync()
         {
             _googleClientManager.OnLogin += OnGoogleLoginCompleted;
-			try 
+            try 
             {
                 await _googleClientManager.LoginAsync();
             }

@@ -28,7 +28,7 @@ namespace HrApp.Droid
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
 
             //GoogleClientManager.Initialize(this, null, Constants.GoogleAndroidClientId);
-            GoogleClientManager.Initialize(this, Constants.GoogleAndroidClientId, Constants.GoogleAndroidClientId);
+            GoogleClientManager.Initialize(this, AppSettingsManager.Settings[Constants.GoogleAndroidClientId], AppSettingsManager.Settings[Constants.GoogleAndroidClientId]);
             DisplayCrashReport();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
