@@ -6,24 +6,10 @@
              mc:Ignorable="d"
              xmlns:views="clr-namespace:HrApp.Views"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             BarBackgroundColor="#2196F3"
              BarTextColor="White"
              x:Class="HrApp.Views.TabbedPage1">
-
-    <!--Pages can be added as references or inline-->
-    <TabbedPage.Children>
-        <NavigationPage Title="Home">
-            <x:Arguments>
-                <views:HomeView />
-            </x:Arguments>
-        </NavigationPage>
-        <NavigationPage Title="Candidates">
-            <x:Arguments>
-                <views:CandidateView />
-            </x:Arguments>
-        </NavigationPage>
-
-    </TabbedPage.Children>
+    <views:HomeView></views:HomeView>
+    <views:CandidateView></views:CandidateView>
 </TabbedPage>
 
 
