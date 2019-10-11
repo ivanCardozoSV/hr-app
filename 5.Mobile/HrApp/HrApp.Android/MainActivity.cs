@@ -41,7 +41,7 @@ namespace HrApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
-            GoogleClientManager.Initialize(this, Constants.GoogleAndroidClientId, Constants.GoogleAndroidClientId);
+            GoogleClientManager.Initialize(this, AppSettingsManager.Settings[Constants.GoogleAndroidClientId], AppSettingsManager.Settings[Constants.GoogleAndroidClientId]);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
         }
 

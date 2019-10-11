@@ -50,7 +50,7 @@ namespace HrApp
             };
 
 
-            HttpCommand.Setup(Constants.APIEndpoint);
+            HttpCommand.Setup(AppSettingsManager.Settings[Constants.BaseApiUrl]);
             HRApi.getApi().Setup("AA", "bb");
             MainPage = new NavigationPage(new LoginView());
             LoadItems();

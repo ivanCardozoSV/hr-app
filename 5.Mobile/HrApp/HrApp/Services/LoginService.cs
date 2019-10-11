@@ -1,4 +1,5 @@
 ﻿using HrApp.API;
+using HrApp.API.Interfaces;
 using HrApp.Models.DTO;
 using HrApp.Services.Interfaces;
 using Newtonsoft.Json;
@@ -10,19 +11,19 @@ namespace HrApp.Services
 {
     public class LoginService : ILoginService
     {
+        private IHRApi _api;
+        public LoginService(IHRApi api)
+        {
+            _api = api;
+        }
+        
         public string Authenticate(string userName, string password)
         {
             //API ENDPOINT
             HttpCommand.Setup(Constants.APIEndpoint);
-            HRApi.getApi().Setup(userName, password);
+            _api.Setup(userName, password);
 
-            var api = HRApi.getApi();
-            var command = new CandidateCommand();
-            var res = api.Execute(command);
-
-            //var resultss = JsonConvert.DeserializeObject<IEnumerable<Candidate>>(res);
-
-            var result = JsonConvert.DeserializeObject<TokenDTO>(res);
+            var result = JsonConvert.DeserializeObject<TokenDTO>(_api.Execute(new GetCandidatesQuery()));
 
             return result.Token;
         }
@@ -34,10 +35,8 @@ namespace HrApp.Services
                 Token = tkn
             };
 
-            var api = HRApi.getApi();
-            var command = new ExternalAuthenticationCommand(token);
-            var res = api.Execute(command);
-            var result = JsonConvert.DeserializeObject<TokenDTO>(res);
+            var result = JsonConvert.DeserializeObject<TokenDTO>(
+                            _api.Execute(new ExternalAuthenticationCommand(token)));
 
             return result.Token;
         }
