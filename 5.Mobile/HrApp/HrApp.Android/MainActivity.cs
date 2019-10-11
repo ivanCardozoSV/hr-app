@@ -24,16 +24,27 @@ namespace HrApp.Droid
             base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(savedInstanceState);
+            InitControls(savedInstanceState);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
 
             //GoogleClientManager.Initialize(this, null, Constants.GoogleAndroidClientId);
-            GoogleClientManager.Initialize(this, Constants.GoogleAndroidClientId, Constants.GoogleAndroidClientId);
-            DisplayCrashReport();
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+
+            // DisplayCrashReport();
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             LoadApplication(new App());
         }
+
+        private void InitControls(Bundle savedInstanceState)
+        {
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            GoogleClientManager.Initialize(this, Constants.GoogleAndroidClientId, Constants.GoogleAndroidClientId);
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

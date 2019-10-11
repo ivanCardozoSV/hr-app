@@ -5,11 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:views="clr-namespace:HrApp.Views"
-             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              BarTextColor="White"
-             x:Class="HrApp.Views.TabbedPage1">
-    <views:HomeView></views:HomeView>
-    <views:CandidateView></views:CandidateView>
+             x:Class="HrApp.Views.TabbedPage1"
+             x:Name="Root">
+
 </TabbedPage>
 
 
