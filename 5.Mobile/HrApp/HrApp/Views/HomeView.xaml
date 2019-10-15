@@ -29,7 +29,10 @@
 
     <ScrollView>
         <StackLayout Orientation="Vertical">
-
+            <Label Text="Dashboard"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Month hirings" />
             <microcharts:ChartView x:Name="chart1"  
                                HeightRequest="150"/>
             <microcharts:ChartView x:Name="chart2"  
