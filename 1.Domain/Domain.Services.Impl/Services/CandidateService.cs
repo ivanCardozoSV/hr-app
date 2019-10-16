@@ -172,7 +172,8 @@ namespace Domain.Services.Impl.Services
 
         private void ValidateExistence(int id, string email)
         {
-            try
+            if(email.Length>0)
+                try
             {
                 Candidate candidate = _candidateRepository.Query().Where(_ => _.EmailAddress == email && _.Id != id).FirstOrDefault();
                 if (candidate != null) throw new InvalidCandidateException("The Email already exists .");
