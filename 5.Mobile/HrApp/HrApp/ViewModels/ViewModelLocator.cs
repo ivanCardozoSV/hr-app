@@ -9,6 +9,14 @@ namespace HrApp.ViewModels
             AppSetup.Initialize();
         }
 
+        public HomeViewModel HomeVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HomeViewModel>();
+            }
+        }
+
         public LoginViewModel LoginVM 
         { 
             get
