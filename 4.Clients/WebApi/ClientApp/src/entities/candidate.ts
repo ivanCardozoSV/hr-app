@@ -22,4 +22,5 @@ export class Candidate {
   contactDay: Date;
   // profile: CandidateProfile;
   // community: Community;
+  // isReferred: boolean;
 }

@@ -127,6 +127,53 @@
             </nz-form-item>
         </div>
     </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="profile" [hidden]="!visible">Profile</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
+                    <nz-select formControlName="profile">
+                        <nz-option *ngFor="let p of profiles" nzLabel="{{p.name}}" [nzValue]="p.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="candidateForm.get('profile').dirty && candidateForm.get('profile').errors">Please input the recruiter</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="community" [hidden]="!visible">Community</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
+                    <nz-select formControlName="community">
+                        <nz-option *ngFor="let c of comms" nzLabel="{{c.name}}" [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the recruiter</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="linkedInProfile" [hidden]="!visible">LinkedIn Profile</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
+                    <input nz-input formControlName="linkedInProfile" id="linkedInProfile" placeholder="Please input the LinkedIn's profile URL">
+                    <nz-form-explain *ngIf="candidateForm.get('linkedInProfile').dirty && candidateForm.get('linkedInProfile').errors">
+                        <ng-container *ngIf="candidateForm.get('linkedInProfile')?.hasError('trimBeginError')">
+                            The input has leading whitespace!
+                        </ng-container>
+                        <ng-container *ngIf="candidateForm.get('linkedInProfile')?.hasError('trimEndError')">
+                            The input has trailing whitespace!
+                        </ng-container>
+                        <ng-container *ngIf="candidateForm.get('linkedInProfile')?.hasError('required')">
+                            Please input a the URL, or mark the N/A option!
+                        </ng-container>
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
     <div nz-row nzType="flex" nzJustify="center">
         <button nz-button nzType="primary" style="background-color: green;" [hidden]="!isNewCandidate" (click)="createNewCandidate()">SAVE</button>
         <button nz-button nzType="primary" style="background-color: blue;" [hidden]="!isEditCandidate" (click)="saveEdit(candidateForm.get('id').value)" nzJustify="end">Recontact</button>

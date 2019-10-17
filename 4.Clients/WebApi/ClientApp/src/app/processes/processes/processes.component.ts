@@ -22,6 +22,8 @@ import { StageStatusEnum } from '../../../entities/enums/stage-status.enum';
 import { HrStage } from 'src/entities/hr-stage';
 import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
 import { Office } from 'src/entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
 
 @Component({
   selector: 'app-processes',
@@ -81,6 +83,8 @@ export class ProcessesComponent implements OnInit {
   selectedSeniority: SeniorityEnum;
 
   offices: Office[] = [];
+  communities: Community[]=[];
+  profiles: CandidateProfile[]=[];
   stepIndex: number = 0;
 
   forms: FormGroup[] = [];
@@ -100,6 +104,8 @@ export class ProcessesComponent implements OnInit {
     this.getCandidates();
     this.getConsultants();
     this.getOffices();
+    this.getCommunities();
+    this.getProfiles();
 
     this.rejectProcessForm = this.formBuilder.group({
       rejectionReasonDescription: [null, [Validators.required]]
@@ -152,6 +158,24 @@ export class ProcessesComponent implements OnInit {
     this.facade.OfficeService.get<Office>()
       .subscribe(res => {
         this.offices = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getCommunities() {
+    this.facade.communityService.get<Community>()
+      .subscribe(res => {
+        this.communities = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getProfiles() {
+    this.facade.candidateProfileService.get<CandidateProfile>()
+      .subscribe(res => {
+        this.profiles = res;
       }, err => {
         console.log(err);
       });

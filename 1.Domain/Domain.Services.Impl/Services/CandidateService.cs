@@ -52,7 +52,7 @@ namespace Domain.Services.Impl.Services
         {
             _log.LogInformation($"Validating contract {contract.Name}");
             ValidateContract(contract);
-            ValidateExistence(0, contract.EmailAddress);
+            ValidateExistence(0, contract.EmailAddress, contract.LinkedInProfile);
 
             _log.LogInformation($"Mapping contract {contract.Name}");
             var candidate = _mapper.Map<Candidate>(contract);
@@ -170,13 +170,22 @@ namespace Domain.Services.Impl.Services
             }
         }
 
-        private void ValidateExistence(int id, string email)
+        private void ValidateExistence(int id, string email, string linkedInProfile)
         {
-            if(email.Length>0)
-                try
+            try
             {
-                Candidate candidate = _candidateRepository.Query().Where(_ => _.EmailAddress == email && _.Id != id).FirstOrDefault();
+                Candidate candidate = _candidateRepository.Query().Where(_ => !string.IsNullOrEmpty(email) && _.EmailAddress == email && _.Id != id).FirstOrDefault();
                 if (candidate != null) throw new InvalidCandidateException("The Email already exists .");
+            }
+            catch (ValidationException ex)
+            {
+                    throw new CreateContractInvalidException(ex.ToListOfMessages());
+            }
+
+            try
+            {
+                Candidate candidate = _candidateRepository.Query().Where(_ => linkedInProfile!="N/A" && _.LinkedInProfile == linkedInProfile && _.Id != id).FirstOrDefault();
+                if (candidate != null) throw new InvalidCandidateException("The LinkedIn Profile already exists in our database.");
             }
             catch (ValidationException ex)
             {
