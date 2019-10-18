@@ -122,16 +122,19 @@ export class CandidatesComponent implements OnInit {
       name: [null, [Validators.required, trimValidator]],
       lastName: [null, [Validators.required, trimValidator]],
       dni: [null, Validators.required],
-      email: [null, [Validators.email, Validators.required]],
+      email: [null, [Validators.email]],
       phoneNumberPrefix: ['+54'],
       phoneNumber: [null],
-      linkedin: [null, [trimValidator]],
+      linkedin: [null, [Validators.required, trimValidator]],
       additionalInformation: [null, [trimValidator]],
       recruiter: [null, [Validators.required]],
       englishLevel: 'none',
       status: null,
       contactDay: null,
       preferredOffice: [null],
+      community: [null, [Validators.required]],
+      profile: [null, [Validators.required]],
+      isReferred: [null]
     });
   }
 
@@ -244,7 +247,10 @@ export class CandidatesComponent implements OnInit {
                 status: this.validateForm.controls['status'].value,
                 preferredOfficeId: this.validateForm.controls['preferredOffice'].value,
                 recruiter: this.validateForm.controls['recruiter'].value,
-                contactDay: new Date()
+                contactDay: new Date(),
+                profile: this.validateForm.controls['profile'].value,
+                community: this.validateForm.controls['community'].value,
+                isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
               }
               this.facade.candidateService.update<Candidate>(id, editedCandidate)
@@ -383,6 +389,10 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);
+    this.validateForm.controls['community'].setValue(candidate.community);
+    this.validateForm.controls['profile'].setValue(candidate.profile);
+    this.validateForm.controls['isReferred'].setValue(candidate.isReferred);
+
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {
         const id = (this.controlEditArray.length > 0) ? this.controlEditArray[this.controlEditArray.length - 1].id + 1 : 0;

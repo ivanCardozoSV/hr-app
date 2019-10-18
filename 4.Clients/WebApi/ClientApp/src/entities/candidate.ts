@@ -2,8 +2,6 @@ import { CandidateSkill } from "./candidateSkill";
 import { CandidateStatusEnum } from "./enums/candidate-status.enum";
 import { EnglishLevelEnum } from './enums/english-level.enum';
 import { Office } from "./office";
-import { CandidateProfile } from "./Candidate-Profile";
-import { Community } from "./community";
 
 export class Candidate {
   id: number;
@@ -20,7 +18,7 @@ export class Candidate {
   recruiter: number;
   preferredOfficeId?: number;
   contactDay: Date;
-  // profile: CandidateProfile;
-  // community: Community;
-  // isReferred: boolean;
+  profile: number;
+  community: number;
+  isReferred: boolean;
 }

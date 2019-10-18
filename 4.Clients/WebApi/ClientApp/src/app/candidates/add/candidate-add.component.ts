@@ -13,6 +13,8 @@ import { getMatIconFailedToSanitizeUrlError } from '@angular/material';
 import { Globals } from '../../app-globals/globals';
 import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
 import { Office } from 'src/entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
 
 @Component({
   selector: 'candidate-add',
@@ -48,8 +50,28 @@ export class CandidateAddComponent implements OnInit {
         this.fillCandidate = value;
     }
     
+    @Input()
+    private _communities: Community[];
+    public get communities(): Community[] {
+      return this._communities;
+    }
+    public set communities(value: Community[]) {
+      this.comms = value;
+    }
+  
+    @Input()
+    private _candidateProfiles: CandidateProfile[];
+    public get candidateProfiles(): CandidateProfile[] {
+      return this._candidateProfiles;
+    }
+    public set candidateProfiles(value: CandidateProfile[]) {
+      this.profiles = value;
+    }
+    
   fillCandidate: Candidate;
   recruiters: Consultant[] = [];
+  comms: Community[] =[];
+  profiles: CandidateProfile[] = [];
   @Input() _offices: Office[] = [];
   currentConsultant: User;
   candidateForm: FormGroup = this.fb.group({
@@ -65,7 +87,10 @@ export class CandidateAddComponent implements OnInit {
     preferredOffice: [null, [Validators.required]],
     englishLevel: 'none',
     status: 1,
-    contacDay : [null]
+    contacDay : [null],
+    profile: [null, [Validators.required]],
+    community: [null, [Validators.required]],
+    isReferred: [null]
   });
   isDniValid: boolean = false;
   isDniLoading: boolean = false;
@@ -85,6 +110,8 @@ export class CandidateAddComponent implements OnInit {
 
   ngOnInit() {
     this.recruiters = this._consultants;
+    this.comms = this._communities;
+    this.profiles = this._candidateProfiles
     this.fillCandidate = this._candidate;
     this.fillCandidateForm(this._process.candidate);
     this.isEdit = this._process.id !== 0;
@@ -182,6 +209,9 @@ export class CandidateAddComponent implements OnInit {
     this.candidateForm.controls['recruiter'].setValue(candidate.recruiter);
     this.candidateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.candidateForm.controls['status'].setValue(candidate.status);
+    this.candidateForm.controls['community'].setValue(candidate.community);
+    this.candidateForm.controls['profile'].setValue(candidate.profile);
+    this.candidateForm.controls['isReferred'].setValue(candidate.isReferred);
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {
         const id = skill.skillId || skill.skill.id;
@@ -297,7 +327,10 @@ export class CandidateAddComponent implements OnInit {
       status: this.candidateForm.controls['status'].value === null ? null : this.candidateForm.controls['status'].value,
       recruiter: this.candidateForm.controls['recruiter'].value === null ? null : this.candidateForm.controls['recruiter'].value,
       preferredOfficeId: this.candidateForm.controls['preferredOffice'].value === null ? null : this.candidateForm.controls['preferredOffice'].value,
-      contactDay: new Date()
+      contactDay: new Date(),
+      profile: this.candidateForm.controls['profile'].value === null ? null : this.candidateForm.controls['profile'].value,
+      community: this.candidateForm.controls['community'].value===null?null:this.candidateForm.controls['community'].value,
+      isReferred: this.candidateForm.controls['isReferred'].value===null?null:this.candidateForm.controls['community'].value
       // contactDay: this.candidateForm.controls['contactDay'].value
     }
     newCandidate.phoneNumber.toString();

@@ -10,23 +10,33 @@ namespace Domain.Services.Impl.Profiles
     {
         public CandidateProfile()
         {
-            CreateMap<Candidate, ReadedCandidateContract>().ForMember(x => x.Recruiter, opt => opt.MapFrom(r => r.Recruiter.Id))
-                .ForMember(x => x.PreferredOfficeId, opt => opt.MapFrom(r => r.PreferredOffice.Id));
+            CreateMap<Candidate, ReadedCandidateContract>()
+                .ForMember(x => x.Recruiter, opt => opt.MapFrom(r => r.Recruiter.Id))
+                .ForMember(x => x.PreferredOfficeId, opt => opt.MapFrom(r => r.PreferredOffice.Id))
+                .ForMember(x => x.Community, opt => opt.MapFrom(r => r.Community.Id))
+                .ForMember(x => x.Profile, opt => opt.MapFrom(r => r.Profile.Id));
             CreateMap<CreateCandidateContract, Candidate>()
                 .ForMember(destination => destination.EnglishLevel,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(EnglishLevel), source.EnglishLevel)))
                 .ForMember(x => x.Recruiter, opt => opt.Ignore())
-                .ForMember(x => x.PreferredOffice, opt => opt.Ignore());
+                .ForMember(x => x.PreferredOffice, opt => opt.Ignore())
+                .ForMember(x => x.Community, opt => opt.Ignore())
+                .ForMember(x => x.Profile, opt => opt.Ignore())
+                ;
             CreateMap<Candidate, CreatedCandidateContract>();
 
             CreateMap<Candidate, ReadedCandidateAppContract>().ForMember(x => x.Recruiter, opt => opt.MapFrom(r => r.Recruiter))
-           .ForMember(x => x.PreferredOffice, opt => opt.MapFrom(r => r.PreferredOffice));
-         
+           .ForMember(x => x.PreferredOffice, opt => opt.MapFrom(r => r.PreferredOffice))
+           .ForMember(x => x.Community, opt => opt.MapFrom(r => r.Community))
+           .ForMember(x => x.Profile, opt => opt.MapFrom(r => r.Profile));
+
             CreateMap<UpdateCandidateContract, Candidate>()
                 .ForMember(destination => destination.EnglishLevel,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(EnglishLevel), source.EnglishLevel)))
                 .ForMember(x => x.Recruiter, opt => opt.Ignore())
-                .ForMember(x => x.PreferredOffice, opt => opt.Ignore());
+                .ForMember(x => x.PreferredOffice, opt => opt.Ignore())
+                .ForMember(x => x.Community, opt => opt.Ignore())
+                .ForMember(x => x.Profile, opt => opt.Ignore());
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Domain.Services.Impl.Services
         private readonly IRepository<Candidate> _candidateRepository;
         private readonly IRepository<Consultant> _consultantRepository;
         private readonly IRepository<Office> _officeRepository;
+        private readonly IRepository<Community> _communityRepository;
+        private readonly IRepository<CandidateProfile> _candidateProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILog<CandidateService> _log;
         private readonly UpdateCandidateContractValidator _updateCandidateContractValidator;
@@ -29,6 +31,8 @@ namespace Domain.Services.Impl.Services
 
         public CandidateService(IMapper mapper,
             IRepository<Candidate> candidateRepository,
+            IRepository<Community> communityRepository,
+            IRepository<CandidateProfile> candidateProfileRepository,
             IRepository<Consultant> consultantRepository,
             IRepository<Office> officeRepository,
             IRepository<Process> processRepository,
@@ -43,6 +47,8 @@ namespace Domain.Services.Impl.Services
             _candidateRepository = candidateRepository;
             _consultantRepository = consultantRepository;
             _officeRepository = officeRepository;
+            _communityRepository = communityRepository;
+            _candidateProfileRepository = candidateProfileRepository;
             _log = log;
             _updateCandidateContractValidator = updateCandidateContractValidator;
             _createCandidateContractValidator = createCandidateContractValidator;
@@ -58,6 +64,8 @@ namespace Domain.Services.Impl.Services
             var candidate = _mapper.Map<Candidate>(contract);
 
             this.AddRecruiterToCandidate(candidate, contract.Recruiter);
+            this.AddCommunityToCandidate(candidate, contract.Community);
+            this.AddCandidateProfileToCandidate(candidate, contract.Profile);
             //this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
 
             var createdCandidate = _candidateRepository.Create(candidate);
@@ -100,6 +108,8 @@ namespace Domain.Services.Impl.Services
 
             this.AddRecruiterToCandidate(candidate, contract.Recruiter);
             this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
+            this.AddCommunityToCandidate(candidate, contract.Community);
+            this.AddCandidateProfileToCandidate(candidate, contract.Profile);
 
             var updatedCandidate = _candidateRepository.Update(candidate);
             _log.LogInformation($"Complete for {contract.Name}");
@@ -214,7 +224,22 @@ namespace Domain.Services.Impl.Services
 
             candidate.Recruiter = recruiter;
         }
+        private void AddCommunityToCandidate(Candidate candidate, int communityID)
+        {
+            var community = _communityRepository.Query().Where(_ => _.Id == communityID).FirstOrDefault();
+            if (community == null)
+                throw new Domain.Model.Exceptions.Community.CommunityNotFoundException(communityID);
 
+            candidate.Community = community;
+        }
+        private void AddCandidateProfileToCandidate(Candidate candidate, int profileID)
+        {
+            var profile = _candidateProfileRepository.Query().Where(_ => _.Id == profileID).FirstOrDefault();
+            if (profile == null)
+                throw new Domain.Model.Exceptions.CandidateProfile.CandidateProfileNotFoundException(profileID);
+
+            candidate.Profile = profile;
+        }
         private void AddOfficeToCandidate(Candidate candidate, int officeId)
         {
             var office = _officeRepository.Query().Where(_ => _.Id == officeId).FirstOrDefault();

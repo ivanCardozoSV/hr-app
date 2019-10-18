@@ -85,7 +85,8 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" [hidden]="!visible">Phone Number</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" [hidden]="!visible">Phone Number
+                </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="candidateForm.controls['phoneNumber']" [hidden]="!visible">
                     <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                         <ng-template #addOnBeforeTemplate>
@@ -108,7 +109,8 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="contactDay" [hidden]="!visible">Contact Day</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <nz-date-picker formControlName="contactDay" [nzSize]="size" nzPlaceHolder="Select a date"></nz-date-picker>
+                    <nz-date-picker formControlName="contactDay" [nzSize]="size" nzPlaceHolder="Select a date">
+                    </nz-date-picker>
                     <!-- <nz-form-explain *ngIf="candidateForm.get('contactDay').dirty && candidateForm.get('contactDay').errors && !exists(candidateForm.get('contactDay').errors)">Please input
                       the date</nz-form-explain> -->
                 </nz-form-control>
@@ -136,7 +138,8 @@
                         <nz-option *ngFor="let p of profiles" nzLabel="{{p.name}}" [nzValue]="p.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="candidateForm.get('profile').dirty && candidateForm.get('profile').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="candidateForm.get('profile').dirty && candidateForm.get('profile').errors">
+                        Please input the profile</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -148,7 +151,7 @@
                         <nz-option *ngFor="let c of comms" nzLabel="{{c.name}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the community</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -156,7 +159,8 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="linkedInProfile" [hidden]="!visible">LinkedIn Profile</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="linkedInProfile" [hidden]="!visible">LinkedIn Profile
+                </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
                     <input nz-input formControlName="linkedInProfile" id="linkedInProfile" placeholder="Please input the LinkedIn's profile URL">
                     <nz-form-explain *ngIf="candidateForm.get('linkedInProfile').dirty && candidateForm.get('linkedInProfile').errors">
@@ -170,6 +174,16 @@
                             Please input a the URL, or mark the N/A option!
                         </ng-container>
                     </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isReferred" [hidden]="!visible">Is Referred
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
+                    <label nz-checkbox formControlName="isReferred"></label>
+                    <!--in the future we could use something like (ngModelChange)="referredBy($event)" to show an input for the referring employee.-->
                 </nz-form-control>
             </nz-form-item>
         </div>

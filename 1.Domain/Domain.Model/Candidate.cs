@@ -18,7 +18,10 @@ namespace Domain.Model
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
         public Consultant Recruiter { get; set; }
-        public Office PreferredOffice { get; set; }
+        public Community Community { get; set; }
+        public CandidateProfile Profile { get; set; }
+        public bool IsReferred { get; set; }
+        public Office PreferredOffice { get; set; }  
         public DateTime ContactDay { get; set; }
         public IList<CandidateSkill> CandidateSkills { get; set; }
     }

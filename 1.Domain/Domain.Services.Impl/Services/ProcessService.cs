@@ -6,6 +6,7 @@ using Domain.Services.Contracts.Process;
 using Domain.Services.Contracts.Stage;
 using Domain.Services.Interfaces.Repositories;
 using Domain.Services.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,8 @@ namespace Domain.Services.Impl.Services
         private readonly IProcessStageRepository _processStageRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Consultant> _consultantRepository;
+        private readonly IRepository<Community> _communityRepository;
+        private readonly IRepository<CandidateProfile> _candidateProfileRepository;
         private readonly IRepository<Candidate> _candidateRepository;
         private readonly IRepository<Office> _officeRepository;
         private readonly IHrStageRepository _hrStageRepository;
@@ -28,6 +31,8 @@ namespace Domain.Services.Impl.Services
         public ProcessService(IMapper mapper,
             IRepository<Consultant> consultantRepository,
             IRepository<Candidate> candidateRepository,
+            IRepository<CandidateProfile> candidateProfileRepository,
+            IRepository<Community> communityRepository,
             IRepository<Office> officeRepository,
             IProcessRepository processRepository,
             IProcessStageRepository processStageRepository,
@@ -39,6 +44,8 @@ namespace Domain.Services.Impl.Services
         {
             _consultantRepository = consultantRepository;
             _candidateRepository = candidateRepository;
+            _candidateProfileRepository = candidateProfileRepository;
+            _communityRepository = communityRepository;
             _officeRepository = officeRepository;
             _mapper = mapper;
             _processRepository = processRepository;
@@ -93,6 +100,8 @@ namespace Domain.Services.Impl.Services
             //process.CandidateId = updatedCandidate.Id;
 
             this.AddRecruiterToCandidate(process.Candidate, createProcessContract.Candidate.Recruiter);
+            this.AddCommunityToCandidate(process.Candidate, createProcessContract.Candidate.Community);
+            this.AddCandidateProfileToCandidate(process.Candidate, createProcessContract.Candidate.Profile);
             this.AddOfficeToCandidate(process.Candidate, createProcessContract.Candidate.PreferredOfficeId);
             var createdProcess = _processRepository.Create(process);
 
@@ -101,6 +110,24 @@ namespace Domain.Services.Impl.Services
             var createdProcessContract = _mapper.Map<CreatedProcessContract>(createdProcess);
 
             return createdProcessContract;
+        }
+
+        private void AddCandidateProfileToCandidate(Candidate candidate, int profileID)
+        {
+            var profile = _candidateProfileRepository.Query().Where(_ => _.Id == profileID).FirstOrDefault();
+            if (profile == null)
+                throw new Domain.Model.Exceptions.Consultant.ConsultantNotFoundException(profileID);
+
+            candidate.Profile = profile;
+        }
+
+        private void AddCommunityToCandidate(Candidate candidate, int communityID)
+        {
+            var community = _communityRepository.Query().Where(_ => _.Id == communityID).FirstOrDefault();
+            if (community == null)
+                throw new Domain.Model.Exceptions.Consultant.ConsultantNotFoundException(communityID);
+
+            candidate.Community = community;
         }
 
         private void AddRecruiterToCandidate(Candidate candidate, int recruiterID)
@@ -139,6 +166,8 @@ namespace Domain.Services.Impl.Services
 
 
             this.AddRecruiterToCandidate(process.Candidate, updateProcessContract.Candidate.Recruiter);
+            this.AddCommunityToCandidate(process.Candidate, updateProcessContract.Candidate.Community);
+            this.AddCandidateProfileToCandidate(process.Candidate, updateProcessContract.Candidate.Profile);
             this.AddOfficeToCandidate(process.Candidate, updateProcessContract.Candidate.PreferredOfficeId);
 
             var updatedProcess = _processRepository.Update(process);

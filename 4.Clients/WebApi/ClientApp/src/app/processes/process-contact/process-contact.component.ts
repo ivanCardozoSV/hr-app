@@ -91,6 +91,7 @@ export class ProcessContactComponent implements OnInit {
     community: [null, [Validators.required]],
     profile: [null, [Validators.required]],
     linkedInProfile: [null, [Validators.required, trimValidator]],
+    isReferred: [null],
     id: [null]
   });
   visible: boolean = false;
@@ -227,6 +228,9 @@ export class ProcessContactComponent implements OnInit {
     this.candidateForm.controls['recruiter'].setValue(Candidate.recruiter);
     this.candidateForm.controls['id'].setValue(Candidate.id);
     this.candidateForm.controls['contactDay'].setValue(new Date(Candidate.contactDay));
+    this.candidateForm.controls['profile'].setValue(Candidate.profile);
+    this.candidateForm.controls['community'].setValue(Candidate.community);
+    this.candidateForm.controls['isReferred'].setValue(Candidate.isReferred);
   }
 
   resetForm() {
@@ -242,6 +246,7 @@ export class ProcessContactComponent implements OnInit {
       community: [null, [Validators.required]],
       profile: [null, [Validators.required]],
       linkedInProfile: [null, [Validators.required, trimValidator]],
+      isReferred: [null],
       id: [null]
     });
   }
@@ -270,7 +275,10 @@ export class ProcessContactComponent implements OnInit {
         additionalInformation: editedCandidate.additionalInformation,
         status: editedCandidate.status,
         candidateSkills: editedCandidate.candidateSkills,
-        preferredOfficeId: editedCandidate.preferredOfficeId
+        preferredOfficeId: editedCandidate.preferredOfficeId,
+        profile: editedCandidate.profile,
+        community: editedCandidate.community,
+        isReferred: editedCandidate.isReferred
       }
       this.facade.candidateService.update<Candidate>(idCandidate, editedCandidate)
         .subscribe(res => {
@@ -302,7 +310,10 @@ export class ProcessContactComponent implements OnInit {
       additionalInformation: editedCandidate.additionalInformation,
       status: CandidateStatusEnum.Recall,
       preferredOfficeId: editedCandidate.preferredOfficeId,
-      candidateSkills: editedCandidate.candidateSkills
+      candidateSkills: editedCandidate.candidateSkills,
+      profile: editedCandidate.profile,
+      community: editedCandidate.community,
+      isReferred: editedCandidate.isReferred
     }
 
     this.facade.candidateService.update<Candidate>(idCandidate, editedCandidate)
@@ -340,7 +351,10 @@ export class ProcessContactComponent implements OnInit {
         additionalInformation: '',
         status: CandidateStatusEnum.New,
         preferredOfficeId: null,
-        candidateSkills: []
+        candidateSkills: [],
+        isReferred: this.candidateForm.controls['isReferred'].value,
+        community: this.candidateForm.controls['community'].value,
+        profile: this.candidateForm.controls['profile'].value
       }
       if (this.candidateForm.controls['phoneNumber'].value) {
         newCandidate.phoneNumber += this.candidateForm.controls['phoneNumber'].value.toString();

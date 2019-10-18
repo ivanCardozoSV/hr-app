@@ -32,6 +32,28 @@ namespace Domain.Services.Repositories.EF
             context.SaveChanges();
             #endregion
 
+            #region CandidateProfiles
+            var Profile1 = new CandidateProfile { Name = "Devs", Description = "Developers" };
+            var Profile2 = new CandidateProfile { Name = "RRHH", Description = "Recursos Humanos" };
+            var Profile3 = new CandidateProfile { Name = "MKT", Description = "Marketing" };
+            context.Profiles.Add(Profile1);
+            context.Profiles.Add(Profile2);
+            context.Profiles.Add(Profile3);
+            context.SaveChanges();
+            #endregion
+
+            #region Community
+            var Community1 = new Community { Name = ".NET", Description = "Comunidad de .Net", ProfileId = 1, Profile = Profile1 };
+            var Community2 = new Community { Name = "Devs", Description = "Comunidad de Developers", ProfileId = 1, Profile = Profile1 };
+            var Community3 = new Community { Name = "RRHH", Description = "Comunidad de Recursos Humanos", ProfileId = 2, Profile = Profile2 };
+            var Community4 = new Community { Name = "Marketing", Description = "Comunidad de Marketing", ProfileId = 3, Profile = Profile3 };
+            context.Community.Add(Community1);
+            context.Community.Add(Community2);
+            context.Community.Add(Community3);
+            context.Community.Add(Community4);
+            context.SaveChanges();
+            #endregion
+
             #region Consultants
             var consultant1 = new Consultant { Name = "Cristian", LastName = "Rodríguez", PhoneNumber = "(+54)12312312", EmailAddress = "critian.rodriguez@softvision.com" };
             var consultant2 = new Consultant { Name = "Santiago", LastName = "Mayochi", PhoneNumber = "(+1)2123453423", EmailAddress = "santiago.mayochi@softvision.com", AdditionalInformation = "HR Analyst" };
@@ -86,17 +108,17 @@ namespace Domain.Services.Repositories.EF
 
 
             #region Candidates
-            var candidate1 = new Candidate { Name = "Cristian", LastName = "Piqué", DNI = 34578644, PhoneNumber = "(+54)2355677581", EmailAddress = "cristian.pique@softvision.com", LinkedInProfile = "https://www.linkedin.com/in/me-cristianpique/", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant1, PreferredOffice = Office1 };
-            var candidate2 = new Candidate { Name = "Cristian", LastName = "Piqué", DNI = 1234567, PhoneNumber = "(+54)1122334455", EmailAddress = "gerardo.chechik@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.Advanced, Status = CandidateStatus.Hired, Recruiter = consultant2, PreferredOffice = Office2};
-            var candidate3 = new Candidate { Name = "Javier", LastName = "Páez", DNI = 12345678, PhoneNumber = "(+54)1122334455", EmailAddress = "javier.paez@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.Recall, Recruiter = consultant3, PreferredOffice = Office1};
-            var candidate4 = new Candidate { Name = "Matías", LastName = "Luraghi", DNI = 1234578, PhoneNumber = "(+54)1122334455", EmailAddress = "matias.luraghi@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant4, PreferredOffice = Office1};
-            var candidate5 = new Candidate { Name = "Juan Pablo", LastName = "Maldonado", DNI = 1345678, PhoneNumber = "(+54)1122334455", EmailAddress = "juanpablo.maldonado@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.None, Status = CandidateStatus.InProgress, Recruiter = consultant5, PreferredOffice = Office2};
-            var candidate6 = new Candidate { Name = "Matías", LastName = "Caniglia", DNI = 1234568, PhoneNumber = "(+1)1122334455", EmailAddress = "matias.caniglia@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant6, PreferredOffice = Office2};
-            var candidate7 = new Candidate { Name = "Gustavo", LastName = "Gilberto", DNI = 2345678, PhoneNumber = "(+54)1122334455", EmailAddress = "gustavo.gilberto@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.Rejected, Recruiter = consultant1, PreferredOffice = Office2};
-            var candidate8 = new Candidate { Name = "Pablo", LastName = "Gore", DNI = 345678, PhoneNumber = "(+54)1122334455", EmailAddress = "pablo.gore@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.Rejected, Recruiter = consultant2, PreferredOffice = Office1};
-            var candidate9 = new Candidate { Name = "Pablo", LastName = "Oubina", DNI = 12340678, PhoneNumber = "(+54)1122334455", EmailAddress = "pablo.oubina@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.Advanced, Status = CandidateStatus.InProgress, Recruiter = consultant3, PreferredOffice = Office1};
-            var candidate10 = new Candidate { Name = "Martín", LastName = "Pielvitori", DNI = 10345678, PhoneNumber = "(+54)1122334455", EmailAddress = "martin.pielvitori@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.None, Status = CandidateStatus.Hired, Recruiter = consultant4, PreferredOffice = Office1};
-            var candidate11 = new Candidate { Name = "Alejo", LastName = "Romano", DNI = 12345670, PhoneNumber = "(+1)1122334455", EmailAddress = "alejo.romano@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.New, Recruiter = consultant5, PreferredOffice = Office1};
+            var candidate1 = new Candidate { Profile=Profile1, Name = "Cristian", LastName = "Piqué", DNI = 34578644, PhoneNumber = "(+54)2355677581", EmailAddress = "cristian.pique@softvision.com", LinkedInProfile = "https://www.linkedin.com/in/me-cristianpique/", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant1, PreferredOffice = Office1, Community=Community1};
+            var candidate2 = new Candidate { Profile = Profile2, Community =Community2, Name = "Cristian", LastName = "Piqué", DNI = 1234567, PhoneNumber = "(+54)1122334455", EmailAddress = "gerardo.chechik@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.Advanced, Status = CandidateStatus.Hired, Recruiter = consultant2, PreferredOffice = Office2};
+            var candidate3 = new Candidate { Profile = Profile3, Community = Community3, Name = "Javier", LastName = "Páez", DNI = 12345678, PhoneNumber = "(+54)1122334455", EmailAddress = "javier.paez@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.Recall, Recruiter = consultant3, PreferredOffice = Office1};
+            var candidate4 = new Candidate { Profile = Profile2, Community = Community4, Name = "Matías", LastName = "Luraghi", DNI = 1234578, PhoneNumber = "(+54)1122334455", EmailAddress = "matias.luraghi@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant4, PreferredOffice = Office1};
+            var candidate5 = new Candidate { Profile = Profile1, Community = Community1, Name = "Juan Pablo", LastName = "Maldonado", DNI = 1345678, PhoneNumber = "(+54)1122334455", EmailAddress = "juanpablo.maldonado@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.None, Status = CandidateStatus.InProgress, Recruiter = consultant5, PreferredOffice = Office2};
+            var candidate6 = new Candidate { Profile = Profile3, Community = Community2, Name = "Matías", LastName = "Caniglia", DNI = 1234568, PhoneNumber = "(+1)1122334455", EmailAddress = "matias.caniglia@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.InProgress, Recruiter = consultant6, PreferredOffice = Office2};
+            var candidate7 = new Candidate { Profile = Profile2, Community = Community3, Name = "Gustavo", LastName = "Gilberto", DNI = 2345678, PhoneNumber = "(+54)1122334455", EmailAddress = "gustavo.gilberto@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.Rejected, Recruiter = consultant1, PreferredOffice = Office2};
+            var candidate8 = new Candidate { Community = Community4, Name = "Pablo", LastName = "Gore", DNI = 345678, PhoneNumber = "(+54)1122334455", EmailAddress = "pablo.gore@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.LowIntermediate, Status = CandidateStatus.Rejected, Recruiter = consultant2, PreferredOffice = Office1};
+            var candidate9 = new Candidate { Community = Community1, Name = "Pablo", LastName = "Oubina", DNI = 12340678, PhoneNumber = "(+54)1122334455", EmailAddress = "pablo.oubina@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.Advanced, Status = CandidateStatus.InProgress, Recruiter = consultant3, PreferredOffice = Office1};
+            var candidate10 = new Candidate { Community = Community3, Name = "Martín", LastName = "Pielvitori", DNI = 10345678, PhoneNumber = "(+54)1122334455", EmailAddress = "martin.pielvitori@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.None, Status = CandidateStatus.Hired, Recruiter = consultant4, PreferredOffice = Office1};
+            var candidate11 = new Candidate { Community = Community2, Name = "Alejo", LastName = "Romano", DNI = 12345670, PhoneNumber = "(+1)1122334455", EmailAddress = "alejo.romano@softvision.com", LinkedInProfile = "", EnglishLevel = EnglishLevel.HighIntermediate, Status = CandidateStatus.New, Recruiter = consultant5, PreferredOffice = Office1};
             context.Candidates.Add(candidate1);
             context.Candidates.Add(candidate2);
             context.Candidates.Add(candidate3);
@@ -623,27 +645,7 @@ namespace Domain.Services.Repositories.EF
             context.SaveChanges();
             #endregion
 
-            #region CandidateProfiles
-            var Profile1 = new CandidateProfile { Name = "Devs", Description = "Developers" };
-            var Profile2 = new CandidateProfile { Name = "RRHH", Description = "Recursos Humanos" };
-            var Profile3 = new CandidateProfile { Name = "MKT", Description = "Marketing" };
-            context.Profiles.Add(Profile1);
-            context.Profiles.Add(Profile2);
-            context.Profiles.Add(Profile3);
-            context.SaveChanges();
-            #endregion
-
-            #region Community
-            var Community1 = new Community { Name = ".NET", Description = "Comunidad de .Net", ProfileId = 1, Profile = Profile1 };
-            var Community2 = new Community { Name = "Devs", Description = "Comunidad de Developers", ProfileId = 1, Profile = Profile1 };
-            var Community3 = new Community { Name = "RRHH", Description = "Comunidad de Recursos Humanos", ProfileId = 2, Profile = Profile2 };
-            var Community4 = new Community { Name = "Marketing", Description = "Comunidad de Marketing", ProfileId = 3, Profile = Profile3 };
-            context.Community.Add(Community1);
-            context.Community.Add(Community2);
-            context.Community.Add(Community3);
-            context.Community.Add(Community4);
-            context.SaveChanges();
-            #endregion
+            
 
             #region DaysOff
             var daysOff1 = new DaysOff {  Date = DateTime.Today.AddDays(-12), EndDate= DateTime.Today.AddDays(-12), Type = DaysOffType.Holidays, Status = DaysOffStatus.InReview, EmployeeId = 2, Employee = employee2 };

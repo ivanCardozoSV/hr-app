@@ -1,5 +1,7 @@
 ﻿using Domain.Model.Enum;
+using Domain.Services.Contracts.CandidateProfile;
 using Domain.Services.Contracts.CandidateSkill;
+using Domain.Services.Contracts.Community;
 using Domain.Services.Contracts.Consultant;
 using Domain.Services.Contracts.Office;
 using System;
@@ -21,6 +23,9 @@ namespace Domain.Services.Contracts.Candidate
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
         public ReadedConsultantContract Recruiter { get; set; }
+        public ReadedCommunityContract Community { get; set; }
+        public ReadedCandidateProfileContract Profile { get; set; }
+        public bool IsReferred { get; set; }
         public ReadedOfficeContract PreferredOffice { get; set; }
         public DateTime ContactDay { get; set; }
 

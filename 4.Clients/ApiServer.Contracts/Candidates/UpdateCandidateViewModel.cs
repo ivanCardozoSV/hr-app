@@ -22,6 +22,12 @@ namespace ApiServer.Contracts.Candidates
         public int Recruiter { get; set; }
         public DateTime ContactDay { get; set; }
         public int PreferredOfficeId { get; set; }
+        public int Profile { get; set; }
+        public int Community { get; set; }
+        public bool IsReferred { get; set; }
+
+
+
         public ICollection<CreateCandidateSkillViewModel> CandidateSkills { get; set; }
     }
 }
