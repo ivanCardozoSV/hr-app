@@ -265,9 +265,9 @@ export class ProcessContactComponent implements OnInit {
         id: idCandidate,
         name: this.candidateForm.controls['firstName'].value.toString(),
         lastName: this.candidateForm.controls['lastName'].value.toString(),
-        phoneNumber: '(' + this.candidateForm.controls['phoneNumberPrefix'].value.toString() + ')' + this.candidateForm.controls['phoneNumber'].value.toString(),
+        phoneNumber: '(' + this.candidateForm.controls['phoneNumberPrefix'].value.toString() + ')',
         dni: editedCandidate.dni,
-        emailAddress: this.candidateForm.controls['email'].value.toString(),
+        emailAddress: this.candidateForm.controls['email'].value ? this.candidateForm.controls['email'].value.toString() : null,
         recruiter: this.candidateForm.controls['recruiter'].value,
         contactDay: new Date(this.candidateForm.controls['contactDay'].value.toString()),
         linkedInProfile: editedCandidate.linkedInProfile,
@@ -279,6 +279,9 @@ export class ProcessContactComponent implements OnInit {
         profile: editedCandidate.profile,
         community: editedCandidate.community,
         isReferred: editedCandidate.isReferred
+      }
+      if (this.candidateForm.controls['phoneNumber'].value) {
+        editedCandidate.phoneNumber += this.candidateForm.controls['phoneNumber'].value.toString();
       }
       this.facade.candidateService.update<Candidate>(idCandidate, editedCandidate)
         .subscribe(res => {

@@ -4,6 +4,8 @@ import { Candidate } from "src/entities/candidate";
 import { CandidateSkill } from "src/entities/candidateSkill";
 import { Consultant } from "src/entities/consultant";
 import { Globals } from '../../app-globals/globals';
+import { Community } from "src/entities/community";
+import { CandidateProfile } from "src/entities/Candidate-Profile";
 
 
 @Component({
@@ -25,6 +27,8 @@ import { Globals } from '../../app-globals/globals';
     }
 
     recruiterName: string = '';
+    profileName: string = '';
+    communityName: string = '';
     englishLevelList: any[] = [];
     statusList: any[] = [];
 
@@ -35,6 +39,8 @@ import { Globals } from '../../app-globals/globals';
 
     ngOnInit(){
         this.getRecruiterName();
+        this.getProfileName();
+        this.getCommunityName();
     }
 
     getRecruiterName(){
@@ -42,6 +48,24 @@ import { Globals } from '../../app-globals/globals';
         .subscribe(res => {
           this.recruiterName = res.filter(x => x.id === this._detailedCandidate.recruiter)[0].name + " " +
                                     res.filter(x => x.id === this._detailedCandidate.recruiter)[0].lastName;
+        }, err => {
+          console.log(err);
+        });
+      }
+
+      getCommunityName(){
+        this.facade.communityService.get<Community>()
+        .subscribe(res => {
+          this.communityName = res.filter(x => x.id === this._detailedCandidate.community)[0].name;
+        }, err => {
+          console.log(err);
+        });
+      }
+
+      getProfileName(){
+        this.facade.candidateProfileService.get<CandidateProfile>()
+        .subscribe(res => {
+          this.profileName = res.filter(x => x.id === this._detailedCandidate.profile)[0].name;
         }, err => {
           console.log(err);
         });
@@ -55,19 +79,19 @@ import { Globals } from '../../app-globals/globals';
             nzClosable: true,
             nzWrapClassName: 'vertical-center-modal',
             nzFooter: null
-        });
+        })
     }
 
-    getColor(candidateSkills: CandidateSkill[], skill: CandidateSkill): string {
-        let colors: string[] = ['red', 'volcano', 'orange', 'gold', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple'];
-        let index: number = candidateSkills.indexOf(skill);
-        if (index > colors.length) index = parseInt((index / colors.length).toString().split(',')[0]);
-        return colors[index];
-      }
+    // getColor(candidateSkills: CandidateSkill[], skill: CandidateSkill): string {
+    //     let colors: string[] = ['red', 'volcano', 'orange', 'gold', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple'];
+    //     let index: number = candidateSkills.indexOf(skill);
+    //     if (index > colors.length) index = parseInt((index / colors.length).toString().split(',')[0]);
+    //     return colors[index];
+    //   }
 
-    getEnglishLevel(): string {
-      return this.englishLevelList.filter(x => x.id === this._detailedCandidate.englishLevel)[0].name;
-    }
+    // getEnglishLevel(): string {
+    //   return this.englishLevelList.filter(x => x.id === this._detailedCandidate.englishLevel)[0].name;
+    // }
 
     getCandidateStatus(): string {
       return this.statusList.filter(x => x.id === this._detailedCandidate.status)[0].name;

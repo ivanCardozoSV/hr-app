@@ -12,6 +12,8 @@ import { NzStatisticNumberComponent } from 'ng-zorro-antd/statistic/nz-statistic
 import { User } from 'src/entities/user';
 import { Globals } from '../app-globals/globals';
 import { Office } from '../../entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
 
 
 @Component({
@@ -38,6 +40,8 @@ export class CandidatesComponent implements OnInit {
   sortValue = 'ascend';
 
   recruiters: Consultant[] = [];
+  profiles: CandidateProfile[] = [];
+  communities: Community[] = [];
   _offices: Office[] = [];
 
   //Modals
@@ -73,6 +77,8 @@ export class CandidatesComponent implements OnInit {
     this.app.removeBgImage();
     this.getCandidates();
     this.getRecruiters();
+    this.getProfiles();
+    this.getCommunities();
     this.getOffices();
     this.getSkills();
     this.resetForm();
@@ -98,6 +104,25 @@ export class CandidatesComponent implements OnInit {
         console.log(err);
       });
   }
+
+  getProfiles() {
+    this.facade.candidateProfileService.get<CandidateProfile>()
+    .subscribe(res => {
+      this.profiles = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getCommunities() {
+    this.facade.communityService.get<Community>()
+    .subscribe(res => {
+      this.communities = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
 
   getSkills() {
     this.facade.skillService.get<Skill>()
@@ -238,8 +263,8 @@ export class CandidatesComponent implements OnInit {
                 name: this.validateForm.controls['name'].value.toString(),
                 lastName: this.validateForm.controls['lastName'].value.toString(),
                 dni: this.validateForm.controls['dni'].value,
-                emailAddress: this.validateForm.controls['email'].value.toString(),
-                phoneNumber: '(' + this.validateForm.controls['phoneNumberPrefix'].value.toString() + ')' + this.validateForm.controls['phoneNumber'].value.toString(),
+                emailAddress: this.validateForm.controls['email'].value ? this.validateForm.controls['email'].value.toString() : null,
+                phoneNumber: '(' + this.validateForm.controls['phoneNumberPrefix'].value.toString() + ')',
                 linkedInProfile: this.validateForm.controls['linkedin'].value === null ? null : this.validateForm.controls['linkedin'].value.toString(),
                 candidateSkills: candidateSkills,
                 additionalInformation: this.validateForm.controls['additionalInformation'].value === null ? null : this.validateForm.controls['additionalInformation'].value.toString(),
@@ -252,6 +277,9 @@ export class CandidatesComponent implements OnInit {
                 community: this.validateForm.controls['community'].value,
                 isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
+              }
+              if (this.validateForm.controls['phoneNumber'].value) {
+                editedCandidate.phoneNumber += this.validateForm.controls['phoneNumber'].value.toString();
               }
               this.facade.candidateService.update<Candidate>(id, editedCandidate)
                 .subscribe(res => {
