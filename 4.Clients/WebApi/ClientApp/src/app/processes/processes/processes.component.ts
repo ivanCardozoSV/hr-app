@@ -64,7 +64,11 @@ export class ProcessesComponent implements OnInit {
   candidatesFullList: Candidate[] = [];
   consultants: Consultant[] = [];
 
-  profileSearch: string = 'ALL';
+  profileSearch: number = 0;
+  profileSearchName: string = 'ALL';
+
+  communitySearch: number =0;
+  communitySearchName: string = 'ALL';
 
   profileList: any[];
 
@@ -83,19 +87,17 @@ export class ProcessesComponent implements OnInit {
   selectedSeniority: SeniorityEnum;
 
   offices: Office[] = [];
-  communities: Community[]=[];
-  profiles: CandidateProfile[]=[];
+  communities: Community[] = [];
+  profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
 
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
     private candidateDetailsModal: CandidateDetailsComponent, private consultantDetailsModal: ConsultantDetailsComponent,
     private globals: Globals) {
-      this.profileList = globals.profileList;
-      this.statusList = globals.processStatusList;
-     }
-
-    
+    this.profileList = globals.profileList;
+    this.statusList = globals.processStatusList;
+  }
 
   ngOnInit() {
     this.app.showLoading();
@@ -163,6 +165,10 @@ export class ProcessesComponent implements OnInit {
       });
   }
 
+  getCommunity(community: number): string {
+    return this.communities.find(x =>x.id === community).name;
+  }
+
   getCommunities() {
     this.facade.communityService.get<Community>()
       .subscribe(res => {
@@ -181,6 +187,10 @@ export class ProcessesComponent implements OnInit {
       });
   }
 
+  getProfile(profile: number): string {
+    return this.profiles.filter(x =>x.id === profile)[0].name;
+  }
+
   getProcesses() {
     this.facade.processService.get<Process>()
       .subscribe(res => {
@@ -197,12 +207,15 @@ export class ProcessesComponent implements OnInit {
   }
 
   getStatus(status: number): string {
-    return this.statusList.filter(st => st.id === status)[0].name;
+    return this.statusList.find(st => st.id === status).name;
   }
+
+
 
   showApproveProcessConfirm(processID: number): void {
     let procesToApprove: Process = this.filteredProcesses.find(p => p.id == processID);
-    let processText = procesToApprove.candidate ? procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName) : procesToApprove.profile;
+    // let processText = procesToApprove.candidate ? procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName) : procesToApprove.profile;
+    let processText = procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName);
 
     this.facade.modalService.confirm({
       nzTitle: 'Are you sure you want to approve the process for ' + processText + '? This will approve all the stages associated with the process',
@@ -286,12 +299,14 @@ export class ProcessesComponent implements OnInit {
 
   search(): void {
     const filterFunc = (item) => {
-      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.candidate.name.indexOf(p) !== -1) : true) &&
-        (item.candidate.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.name.toString() + " " + item.candidate.lastName.toString()).indexOf(p) !== -1) : true) &&
+        ((item.candidate.name.toString() + " " + item.candidate.lastName.toString()).toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValue = '';
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
     this.nameDropdown.nzVisible = false;
   }
 
@@ -306,11 +321,32 @@ export class ProcessesComponent implements OnInit {
     this.statusDropdown.nzVisible = false;
   }
 
-  searchProfile(searchedProfile: string) {
+  searchProfile(searchedProfile: number) {
     this.profileSearch = searchedProfile;
-    if (searchedProfile == 'ALL') this.listOfDisplayData = this.filteredProcesses;
+
+
+    if (this.profileSearch == 0) {
+    this.listOfDisplayData = this.filteredProcesses;
+      this.profileSearchName = 'ALL';
+    }
     else {
-      this.listOfDisplayData = this.filteredProcesses.filter(p => p.profile == searchedProfile);
+      this.profileSearchName = (this.profiles.find(p => p.id == this.profileSearch)).name;
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.profile == searchedProfile);
+    }
+  }
+
+  searchCommunity(searchedCommunity: number) {
+    this.communitySearch = searchedCommunity;
+
+
+    if (this.communitySearch == 0) {
+    this.listOfDisplayData = this.filteredProcesses;
+      this.communitySearchName = 'ALL';
+    }
+    else {
+      this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
+      this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.community == searchedCommunity);
     }
   }
 
@@ -340,7 +376,7 @@ export class ProcessesComponent implements OnInit {
   newProcessStart(modalContent: TemplateRef<{}>, footer: TemplateRef<{}>, candidate: Candidate): void {
     this.app.showLoading();
     this.createEmptyProcess(candidate);
-    
+
     this.currentCandidate = candidate;
 
     const modal = this.facade.modalService.create({
@@ -385,7 +421,8 @@ export class ProcessesComponent implements OnInit {
 
   showDeleteConfirm(processID: number): void {
     let procesDelete: Process = this.filteredProcesses.find(p => p.id == processID);
-    let processText = procesDelete.candidate ? procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName) : procesDelete.profile;
+    let processText = procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName);
+    // let processText = procesDelete.candidate ? procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName) : procesDelete.profile;
 
     this.facade.modalService.confirm({
       nzTitle: 'Are you sure delete the process for ' + processText + ' ?',
@@ -530,8 +567,7 @@ export class ProcessesComponent implements OnInit {
       id: !this.isEdit ? 0 : this.emptyProcess.id,
       startDate: new Date(),
       endDate: null,
-      status:  !this.isEdit ? ProcessStatusEnum.InProgress : ProcessStatusEnum[CandidateStatusEnum[this.emptyProcess.candidate.status]],
-      profile: 'Dev',
+      status: !this.isEdit ? ProcessStatusEnum.InProgress : ProcessStatusEnum[CandidateStatusEnum[this.emptyProcess.candidate.status]],
       candidateId: !this.isEdit ? 0 : this.emptyProcess.candidate.id,
       candidate: null,
       consultantOwnerId: 0,
@@ -557,8 +593,8 @@ export class ProcessesComponent implements OnInit {
 
     // Seniority is now handled global between technical stage and offer stage. The process uses the last updated value.
     process.seniority = this.selectedSeniority ? this.selectedSeniority :
-                        (process.technicalStage.seniority ? process.technicalStage.seniority :
-                          (process.offerStage.seniority));
+      (process.technicalStage.seniority ? process.technicalStage.seniority :
+        (process.offerStage.seniority));
     process.englishLevel = process.englishLevel;
 
     return process;
@@ -574,8 +610,7 @@ export class ProcessesComponent implements OnInit {
     if (stages[3].status === StageStatusEnum.Accepted) { processStatus = ProcessStatusEnum.OfferAccepted; }
 
     if (stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.InProgress ||
-      stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.Declined) 
-      { processStatus = ProcessStatusEnum.Declined; }
+      stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.Declined) { processStatus = ProcessStatusEnum.Declined; }
 
     if (stages[4].status === StageStatusEnum.Accepted) { processStatus = ProcessStatusEnum.Hired; }
 
@@ -633,8 +668,7 @@ export class ProcessesComponent implements OnInit {
       id: 0,
       startDate: new Date(),
       endDate: null,
-      status:  ProcessStatusEnum.NA,
-      profile: 'Dev',
+      status: ProcessStatusEnum.NA,
       candidateId: candidate.id,
       candidate: candidate,
       consultantOwnerId: 0,

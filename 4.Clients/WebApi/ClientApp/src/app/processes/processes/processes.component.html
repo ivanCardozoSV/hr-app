@@ -11,15 +11,8 @@
         <nz-table #processTable [nzData]="listOfDisplayData" [nzPageSize]="10" nzShowSizeChanger>
             <thead>
                 <tr>
-                    <th nzCustomFilter>Profile
-                        <nz-dropdown [nzPlacement]="'bottomCenter'" style="margin-left: 30%;">
-                            <button nz-button nz-dropdown>{{profileSearch}}</button>
-                            <ul nz-menu>
-                                <li nz-menu-item *ngFor="let profile of profileList" (click)="searchProfile(profile.name)">
-                                    <label>{{profile.name}}</label>
-                                </li>
-                            </ul>
-                        </nz-dropdown>
+                    <th nzCustomFilter>Candidate
+
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
                             <div class="search-box">
@@ -27,6 +20,33 @@
                                 <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
                                 <button nz-button nzSize="small" (click)="reset()">Reset</button>
                             </div>
+                        </nz-dropdown>
+                    </th>
+
+                    <th>Profile
+                        <nz-dropdown [nzPlacement]="'bottomCenter'" style="margin-left: 30px;">
+                            <button nz-button nz-dropdown>{{profileSearchName}}</button>
+                            <ul nz-menu>
+                                <li nz-menu-item (click)="searchProfile(0)">
+                                    <label>ALL</label>
+                                </li>
+                                <li nz-menu-item *ngFor="let profile of profiles" (click)="searchProfile(profile.id)">
+                                    <label>{{profile.name}}</label>
+                                </li>
+                            </ul>
+                        </nz-dropdown>
+                    </th>
+                    <th>Community
+                        <nz-dropdown [nzPlacement]="'bottomCenter'" style="margin-left: 30px;">
+                            <button nz-button nz-dropdown>{{communitySearchName}}</button>
+                            <ul nz-menu>
+                                <li nz-menu-item (click)="searchCommunity(0)">
+                                    <label>ALL</label>
+                                </li>
+                                <li nz-menu-item *ngFor="let community of communities" (click)="searchCommunity(community.id)">
+                                    <label>{{community.name}}</label>
+                                </li>
+                            </ul>
                         </nz-dropdown>
                     </th>
                     <th nzCustomFilter>Status
@@ -52,7 +72,13 @@
                     <td scope="row">
                         <a *ngIf="process.candidate" style="color: #1890ff;" (click)="showCandidateDetailsModal(process.candidate.id, candidateDetailModal)">
                             {{ process.candidate.name }} {{ process.candidate.lastName }}</a>
-                        <nz-divider nzType="vertical"></nz-divider>{{ process.profile }}
+
+                    </td>
+                    <td scope="row">
+                        {{ getProfile(process.candidate.profile) }}
+                    </td>
+                    <td scope="row">
+                        {{ getCommunity(process.candidate.community) }}
                     </td>
                     <td scope="row">
                         <nz-badge [nzStatus]="getStatusColor(process.status)" style="margin-right: 3%; margin-top: -2%;"></nz-badge>

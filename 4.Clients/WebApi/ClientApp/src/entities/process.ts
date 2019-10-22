@@ -14,7 +14,6 @@ export class Process {
     startDate: Date;
     endDate: Date;
     status: ProcessStatusEnum;
-    profile: string;
     candidateId: number;
     candidate: Candidate;
     consultantOwnerId: number;
