@@ -14,6 +14,8 @@ import { Globals } from '../app-globals/globals';
 import { Office } from '../../entities/office';
 import { Community } from 'src/entities/community';
 import { CandidateProfile } from 'src/entities/Candidate-Profile';
+import { replaceAccent } from 'src/app/helpers/string-helpers'
+
 
 
 @Component({
@@ -172,11 +174,10 @@ export class CandidatesComponent implements OnInit {
   search(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchCandidates.length ? this.listOfSearchCandidates.some(candidates => item.name.indexOf(candidates) !== -1) : true) &&
-        (item.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+        (replaceAccent(item.name.toString().toUpperCase() + item.lastName.toString().toUpperCase()).indexOf(replaceAccent(this.searchValue.toUpperCase())) !== -1);
     };
     const data = this.filteredCandidates.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
     this.nameDropdown.nzVisible = false;
   }
 
