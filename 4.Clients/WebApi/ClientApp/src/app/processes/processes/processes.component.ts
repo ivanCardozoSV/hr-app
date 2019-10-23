@@ -305,7 +305,6 @@ export class ProcessesComponent implements OnInit {
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
     this.communitySearchName = 'ALL';
     this.profileSearchName = 'ALL';
     this.nameDropdown.nzVisible = false;
