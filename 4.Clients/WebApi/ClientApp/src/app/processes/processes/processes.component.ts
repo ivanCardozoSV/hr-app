@@ -24,6 +24,7 @@ import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
 import { Office } from 'src/entities/office';
 import { Community } from 'src/entities/community';
 import { CandidateProfile } from 'src/entities/Candidate-Profile';
+import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
 
 @Component({
   selector: 'app-processes',
@@ -196,7 +197,6 @@ export class ProcessesComponent implements OnInit {
       .subscribe(res => {
         this.filteredProcesses = res;
         this.listOfDisplayData = res;
-
         let newProc: Process = res[res.length - 1];
         if (newProc && newProc.candidate) {
           this.candidatesFullList.push(newProc.candidate);
@@ -693,7 +693,8 @@ export class ProcessesComponent implements OnInit {
         processId: 0,
         actualSalary: 0,
         wantedSalary: 0,
-        englishLevel: EnglishLevelEnum.None
+        englishLevel: EnglishLevelEnum.None,
+        rejectionReasonsHr: null
 
       },
       technicalStage: {

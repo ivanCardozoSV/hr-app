@@ -7,5 +7,5 @@ export class HrStage extends Stage{
     actualSalary: number;
     wantedSalary: number;
     englishLevel: EnglishLevelEnum;
-    rejectionReasonHR?: RejectionReasonsHrEnum;
+    rejectionReasonsHr?: RejectionReasonsHrEnum;
 }

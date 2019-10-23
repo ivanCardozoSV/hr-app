@@ -119,7 +119,7 @@
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
 
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <nz-radio-group formControlName="rejectionReasonHR">
+                    <nz-radio-group formControlName="rejectionReasonsHr">
                         <label id="radio" style="display:block; line-height: 30px; height: 30px;" *ngFor="let reason of rejectionReasonsHRList" [nzDisabled]="disabled" nz-radio [nzValue]="reason.id"><span>{{reason.name}}</span></label>
                     </nz-radio-group>
                     <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Please, briefly explain what happened."></textarea>
