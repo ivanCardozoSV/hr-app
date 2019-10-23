@@ -5,6 +5,8 @@ import { trimValidator } from '../directives/trim.validator';
 import { FacadeService } from 'src/app/services/facade.service';
 import { ConsultantDetailsComponent } from './details/consultant-details.component';
 import { AppComponent } from '../app.component';
+import { replaceAccent } from 'src/app/helpers/string-helpers'
+
 
 
 @Component({
@@ -73,7 +75,7 @@ export class ConsultantsComponent implements OnInit {
   search(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchConsultants.length ? this.listOfSearchConsultants.some(consultants => item.name.indexOf(consultants) !== -1) : true) &&
-        (item.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+        (replaceAccent(item.name.toString().toUpperCase() + item.lastName.toString().toUpperCase()).indexOf(replaceAccent(this.searchValue.toUpperCase())) !== -1);
     };
     const data = this.filteredConsultants.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
