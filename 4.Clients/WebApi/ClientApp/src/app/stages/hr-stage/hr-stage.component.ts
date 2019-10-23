@@ -36,17 +36,20 @@ export class HrStageComponent implements OnInit {
     consultantDelegateId: [null],
     feedback: [null, [trimValidator]],
     englishLevel: EnglishLevelEnum.None,
-    rejectionReason: [null, [Validators.required]]
+    rejectionReason: [null, [Validators.required]],
+    rejectionReasonHR: [null, [Validators.required]]
   });
 
   statusList: any[] ;
   englishLevelList: any[];
+  rejectionReasonsHRList: any[];
 
   @Input() hrStage: HrStage;
 
   constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals) {
     this.statusList = globals.stageStatusList.filter(x => x.id !== StageStatusEnum.Hired);
     this.englishLevelList = globals.englishLevelList;
+    this.rejectionReasonsHRList = globals.rejectionReasonsHRList;
    }
 
   ngOnInit() {
@@ -99,6 +102,7 @@ export class HrStageComponent implements OnInit {
     hrStage.wantedSalary = this.getControlValue(this.hrForm.controls.wantedSalary);
     hrStage.consultantDelegateId = this.getControlValue(this.hrForm.controls.consultantDelegateId);
     hrStage.rejectionReason = this.getControlValue(this.hrForm.controls.rejectionReason);
+    hrStage.rejectionReasonHR = this.getControlValue(this.hrForm.controls.rejectionReasonHR);
     return hrStage;
   }
 
@@ -122,15 +126,18 @@ export class HrStageComponent implements OnInit {
     if (hrStage.actualSalary != null) { this.hrForm.controls['actualSalary'].setValue(hrStage.actualSalary); }
     if (hrStage.wantedSalary != null) { this.hrForm.controls['wantedSalary'].setValue(hrStage.wantedSalary); }
     if (hrStage.englishLevel != null) { this.hrForm.controls['englishLevel'].setValue(hrStage.englishLevel); }
-    if (hrStage.rejectionReason != null) { this.hrForm.controls['rejectionReason'].setValue(hrStage.rejectionReason); }
+    if (hrStage.rejectionReason != null) { this.hrForm.controls['rejectionReason'].setValue(hrStage.rejectionReason)};
+    if (hrStage.rejectionReasonHR != null) { this.hrForm.controls['rejectionReasonHR'].setValue(hrStage.rejectionReasonHR)};
   }
 
   showRejectionReason() {
     if (this.hrForm.controls['status'].value === StageStatusEnum.Rejected) {
       this.hrForm.controls['rejectionReason'].enable();
+      this.hrForm.controls['rejectionReasonHR'].enable();
       return true;
     }
     this.hrForm.controls['rejectionReason'].disable();
+    this.hrForm.controls['rejectionReasonHR'].disable();
     return false;
   }
 
