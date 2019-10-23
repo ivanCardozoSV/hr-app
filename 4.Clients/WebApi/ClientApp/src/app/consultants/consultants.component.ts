@@ -48,7 +48,7 @@ export class ConsultantsComponent implements OnInit {
       lastName: [null, [Validators.required, trimValidator]],
       email: [null, [Validators.email, Validators.required]],
       phoneNumberPrefix: ['+54'],
-      phoneNumber: [null],
+      phoneNumber: [null, [Validators.required]],
       additionalInformation: [null, [trimValidator]]
     });
 
