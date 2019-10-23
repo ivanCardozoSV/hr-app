@@ -213,8 +213,8 @@ export class ProcessContactComponent implements OnInit {
     this.detailsModal.showModal(modalContent, this.emptyCandidate.name + " " + this.emptyCandidate.lastName);
   }
 
-  searchCandidate(name: string, modalContent: TemplateRef<{}>) {
-    let candidate = this.candidates.filter(s => this.replaceAccent(s.name).toLowerCase() + " " + this.replaceAccent(s.lastName).toLowerCase() == this.replaceAccent(name).toLowerCase());
+  searchCandidate(searchString: string, modalContent: TemplateRef<{}>) {
+    let candidate = this.candidates.filter(s => {return (this.replaceAccent(s.name).toLowerCase() + " " + this.replaceAccent(s.lastName).toLowerCase()).indexOf(this.replaceAccent(searchString).toLowerCase()) !== -1});
     this.filteredCandidate = candidate;
     this.searchedCandidateModal(modalContent);
   }
