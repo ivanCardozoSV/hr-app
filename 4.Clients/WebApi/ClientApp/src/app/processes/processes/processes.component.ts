@@ -333,6 +333,7 @@ export class ProcessesComponent implements OnInit {
     else {
       this.profileSearchName = (this.profiles.find(p => p.id == this.profileSearch)).name;
       this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.profile == searchedProfile);
+      this.communitySearchName = 'ALL';
     }
   }
 
@@ -348,6 +349,7 @@ export class ProcessesComponent implements OnInit {
       this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
       this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
       this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.community == searchedCommunity);
+      this.profileSearchName = 'ALL';
     }
   }
 
