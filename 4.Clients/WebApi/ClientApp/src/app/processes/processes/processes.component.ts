@@ -25,6 +25,8 @@ import { Office } from 'src/entities/office';
 import { Community } from 'src/entities/community';
 import { CandidateProfile } from 'src/entities/Candidate-Profile';
 import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
+import { replaceAccent } from 'src/app/helpers/string-helpers';
+
 
 @Component({
   selector: 'app-processes',
@@ -300,11 +302,10 @@ export class ProcessesComponent implements OnInit {
   search(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.name.toString() + " " + item.candidate.lastName.toString()).indexOf(p) !== -1) : true) &&
-        ((item.candidate.name.toString() + " " + item.candidate.lastName.toString()).toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+        (replaceAccent(item.candidate.name.toString() + " " + item.candidate.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchValue).toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
     this.communitySearchName = 'ALL';
     this.profileSearchName = 'ALL';
     this.nameDropdown.nzVisible = false;
