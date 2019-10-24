@@ -169,17 +169,17 @@ export class CandidateAddComponent implements OnInit {
   }
 
   checkID(id:number) {
-    this.facade.candidateService.idExists(id)
-      .subscribe(res => {
-        if (res !== null) {
+    this.facade.processService.getActiveProcessByCandidate(id)
+      .subscribe((res: Process[]) => {
+        if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res.lastName + ', ' + res.name + '. Do you want to open a new one ?',
+            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',
             nzCancelText: 'No',
             nzOnOk: () => {
-              this.fillCandidateForm(res);
+              this.fillCandidateForm(res[0].candidate);
               this.changeFormStatus(false);
             },
             nzOnCancel: () => {

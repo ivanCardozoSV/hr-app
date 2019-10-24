@@ -84,6 +84,14 @@ namespace Domain.Services.Impl.Services
             return _mapper.Map<List<ReadedProcessContract>>(candidateResult);
         }
 
+        public IEnumerable<ReadedProcessContract> GetActiveByCandidateId(int candidateId)
+        {
+            var process = _processRepository
+                .QueryEager().Where(_ => _.CandidateId == candidateId && (_.Status == ProcessStatus.InProgress || _.Status == ProcessStatus.OfferAccepted || _.Status == ProcessStatus.Recall ));
+
+            return _mapper.Map<IEnumerable<ReadedProcessContract>>(process);
+        }
+
         public CreatedProcessContract Create(CreateProcessContract createProcessContract)
         {
             var process = _mapper.Map<Process>(createProcessContract);

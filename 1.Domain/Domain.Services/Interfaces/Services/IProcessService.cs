@@ -14,7 +14,7 @@ namespace Domain.Services.Interfaces.Services
         void Delete(int id);
 
         IEnumerable<ReadedProcessContract> List();
-
+        IEnumerable<ReadedProcessContract> GetActiveByCandidateId(int candidateId);
         void Approve(int processID);
 
         void Reject(int id, string rejectionReason);
