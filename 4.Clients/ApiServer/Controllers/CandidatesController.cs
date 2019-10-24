@@ -51,7 +51,7 @@ namespace ApiServer.Controllers
                     return NotFound(id);
                 }
 
-                var vm = _mapper.Map<ReadedCandidateAppViewModel>(candidate);
+                var vm = _mapper.Map<ReadedCandidateViewModel>(candidate);
                 return Accepted(vm);
             });
         }
