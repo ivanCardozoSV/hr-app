@@ -68,7 +68,6 @@ export class SkillTypeComponent implements OnInit {
     };
     const data = this.filteredSkillTypes.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
     this.nameDropdown.nzVisible = false;
   }
 

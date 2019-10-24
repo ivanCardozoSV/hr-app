@@ -6,6 +6,7 @@ import { CandidateStatusEnum } from 'src/entities/enums/candidate-status.enum';
 import { DaysOffStatusEnum } from '../../entities/enums/daysoff-status.enum';
 import { DaysOffTypeEnum } from '../../entities/enums/daysoff-type.enum';
 import { EnglishLevelEnum } from '../../entities/enums/english-level.enum';
+import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
 
 @Injectable()
 export class Globals {
@@ -63,5 +64,13 @@ export class Globals {
     daysOffStatusList: any[] = [
       { id: DaysOffStatusEnum.InReview, name: 'In Review' },
       { id: DaysOffStatusEnum.Accepted, name: 'Accepted' }
+    ];
+
+    rejectionReasonsHRList: any[] = [
+      { id: RejectionReasonsHrEnum.SalaryExpectations, name: 'Salary Expectations' },
+      { id: RejectionReasonsHrEnum.Skills, name: 'Skills' },
+      { id: RejectionReasonsHrEnum.EnglishLevel, name: 'English Level' },
+      { id: RejectionReasonsHrEnum.Residence, name: 'Residence' },
+      { id: RejectionReasonsHrEnum.Other, name: 'Other' }
     ];
 }

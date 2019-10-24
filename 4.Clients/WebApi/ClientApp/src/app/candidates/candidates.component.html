@@ -13,7 +13,7 @@
                         <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
                             <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
                             <div class="search-box">
-                                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" (keyup.enter)="search()">
                                 <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
                                 <button nz-button nzSize="small" (click)="reset()">Reset</button>
                             </div>
@@ -198,6 +198,46 @@
                             </nz-option>
                         </nz-select>
                         <nz-form-explain *ngIf="validateForm.get('preferredOffice').dirty && validateForm.get('preferredOffice').errors">Please input the preferred office</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="profile">Profile</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="profile">
+                            <nz-option *ngFor="let p of profiles" nzLabel="{{p.name}}" [nzValue]="p.id">
+                            </nz-option>
+                        </nz-select>
+                        <nz-form-explain *ngIf="validateForm.get('profile').dirty && validateForm.get('profile').errors">
+                            Please input the profile</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="community">Community</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="community">
+                            <nz-option *ngFor="let c of communities" nzLabel="{{c.name}}" [nzValue]="c.id">
+                            </nz-option>
+                        </nz-select>
+                        <nz-form-explain *ngIf="validateForm.get('community').dirty && validateForm.get('community').errors">Please input the community</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div nz-row>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isReferred">Is Referred
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <label nz-checkbox formControlName="isReferred"></label>
+                        <!--in the future we could use something like (ngModelChange)="referredBy($event)" to show an input for the referring employee.-->
                     </nz-form-control>
                 </nz-form-item>
             </div>

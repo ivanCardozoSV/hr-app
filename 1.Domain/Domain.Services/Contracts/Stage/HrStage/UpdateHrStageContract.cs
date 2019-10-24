@@ -10,5 +10,6 @@ namespace Domain.Services.Contracts.Stage
         public float ActualSalary { get; set; }
         public float WantedSalary { get; set; }
         public EnglishLevel EnglishLevel { get; set; }
+        public RejectionReasonsHr RejectionReasonsHr { get; set; }
     }
 }

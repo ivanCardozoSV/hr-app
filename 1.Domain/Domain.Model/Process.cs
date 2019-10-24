@@ -13,8 +13,6 @@ namespace Domain.Model
       
         public ProcessStatus Status { get; set; }
 
-        public string Profile { get; set; }
-
         public string RejectionReason { get; set; }
 
         public int? CandidateId { get; set; }

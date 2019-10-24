@@ -22,7 +22,10 @@ namespace Domain.Services.Repositories.EF
         {
             return Query().Include(c => c.CandidateSkills).ThenInclude(cs => cs.Skill)
                 .Include(r => r.Recruiter)
-                .Include(r => r.PreferredOffice);
+                .Include(r => r.PreferredOffice)
+                .Include(r => r.Community)
+                .Include(r => r.Profile);
+
         }
 
         public override Candidate Update(Candidate entity)

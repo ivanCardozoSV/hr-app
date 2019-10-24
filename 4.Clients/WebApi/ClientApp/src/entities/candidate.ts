@@ -18,4 +18,7 @@ export class Candidate {
   recruiter: number;
   preferredOfficeId?: number;
   contactDay: Date;
+  profile: number;
+  community: number;
+  isReferred: boolean;
 }

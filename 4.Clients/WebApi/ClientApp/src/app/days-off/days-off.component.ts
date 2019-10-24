@@ -347,7 +347,6 @@ export class DaysOffComponent implements OnInit {
     };
     const data = this.listOfDaysOff.filter(item => filterFunc(item));
     this.listOfDaysOff = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortDni] > b[this.sortDni] ? 1 : -1) : (b[this.sortDni] > a[this.sortDni] ? 1 : -1));
-    this.searchValue = '';
     this.nameDropdown.nzVisible = false;
   }
 

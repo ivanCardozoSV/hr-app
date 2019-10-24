@@ -12,6 +12,10 @@ import { NzStatisticNumberComponent } from 'ng-zorro-antd/statistic/nz-statistic
 import { User } from 'src/entities/user';
 import { Globals } from '../app-globals/globals';
 import { Office } from '../../entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
+import { replaceAccent } from 'src/app/helpers/string-helpers'
+
 
 
 @Component({
@@ -38,6 +42,8 @@ export class CandidatesComponent implements OnInit {
   sortValue = 'ascend';
 
   recruiters: Consultant[] = [];
+  profiles: CandidateProfile[] = [];
+  communities: Community[] = [];
   _offices: Office[] = [];
 
   //Modals
@@ -73,6 +79,8 @@ export class CandidatesComponent implements OnInit {
     this.app.removeBgImage();
     this.getCandidates();
     this.getRecruiters();
+    this.getProfiles();
+    this.getCommunities();
     this.getOffices();
     this.getSkills();
     this.resetForm();
@@ -99,6 +107,25 @@ export class CandidatesComponent implements OnInit {
       });
   }
 
+  getProfiles() {
+    this.facade.candidateProfileService.get<CandidateProfile>()
+    .subscribe(res => {
+      this.profiles = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getCommunities() {
+    this.facade.communityService.get<Community>()
+    .subscribe(res => {
+      this.communities = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+
   getSkills() {
     this.facade.skillService.get<Skill>()
       .subscribe(res => {
@@ -122,16 +149,19 @@ export class CandidatesComponent implements OnInit {
       name: [null, [Validators.required, trimValidator]],
       lastName: [null, [Validators.required, trimValidator]],
       dni: [null, Validators.required],
-      email: [null, [Validators.email, Validators.required]],
+      email: [null, [Validators.email]],
       phoneNumberPrefix: ['+54'],
       phoneNumber: [null],
-      linkedin: [null, [trimValidator]],
+      linkedin: [null, [Validators.required, trimValidator]],
       additionalInformation: [null, [trimValidator]],
       recruiter: [null, [Validators.required]],
       englishLevel: 'none',
       status: null,
       contactDay: null,
       preferredOffice: [null],
+      community: [null, [Validators.required]],
+      profile: [null, [Validators.required]],
+      isReferred: [null]
     });
   }
 
@@ -144,11 +174,10 @@ export class CandidatesComponent implements OnInit {
   search(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchCandidates.length ? this.listOfSearchCandidates.some(candidates => item.name.indexOf(candidates) !== -1) : true) &&
-        (item.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+        (replaceAccent(item.name.toString().toUpperCase() + item.lastName.toString().toUpperCase()).indexOf(replaceAccent(this.searchValue.toUpperCase())) !== -1);
     };
     const data = this.filteredCandidates.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
     this.nameDropdown.nzVisible = false;
   }
 
@@ -235,8 +264,8 @@ export class CandidatesComponent implements OnInit {
                 name: this.validateForm.controls['name'].value.toString(),
                 lastName: this.validateForm.controls['lastName'].value.toString(),
                 dni: this.validateForm.controls['dni'].value,
-                emailAddress: this.validateForm.controls['email'].value.toString(),
-                phoneNumber: '(' + this.validateForm.controls['phoneNumberPrefix'].value.toString() + ')' + this.validateForm.controls['phoneNumber'].value.toString(),
+                emailAddress: this.validateForm.controls['email'].value ? this.validateForm.controls['email'].value.toString() : null,
+                phoneNumber: '(' + this.validateForm.controls['phoneNumberPrefix'].value.toString() + ')',
                 linkedInProfile: this.validateForm.controls['linkedin'].value === null ? null : this.validateForm.controls['linkedin'].value.toString(),
                 candidateSkills: candidateSkills,
                 additionalInformation: this.validateForm.controls['additionalInformation'].value === null ? null : this.validateForm.controls['additionalInformation'].value.toString(),
@@ -244,8 +273,14 @@ export class CandidatesComponent implements OnInit {
                 status: this.validateForm.controls['status'].value,
                 preferredOfficeId: this.validateForm.controls['preferredOffice'].value,
                 recruiter: this.validateForm.controls['recruiter'].value,
-                contactDay: new Date()
+                contactDay: new Date(),
+                profile: this.validateForm.controls['profile'].value,
+                community: this.validateForm.controls['community'].value,
+                isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
+              }
+              if (this.validateForm.controls['phoneNumber'].value) {
+                editedCandidate.phoneNumber += this.validateForm.controls['phoneNumber'].value.toString();
               }
               this.facade.candidateService.update<Candidate>(id, editedCandidate)
                 .subscribe(res => {
@@ -383,6 +418,10 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);
+    this.validateForm.controls['community'].setValue(candidate.community);
+    this.validateForm.controls['profile'].setValue(candidate.profile);
+    this.validateForm.controls['isReferred'].setValue(candidate.isReferred);
+
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {
         const id = (this.controlEditArray.length > 0) ? this.controlEditArray[this.controlEditArray.length - 1].id + 1 : 0;
