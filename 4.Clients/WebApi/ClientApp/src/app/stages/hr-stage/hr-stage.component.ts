@@ -37,7 +37,7 @@ export class HrStageComponent implements OnInit {
     feedback: [null, [trimValidator]],
     englishLevel: EnglishLevelEnum.None,
     rejectionReason: [null, [Validators.required]],
-    rejectionReasonsHr: [null, [Validators.required]]
+    rejectionReasonsHr: [0, [Validators.required]]
   });
 
   statusList: any[] ;
