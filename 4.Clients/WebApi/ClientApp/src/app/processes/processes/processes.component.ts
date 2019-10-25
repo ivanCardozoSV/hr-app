@@ -552,6 +552,7 @@ export class ProcessesComponent implements OnInit {
       let newProcess: Process;
 
       newCandidate = this.candidateAdd.getFormData();
+      newCandidate.candidateSkills=this.technicalStage.getFormDataSkills();
       newProcess = this.getProcessFormData();
       newProcess.consultantOwnerId = newCandidate.recruiter;
 
