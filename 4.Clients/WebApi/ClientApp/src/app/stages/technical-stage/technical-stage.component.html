@@ -91,6 +91,20 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="seniority1">Seniority 2</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select #seniority1 formControlName="seniority1" (ngModelChange)="updateSeniority(seniority1.value)">
+                        <nz-option *ngFor="let seniority of seniorityList" nzLabel="{{seniority.name}}" [nzValue]="seniority.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="technicalForm.get('seniority').dirty && technicalForm.get('seniority').errors">Please select a seniority</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="client">Client</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <input nz-input id="client" formControlName="client" placeholder="Input the client that best suits" />

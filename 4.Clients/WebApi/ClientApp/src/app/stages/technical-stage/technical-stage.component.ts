@@ -42,6 +42,7 @@ export class TechnicalStageComponent implements OnInit {
     status: [0, [Validators.required]],
     date: [new Date(), [Validators.required]],
     seniority: [0, [Validators.required]],
+    seniority1: [0, [Validators.required]],
     consultantOwnerId: [null, [Validators.required]],
     consultantDelegateId: [null],
     feedback: [null, [trimValidator]],
@@ -115,6 +116,7 @@ export class TechnicalStageComponent implements OnInit {
     stage.processId = processId;
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
     stage.seniority = this.getControlValue(form.controls.seniority);
+    stage.seniority1 = this.getControlValue(form.controls.seniority1);
     stage.client = this.getControlValue(form.controls.client);
     stage.rejectionReason = this.getControlValue(form.controls.rejectionReason);
     return stage;
@@ -156,6 +158,7 @@ export class TechnicalStageComponent implements OnInit {
     }
     if (technicalStage.feedback != null) { this.technicalForm.controls['feedback'].setValue(technicalStage.feedback); }
     if (technicalStage.seniority != null) { this.technicalForm.controls['seniority'].setValue(technicalStage.seniority); }
+    if (technicalStage.seniority1 != null) { this.technicalForm.controls['seniority'].setValue(technicalStage.seniority1); }
     if (technicalStage.client != null) { this.technicalForm.controls['client'].setValue(technicalStage.client); }
     if (technicalStage.rejectionReason != null) { this.technicalForm.controls['rejectionReason'].setValue(technicalStage.rejectionReason); }
 
