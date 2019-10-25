@@ -105,7 +105,6 @@ export class CandidateAddComponent implements OnInit {
               private globals: Globals) {
                 this.statusList = globals.candidateStatusList;
                 this.currentConsultant = JSON.parse(localStorage.getItem('currentUser'));
-                this.getSkills();
   }
 
   ngOnInit() {
@@ -122,15 +121,6 @@ export class CandidateAddComponent implements OnInit {
       this.candidateForm.controls['preferredOffice'].disable();
     }
     this.changeFormStatus(false);
-  }
-
-  getSkills() {
-    this.facade.skillService.get<Skill>()
-      .subscribe(res => {
-        this.skills = res;
-      }, err => {
-        console.log(err);
-      });
   }
 
   onCheckAndSave(): boolean {
@@ -169,17 +159,17 @@ export class CandidateAddComponent implements OnInit {
   }
 
   checkID(id:number) {
-    this.facade.candidateService.idExists(id)
-      .subscribe(res => {
-        if (res !== null) {
+    this.facade.processService.getActiveProcessByCandidate(id)
+      .subscribe((res: Process[]) => {
+        if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res.lastName + ', ' + res.name + '. Do you want to open a new one ?',
+            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',
             nzCancelText: 'No',
             nzOnOk: () => {
-              this.fillCandidateForm(res);
+              this.fillCandidateForm(res[0].candidate);
               this.changeFormStatus(false);
             },
             nzOnCancel: () => {
@@ -233,78 +223,7 @@ export class CandidateAddComponent implements OnInit {
     return this.candidateForm.controls[name];
   }
    
-  addField(e?: MouseEvent): void {
-    if (e) {
-      e.preventDefault();
-    }
-    const id = (this.controlArray.length > 0) ? this.controlArray[this.controlArray.length - 1].id + 1 : 0;
-
-    const control = {
-      id,
-      controlInstance: [`skill${id}`, `slidder${id}`, `comment${id}`]
-    };
-
-    if (id > 0) {
-      this.skills = this.skills.filter(
-        s => !this.controlArray.some( 
-        cai => s.id == this.candidateForm.controls[cai.controlInstance[0]].value));
-    }
-
-    const index = this.controlArray.push(control);
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[0], new FormControl(null, Validators.required));
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[1], new FormControl(10));
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[2], new FormControl(null, Validators.required));
-  }
-
-  removeCandidateSkills() {
-    let skills: Skill[] = [];
-    this.completeSkillList.forEach(sk => {
-      let exists: boolean = false;
-      this.controlArray.forEach(control => {
-        if (this.candidateForm.controls[control.controlInstance[0]].value == sk.id) { exists = true; }
-      });
-      if (!exists && skills.filter(s => s.id == sk.id).length == 0) { skills.push(sk); }
-    });
-    this.skills = skills;
-  }
-
-  removeField(i: { id: number, controlInstance: string[] }, e: MouseEvent): void {
-    e.preventDefault();
-    let skillList: Skill[] = [];
-    this.completeSkillList.forEach(sk => skillList.push(sk));
-
-    if (this.controlArray.length >= 1) {
-
-      if (this.candidateForm.controls[i.controlInstance[0]].value != null) {
-        const singleSkill = skillList.filter(skill => (skill.id === this.candidateForm.controls[i.controlInstance[0]].value)
-          || (skill.id === i.id) )[0];
-
-          if (singleSkill) {
-            this.skills.push(singleSkill);
-            this.skills.sort((a, b) => (a.id > b.id ? 1 : -1));
-          }
-        }
-      let j: number = 0;
-      const index = this.controlArray.indexOf(i);
-      this.controlArray.splice(index, 1);
-      for (j; j < 3; j++) { this.candidateForm.removeControl(i.controlInstance[j]); }
-    }
-  }
-
   getFormData(): Candidate {
-    let candidateSkills: CandidateSkill[] = [];
-    this.controlArray.forEach(skillControl => {
-      let skill: CandidateSkill = {
-        candidateId: 0,
-        candidate: null,
-        skillId: this.candidateForm.controls[skillControl.controlInstance[0]].value,
-        skill: null,
-        rate: this.candidateForm.controls[skillControl.controlInstance[1]].value,
-        comment: this.candidateForm.controls[skillControl.controlInstance[2]].value
-      }
-      candidateSkills.push(skill);
-    });
-
     let pn = this.candidateForm.controls['phoneNumber'].value == undefined
     || this.candidateForm.controls['phoneNumber'].value == null ? ''
     : this.candidateForm.controls['phoneNumber'].value.toString();
@@ -321,7 +240,7 @@ export class CandidateAddComponent implements OnInit {
       emailAddress: this.candidateForm.controls['email'].value === null ? null : this.candidateForm.controls['email'].value.toString(),
       phoneNumber: prefix + pn,
       linkedInProfile: this.candidateForm.controls['linkedin'].value === null ? null : this.candidateForm.controls['linkedin'].value.toString(),
-      candidateSkills: candidateSkills,
+      candidateSkills: null,
       additionalInformation: this.candidateForm.controls['additionalInformation'].value === null ? null : this.candidateForm.controls['additionalInformation'].value.toString(),
       englishLevel: EnglishLevelEnum.None,
       status: this.candidateForm.controls['status'].value === null ? null : this.candidateForm.controls['status'].value,

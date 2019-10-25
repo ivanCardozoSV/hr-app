@@ -16,6 +16,7 @@ import { Globals } from 'src/app/app-globals/globals';
 import { Community } from 'src/entities/community';
 import { CandidateProfile } from 'src/entities/Candidate-Profile';
 import { replaceAccent } from 'src/app/helpers/string-helpers'
+import { Process } from 'src/entities/process';
 
 @Component({
   selector: 'app-process-contact',
@@ -92,7 +93,7 @@ export class ProcessContactComponent implements OnInit {
     community: [null, [Validators.required]],
     profile: [null, [Validators.required]],
     linkedInProfile: [null, [Validators.required, trimValidator]],
-    isReferred: [null],
+    isReferred: false,
     id: [null]
   });
   visible: boolean = false;
@@ -247,7 +248,7 @@ export class ProcessContactComponent implements OnInit {
       community: [null, [Validators.required]],
       profile: [null, [Validators.required]],
       linkedInProfile: [null, [Validators.required, trimValidator]],
-      isReferred: [null],
+      isReferred: false,
       id: [null]
     });
   }
@@ -365,14 +366,12 @@ export class ProcessContactComponent implements OnInit {
       }
       this.facade.candidateService.add<Candidate>(newCandidate)
         .subscribe(res => {
-
-          this.getCandidates();
           this.facade.toastrService.success('Candidate was successfully created !');
           this.isNewCandidate = false;
           this.visible = false;
-          this.app.hideLoading;
-          
-
+          this.app.hideLoading();
+          this.getCandidates();
+          this.startNewProcess(res.id);
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -384,11 +383,11 @@ export class ProcessContactComponent implements OnInit {
 
   startNewProcess(candidateId: number) {
 
-    this.facade.candidateService.idExists(candidateId)
-      .subscribe(res => {
-        if (res !== null) {
+    this.facade.processService.getActiveProcessByCandidate(candidateId)
+      .subscribe((res: Process[]) => {
+        if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res.lastName + ', ' + res.name + '. Do you want to open a new one ?',
+            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',

@@ -19,6 +19,15 @@ export class ProcessService extends BaseService {
 
   candidatesUrl: string = '';
 
+  public getActiveProcessByCandidate(candidateId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${candidateId}`,
+      {headers: this.headersWithAuth, observe: "body"})
+      .pipe(
+        tap(data => {}),
+        catchError(this.handleErrors)
+      );
+  }
+
   public approve(processID: number): Observable<any> {
     return this.http.post(this.apiUrl + '/Approve', processID, {
       headers: this.headersWithAuth, observe: 'response'

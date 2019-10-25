@@ -25,9 +25,10 @@ namespace HrApp.API
             httpClient.Timeout = TimeSpan.FromSeconds(10);
         }
 
-        public void SetToken(string token)
+        public HttpReceiver SetToken(string token)
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            return Instance;
         }
 
         public HttpResponseMessage PostJson(string url, string json)

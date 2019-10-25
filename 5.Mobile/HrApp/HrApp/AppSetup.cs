@@ -18,11 +18,13 @@ namespace HrApp
         {
             
             ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterType<HomeViewModel>().AsSelf();
             builder.RegisterType<LoginViewModel>().AsSelf();
             builder.RegisterType<CandidateViewModel>().AsSelf();
             builder.RegisterInstance<IHRApi>(HRApi.getApi()).SingleInstance();
             builder.RegisterType<LoginService>().As<ILoginService>();
             builder.RegisterType<CandidateService>().As<ICandidateService>();
+            builder.RegisterType<ProcessService>().As<IProcessService>();
 
             IContainer container = builder.Build();
 

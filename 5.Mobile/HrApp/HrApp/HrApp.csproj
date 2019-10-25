@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\1.Domain\Domain.Model\Domain.Model.csproj" />
+    <ProjectReference Include="..\..\..\4.Clients\ApiServer.Contracts\ApiServer.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
