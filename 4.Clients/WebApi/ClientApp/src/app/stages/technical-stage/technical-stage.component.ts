@@ -158,7 +158,7 @@ export class TechnicalStageComponent implements OnInit {
     }
     if (technicalStage.feedback != null) { this.technicalForm.controls['feedback'].setValue(technicalStage.feedback); }
     if (technicalStage.seniority != null) { this.technicalForm.controls['seniority'].setValue(technicalStage.seniority); }
-    if (technicalStage.seniority1 != null) { this.technicalForm.controls['seniority'].setValue(technicalStage.seniority1); }
+    if (technicalStage.seniority1 != null) { this.technicalForm.controls['seniority1'].setValue(technicalStage.seniority1); }
     if (technicalStage.client != null) { this.technicalForm.controls['client'].setValue(technicalStage.client); }
     if (technicalStage.rejectionReason != null) { this.technicalForm.controls['rejectionReason'].setValue(technicalStage.rejectionReason); }
 
