@@ -1,4 +1,5 @@
 ﻿using ApiServer.Contracts.CandidateSkill;
+using ApiServer.Contracts.Consultant;
 using ApiServer.Contracts.Office;
 using Domain.Model.Enum;
 using System;
@@ -19,7 +20,7 @@ namespace ApiServer.Contracts.Candidates
         public string AdditionalInformation { get; set; }
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
-        public int Recruiter { get; set; }
+        public ReadedConsultantViewModel Recruiter { get; set; }
         public int Community { get; set; }
         public int Profile { get; set; }
         public bool IsReferred { get; set; }

@@ -554,7 +554,7 @@ export class ProcessesComponent implements OnInit {
       newCandidate = this.candidateAdd.getFormData();
       newCandidate.candidateSkills=this.technicalStage.getFormDataSkills();
       newProcess = this.getProcessFormData();
-      newProcess.consultantOwnerId = newCandidate.recruiter;
+      newProcess.consultantOwnerId = newCandidate.recruiter.id;
 
       newProcess.candidate = newCandidate;
 
@@ -715,8 +715,8 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.InProgress,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         actualSalary: 0,
         wantedSalary: 0,
@@ -729,8 +729,8 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         seniority: SeniorityEnum.NA,
         client: ''
@@ -740,8 +740,8 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0
       },
       offerStage: {
@@ -749,8 +749,8 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         agreedSalary: 0,
         seniority: SeniorityEnum.NA,
