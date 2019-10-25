@@ -96,21 +96,24 @@ namespace Domain.Services.Impl.Services
         {
             var process = _mapper.Map<Process>(createProcessContract);
             //var candidate = _mapper.Map<Candidate>(createProcessContract.Candidate);
-            _candidateRepository.Update(process.Candidate);
 
             //process.Candidate = candidate;
 
-            //var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            candidate.DNI = process.Candidate.DNI;
+            candidate.LinkedInProfile = process.Candidate.LinkedInProfile;
+            this.AddOfficeToCandidate(candidate, createProcessContract.Candidate.PreferredOfficeId);
+            process.Candidate = candidate;
+            //_candidateRepository.Update(process.Candidate);
 
             //var updatedCandidate = _candidateRepository.Update(candidate);
 
             //process.Candidate = updatedCandidate;
             //process.CandidateId = updatedCandidate.Id;
 
-            this.AddRecruiterToCandidate(process.Candidate, createProcessContract.Candidate.Recruiter);
-            this.AddCommunityToCandidate(process.Candidate, createProcessContract.Candidate.Community);
-            this.AddCandidateProfileToCandidate(process.Candidate, createProcessContract.Candidate.Profile);
-            this.AddOfficeToCandidate(process.Candidate, createProcessContract.Candidate.PreferredOfficeId);
+            //this.AddRecruiterToCandidate(process.Candidate, createProcessContract.Candidate.Recruiter.Id);
+            //this.AddCommunityToCandidate(process.Candidate, createProcessContract.Candidate.Community);
+            //this.AddCandidateProfileToCandidate(process.Candidate, createProcessContract.Candidate.Profile);
             process.CurrentStage = SetProcessCurrentStage(process);
             var createdProcess = _processRepository.Create(process);
 
@@ -164,10 +167,12 @@ namespace Domain.Services.Impl.Services
             var process = _mapper.Map<Process>(updateProcessContract);
             process.Status = SetProcessStatus(process);
             process.CurrentStage = SetProcessCurrentStage(process);
-            process.Candidate.EnglishLevel = process.HrStage.EnglishLevel;
-            process.Candidate.Status = SetCandidateStatus(process.Status);
-            var updatedCandidate = _candidateRepository.Update(process.Candidate);
 
+            var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            candidate.EnglishLevel = process.HrStage.EnglishLevel;
+            candidate.Status = SetCandidateStatus(process.Status);
+            process.Candidate = candidate;
+            //_candidateRepository.Update(candidate);
 
             _hrStageRepository.Update(process.HrStage);
             _technicalStageRepository.Update(process.TechnicalStage);
@@ -175,10 +180,10 @@ namespace Domain.Services.Impl.Services
             _offerStageRepository.Update(process.OfferStage);
 
 
-            this.AddRecruiterToCandidate(process.Candidate, updateProcessContract.Candidate.Recruiter);
-            this.AddCommunityToCandidate(process.Candidate, updateProcessContract.Candidate.Community);
-            this.AddCandidateProfileToCandidate(process.Candidate, updateProcessContract.Candidate.Profile);
-            this.AddOfficeToCandidate(process.Candidate, updateProcessContract.Candidate.PreferredOfficeId);
+            //this.AddRecruiterToCandidate(process.Candidate, updateProcessContract.Candidate.Recruiter.Id);
+            //this.AddCommunityToCandidate(process.Candidate, updateProcessContract.Candidate.Community);
+            //this.AddCandidateProfileToCandidate(process.Candidate, updateProcessContract.Candidate.Profile);
+            //this.AddOfficeToCandidate(process.Candidate, updateProcessContract.Candidate.PreferredOfficeId);
 
             var updatedProcess = _processRepository.Update(process);
 

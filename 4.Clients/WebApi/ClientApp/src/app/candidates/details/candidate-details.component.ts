@@ -46,8 +46,8 @@ import { CandidateProfile } from "src/entities/Candidate-Profile";
     getRecruiterName(){
         this.facade.consultantService.get<Consultant>()
         .subscribe(res => {
-          this.recruiterName = res.filter(x => x.id === this._detailedCandidate.recruiter)[0].name + " " +
-                                    res.filter(x => x.id === this._detailedCandidate.recruiter)[0].lastName;
+          this.recruiterName = res.filter(x => x.id === this._detailedCandidate.recruiter.id)[0].name + " " +
+                                    res.filter(x => x.id === this._detailedCandidate.recruiter.id)[0].lastName;
         }, err => {
           console.log(err);
         });

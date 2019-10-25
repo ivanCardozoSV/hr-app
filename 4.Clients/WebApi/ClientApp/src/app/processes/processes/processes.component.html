@@ -77,7 +77,7 @@
                             </div>
                         </nz-dropdown>
                     </th>
-                    <th [style.text-align]="center">Interviewer</th>
+                    <th [style.text-align]="center">Recruiter</th>
                     <th [style.text-align]="center">Actions</th>
                 </tr>
             </thead>
@@ -102,8 +102,8 @@
                         <nz-badge style="margin-right: 3%; margin-top: -2%;"></nz-badge>
                         {{ getCurrentStage(process.currentStage) }}
                     </td>
-                    <td scope="row"><a *ngIf="process.consultantOwner" style="color: #1890ff;" (click)="showConsultantDetailsModal(process.consultantOwner.id, consultantDetailModal)">{{ process.consultantOwner.name }}
-                            {{ process.consultantOwner.lastName }}</a></td>
+                    <td scope="row"><a *ngIf="process.candidate.recruiter" style="color: #1890ff;" (click)="showConsultantDetailsModal(process.consultantOwner.id, consultantDetailModal)">{{ process.candidate.recruiter.name }}
+                            {{ process.candidate.recruiter.lastName }}</a></td>
 
                     <td [style.text-align]="center">
                         <!-- <i nzTitle="Details" [routerLink]="['/process-details/', process.id]" style="cursor: pointer;" nz-tooltip nz-icon type="info-circle" theme="outline"></i>

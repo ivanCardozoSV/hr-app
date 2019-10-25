@@ -1,5 +1,6 @@
 ﻿using Domain.Model.Enum;
 using Domain.Services.Contracts.CandidateSkill;
+using Domain.Services.Contracts.Consultant;
 using Domain.Services.Contracts.Office;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Domain.Services.Contracts.Candidate
         public string AdditionalInformation { get; set; }
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
-        public int Recruiter { get; set; }
+        public UpdateConsultantContract Recruiter { get; set; }
         public int Community { get; set; }
         public int Profile { get; set; }
         public bool isReferred { get; set; }

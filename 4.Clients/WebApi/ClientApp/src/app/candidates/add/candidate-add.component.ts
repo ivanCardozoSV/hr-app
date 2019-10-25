@@ -206,7 +206,7 @@ export class CandidateAddComponent implements OnInit {
     this.candidateForm.controls['phoneNumberPrefix'].setValue(candidate.phoneNumber.substring(1, candidate.phoneNumber.indexOf(')')));
     this.candidateForm.controls['phoneNumber'].setValue(candidate.phoneNumber.split(')')[1]); //(54),1123445678
     this.candidateForm.controls['additionalInformation'].setValue(candidate.additionalInformation);
-    this.candidateForm.controls['recruiter'].setValue(candidate.recruiter);
+    this.candidateForm.controls['recruiter'].setValue(candidate.recruiter.id);
     this.candidateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.candidateForm.controls['status'].setValue(candidate.status);
     this.candidateForm.controls['community'].setValue(candidate.community);
@@ -325,7 +325,7 @@ export class CandidateAddComponent implements OnInit {
       additionalInformation: this.candidateForm.controls['additionalInformation'].value === null ? null : this.candidateForm.controls['additionalInformation'].value.toString(),
       englishLevel: EnglishLevelEnum.None,
       status: this.candidateForm.controls['status'].value === null ? null : this.candidateForm.controls['status'].value,
-      recruiter: this.candidateForm.controls['recruiter'].value === null ? null : this.candidateForm.controls['recruiter'].value,
+      recruiter: !this.candidateForm.controls['recruiter'].value ? null : new Consultant(this.candidateForm.controls['recruiter'].value, null, null),
       preferredOfficeId: this.candidateForm.controls['preferredOffice'].value === null ? null : this.candidateForm.controls['preferredOffice'].value,
       contactDay: new Date(),
       profile: this.candidateForm.controls['profile'].value === null ? null : this.candidateForm.controls['profile'].value,
