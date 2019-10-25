@@ -366,14 +366,12 @@ export class ProcessContactComponent implements OnInit {
       }
       this.facade.candidateService.add<Candidate>(newCandidate)
         .subscribe(res => {
-
-          this.getCandidates();
           this.facade.toastrService.success('Candidate was successfully created !');
           this.isNewCandidate = false;
           this.visible = false;
-          this.app.hideLoading;
-          
-
+          this.app.hideLoading();
+          this.getCandidates();
+          this.startNewProcess(res.id);
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

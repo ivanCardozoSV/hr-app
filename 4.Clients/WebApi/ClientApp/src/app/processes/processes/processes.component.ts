@@ -303,8 +303,12 @@ export class ProcessesComponent implements OnInit {
 
   resetStatus(): void {
     this.searchValueStatus = '';
-    this.searchValueCurrentStage = '';
     this.searchStatus();
+  }
+
+  resetCurrentStage(): void {
+    this.searchValueCurrentStage = '';
+    this.searchCurrentStage();
   }
 
   search(): void {
@@ -324,7 +328,7 @@ export class ProcessesComponent implements OnInit {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.status.indexOf(p) !== -1) : true) &&
         (item.status === this.searchValueStatus)
     };
-    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    const data = this.searchValueStatus != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValueStatus = '';
     this.statusDropdown.nzVisible = false;
@@ -335,7 +339,7 @@ export class ProcessesComponent implements OnInit {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.currentStage.indexOf(p) !== -1) : true) &&
         (item.currentStage === this.searchValueCurrentStage)
     };
-    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    const data =  this.searchValueCurrentStage != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValueCurrentStage = '';
     this.currentStageDropdown.nzVisible = false;
