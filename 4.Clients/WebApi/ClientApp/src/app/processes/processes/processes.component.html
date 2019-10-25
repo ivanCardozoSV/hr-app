@@ -193,7 +193,7 @@
             <hr-stage [_consultants]="consultants" [hrStage]="emptyProcess.hrStage"></hr-stage>
         </div>
         <div nz-carousel-content>
-            <technical-stage [_consultants]="consultants" [technicalStage]="emptyProcess.technicalStage" (selectedSeniority)="updateSeniority($event)"></technical-stage>
+            <technical-stage [_process]="emptyProcess" [_consultants]="consultants" [technicalStage]="emptyProcess.technicalStage" (selectedSeniority)="updateSeniority($event)"></technical-stage>
         </div>
         <div nz-carousel-content>
             <client-stage [_consultants]="consultants" [clientStage]="emptyProcess.clientStage"></client-stage>
