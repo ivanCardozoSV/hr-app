@@ -70,9 +70,9 @@ export class TechnicalStageComponent implements OnInit {
 
   ngOnInit() {
     this.getSkills();
-    
-    if (this.technicalStage) { this.fillForm(this.technicalStage, this._process.candidate); }
     this.changeFormStatus(false);
+    if (this.technicalStage) { this.fillForm(this.technicalStage, this._process.candidate); }
+    
   }
 
   updateSeniority(seniorityId) {
