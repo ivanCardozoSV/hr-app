@@ -1,6 +1,6 @@
 <form nz-form [formGroup]="technicalForm" [nzLayout]="'horizontal'">
     <nz-divider nzText="TECHNICAL STAGE"></nz-divider>
-    <br />
+    <br /> {{message}}
     <nz-form-item>
         <nz-form-control>
             <input type="hidden" formControlName="id">
@@ -91,9 +91,9 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="seniority1">Seniority 2</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="alternativeSeniority">Alternative Seniority</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <nz-select #seniority1 formControlName="seniority1" (ngModelChange)="updateSeniority(seniority1.value)">
+                    <nz-select #alternativeSeniority formControlName="alternativeSeniority" (ngModelChange)="updateAlternativeSeniority(alternativeSeniority.value)">
                         <nz-option *ngFor="let seniority of seniorityList" nzLabel="{{seniority.name}}" [nzValue]="seniority.id">
                         </nz-option>
                     </nz-select>

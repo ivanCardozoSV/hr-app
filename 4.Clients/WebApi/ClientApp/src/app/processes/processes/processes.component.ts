@@ -640,7 +640,7 @@ export class ProcessesComponent implements OnInit {
     // Seniority is now handled global between technical stage and offer stage. The process uses the last updated value.
     process.seniority = this.selectedSeniority ? this.selectedSeniority :
       (process.technicalStage.seniority ? process.technicalStage.seniority :
-        process.technicalStage.seniority1 ? process.technicalStage.seniority1 :
+        process.technicalStage.alternativeSeniority ? process.technicalStage.alternativeSeniority :
         (process.offerStage.seniority));
     process.englishLevel = process.englishLevel;
 
@@ -752,7 +752,7 @@ export class ProcessesComponent implements OnInit {
         consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         seniority: SeniorityEnum.NA,
-        seniority1: SeniorityEnum.NA,
+        alternativeSeniority: SeniorityEnum.NA,
         client: ''
       },
       clientStage: {

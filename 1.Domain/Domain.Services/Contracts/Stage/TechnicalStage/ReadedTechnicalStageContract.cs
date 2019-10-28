@@ -10,7 +10,7 @@ namespace Domain.Services.Contracts.Stage
     public class ReadedTechnicalStageContract: ReadedStageContract
     {
         public Seniority Seniority { get; set; }
-        public Seniority Seniority1 { get; set; }
+        public Seniority AlternativeSeniority { get; set; }
         public string Client { get; set; }
     }
 }

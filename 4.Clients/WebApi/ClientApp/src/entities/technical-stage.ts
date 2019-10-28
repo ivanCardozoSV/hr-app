@@ -4,6 +4,6 @@ import { Stage } from './stage';
 
 export class TechnicalStage extends Stage{
     seniority: SeniorityEnum;
-    seniority1: SeniorityEnum;
+    alternativeSeniority: SeniorityEnum;
     client: string;
 }

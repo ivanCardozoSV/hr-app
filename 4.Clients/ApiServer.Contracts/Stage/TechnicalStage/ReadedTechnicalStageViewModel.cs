@@ -9,7 +9,7 @@ namespace ApiServer.Contracts.Stage
     public class ReadedTechnicalStageViewModel : ReadedStageViewModel
     {
         public Seniority Seniority { get; set; }
-        public Seniority Seniority1 { get; set; }
+        public Seniority AlternativeSeniority { get; set; }
         public string Client { get; set; }
     }
 }
