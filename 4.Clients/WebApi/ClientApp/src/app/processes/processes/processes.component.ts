@@ -27,6 +27,7 @@ import { CandidateProfile } from 'src/entities/Candidate-Profile';
 import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
 import { replaceAccent } from 'src/app/helpers/string-helpers';
 import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
+import { User } from 'src/entities/user';
 
 
 @Component({
@@ -58,6 +59,7 @@ export class ProcessesComponent implements OnInit {
   searchValueCurrentStage = '';
   listOfSearchProcesses = [];
   listOfDisplayData = [...this.filteredProcesses];
+  currentUser: User;
 
   sortName = null;
   sortValue = null;
@@ -74,7 +76,7 @@ export class ProcessesComponent implements OnInit {
   profileSearch: number = 0;
   profileSearchName: string = 'ALL';
 
-  communitySearch: number =0;
+  communitySearch: number = 0;
   communitySearchName: string = 'ALL';
 
   profileList: any[];
@@ -85,6 +87,8 @@ export class ProcessesComponent implements OnInit {
   emptyCandidate: Candidate;
   emptyConsultant: Consultant;
   currentCandidate: Candidate;
+
+  currentConsultant: any;
 
   isEdit: boolean = false;
 
@@ -99,6 +103,8 @@ export class ProcessesComponent implements OnInit {
   profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
 
+  showOnlyOwnedProcessesSwitch: boolean = false;
+
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
     private candidateDetailsModal: CandidateDetailsComponent, private consultantDetailsModal: ConsultantDetailsComponent,
@@ -109,6 +115,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.app.showLoading();
     this.app.removeBgImage();
     this.getProcesses();
@@ -117,6 +124,14 @@ export class ProcessesComponent implements OnInit {
     this.getOffices();
     this.getCommunities();
     this.getProfiles();
+    this.facade.consultantService.GetByEmail(this.currentUser.Email)
+      .subscribe(res => {
+        this.currentConsultant = res.body;
+        console.log(this.currentConsultant);
+      });
+    this.searchOwnRecruiter();
+
+
 
     this.rejectProcessForm = this.formBuilder.group({
       rejectionReasonDescription: [null, [Validators.required]]
@@ -175,7 +190,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   getCommunity(community: number): string {
-    return this.communities.find(x =>x.id === community).name;
+    return this.communities.find(x => x.id === community).name;
   }
 
   getCommunities() {
@@ -197,7 +212,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   getProfile(profile: number): string {
-    return this.profiles.filter(x =>x.id === profile)[0].name;
+    return this.profiles.filter(x => x.id === profile)[0].name;
   }
 
   getProcesses() {
@@ -212,6 +227,34 @@ export class ProcessesComponent implements OnInit {
       }, err => {
         console.log(err);
       });
+  }
+
+  getProcessesByConsultant() {
+    this.facade.processService.get<Process>()
+      .subscribe(res => {
+        this.filteredProcesses = res;
+        this.listOfDisplayData = res;
+        let newProc: Process = res[res.length - 1];
+        if (newProc && newProc.candidate) {
+          this.candidatesFullList.push(newProc.candidate);
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  showOnlyOwnedProcesses()
+  {
+    if(this.showOnlyOwnedProcessesSwitch = false)
+    {
+      this.getProcesses();
+      console.log('tengo que mostrar algo');
+    }
+    else{
+      this.listOfDisplayData=[];
+      console.log('no muestro nada');
+    }
+    
   }
 
   getStatus(status: number): string {
@@ -341,6 +384,23 @@ export class ProcessesComponent implements OnInit {
     this.nameDropdown.nzVisible = false;
   }
 
+  searchOwnRecruiter(): void {
+    this.searchRecruiterValue=this.currentConsultant.name + ' ' + this.currentConsultant.lastName;
+    this.searchRecruiter();
+  }
+
+  showOwnProcessesFirst(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
+    };
+    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
+    this.nameDropdown.nzVisible = false;
+  }
+
   searchStatus(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.status.indexOf(p) !== -1) : true) &&
@@ -357,7 +417,7 @@ export class ProcessesComponent implements OnInit {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.currentStage.indexOf(p) !== -1) : true) &&
         (item.currentStage === this.searchValueCurrentStage)
     };
-    const data =  this.searchValueCurrentStage != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
+    const data = this.searchValueCurrentStage != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValueCurrentStage = '';
     this.currentStageDropdown.nzVisible = false;
@@ -368,7 +428,7 @@ export class ProcessesComponent implements OnInit {
 
 
     if (this.profileSearch == 0) {
-    this.listOfDisplayData = this.filteredProcesses;
+      this.listOfDisplayData = this.filteredProcesses;
       this.profileSearchName = 'ALL';
     }
     else {
@@ -383,7 +443,7 @@ export class ProcessesComponent implements OnInit {
 
 
     if (this.communitySearch == 0) {
-    this.listOfDisplayData = this.filteredProcesses;
+      this.listOfDisplayData = this.filteredProcesses;
       this.communitySearchName = 'ALL';
     }
     else {
@@ -570,7 +630,7 @@ export class ProcessesComponent implements OnInit {
       let newProcess: Process;
 
       newCandidate = this.candidateAdd.getFormData();
-      newCandidate.candidateSkills=this.technicalStage.getFormDataSkills();
+      newCandidate.candidateSkills = this.technicalStage.getFormDataSkills();
       newProcess = this.getProcessFormData();
       newProcess.consultantOwnerId = newCandidate.recruiter.id;
 
@@ -641,7 +701,7 @@ export class ProcessesComponent implements OnInit {
     process.seniority = this.selectedSeniority ? this.selectedSeniority :
       (process.technicalStage.seniority ? process.technicalStage.seniority :
         process.technicalStage.seniority1 ? process.technicalStage.seniority1 :
-        (process.offerStage.seniority));
+          (process.offerStage.seniority));
     process.englishLevel = process.englishLevel;
 
     return process;

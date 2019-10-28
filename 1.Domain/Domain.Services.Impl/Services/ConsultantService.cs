@@ -67,6 +67,13 @@ namespace Domain.Services.Impl.Services
             return _mapper.Map<ReadedConsultantByNameContract>(consultants);
         }
 
+        public Consultant GetByEmail(string email)
+        {
+            Consultant consultant = _consultantRepository.Query()
+                .Where(x => x.EmailAddress == email).FirstOrDefault();
+            return _mapper.Map<Consultant>(consultant);
+        }
+
         public CreatedConsultantContract Create(CreateConsultantContract contract)
         {
             _logger.LogInformation($"Validating contract {contract.Name}");

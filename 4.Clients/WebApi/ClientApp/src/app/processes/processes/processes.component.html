@@ -1,8 +1,15 @@
 <br /><br />
 <div nz-row>
-    <div nz-col nzSpan="24">
+    <div nz-col nzSpan="2">
         <button nz-button nzType="primary" (click)="showContactCandidatesModal(searchContactedCandidate)" nzShape="circle">
             <i nz-icon type="search" theme="outline"></i></button>
+    </div>
+    <div nz-col nzSpan="5">
+        Show only my processes:
+        <nz-switch nzSize="small" [(ngModel)]="showOnlyOwnedProcessesSwitch" (click)="showOnlyOwnedProcesses()"></nz-switch>
+    </div>
+    <div nz-col nzSpan="8">
+        <button nz-button nzType="primary" (click)="searchOwnRecruiter()" nzShape="round"> Show my processes first</button>
     </div>
 </div>
 <br />
