@@ -735,14 +735,16 @@ export class ProcessesComponent implements OnInit {
         seniority: SeniorityEnum.NA,
         client: ''
       },
-      clientStage: {
+    clientStage: {
         id: 0,
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
         consultantOwnerId: candidate.recruiter.id,
         consultantDelegateId: candidate.recruiter.id,
-        processId: 0
+        processId: 0,
+        interviewer: '',
+        delegateName: ''
       },
       offerStage: {
         id: 0,
