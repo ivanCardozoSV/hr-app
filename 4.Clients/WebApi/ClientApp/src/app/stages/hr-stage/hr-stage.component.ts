@@ -7,6 +7,7 @@ import { Globals } from '../../app-globals/globals';
 import { StageStatusEnum } from '../../../entities/enums/stage-status.enum';
 import { HrStage } from '../../../entities/hr-stage';
 import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'hr-stage',
@@ -46,7 +47,7 @@ export class HrStageComponent implements OnInit {
 
   @Input() hrStage: HrStage;
 
-  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals) {
+  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals, private _appComponent: AppComponent) {
     this.statusList = globals.stageStatusList.filter(x => x.id !== StageStatusEnum.Hired);
     this.englishLevelList = globals.englishLevelList;
     this.rejectionReasonsHRList = globals.rejectionReasonsHRList;
@@ -141,6 +142,10 @@ export class HrStageComponent implements OnInit {
     this.hrForm.controls['rejectionReason'].disable();
     this.hrForm.controls['rejectionReasonsHr'].disable();
     return false;
+  }
+
+  isUserRole(roles: string[]): boolean {
+    return this._appComponent.isUserRole(roles);
   }
 
 }

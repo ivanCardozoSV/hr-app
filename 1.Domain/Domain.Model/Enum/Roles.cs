@@ -9,6 +9,7 @@ namespace Domain.Model.Enum
         Admin,
         HRManagement,
         HRUser,
-        Interviewer
+        Interviewer,
+        TechnicalInterviewer
     }
 }

@@ -102,7 +102,7 @@ export class ProcessesComponent implements OnInit {
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
     private candidateDetailsModal: CandidateDetailsComponent, private consultantDetailsModal: ConsultantDetailsComponent,
-    private globals: Globals) {
+    private globals: Globals, private _appComponent: AppComponent,) {
     this.profileList = globals.profileList;
     this.statusList = globals.processStatusList;
     this.currentStageList = globals.processCurrentStageList;
@@ -125,6 +125,10 @@ export class ProcessesComponent implements OnInit {
     this.setRejectionReasonValidators();
 
     this.app.hideLoading();
+  }
+
+  isUserRole(roles: string[]): boolean {
+    return this._appComponent.isUserRole(roles);
   }
 
   setRejectionReasonValidators() {
