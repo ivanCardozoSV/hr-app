@@ -19,13 +19,17 @@ namespace Domain.Services.Impl.Profiles
                 .ForMember(destination => destination.Status,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(StageStatus), source.Status)))
                 .ForMember(destination => destination.Seniority,
-                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.Seniority)));
+                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.Seniority)))
+                .ForMember(destination => destination.AlternativeSeniority,
+                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.AlternativeSeniority)));
             CreateMap<TechnicalStage, CreatedTechnicalStageContract>();
             CreateMap<UpdateTechnicalStageContract, TechnicalStage>()
                                 .ForMember(destination => destination.Status,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(StageStatus), source.Status)))
                 .ForMember(destination => destination.Seniority,
-                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.Seniority)));
+                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.Seniority)))
+                .ForMember(destination => destination.AlternativeSeniority,
+                opt => opt.MapFrom(source => Enum.GetName(typeof(Seniority), source.AlternativeSeniority)));
             CreateMap<UpdateTechnicalStageViewModel, UpdateTechnicalStageContract>();
         }
     }

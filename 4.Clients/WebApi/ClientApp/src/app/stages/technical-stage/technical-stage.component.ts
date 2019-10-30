@@ -11,6 +11,7 @@ import { TechnicalStage } from 'src/entities/technical-stage';
 import { Skill } from 'src/entities/skill';
 import { Candidate } from 'src/entities/candidate';
 import { CandidateSkill } from 'src/entities/candidateSkill';
+import { ProcessService } from '../../services/process.service';
 
 @Component({
   selector: 'technical-stage',
@@ -42,6 +43,7 @@ export class TechnicalStageComponent implements OnInit {
     status: [0, [Validators.required]],
     date: [new Date(), [Validators.required]],
     seniority: [0, [Validators.required]],
+    alternativeSeniority: [0, [Validators.required]],
     consultantOwnerId: [null, [Validators.required]],
     consultantDelegateId: [null],
     feedback: [null, [trimValidator]],
@@ -58,24 +60,49 @@ export class TechnicalStageComponent implements OnInit {
 
   seniorityList: any[];
 
+  selectedSeniorities: any[2];
+
   @Input() technicalStage: TechnicalStage;
 
   @Output() selectedSeniority = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals) {
+  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals, private processService: ProcessService) {
     this.statusList = globals.stageStatusList.filter(x => x.id !== StageStatusEnum.Hired);
     this.seniorityList = globals.seniorityList;
   }
 
   ngOnInit() {
+    this.processService.selectedSeniorities.subscribe(sr => this.selectedSeniorities = sr);
+
     this.getSkills();
-    
-    if (this.technicalStage) { this.fillForm(this.technicalStage, this._process.candidate); }
     this.changeFormStatus(false);
+    if (this.technicalStage) { this.fillForm(this.technicalStage, this._process.candidate); }
   }
 
   updateSeniority(seniorityId) {
     this.selectedSeniority.emit(seniorityId);
+    this.selectedSeniorities = [];
+    if (seniorityId !== this.seniorityList.find(
+      s => s.id === this.technicalForm.controls['alternativeSeniority'].value).id) {
+      this.selectedSeniorities[0] = this.seniorityList.find(s => s.id === seniorityId);
+      this.selectedSeniorities[1] = this.seniorityList.find(s => s.id === this.technicalForm.controls['alternativeSeniority'].value);
+    } else {
+      this.selectedSeniorities[0] = this.seniorityList.find(s => s.id === seniorityId);
+    }
+    this.processService.changeSeniority(this.selectedSeniorities);
+  }
+
+  updateAlternativeSeniority(seniorityId) {
+    this.selectedSeniority.emit(seniorityId);
+    this.selectedSeniorities = [];
+    if (seniorityId !== this.seniorityList.find(
+      s => s.id === this.technicalForm.controls['seniority'].value).id) {
+      this.selectedSeniorities[0] = this.seniorityList.find(s => s.id === this.technicalForm.controls['seniority'].value);
+      this.selectedSeniorities[1] = this.seniorityList.find(s => s.id === seniorityId);
+    } else {
+      this.selectedSeniorities[0] = this.seniorityList.find(s => s.id === seniorityId);
+    }
+    this.processService.changeSeniority(this.selectedSeniorities);
   }
 
   getFormControl(name: string): AbstractControl {
@@ -115,6 +142,7 @@ export class TechnicalStageComponent implements OnInit {
     stage.processId = processId;
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
     stage.seniority = this.getControlValue(form.controls.seniority);
+    stage.alternativeSeniority = this.getControlValue(form.controls.alternativeSeniority);
     stage.client = this.getControlValue(form.controls.client);
     stage.rejectionReason = this.getControlValue(form.controls.rejectionReason);
     return stage;
@@ -156,8 +184,22 @@ export class TechnicalStageComponent implements OnInit {
     }
     if (technicalStage.feedback != null) { this.technicalForm.controls['feedback'].setValue(technicalStage.feedback); }
     if (technicalStage.seniority != null) { this.technicalForm.controls['seniority'].setValue(technicalStage.seniority); }
+    if (technicalStage.alternativeSeniority != null) { this.technicalForm.controls['alternativeSeniority'].setValue(technicalStage.alternativeSeniority); }
     if (technicalStage.client != null) { this.technicalForm.controls['client'].setValue(technicalStage.client); }
     if (technicalStage.rejectionReason != null) { this.technicalForm.controls['rejectionReason'].setValue(technicalStage.rejectionReason); }
+    
+
+    if (technicalStage.seniority !== technicalStage.alternativeSeniority) {
+      this.selectedSeniorities = [
+        this.seniorityList.find(s => s.id === technicalStage.seniority),
+        this.seniorityList.find(s => s.id === technicalStage.alternativeSeniority)];
+    } else {
+      this.selectedSeniorities = [
+        this.seniorityList.find(s => s.id === technicalStage.seniority)];
+    }
+
+
+    this.processService.changeSeniority(this.selectedSeniorities);
 
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {

@@ -40,7 +40,7 @@ namespace Domain.Services.Impl.Profiles
             CreateMap<UpdateCandidateContract, Candidate>()
                 .ForMember(destination => destination.EnglishLevel,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(EnglishLevel), source.EnglishLevel)))
-                .ForMember(x => x.Recruiter, opt => opt.MapFrom(r => r.Recruiter))
+                .ForMember(x => x.Recruiter, opt => opt.Ignore())
                 .ForMember(x => x.PreferredOffice, opt => opt.Ignore())
                 .ForMember(x => x.Community, opt => opt.Ignore())
                 .ForMember(x => x.Profile, opt => opt.Ignore());

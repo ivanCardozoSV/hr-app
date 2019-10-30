@@ -20,7 +20,7 @@ namespace ApiServer.Contracts.Candidates
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
         public string AdditionalInformation { get; set; }
-        public UpdateConsultantViewModel Recruiter { get; set; }
+        public ReadedConsultantViewModel Recruiter { get; set; }
         public DateTime ContactDay { get; set; }
         public int PreferredOfficeId { get; set; }
         public int Profile { get; set; }

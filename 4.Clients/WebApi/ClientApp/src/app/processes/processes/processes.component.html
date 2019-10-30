@@ -77,7 +77,16 @@
                             </div>
                         </nz-dropdown>
                     </th>
-                    <th [style.text-align]="center">Recruiter</th>
+                    <th [style.text-align]="center" nzCustomFilter>Recruiter
+                        <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                            <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                            <div class="search-box">
+                                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchRecruiterValue" (keyup.enter)="searchRecruiter()">
+                                <button nz-button nzSize="small" nzType="primary" (click)="searchRecruiter()" class="search-button">Search</button>
+                                <button nz-button nzSize="small" (click)="resetRecruiter()">Reset</button>
+                            </div>
+                        </nz-dropdown>
+                    </th>
                     <th [style.text-align]="center">Actions</th>
                 </tr>
             </thead>

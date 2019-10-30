@@ -7,6 +7,7 @@ import { Process } from 'src/entities/process';
 import { Globals } from '../../app-globals/globals';
 import { StageStatusEnum } from '../../../entities/enums/stage-status.enum';
 import { OfferStage } from 'src/entities/offer-stage';
+import { ProcessService } from '../../services/process.service';
 
 @Component({
   selector: 'offer-stage',
@@ -53,13 +54,19 @@ export class OfferStageComponent implements OnInit {
 
   @Output() selectedSeniority = new EventEmitter();
 
-  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals) {
+  //selectedSeniorities: any[2];
+
+  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals, private processService: ProcessService) {
     this.statusList = globals.stageStatusList;
-    this.seniorityList = globals.seniorityList;
+    //this.seniorityList = globals.seniorityList;
    }
 
 
   ngOnInit() {
+    this.processService.selectedSeniorities.subscribe(sr => {
+      this.seniorityList = sr;
+      this.offerForm.controls['seniority'].setValue(this.seniorityList[0].id);
+    });
     this.changeFormStatus(false);
     if (this.offerStage) { this.fillForm(this.offerStage); }
   }

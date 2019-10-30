@@ -53,6 +53,7 @@ export class ProcessesComponent implements OnInit {
   filteredProcesses: Process[] = [];
 
   searchValue = '';
+  searchRecruiterValue = '';
   searchValueStatus = '';
   searchValueCurrentStage = '';
   listOfSearchProcesses = [];
@@ -301,6 +302,11 @@ export class ProcessesComponent implements OnInit {
     this.search();
   }
 
+  resetRecruiter(): void {
+    this.searchRecruiterValue = '';
+    this.searchRecruiter();
+  }
+
   resetStatus(): void {
     this.searchValueStatus = '';
     this.searchStatus();
@@ -323,12 +329,24 @@ export class ProcessesComponent implements OnInit {
     this.nameDropdown.nzVisible = false;
   }
 
+  searchRecruiter(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
+    };
+    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
+    this.nameDropdown.nzVisible = false;
+  }
+
   searchStatus(): void {
     const filterFunc = (item) => {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.status.indexOf(p) !== -1) : true) &&
         (item.status === this.searchValueStatus)
     };
-    const data = this.searchValueStatus != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
+    const data = this.searchValueStatus !== '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValueStatus = '';
     this.statusDropdown.nzVisible = false;
@@ -622,6 +640,7 @@ export class ProcessesComponent implements OnInit {
     // Seniority is now handled global between technical stage and offer stage. The process uses the last updated value.
     process.seniority = this.selectedSeniority ? this.selectedSeniority :
       (process.technicalStage.seniority ? process.technicalStage.seniority :
+        process.technicalStage.alternativeSeniority ? process.technicalStage.alternativeSeniority :
         (process.offerStage.seniority));
     process.englishLevel = process.englishLevel;
 
@@ -733,6 +752,7 @@ export class ProcessesComponent implements OnInit {
         consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         seniority: SeniorityEnum.NA,
+        alternativeSeniority: SeniorityEnum.NA,
         client: ''
       },
     clientStage: {

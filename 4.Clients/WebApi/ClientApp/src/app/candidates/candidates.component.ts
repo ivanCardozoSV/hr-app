@@ -272,7 +272,7 @@ export class CandidatesComponent implements OnInit {
                 englishLevel: this.validateForm.controls['englishLevel'].value,
                 status: this.validateForm.controls['status'].value,
                 preferredOfficeId: this.validateForm.controls['preferredOffice'].value,
-                recruiter: this.validateForm.controls['recruiter'].value,
+                recruiter: new Consultant(this.validateForm.controls['recruiter'].value, null, null),
                 contactDay: new Date(),
                 profile: this.validateForm.controls['profile'].value,
                 community: this.validateForm.controls['community'].value,
@@ -414,7 +414,7 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['phoneNumberPrefix'].setValue(candidate.phoneNumber.substring(1, candidate.phoneNumber.indexOf(')')));
     this.validateForm.controls['phoneNumber'].setValue(candidate.phoneNumber.split(')')[1]);
     this.validateForm.controls['additionalInformation'].setValue(candidate.additionalInformation);
-    this.validateForm.controls['recruiter'].setValue(candidate.recruiter);
+    this.validateForm.controls['recruiter'].setValue(candidate.recruiter.id);
     this.validateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);

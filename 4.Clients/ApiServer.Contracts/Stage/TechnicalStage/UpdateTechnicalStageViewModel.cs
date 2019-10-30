@@ -7,6 +7,7 @@ namespace ApiServer.Contracts.Stage
     public class UpdateTechnicalStageViewModel : UpdateStageViewModel
     {
         public Seniority Seniority { get; set; }
+        public Seniority AlternativeSeniority { get; set; }
         public string Client { get; set; }
     }
 }

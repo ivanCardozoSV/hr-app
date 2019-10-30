@@ -20,7 +20,7 @@ namespace Domain.Services.Contracts.Candidate
         public string AdditionalInformation { get; set; }
         public EnglishLevel EnglishLevel { get; set; }
         public CandidateStatus Status { get; set; }
-        public UpdateConsultantContract Recruiter { get; set; }
+        public ReadedConsultantContract Recruiter { get; set; }
         public int Community { get; set; }
         public int Profile { get; set; }
         public bool isReferred { get; set; }

@@ -1,6 +1,6 @@
 <form nz-form [formGroup]="technicalForm" [nzLayout]="'horizontal'">
     <nz-divider nzText="TECHNICAL STAGE"></nz-divider>
-    <br />
+    <br /> {{message}}
     <nz-form-item>
         <nz-form-control>
             <input type="hidden" formControlName="id">
@@ -85,6 +85,20 @@
                         The input has trailing whitespace!
                     </ng-container>
                 </nz-form-explain>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="alternativeSeniority">Alternative Seniority</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select #alternativeSeniority formControlName="alternativeSeniority" (ngModelChange)="updateAlternativeSeniority(alternativeSeniority.value)">
+                        <nz-option *ngFor="let seniority of seniorityList" nzLabel="{{seniority.name}}" [nzValue]="seniority.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="technicalForm.get('seniority').dirty && technicalForm.get('seniority').errors">Please select a seniority</nz-form-explain>
+                </nz-form-control>
             </nz-form-item>
         </div>
     </div>
