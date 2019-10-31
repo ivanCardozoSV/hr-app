@@ -27,7 +27,7 @@ import { CandidateProfile } from 'src/entities/Candidate-Profile';
 import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
 import { replaceAccent } from 'src/app/helpers/string-helpers';
 import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
-
+import { User } from 'src/entities/user';
 
 @Component({
   selector: 'app-processes',
@@ -58,7 +58,8 @@ export class ProcessesComponent implements OnInit {
   searchValueCurrentStage = '';
   listOfSearchProcesses = [];
   listOfDisplayData = [...this.filteredProcesses];
-
+  currentUser: User;
+  
   sortName = null;
   sortValue = null;
 
@@ -86,6 +87,8 @@ export class ProcessesComponent implements OnInit {
   emptyConsultant: Consultant;
   currentCandidate: Candidate;
 
+  currentConsultant: any;
+
   isEdit: boolean = false;
 
   currentComponent: string;
@@ -99,6 +102,8 @@ export class ProcessesComponent implements OnInit {
   profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
 
+  isOwnedProcesses: boolean = false;
+
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
     private candidateDetailsModal: CandidateDetailsComponent, private consultantDetailsModal: ConsultantDetailsComponent,
@@ -109,6 +114,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.app.showLoading();
     this.app.removeBgImage();
     this.getProcesses();
@@ -117,6 +123,11 @@ export class ProcessesComponent implements OnInit {
     this.getOffices();
     this.getCommunities();
     this.getProfiles();
+    this.facade.consultantService.GetByEmail(this.currentUser.Email)
+      .subscribe(res => {
+        this.currentConsultant = res.body;
+      console.log(this.currentConsultant);
+    });
 
     this.rejectProcessForm = this.formBuilder.group({
       rejectionReasonDescription: [null, [Validators.required]]
@@ -205,6 +216,19 @@ export class ProcessesComponent implements OnInit {
   }
 
   getProcesses() {
+    this.facade.processService.get<Process>()
+      .subscribe(res => {
+        this.filteredProcesses = res;
+        this.listOfDisplayData = res;
+        let newProc: Process = res[res.length - 1];
+        if (newProc && newProc.candidate) {
+          this.candidatesFullList.push(newProc.candidate);
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
+  getProcessesByConsultant() {
     this.facade.processService.get<Process>()
       .subscribe(res => {
         this.filteredProcesses = res;
@@ -339,6 +363,31 @@ export class ProcessesComponent implements OnInit {
         (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
+    // const data = this.filteredProcesses;
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
+    this.nameDropdown.nzVisible = false;
+  }
+
+  searchOwnRecruiter(): void {
+    this.searchRecruiterValue=this.currentConsultant.name + ' ' + this.currentConsultant.lastName;
+    this.searchRecruiter();
+    this.isOwnedProcesses = true;
+  }
+
+  searchAllProcess(){
+    this.getProcesses();
+    this.isOwnedProcesses = false;
+  }
+
+  showOwnProcessesFirst(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
+    };
+    const data = this.filteredProcesses.filter(item => filterFunc(item));
+
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.communitySearchName = 'ALL';
     this.profileSearchName = 'ALL';
