@@ -6,7 +6,5 @@ namespace Domain.Model
 {
     public class ClientStage: Stage
     {
-        public string interviewer { get; set; }
-        public string delegateName { get; set; }
     }
 }

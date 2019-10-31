@@ -20,8 +20,10 @@ namespace Domain.Services.Contracts.Stage
         public List<CreateStageItemContract> StageItems { get; set; }
 
         public int? ConsultantOwnerId { get; set; }
+        public string Interviewer { get; set; }
 
         public int? ConsultantDelegateId { get; set; }
+        public string DelegateName { get; set; }
         public string RejectionReason { get; set; }
     }
 }
