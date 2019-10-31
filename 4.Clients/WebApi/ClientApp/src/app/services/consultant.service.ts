@@ -11,4 +11,9 @@ export class ConsultantService extends BaseService {
     super(router, config, http);
     this.apiUrl += 'Consultant';
   }
+
+  public GetByEmail(email: string){
+    return this.http.get(this.apiUrl
+      + '/GetByEmail?email=' + email, { headers: this.headers, observe: "response" })
+  }
 }
