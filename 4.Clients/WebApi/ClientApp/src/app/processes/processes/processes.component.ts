@@ -103,7 +103,7 @@ export class ProcessesComponent implements OnInit {
   profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
 
-  showOnlyOwnedProcessesSwitch: boolean = false;
+  isOwnedProcesses: boolean = false;
 
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
@@ -129,16 +129,13 @@ export class ProcessesComponent implements OnInit {
         this.currentConsultant = res.body;
         console.log(this.currentConsultant);
       });
-    this.searchOwnRecruiter();
-
-
+    // this.searchOwnRecruiter();
 
     this.rejectProcessForm = this.formBuilder.group({
       rejectionReasonDescription: [null, [Validators.required]]
     });
 
     this.setRejectionReasonValidators();
-
     this.app.hideLoading();
   }
 
@@ -241,20 +238,6 @@ export class ProcessesComponent implements OnInit {
       }, err => {
         console.log(err);
       });
-  }
-
-  showOnlyOwnedProcesses()
-  {
-    if(this.showOnlyOwnedProcessesSwitch = false)
-    {
-      this.getProcesses();
-      console.log('tengo que mostrar algo');
-    }
-    else{
-      this.listOfDisplayData=[];
-      console.log('no muestro nada');
-    }
-    
   }
 
   getStatus(status: number): string {
@@ -378,6 +361,7 @@ export class ProcessesComponent implements OnInit {
         (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
+    // const data = this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.communitySearchName = 'ALL';
     this.profileSearchName = 'ALL';
@@ -387,6 +371,12 @@ export class ProcessesComponent implements OnInit {
   searchOwnRecruiter(): void {
     this.searchRecruiterValue=this.currentConsultant.name + ' ' + this.currentConsultant.lastName;
     this.searchRecruiter();
+    this.isOwnedProcesses = true;
+  }
+
+  searchAllProcess(){
+    this.getProcesses();
+    this.isOwnedProcesses = false;
   }
 
   showOwnProcessesFirst(): void {
@@ -395,6 +385,7 @@ export class ProcessesComponent implements OnInit {
         (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
+
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.communitySearchName = 'ALL';
     this.profileSearchName = 'ALL';
