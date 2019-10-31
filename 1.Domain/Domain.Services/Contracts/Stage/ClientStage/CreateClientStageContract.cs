@@ -6,5 +6,7 @@ namespace Domain.Services.Contracts.Stage
 {
     public class CreateClientStageContract: CreateStageContract
     {
+        public string Interviewer { get; set; }
+        public string DelegateName { get; set; }
     }
 }

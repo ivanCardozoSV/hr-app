@@ -28,8 +28,10 @@ export class ClientStageComponent implements OnInit {
     status: [0, [Validators.required]],
     date: [new Date(), [Validators.required]],
     consultantOwnerId: [null, [Validators.required]],
+    interviewer: [null],
     consultantDelegateId:  [null, [Validators.required]],
     feedback: [null],
+    delegateName: [null],
     rejectionReason: [null, [Validators.required]]
   });
 
@@ -76,11 +78,12 @@ export class ClientStageComponent implements OnInit {
     stage.id = this.getControlValue(form.controls.id);
     stage.date = this.getControlValue(form.controls.date);
     stage.feedback = this.getControlValue(form.controls.feedback);
+    stage.interviewer = this.getControlValue(form.controls.interviewer);
     stage.status = this.getControlValue(form.controls.status);
     stage.consultantOwnerId = this.getControlValue(form.controls.consultantOwnerId);
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
+    stage.delegateName = this.getControlValue(form.controls.delegateName);
     stage.processId = processId;
-    stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
     stage.rejectionReason = this.getControlValue(form.controls.rejectionReason);
     return stage;
   }
@@ -98,8 +101,14 @@ export class ClientStageComponent implements OnInit {
     if (clientStage.consultantOwnerId != null) {
       this.clientForm.controls['consultantOwnerId'].setValue(clientStage.consultantOwnerId);
     }
+    if (clientStage.interviewer != null) {
+      this.clientForm.controls['interviewer'].setValue(clientStage.interviewer);
+    }
     if (clientStage.consultantDelegateId != null) {
       this.clientForm.controls['consultantDelegateId'].setValue(clientStage.consultantDelegateId);
+    }
+    if (clientStage.delegateName != null) {
+      this.clientForm.controls['delegateName'].setValue(clientStage.delegateName);
     }
     if (clientStage.feedback != null) { this.clientForm.controls['feedback'].setValue(clientStage.feedback); }
     if (clientStage.rejectionReason != null) { this.clientForm.controls['rejectionReason'].setValue(clientStage.rejectionReason); }
