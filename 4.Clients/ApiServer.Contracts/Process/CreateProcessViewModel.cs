@@ -21,7 +21,11 @@ namespace ApiServer.Contracts.Process
 
         public int? ConsultantOwnerId { get; set; }
 
+        public string Interviewer { get; set; }
+
         public int? ConsultantDelegateId { get; set; }
+
+        public string DelegateName { get; set; }
 
         public float? ActualSalary { get; set; }
 

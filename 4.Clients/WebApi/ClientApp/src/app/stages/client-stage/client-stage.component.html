@@ -33,17 +33,21 @@
     </div>
     <div nz-row>
         <div nz-col nzSpan="12">
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
-           <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input type="text" nz-input formControlName="interviewer" id="interviewer" placeholder="Please input the interviewer's name">
-            </nz-form-control>
+        <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                            <input type="text" nz-input formControlName="interviewer" id="interviewer" placeholder="Please input the interviewer's name">
+                    </nz-form-control>
+        </nz-form-item>
         </div>
         <div nz-col nzSpan="12">
+        <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="delegateName">Delegate</nz-form-label>
                <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input type="text" nz-input formControlName="delegateName" id="delegateName" placeholder="Please input the delegate name">
                 </nz-form-control>
-            </div>
+        </nz-form-item>
+        </div>
     </div>
     <div nz-row>
         <div nz-col nzSpan="12">
