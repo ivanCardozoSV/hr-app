@@ -19,6 +19,7 @@ namespace ApiServer.Contracts.Stage
         public int? ConsultantOwnerId { get; set; }
 
         public int? ConsultantDelegateId { get; set; }
+
         public string RejectionReason { get; set; }
     }
 }
