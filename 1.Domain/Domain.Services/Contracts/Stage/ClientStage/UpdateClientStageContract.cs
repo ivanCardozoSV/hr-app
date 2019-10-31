@@ -6,5 +6,7 @@ namespace Domain.Services.Contracts.Stage
 {
     public class UpdateClientStageContract: UpdateStageContract
     {
+        public string Interviewer { get; set; }
+        public string DelegateName { get; set; }
     }
 }
