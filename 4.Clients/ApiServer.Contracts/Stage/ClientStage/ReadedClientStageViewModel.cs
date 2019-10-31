@@ -7,5 +7,7 @@ namespace ApiServer.Contracts.Stage
 {
     public class ReadedClientStageViewModel: ReadedStageViewModel
     {
+        public string Interviewer { get; set; }
+        public string DelegateName { get; set; }
     }
 }
