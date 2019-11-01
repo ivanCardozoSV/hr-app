@@ -140,6 +140,7 @@ export class ProcessContactComponent implements OnInit {
     this.getCandidates();
 
     this.visible = this._visible;
+    this.isNewCandidate = this.visible;
   }
 
 
