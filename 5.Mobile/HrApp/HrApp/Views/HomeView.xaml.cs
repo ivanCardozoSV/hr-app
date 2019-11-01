@@ -1,5 +1,5 @@
-﻿using Android.OS;
-using Android;
+﻿//using Android.OS;
+//using Android;
 using Microcharts;
 using System;
 using System.Collections.Generic;
