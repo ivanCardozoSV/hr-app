@@ -39,6 +39,18 @@ export class ProcessContactComponent implements OnInit {
     this.recruiters = value;
   }
 
+
+  
+  @Input()
+  private _visible: boolean;
+  public get visibles(): boolean {
+    return this._visible;
+  }
+  public set visibles(value: boolean) {
+    this.visible = value;
+  }
+
+
   @Input()
   private _communities: Community[];
   public get communities(): Community[] {
@@ -126,6 +138,8 @@ export class ProcessContactComponent implements OnInit {
     this.processStartModal = this._processModal;
     this.getConsultants();
     this.getCandidates();
+
+    this.visible = this._visible;
   }
 
 
