@@ -67,7 +67,9 @@ namespace Domain.Services.Impl.Services
 
         public void Delete(int id)
         {
-            var process = _processRepository.GetByIdFullProcess(id);
+            var process = _processRepository.QueryEager().FirstOrDefault(p => p.Id == id);
+
+            process.Candidate.Status = SetCandidateStatus(ProcessStatus.Rejected);
 
             _processRepository.Delete(process);
 
@@ -193,12 +195,26 @@ namespace Domain.Services.Impl.Services
         public void Approve(int processID)
         {
             _processRepository.Approve(processID);
+
+            var process = _processRepository.QueryEager().FirstOrDefault(p => p.Id == processID);
+
+            //var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            process.Candidate.Status = SetCandidateStatus(process.Status);
+            //_candidateRepository.Update(candidate);
+
             _unitOfWork.Complete();
         }
 
         public void Reject(int id, string rejectionReason)
         {
             _processRepository.Reject(id, rejectionReason);
+
+            var process = _processRepository.QueryEager().FirstOrDefault(p => p.Id == id);
+
+            //var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            process.Candidate.Status = SetCandidateStatus(process.Status);
+            //_candidateRepository.Update(candidate);
+
             _unitOfWork.Complete();
         }
 
