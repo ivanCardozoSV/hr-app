@@ -64,7 +64,7 @@ namespace Domain.Services.Impl.Services
             var candidate = _mapper.Map<Candidate>(contract);
 
             this.AddRecruiterToCandidate(candidate, contract.Recruiter.Id);
-            this.AddCommunityToCandidate(candidate, contract.Community);
+            this.AddCommunityToCandidate(candidate, contract.Community.Id);
             this.AddCandidateProfileToCandidate(candidate, contract.Profile);
             //this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
 
@@ -108,7 +108,7 @@ namespace Domain.Services.Impl.Services
 
             this.AddRecruiterToCandidate(candidate, contract.Recruiter.Id);
             this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
-            this.AddCommunityToCandidate(candidate, contract.Community);
+            this.AddCommunityToCandidate(candidate, contract.Community.Id);
             this.AddCandidateProfileToCandidate(candidate, contract.Profile);
 
             var updatedCandidate = _candidateRepository.Update(candidate);
