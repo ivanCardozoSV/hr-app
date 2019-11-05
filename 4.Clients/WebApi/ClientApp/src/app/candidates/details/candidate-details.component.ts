@@ -56,7 +56,7 @@ import { CandidateProfile } from "src/entities/Candidate-Profile";
       getCommunityName(){
         this.facade.communityService.get<Community>()
         .subscribe(res => {
-          this.communityName = res.filter(x => x.id === this._detailedCandidate.community)[0].name;
+          this.communityName = res.filter(x => x.id === this._detailedCandidate.community.id)[0].name;
         }, err => {
           console.log(err);
         });

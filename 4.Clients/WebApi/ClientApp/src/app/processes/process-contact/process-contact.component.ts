@@ -246,7 +246,7 @@ export class ProcessContactComponent implements OnInit {
     this.candidateForm.controls['id'].setValue(Candidate.id);
     this.candidateForm.controls['contactDay'].setValue(new Date(Candidate.contactDay));
     this.candidateForm.controls['profile'].setValue(Candidate.profile);
-    this.candidateForm.controls['community'].setValue(Candidate.community);
+    this.candidateForm.controls['community'].setValue(Candidate.community.id);
     this.candidateForm.controls['isReferred'].setValue(Candidate.isReferred);
   }
 
@@ -373,7 +373,7 @@ export class ProcessContactComponent implements OnInit {
         preferredOfficeId: null,
         candidateSkills: [],
         isReferred: this.candidateForm.controls['isReferred'].value,
-        community: this.candidateForm.controls['community'].value,
+        community: new Community(this.candidateForm.controls['community'].value),
         profile: this.candidateForm.controls['profile'].value
       }
       if (this.candidateForm.controls['phoneNumber'].value) {

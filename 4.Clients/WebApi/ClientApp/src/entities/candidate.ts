@@ -3,6 +3,7 @@ import { CandidateStatusEnum } from "./enums/candidate-status.enum";
 import { EnglishLevelEnum } from './enums/english-level.enum';
 import { Office } from "./office";
 import { Consultant } from "./consultant";
+import { Community } from "./community";
 
 export class Candidate {
   id: number;
@@ -20,6 +21,6 @@ export class Candidate {
   preferredOfficeId?: number;
   contactDay: Date;
   profile: number;
-  community: number;
+  community: Community;
   isReferred: boolean;
 }

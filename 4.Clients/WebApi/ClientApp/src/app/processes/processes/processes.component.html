@@ -108,7 +108,8 @@
                         {{ getProfile(process.candidate.profile) }}
                     </td>
                     <td scope="row">
-                        {{ getCommunity(process.candidate.community) }}
+                        <!-- {{ getCommunity(process.candidate.community) }} -->
+                        {{ process.candidate.community.name }}
                     </td>
                     <td scope="row">
                         <nz-badge [nzStatus]="getStatusColor(process.status)" style="margin-right: 3%; margin-top: -2%;"></nz-badge>
@@ -191,33 +192,39 @@
 <ng-template #processStart>
     <div nz-col nzSpan="24">
         <nz-steps [nzCurrent]="stepIndex">
-            <nz-step nzTitle="Candidate" id="candidateButton" (click)="wishedStage(0, $event.currentTarget.id)">
+            <nz-step nzTitle="Candidate" id="candidateButton" (click)="slickModal.slickGoTo(0);wishedStage(0, $event.currentTarget.id)">
             </nz-step>
-            <nz-step nzTitle="HR" id="hrButton" (click)="wishedStage(1, $event.currentTarget.id)"></nz-step>
-            <nz-step nzTitle="Technical" id="technicalButton" (click)="wishedStage(2, $event.currentTarget.id)">
+            <nz-step nzTitle="HR" id="hrButton" (click)="slickModal.slickGoTo(1);wishedStage(1, $event.currentTarget.id)"></nz-step>
+            <nz-step nzTitle="Technical" id="technicalButton" (click)="slickModal.slickGoTo(2);wishedStage(2, $event.currentTarget.id)">
             </nz-step>
-            <nz-step *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])" nzTitle="Client" id="clientButton" (click)="wishedStage(3, $event.currentTarget.id)"></nz-step>
-            <nz-step *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])" nzTitle="Offer" id="offerButton" (click)="wishedStage(4, $event.currentTarget.id)"></nz-step>
+            <nz-step *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])" nzTitle="Client" id="clientButton" (click)="slickModal.slickGoTo(3);wishedStage(3, $event.currentTarget.id)"></nz-step>
+            <nz-step *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])" nzTitle="Offer" id="offerButton" (click)="slickModal.slickGoTo(4);wishedStage(4, $event.currentTarget.id)"></nz-step>
         </nz-steps>
     </div>
-    <nz-carousel #processCarousel>
-        <div nz-carousel-content>
-            <candidate-add [_candidateProfiles]=profiles [_communities]=communities [_process]="emptyProcess" [_consultants]="consultants" [_candidate]="currentCandidate" [_offices]="offices">
-            </candidate-add>
+    <br />
+    <br />
+    <ngx-slick
+      class="carousel"
+      #slickModal="slick-modal"
+      [config]="slideConfig"
+    >
+      <div ngxSlickItem class="slide">
+        <candidate-add [_candidateProfiles]=profiles [_communities]=communities [_process]="emptyProcess" [_consultants]="consultants" [_candidate]="currentCandidate" [_offices]="offices">
+        </candidate-add>
         </div>
-        <div nz-carousel-content>
+        <div ngxSlickItem class="slide">
             <hr-stage [_consultants]="consultants" [hrStage]="emptyProcess.hrStage"></hr-stage>
         </div>
-        <div nz-carousel-content>
+        <div ngxSlickItem class="slide">
             <technical-stage [_process]="emptyProcess" [_consultants]="consultants" [technicalStage]="emptyProcess.technicalStage" (selectedSeniority)="updateSeniority($event)"></technical-stage>
         </div>
-        <div nz-carousel-content>
+        <div ngxSlickItem class="slide">
             <client-stage [_consultants]="consultants" [clientStage]="emptyProcess.clientStage"></client-stage>
         </div>
-        <div nz-carousel-content>
+        <div ngxSlickItem class="slide">
             <offer-stage [_consultants]="consultants" [offerStage]="emptyProcess.offerStage" (selectedSeniority)="updateSeniority($event)"></offer-stage>
         </div>
-    </nz-carousel>
+    </ngx-slick>
 </ng-template>
 
 <ng-template #startModalButtons>

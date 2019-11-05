@@ -418,7 +418,7 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);
-    this.validateForm.controls['community'].setValue(candidate.community);
+    this.validateForm.controls['community'].setValue(candidate.community.id);
     this.validateForm.controls['profile'].setValue(candidate.profile);
     this.validateForm.controls['isReferred'].setValue(candidate.isReferred);
 

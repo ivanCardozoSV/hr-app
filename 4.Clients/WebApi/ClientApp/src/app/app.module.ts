@@ -123,6 +123,7 @@ import { Globals } from './app-globals/globals';
 import { NumbersOnlyDirective } from './directives/numbersOnlyDirective';
 import { LocationsComponent } from './locations/locations.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { SlickModule } from "ngx-slick";
 
 
 
@@ -216,6 +217,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzPopoverModule,
     ChartsModule,
     DragDropModule,
+    SlickModule.forRoot(),
     ToastrModule.forRoot(),
     Ng2LoadingSpinnerModule.forRoot({}),
     RouterModule.forRoot([
