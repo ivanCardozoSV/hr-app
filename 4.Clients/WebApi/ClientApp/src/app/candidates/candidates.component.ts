@@ -85,7 +85,7 @@ export class CandidatesComponent implements OnInit {
     this.getSkills();
     this.resetForm();
     this.app.hideLoading();
-    
+
   }
 
   getCandidates() {
@@ -275,7 +275,7 @@ export class CandidatesComponent implements OnInit {
                 recruiter: new Consultant(this.validateForm.controls['recruiter'].value, null, null),
                 contactDay: new Date(),
                 profile: this.validateForm.controls['profile'].value,
-                community: this.validateForm.controls['community'].value,
+                community: new Community(this.validateForm.controls['community'].value),
                 isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
               }
