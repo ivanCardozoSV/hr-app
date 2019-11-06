@@ -91,6 +91,7 @@ export class ProcessContactComponent implements OnInit {
   processFooterModal: TemplateRef<{}>;
   recruiters: Consultant[] = [];
   comms: Community[] = [];
+  filteredCommunity: Community[] = [];
   profiles: CandidateProfile[] = [];
   currentConsultant: User;
   candidateForm: FormGroup = this.fb.group({
@@ -133,6 +134,7 @@ export class ProcessContactComponent implements OnInit {
   ngOnInit() {
     this.recruiters = this._consultants;
     this.comms = this._communities;
+    this.filteredCommunity = this._communities;
     this.profiles = this._candidateProfiles
     this.processFootModal = this._processFooterModal;
     this.processStartModal = this._processModal;
@@ -143,7 +145,11 @@ export class ProcessContactComponent implements OnInit {
     this.isNewCandidate = this.visible;
   }
 
-
+  profileChanges(profileId){
+    this.candidateForm.controls['community'].reset();
+    this.filteredCommunity = this.comms.filter(c => c.profileId === profileId);
+  }
+  
 
   getCandidates() {
     this.facade.candidateService.get<Candidate>()
