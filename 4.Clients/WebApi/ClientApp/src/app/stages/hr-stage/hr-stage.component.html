@@ -55,8 +55,7 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="hrForm.get('consultantDelegateId').dirty && hrForm.get('consultantDelegateId').errors ">
-                        Please input the consultant</nz-form-explain>
+                    
                 </nz-form-control>
             </nz-form-item>
         </div>
