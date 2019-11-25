@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 
 @Injectable()
-export class CommunityService extends BaseService {
+  export class CommunityService extends BaseService {
 
   constructor(router: Router, config: AppConfig, http: HttpClient) {
     super(router, config, http);

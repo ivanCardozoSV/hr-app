@@ -85,7 +85,7 @@ export class CandidatesComponent implements OnInit {
     this.getSkills();
     this.resetForm();
     this.app.hideLoading();
-    
+
   }
 
   getCandidates() {
@@ -275,7 +275,7 @@ export class CandidatesComponent implements OnInit {
                 recruiter: new Consultant(this.validateForm.controls['recruiter'].value, null, null),
                 contactDay: new Date(),
                 profile: this.validateForm.controls['profile'].value,
-                community: this.validateForm.controls['community'].value,
+                community: new Community(this.validateForm.controls['community'].value),
                 isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
               }
@@ -418,7 +418,7 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);
-    this.validateForm.controls['community'].setValue(candidate.community);
+    this.validateForm.controls['community'].setValue(candidate.community.id);
     this.validateForm.controls['profile'].setValue(candidate.profile);
     this.validateForm.controls['isReferred'].setValue(candidate.isReferred);
 

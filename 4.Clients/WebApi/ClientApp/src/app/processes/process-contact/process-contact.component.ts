@@ -27,8 +27,8 @@ import { Process } from 'src/entities/process';
 export class ProcessContactComponent implements OnInit {
 
 
-  @ViewChild('dropdown', {static: false}) nameDropdown;
-  @ViewChild(CandidateAddComponent, {static: false}) candidateAdd: CandidateAddComponent;
+  @ViewChild('dropdown') nameDropdown;
+  @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent;
 
   @Input()
   private _consultants: Consultant[];
@@ -91,6 +91,7 @@ export class ProcessContactComponent implements OnInit {
   processFooterModal: TemplateRef<{}>;
   recruiters: Consultant[] = [];
   comms: Community[] = [];
+  filteredCommunity: Community[] = [];
   profiles: CandidateProfile[] = [];
   currentUser: User;
   currentConsultant: any;
@@ -134,6 +135,7 @@ export class ProcessContactComponent implements OnInit {
   ngOnInit() {
     this.recruiters = this._consultants;
     this.comms = this._communities;
+    this.filteredCommunity = this._communities;
     this.profiles = this._candidateProfiles
     this.processFootModal = this._processFooterModal;
     this.processStartModal = this._processModal;
@@ -150,7 +152,11 @@ export class ProcessContactComponent implements OnInit {
     });
   }
 
-
+  profileChanges(profileId){
+    this.candidateForm.controls['community'].reset();
+    this.filteredCommunity = this.comms.filter(c => c.profileId === profileId);
+  }
+  
 
   getCandidates() {
     this.facade.candidateService.get<Candidate>()
@@ -253,7 +259,7 @@ export class ProcessContactComponent implements OnInit {
     this.candidateForm.controls['id'].setValue(Candidate.id);
     this.candidateForm.controls['contactDay'].setValue(new Date(Candidate.contactDay));
     this.candidateForm.controls['profile'].setValue(Candidate.profile);
-    this.candidateForm.controls['community'].setValue(Candidate.community);
+    this.candidateForm.controls['community'].setValue(Candidate.community.id);
     this.candidateForm.controls['isReferred'].setValue(Candidate.isReferred);
   }
 
@@ -380,7 +386,7 @@ export class ProcessContactComponent implements OnInit {
         preferredOfficeId: null,
         candidateSkills: [],
         isReferred: this.candidateForm.controls['isReferred'].value,
-        community: this.candidateForm.controls['community'].value,
+        community: new Community(this.candidateForm.controls['community'].value),
         profile: this.candidateForm.controls['profile'].value
       }
       if (this.candidateForm.controls['phoneNumber'].value) {

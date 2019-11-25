@@ -13,6 +13,7 @@ namespace Domain.Services.Impl.Profiles
         public CommunityProfile()
         {
             CreateMap<Community, ReadedCommunityContract>();
+            CreateMap<ReadedCommunityContract, Community>();
             CreateMap<CreateCommunityContract, Community>();
             CreateMap<Community, CreatedCommunityContract>();
             CreateMap<UpdateCommunityContract, Community>();
