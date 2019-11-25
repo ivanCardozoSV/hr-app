@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="candidateForm" [nzLayout]="'horizontal'">
     <nz-divider nzText="CONTACTED CANDIDATE "></nz-divider>
     <br />
-    <div nz-row>
+    <div nz-row [hidden]="visible">
         <div nz-col nzSpan="24">
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="12" nzFor="name">Name</nz-form-label>
@@ -134,7 +134,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="profile" [hidden]="!visible">Profile</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <nz-select formControlName="profile">
+                    <nz-select formControlName="profile" (ngModelChange)="profileChanges($event)">
                         <nz-option *ngFor="let p of profiles" nzLabel="{{p.name}}" [nzValue]="p.id">
                         </nz-option>
                     </nz-select>
@@ -147,8 +147,8 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="community" [hidden]="!visible">Community</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <nz-select formControlName="community">
-                        <nz-option *ngFor="let c of comms" nzLabel="{{c.name}}" [nzValue]="c.id">
+                    <nz-select formControlName="community" >
+                        <nz-option *ngFor="let c of filteredCommunity" nzLabel="{{c.name}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
                     <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the community</nz-form-explain>

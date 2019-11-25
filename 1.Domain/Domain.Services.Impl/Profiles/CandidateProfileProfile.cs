@@ -12,6 +12,7 @@ namespace Domain.Services.Impl.CandidateProfiles
         public CandidateProfileProfile()
         {
             CreateMap<CandidateProfile, ReadedCandidateProfileContract>();
+            CreateMap<ReadedCandidateProfileContract, CandidateProfile>();
             CreateMap<CreateCandidateProfileContract, CandidateProfile>();
             CreateMap<CandidateProfile, CreatedCandidateProfileContract>();
             CreateMap<UpdateCandidateProfileContract, CandidateProfile>();

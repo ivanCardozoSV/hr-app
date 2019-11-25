@@ -101,12 +101,10 @@ namespace Domain.Services.Impl.Services
 
             //process.Candidate = candidate;
 
-            var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
-            candidate.DNI = process.Candidate.DNI;
-            candidate.LinkedInProfile = process.Candidate.LinkedInProfile;
-            this.AddOfficeToCandidate(candidate, createProcessContract.Candidate.PreferredOfficeId);
-            process.Candidate = candidate;
-            //_candidateRepository.Update(process.Candidate);
+            //var candidate = _candidateRepository.QueryEager().FirstOrDefault(c => c.Id == process.Candidate.Id);
+            //candidate = process.Candidate;
+            this.AddOfficeToCandidate(process.Candidate, createProcessContract.Candidate.PreferredOfficeId);
+            _candidateRepository.Update(process.Candidate);
 
             //var updatedCandidate = _candidateRepository.Update(candidate);
 

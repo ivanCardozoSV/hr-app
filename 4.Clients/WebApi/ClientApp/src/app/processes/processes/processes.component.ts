@@ -37,6 +37,14 @@ import { User } from 'src/entities/user';
 })
 
 export class ProcessesComponent implements OnInit {
+  slideConfig = {
+    slidesToShow: 1,
+    adaptiveHeight: true, //la papa
+    arrows: true,
+    infinite: false,
+    draggable: false
+  };
+
 
   @ViewChild('dropdown') nameDropdown;
   @ViewChild('dropdownStatus') statusDropdown;
@@ -126,7 +134,6 @@ export class ProcessesComponent implements OnInit {
     this.facade.consultantService.GetByEmail(this.currentUser.Email)
       .subscribe(res => {
         this.currentConsultant = res.body;
-      console.log(this.currentConsultant);
     });
 
     this.rejectProcessForm = this.formBuilder.group({
@@ -442,7 +449,7 @@ export class ProcessesComponent implements OnInit {
     else {
       this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
       this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
-      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.community == searchedCommunity);
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.community.id == searchedCommunity);
       this.profileSearchName = 'ALL';
     }
   }
@@ -572,7 +579,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   wishedStage(choosenStage: number, elementName: string) {
-    this.processCarousel.goTo(choosenStage);
+    //this.processCarousel.goTo(choosenStage);
     this.stepIndex = choosenStage;
     // if (choosenStage !== 0) {
     //   var height = document.getElementById('hrStage').style.height;
