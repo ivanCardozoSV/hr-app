@@ -28,7 +28,7 @@ export class ProcessContactComponent implements OnInit {
 
 
   @ViewChild('dropdown') nameDropdown;
-  @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent;
+  @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent
 
   @Input()
   private _consultants: Consultant[];
@@ -93,7 +93,8 @@ export class ProcessContactComponent implements OnInit {
   comms: Community[] = [];
   filteredCommunity: Community[] = [];
   profiles: CandidateProfile[] = [];
-  currentConsultant: User;
+  currentUser: User;
+  currentConsultant: any;
   candidateForm: FormGroup = this.fb.group({
     name: ['', [trimValidator]],
     firstName: [null, [Validators.required, trimValidator]],
@@ -102,7 +103,7 @@ export class ProcessContactComponent implements OnInit {
     phoneNumberPrefix: ['+54'],
     phoneNumber: [null, trimValidator],
     recruiter: [null, [Validators.required]],
-    contactDay: [null, [Validators.required]],
+    contactDay: [new Date(), [Validators.required]],
     community: [null, [Validators.required]],
     profile: [null, [Validators.required]],
     linkedInProfile: [null, [Validators.required, trimValidator]],
@@ -128,7 +129,7 @@ export class ProcessContactComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private facade: FacadeService, private app: AppComponent, private detailsModal: CandidateDetailsComponent,
     private modalService: NzModalService, private process: ProcessesComponent) {
-    this.currentConsultant = JSON.parse(localStorage.getItem("currentUser"));
+    this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
   }
 
   ngOnInit() {
@@ -143,6 +144,12 @@ export class ProcessContactComponent implements OnInit {
 
     this.visible = this._visible;
     this.isNewCandidate = this.visible;
+
+    this.facade.consultantService.GetByEmail(this.currentUser.Email)
+      .subscribe(res => {
+        this.currentConsultant = res.body;
+        this.currentConsultant != null ? this.candidateForm.controls['recruiter'].setValue(this.currentConsultant.id) : null   
+    });
   }
 
   profileChanges(profileId){
@@ -196,7 +203,7 @@ export class ProcessContactComponent implements OnInit {
     this.visible = true;
     this.isEditCandidate = false;
     this.resetForm();
-    this.candidateForm.controls['recruiter'].setValue(this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentConsultant.Email.toLowerCase())[0].id);
+    this.candidateForm.controls['recruiter'].setValue(this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentUser.Email.toLowerCase())[0].id);
     this.candidateForm.controls['contactDay'].setValue(new Date());
   }
 
@@ -320,7 +327,7 @@ export class ProcessContactComponent implements OnInit {
   }
 
   Recontact(idCandidate: number) {
-    console.log(this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentConsultant.Email.toLowerCase())[0].id);
+    console.log(this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentUser.Email.toLowerCase())[0].id);
     let editedCandidate: Candidate = this.candidates.filter(Candidate => Candidate.id == idCandidate)[0];
     editedCandidate = {
       id: idCandidate,
@@ -329,7 +336,7 @@ export class ProcessContactComponent implements OnInit {
       phoneNumber: editedCandidate.phoneNumber,
       dni: editedCandidate.dni,
       emailAddress: editedCandidate.emailAddress,
-      recruiter: this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentConsultant.Email.toLowerCase())[0],
+      recruiter: this.recruiters.filter(r => r.emailAddress.toLowerCase() === this.currentUser.Email.toLowerCase())[0],
       contactDay: new Date(),
       linkedInProfile: editedCandidate.linkedInProfile,
       englishLevel: editedCandidate.englishLevel,
