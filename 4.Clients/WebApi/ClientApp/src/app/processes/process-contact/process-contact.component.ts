@@ -136,7 +136,7 @@ export class ProcessContactComponent implements OnInit {
     this.recruiters = this._consultants;
     this.comms = this._communities;
     this.filteredCommunity = this._communities;
-    this.profiles = this._candidateProfiles
+    this.profiles = this._candidateProfiles;
     this.processFootModal = this._processFooterModal;
     this.processStartModal = this._processModal;
     this.getConsultants();
@@ -258,7 +258,7 @@ export class ProcessContactComponent implements OnInit {
     this.candidateForm.controls['recruiter'].setValue(Candidate.recruiter);
     this.candidateForm.controls['id'].setValue(Candidate.id);
     this.candidateForm.controls['contactDay'].setValue(new Date(Candidate.contactDay));
-    this.candidateForm.controls['profile'].setValue(Candidate.profile);
+    this.candidateForm.controls['profile'].setValue(Candidate.profile.id);
     this.candidateForm.controls['community'].setValue(Candidate.community.id);
     this.candidateForm.controls['isReferred'].setValue(Candidate.isReferred);
   }
@@ -387,7 +387,7 @@ export class ProcessContactComponent implements OnInit {
         candidateSkills: [],
         isReferred: this.candidateForm.controls['isReferred'].value,
         community: new Community(this.candidateForm.controls['community'].value),
-        profile: this.candidateForm.controls['profile'].value
+        profile: new CandidateProfile(this.candidateForm.controls['profile'].value)
       }
       if (this.candidateForm.controls['phoneNumber'].value) {
         newCandidate.phoneNumber += this.candidateForm.controls['phoneNumber'].value.toString();
