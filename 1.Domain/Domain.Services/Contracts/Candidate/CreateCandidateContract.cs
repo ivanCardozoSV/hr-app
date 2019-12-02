@@ -2,6 +2,7 @@
 using Domain.Services.Contracts.CandidateSkill;
 using Domain.Services.Contracts.Community;
 using Domain.Services.Contracts.Consultant;
+using Domain.Services.Contracts.CandidateProfile;
 using Domain.Services.Contracts.Office;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Domain.Services.Contracts.Candidate
         public CandidateStatus Status { get; set; }
         public ReadedConsultantContract Recruiter { get; set; }
         public ReadedCommunityContract Community { get; set; }
-        public int Profile { get; set; }
+        public ReadedCandidateProfileContract Profile { get; set; }
         public bool IsReferred { get; set; }
         //public int PreferredOfficeId { get; set; }
         public DateTime ContactDay { get; set; }
