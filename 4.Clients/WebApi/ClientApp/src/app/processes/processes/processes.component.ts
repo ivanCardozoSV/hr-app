@@ -433,7 +433,7 @@ export class ProcessesComponent implements OnInit {
     }
     else {
       this.profileSearchName = (this.profiles.find(p => p.id == this.profileSearch)).name;
-      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.profile == searchedProfile);
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.profile.id == searchedProfile);
       this.communitySearchName = 'ALL';
     }
   }

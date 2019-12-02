@@ -65,7 +65,7 @@ import { CandidateProfile } from "src/entities/Candidate-Profile";
       getProfileName(){
         this.facade.candidateProfileService.get<CandidateProfile>()
         .subscribe(res => {
-          this.profileName = res.filter(x => x.id === this._detailedCandidate.profile)[0].name;
+          this.profileName = res.filter(x => x.id === this._detailedCandidate.profile.id)[0].name;
         }, err => {
           console.log(err);
         });
