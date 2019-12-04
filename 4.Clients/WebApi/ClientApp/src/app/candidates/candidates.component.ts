@@ -274,7 +274,7 @@ export class CandidatesComponent implements OnInit {
                 preferredOfficeId: this.validateForm.controls['preferredOffice'].value,
                 recruiter: new Consultant(this.validateForm.controls['recruiter'].value, null, null),
                 contactDay: new Date(),
-                profile: this.validateForm.controls['profile'].value,
+                profile: new CandidateProfile(this.validateForm.controls['profile'].value),
                 community: new Community(this.validateForm.controls['community'].value),
                 isReferred: this.validateForm.controls['isReferred'].value
                 // contactDay: this.validateForm.controls['contactDay'].value
@@ -419,7 +419,7 @@ export class CandidatesComponent implements OnInit {
     this.validateForm.controls['englishLevel'].setValue(candidate.englishLevel);
     this.validateForm.controls['status'].setValue(candidate.status);
     this.validateForm.controls['community'].setValue(candidate.community.id);
-    this.validateForm.controls['profile'].setValue(candidate.profile);
+    this.validateForm.controls['profile'].setValue(candidate.profile.id);
     this.validateForm.controls['isReferred'].setValue(candidate.isReferred);
 
     if (candidate.candidateSkills.length > 0) {

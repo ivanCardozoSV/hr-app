@@ -129,6 +129,7 @@ import { PostulantsService } from './services/postulants.service';
 
 
 
+
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {

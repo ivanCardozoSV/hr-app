@@ -200,7 +200,7 @@ export class CandidateAddComponent implements OnInit {
     this.candidateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.candidateForm.controls['status'].setValue(candidate.status);
     this.candidateForm.controls['community'].setValue(candidate.community.id);
-    this.candidateForm.controls['profile'].setValue(candidate.profile);
+    this.candidateForm.controls['profile'].setValue(candidate.profile.id);
     this.candidateForm.controls['isReferred'].setValue(candidate.isReferred);
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {
@@ -247,7 +247,7 @@ export class CandidateAddComponent implements OnInit {
       recruiter: !this.candidateForm.controls['recruiter'].value ? null : new Consultant(this.candidateForm.controls['recruiter'].value, null, null),
       preferredOfficeId: this.candidateForm.controls['preferredOffice'].value === null ? null : this.candidateForm.controls['preferredOffice'].value,
       contactDay: new Date(),
-      profile: this.candidateForm.controls['profile'].value === null ? null : this.candidateForm.controls['profile'].value,
+      profile: this.candidateForm.controls['profile'].value===null?null:new CandidateProfile(this.candidateForm.controls['profile'].value),
       community: this.candidateForm.controls['community'].value===null?null: new Community(this.candidateForm.controls['community'].value),
       isReferred: this.candidateForm.controls['isReferred'].value===null?null:this.candidateForm.controls['community'].value
       // contactDay: this.candidateForm.controls['contactDay'].value
