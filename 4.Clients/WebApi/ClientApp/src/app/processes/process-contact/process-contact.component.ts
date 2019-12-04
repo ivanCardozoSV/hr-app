@@ -28,7 +28,7 @@ export class ProcessContactComponent implements OnInit {
 
 
   @ViewChild('dropdown') nameDropdown;
-  @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent
+  @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent;
 
   @Input()
   private _consultants: Consultant[];

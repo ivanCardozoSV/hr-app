@@ -127,7 +127,6 @@
                     </nz-radio-group> -->
                     <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Please, briefly explain what happened."></textarea>
                 </nz-form-control>
-
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && hrForm.get('rejectionReason').dirty && hrForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="hrForm.get('rejectionReason')?.dirty && hrForm.get('rejectionReason')?.errors ">
                         Please tell us more about your decision!

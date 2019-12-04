@@ -15,6 +15,7 @@ namespace Domain.Services.Impl.Profiles
                 .ForMember(x => x.PreferredOfficeId, opt => opt.MapFrom(r => r.PreferredOffice.Id))
                 .ForMember(x => x.Community, opt => opt.MapFrom(r => r.Community))
                 .ForMember(x => x.Profile, opt => opt.MapFrom(r => r.Profile));
+
             CreateMap<CreateCandidateContract, Candidate>()
                 .ForMember(destination => destination.EnglishLevel,
                 opt => opt.MapFrom(source => Enum.GetName(typeof(EnglishLevel), source.EnglishLevel)))

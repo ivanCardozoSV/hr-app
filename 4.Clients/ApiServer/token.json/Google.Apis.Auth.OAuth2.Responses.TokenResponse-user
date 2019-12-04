@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-{"access_token":"ya29.ImGxB1ELtRxEd0GYvOTK6we_TSXfrT6Bwwy7qc9M0Mw-Mye_FDI_PtspyJZf64N-Wp9yRHe1GOSZ8-Wy5w8qQhmi6xUqmya4ycZAVIqJLXM6DDp_8CuSjVYzOygJXYCKDXYt","token_type":"Bearer","expires_in":3600,"refresh_token":"1/8Tw8cgSRmp9tpIkdBRPgKsMJqL2LN2DJAg-NnFG-IRk","scope":"https://www.googleapis.com/auth/calendar","Issued":"2019-11-20T14:23:58.272-03:00","IssuedUtc":"2019-11-20T17:23:58.272Z"}
-=======
 {"access_token":"ya29.ImGvB3A2dAeR5zjIzfjHLJPwcwQa9yUjnQTtzAw6PTvMS9JPo6WsTbNT-jIYCi-g8x5_sXLYyERQEn-iPAj0LVJFVsudvOZHX0q_mWn01dFqFpmB-XD3Jab391gzHtdVD2pZ","token_type":"Bearer","expires_in":3600,"refresh_token":"1/8Tw8cgSRmp9tpIkdBRPgKsMJqL2LN2DJAg-NnFG-IRk","scope":"https://www.googleapis.com/auth/calendar","Issued":"2019-11-01T13:57:27.991-03:00","IssuedUtc":"2019-11-01T16:57:27.991Z"}
->>>>>>> d16b527337238af934ede73277ad0dacf6981c97
+

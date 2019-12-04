@@ -22,6 +22,7 @@ import { RoomService } from './room.service';
 import { OfficeService } from './office.service';
 import { RoleService } from "./role.service";
 import { CompanyCalendarService } from "./company-calendar.service";
+import { PostulantsService } from "./postulants.service";
 
 @Injectable()
 export class FacadeService {
@@ -89,6 +90,14 @@ export class FacadeService {
       this._candidateService = this.injector.get(CandidateService);
     }
     return this._candidateService;
+  }
+
+  private _postulantService: PostulantsService;
+  public get postulantService(): PostulantsService {
+    if (!this._postulantService) {
+      this._postulantService = this.injector.get(PostulantsService);
+    }
+    return this._postulantService;
   }
 
   private _consultantService: ConsultantService;
