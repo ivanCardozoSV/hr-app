@@ -1,5 +1,5 @@
-﻿using Android.OS;
-using Android;
+﻿//using Android.OS;
+//using Android;
 using Microcharts;
 using System;
 using System.Collections.Generic;
@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SkiaSharp;
+using HrApp.Services.Interfaces;
+using HrApp.ViewModels;
+using System.Globalization;
 
 namespace HrApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomeView : ContentPage
     {
+        private HomeViewModel _container;
         public HomeView()
         {
             InitializeComponent();
+            _container = BindingContext as HomeViewModel;
         }
 
         protected override void OnAppearing()
@@ -59,19 +64,112 @@ namespace HrApp.Views
                 }
             };
 
-            var chart1 = new BarChart() { Entries = entries, LabelTextSize = 35};
-            var chart2 = new PointChart() { Entries = entries, LabelTextSize = 35 };
-            var chart3 = new LineChart() { Entries = entries, LabelTextSize = 35 };
-            var chart4 = new DonutChart() { Entries = entries, LabelTextSize = 35 };
+            var chart4 = new PointChart() { Entries = entries, LabelTextSize = 35 };
+
             var chart5 = new RadialGaugeChart() { Entries = entries, LabelTextSize = 35 };
             var chart6 = new RadarChart() { Entries = entries, LabelTextSize = 35 };
             
-            this.chart1.Chart = chart1;
-            this.chart2.Chart = chart2;
-            this.chart3.Chart = chart3;
             this.chart4.Chart = chart4;
             this.chart5.Chart = chart5;
             this.chart6.Chart = chart6;
+
+            ProcessStatusChartBuild();
+            ProcessSucceededChartBuild();
+            MonthlyHiringsChartBuild();
+        }
+
+        public void ProcessStatusChartBuild()
+        {
+            var res = _container.GetProcesses();
+
+            var chartEntries = new[]
+            {
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.InProgress))
+                {
+                    Label = "In Progress",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.InProgress).ToString(),
+                    Color = SKColor.Parse("#0080ff")
+                },
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.NA))
+                {
+                    Label = "Not Started",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.NA).ToString(),
+                    Color = SKColor.Parse("#D3D3D3")
+                },
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Rejected))
+                {
+                    Label = "Rejected",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Rejected).ToString(),
+                    Color = SKColor.Parse("#FF0000")
+                },
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Hired))
+                {
+                    Label = "Hired",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Hired).ToString(),
+                    Color = SKColor.Parse("#90D585")
+                },
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Declined))
+                {
+                    Label = "Declined",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Declined).ToString(),
+                    Color = SKColor.Parse("#ff6666")
+                },
+                new Microcharts.Entry(res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.OfferAccepted))
+                {
+                    Label = "Offer Accepted",
+                    ValueLabel = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.OfferAccepted).ToString(),
+                    Color = SKColor.Parse("#FFA500")
+                }
+            };
+
+            this.chart1.Chart = new BarChart() { Entries = chartEntries, LabelTextSize = 35 }; ;
+        }
+
+        public void ProcessSucceededChartBuild()
+        {
+            var res = _container.GetProcesses();
+            var sp = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Hired || r.Status == Domain.Model.Enum.ProcessStatus.OfferAccepted); 
+            var fp = res.Count(r => r.Status == Domain.Model.Enum.ProcessStatus.Rejected || r.Status == Domain.Model.Enum.ProcessStatus.Declined);
+
+            var chartEntries = new[]
+            {
+                new Microcharts.Entry(sp)
+                {
+                    Label = "Successful processes",
+                    ValueLabel = sp.ToString(),
+                    Color = SKColor.Parse("#266489")
+                },
+                new Microcharts.Entry(fp)
+                {
+                    Label = "Failed processes",
+                    ValueLabel = fp.ToString(),
+                    Color = SKColor.Parse("#ff6666")
+                }
+            };
+
+            this.chart2.Chart = new DonutChart() { Entries = chartEntries, LabelTextSize = 35 };
+        }
+
+        public void MonthlyHiringsChartBuild()
+        {
+            var length = 5;
+            var res = _container.GetProcesses();//.Where(r => r.Status == Domain.Model.Enum.ProcessStatus.Hired);
+            var chartEntries = new List<Microcharts.Entry>();
+
+            for (int i = length; i >= 0; i--)
+            {
+                var proc = res.Count(r => r.HireDate.Year == DateTime.Now.AddMonths(-i).Year && r.HireDate.Month == DateTime.Now.AddMonths(-i).Month);
+                var entry = new Microcharts.Entry(proc)
+                {
+                    Label = DateTime.Now.AddMonths(-i).ToString("MMMM", CultureInfo.CreateSpecificCulture("en")),
+                    ValueLabel = proc.ToString(),
+                    Color = SKColor.Parse("#ff6666")
+                };
+                chartEntries.Add(entry);
+            }
+
+            var chart3 = new LineChart() { Entries = chartEntries.ToArray(), LabelTextSize = 35 };
+            this.chart3.Chart = chart3;
         }
     }
 }

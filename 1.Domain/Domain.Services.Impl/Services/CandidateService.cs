@@ -22,6 +22,8 @@ namespace Domain.Services.Impl.Services
         private readonly IRepository<Candidate> _candidateRepository;
         private readonly IRepository<Consultant> _consultantRepository;
         private readonly IRepository<Office> _officeRepository;
+        private readonly IRepository<Community> _communityRepository;
+        private readonly IRepository<CandidateProfile> _candidateProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILog<CandidateService> _log;
         private readonly UpdateCandidateContractValidator _updateCandidateContractValidator;
@@ -29,6 +31,8 @@ namespace Domain.Services.Impl.Services
 
         public CandidateService(IMapper mapper,
             IRepository<Candidate> candidateRepository,
+            IRepository<Community> communityRepository,
+            IRepository<CandidateProfile> candidateProfileRepository,
             IRepository<Consultant> consultantRepository,
             IRepository<Office> officeRepository,
             IRepository<Process> processRepository,
@@ -43,6 +47,8 @@ namespace Domain.Services.Impl.Services
             _candidateRepository = candidateRepository;
             _consultantRepository = consultantRepository;
             _officeRepository = officeRepository;
+            _communityRepository = communityRepository;
+            _candidateProfileRepository = candidateProfileRepository;
             _log = log;
             _updateCandidateContractValidator = updateCandidateContractValidator;
             _createCandidateContractValidator = createCandidateContractValidator;
@@ -52,12 +58,14 @@ namespace Domain.Services.Impl.Services
         {
             _log.LogInformation($"Validating contract {contract.Name}");
             ValidateContract(contract);
-            ValidateExistence(0, contract.EmailAddress);
+            ValidateExistence(0, contract.EmailAddress, contract.LinkedInProfile);
 
             _log.LogInformation($"Mapping contract {contract.Name}");
             var candidate = _mapper.Map<Candidate>(contract);
 
-            this.AddRecruiterToCandidate(candidate, contract.Recruiter);
+            this.AddRecruiterToCandidate(candidate, contract.Recruiter.Id);
+            this.AddCommunityToCandidate(candidate, contract.Community.Id);
+            this.AddCandidateProfileToCandidate(candidate, contract.Profile.Id);
             //this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
 
             var createdCandidate = _candidateRepository.Create(candidate);
@@ -98,8 +106,10 @@ namespace Domain.Services.Impl.Services
                 _processRepository.Update(process);
             }
 
-            this.AddRecruiterToCandidate(candidate, contract.Recruiter);
+            this.AddRecruiterToCandidate(candidate, contract.Recruiter.Id);
             this.AddOfficeToCandidate(candidate, contract.PreferredOfficeId);
+            this.AddCommunityToCandidate(candidate, contract.Community.Id);
+            this.AddCandidateProfileToCandidate(candidate, contract.Profile.Id);
 
             var updatedCandidate = _candidateRepository.Update(candidate);
             _log.LogInformation($"Complete for {contract.Name}");
@@ -170,12 +180,22 @@ namespace Domain.Services.Impl.Services
             }
         }
 
-        private void ValidateExistence(int id, string email)
+        private void ValidateExistence(int id, string email, string linkedInProfile)
         {
             try
             {
-                Candidate candidate = _candidateRepository.Query().Where(_ => _.EmailAddress == email && _.Id != id).FirstOrDefault();
+                Candidate candidate = _candidateRepository.Query().Where(_ => !string.IsNullOrEmpty(email) && _.EmailAddress == email && _.Id != id).FirstOrDefault();
                 if (candidate != null) throw new InvalidCandidateException("The Email already exists .");
+            }
+            catch (ValidationException ex)
+            {
+                    throw new CreateContractInvalidException(ex.ToListOfMessages());
+            }
+
+            try
+            {
+                Candidate candidate = _candidateRepository.Query().Where(_ => linkedInProfile!="N/A" && _.LinkedInProfile == linkedInProfile && _.Id != id).FirstOrDefault();
+                if (candidate != null) throw new InvalidCandidateException("The LinkedIn Profile already exists in our database.");
             }
             catch (ValidationException ex)
             {
@@ -204,7 +224,22 @@ namespace Domain.Services.Impl.Services
 
             candidate.Recruiter = recruiter;
         }
+        private void AddCommunityToCandidate(Candidate candidate, int communityID)
+        {
+            var community = _communityRepository.Query().Where(_ => _.Id == communityID).FirstOrDefault();
+            if (community == null)
+                throw new Domain.Model.Exceptions.Community.CommunityNotFoundException(communityID);
 
+            candidate.Community = community;
+        }
+        private void AddCandidateProfileToCandidate(Candidate candidate, int profileID)
+        {
+            var profile = _candidateProfileRepository.Query().Where(_ => _.Id == profileID).FirstOrDefault();
+            if (profile == null)
+                throw new Domain.Model.Exceptions.CandidateProfile.CandidateProfileNotFoundException(profileID);
+
+            candidate.Profile = profile;
+        }
         private void AddOfficeToCandidate(Candidate candidate, int officeId)
         {
             var office = _officeRepository.Query().Where(_ => _.Id == officeId).FirstOrDefault();

@@ -13,8 +13,7 @@ namespace ApiServer.Contracts.Process
         public DateTime? EndDate { get; set; }
        
         public ProcessStatus Status { get; set; }
-
-        public string Profile { get; set; }
+        public ProcessCurrentStage CurrentStage { get; set; }
 
         public string RejectionReason { get; set; }
 
@@ -22,7 +21,11 @@ namespace ApiServer.Contracts.Process
 
         public int? ConsultantOwnerId { get; set; }
 
+        public string Interviewer { get; set; }
+
         public int? ConsultantDelegateId { get; set; }
+
+        public string DelegateName { get; set; }
 
         public float? ActualSalary { get; set; }
 

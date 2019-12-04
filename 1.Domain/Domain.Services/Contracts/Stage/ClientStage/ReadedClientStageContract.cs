@@ -8,5 +8,7 @@ namespace Domain.Services.Contracts.Stage
 {
     public class ReadedClientStageContract: ReadedStageContract
     {
+        public string Interviewer { get; set; }
+        public string DelegateName { get; set; }
     }
 }

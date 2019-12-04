@@ -63,6 +63,16 @@ namespace ApiServer.Controllers
             });
         }
 
+        [HttpGet("GetByEmail")]
+        public IActionResult GetByEmail([FromQuery] string email)
+        {
+            return ApiAction(() =>
+            {
+                var consultant = _consultantService.GetByEmail(email);
+                return Accepted(_mapper.Map<ReadedConsultantViewModel>(consultant));
+            });
+        }
+
         // POST api/consultant
         // Creation
         [HttpPost]

@@ -29,7 +29,9 @@ namespace Domain.Services.Repositories.EF
                 .ThenInclude(c => c.CandidateSkills)
                 .ThenInclude(cs => cs.Skill)
                 .Include(x => x.Candidate.Recruiter)
-                .Include(x => x.Candidate.PreferredOffice);
+                .Include(x => x.Candidate.PreferredOffice)
+                .Include(x => x.Candidate.Community)
+                .Include(x => x.Candidate.Profile);
         }
 
         public void Approve(int id)

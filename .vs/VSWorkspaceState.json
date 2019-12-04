@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\4.Clients",
+    "\\4.Clients\\ApiServer"
   ],
-  "SelectedNode": "\\Seed.sln",
+  "SelectedNode": "\\4.Clients\\ApiServer\\Security",
   "PreviewInSolutionExplorer": false
 }

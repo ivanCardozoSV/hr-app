@@ -13,6 +13,8 @@ import { getMatIconFailedToSanitizeUrlError } from '@angular/material';
 import { Globals } from '../../app-globals/globals';
 import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
 import { Office } from 'src/entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
 
 @Component({
   selector: 'candidate-add',
@@ -48,24 +50,47 @@ export class CandidateAddComponent implements OnInit {
         this.fillCandidate = value;
     }
     
+    @Input()
+    private _communities: Community[];
+    public get communities(): Community[] {
+      return this._communities;
+    }
+    public set communities(value: Community[]) {
+      this.comms = value;
+    }
+  
+    @Input()
+    private _candidateProfiles: CandidateProfile[];
+    public get candidateProfiles(): CandidateProfile[] {
+      return this._candidateProfiles;
+    }
+    public set candidateProfiles(value: CandidateProfile[]) {
+      this.profiles = value;
+    }
+    
   fillCandidate: Candidate;
   recruiters: Consultant[] = [];
+  comms: Community[] =[];
+  profiles: CandidateProfile[] = [];
   @Input() _offices: Office[] = [];
   currentConsultant: User;
   candidateForm: FormGroup = this.fb.group({
     name: [null, [Validators.required, trimValidator]],
     lastName: [null, [Validators.required, trimValidator]],
-    dni: [null, Validators.required],
-    email: [null, [Validators.email, Validators.required]],
+    dni: [null],
+    email: [null, [Validators.email]],
     phoneNumberPrefix: ['+54'],
     phoneNumber: [null],
-    linkedin: [null, [trimValidator]],
+    linkedin: [null, [Validators.required, trimValidator]],
     additionalInformation: [null, [trimValidator]],
     recruiter: [null, [Validators.required]],
     preferredOffice: [null, [Validators.required]],
     englishLevel: 'none',
     status: 1,
-    contacDay : [null]
+    contacDay : [null],
+    profile: [null, [Validators.required]],
+    community: [null, [Validators.required]],
+    isReferred: [null]
   });
   isDniValid: boolean = false;
   isDniLoading: boolean = false;
@@ -80,11 +105,12 @@ export class CandidateAddComponent implements OnInit {
               private globals: Globals) {
                 this.statusList = globals.candidateStatusList;
                 this.currentConsultant = JSON.parse(localStorage.getItem('currentUser'));
-                this.getSkills();
   }
 
   ngOnInit() {
     this.recruiters = this._consultants;
+    this.comms = this._communities;
+    this.profiles = this._candidateProfiles
     this.fillCandidate = this._candidate;
     this.fillCandidateForm(this._process.candidate);
     this.isEdit = this._process.id !== 0;
@@ -95,15 +121,6 @@ export class CandidateAddComponent implements OnInit {
       this.candidateForm.controls['preferredOffice'].disable();
     }
     this.changeFormStatus(false);
-  }
-
-  getSkills() {
-    this.facade.skillService.get<Skill>()
-      .subscribe(res => {
-        this.skills = res;
-      }, err => {
-        console.log(err);
-      });
   }
 
   onCheckAndSave(): boolean {
@@ -142,17 +159,17 @@ export class CandidateAddComponent implements OnInit {
   }
 
   checkID(id:number) {
-    this.facade.candidateService.idExists(id)
-      .subscribe(res => {
-        if (res !== null) {
+    this.facade.processService.getActiveProcessByCandidate(id)
+      .subscribe((res: Process[]) => {
+        if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res.lastName + ', ' + res.name + '. Do you want to open a new one ?',
+            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',
             nzCancelText: 'No',
             nzOnOk: () => {
-              this.fillCandidateForm(res);
+              this.fillCandidateForm(res[0].candidate);
               this.changeFormStatus(false);
             },
             nzOnCancel: () => {
@@ -179,9 +196,12 @@ export class CandidateAddComponent implements OnInit {
     this.candidateForm.controls['phoneNumberPrefix'].setValue(candidate.phoneNumber.substring(1, candidate.phoneNumber.indexOf(')')));
     this.candidateForm.controls['phoneNumber'].setValue(candidate.phoneNumber.split(')')[1]); //(54),1123445678
     this.candidateForm.controls['additionalInformation'].setValue(candidate.additionalInformation);
-    this.candidateForm.controls['recruiter'].setValue(candidate.recruiter);
+    this.candidateForm.controls['recruiter'].setValue(candidate.recruiter.id);
     this.candidateForm.controls['preferredOffice'].setValue(candidate.preferredOfficeId);
     this.candidateForm.controls['status'].setValue(candidate.status);
+    this.candidateForm.controls['community'].setValue(candidate.community.id);
+    this.candidateForm.controls['profile'].setValue(candidate.profile.id);
+    this.candidateForm.controls['isReferred'].setValue(candidate.isReferred);
     if (candidate.candidateSkills.length > 0) {
       candidate.candidateSkills.forEach(skill => {
         const id = skill.skillId || skill.skill.id;
@@ -203,78 +223,7 @@ export class CandidateAddComponent implements OnInit {
     return this.candidateForm.controls[name];
   }
    
-  addField(e?: MouseEvent): void {
-    if (e) {
-      e.preventDefault();
-    }
-    const id = (this.controlArray.length > 0) ? this.controlArray[this.controlArray.length - 1].id + 1 : 0;
-
-    const control = {
-      id,
-      controlInstance: [`skill${id}`, `slidder${id}`, `comment${id}`]
-    };
-
-    if (id > 0) {
-      this.skills = this.skills.filter(
-        s => !this.controlArray.some( 
-        cai => s.id == this.candidateForm.controls[cai.controlInstance[0]].value));
-    }
-
-    const index = this.controlArray.push(control);
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[0], new FormControl(null, Validators.required));
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[1], new FormControl(10));
-    this.candidateForm.addControl(this.controlArray[index - 1].controlInstance[2], new FormControl(null, Validators.required));
-  }
-
-  removeCandidateSkills() {
-    let skills: Skill[] = [];
-    this.completeSkillList.forEach(sk => {
-      let exists: boolean = false;
-      this.controlArray.forEach(control => {
-        if (this.candidateForm.controls[control.controlInstance[0]].value == sk.id) { exists = true; }
-      });
-      if (!exists && skills.filter(s => s.id == sk.id).length == 0) { skills.push(sk); }
-    });
-    this.skills = skills;
-  }
-
-  removeField(i: { id: number, controlInstance: string[] }, e: MouseEvent): void {
-    e.preventDefault();
-    let skillList: Skill[] = [];
-    this.completeSkillList.forEach(sk => skillList.push(sk));
-
-    if (this.controlArray.length >= 1) {
-
-      if (this.candidateForm.controls[i.controlInstance[0]].value != null) {
-        const singleSkill = skillList.filter(skill => (skill.id === this.candidateForm.controls[i.controlInstance[0]].value)
-          || (skill.id === i.id) )[0];
-
-          if (singleSkill) {
-            this.skills.push(singleSkill);
-            this.skills.sort((a, b) => (a.id > b.id ? 1 : -1));
-          }
-        }
-      let j: number = 0;
-      const index = this.controlArray.indexOf(i);
-      this.controlArray.splice(index, 1);
-      for (j; j < 3; j++) { this.candidateForm.removeControl(i.controlInstance[j]); }
-    }
-  }
-
   getFormData(): Candidate {
-    let candidateSkills: CandidateSkill[] = [];
-    this.controlArray.forEach(skillControl => {
-      let skill: CandidateSkill = {
-        candidateId: 0,
-        candidate: null,
-        skillId: this.candidateForm.controls[skillControl.controlInstance[0]].value,
-        skill: null,
-        rate: this.candidateForm.controls[skillControl.controlInstance[1]].value,
-        comment: this.candidateForm.controls[skillControl.controlInstance[2]].value
-      }
-      candidateSkills.push(skill);
-    });
-
     let pn = this.candidateForm.controls['phoneNumber'].value == undefined
     || this.candidateForm.controls['phoneNumber'].value == null ? ''
     : this.candidateForm.controls['phoneNumber'].value.toString();
@@ -291,13 +240,16 @@ export class CandidateAddComponent implements OnInit {
       emailAddress: this.candidateForm.controls['email'].value === null ? null : this.candidateForm.controls['email'].value.toString(),
       phoneNumber: prefix + pn,
       linkedInProfile: this.candidateForm.controls['linkedin'].value === null ? null : this.candidateForm.controls['linkedin'].value.toString(),
-      candidateSkills: candidateSkills,
+      candidateSkills: null,
       additionalInformation: this.candidateForm.controls['additionalInformation'].value === null ? null : this.candidateForm.controls['additionalInformation'].value.toString(),
       englishLevel: EnglishLevelEnum.None,
       status: this.candidateForm.controls['status'].value === null ? null : this.candidateForm.controls['status'].value,
-      recruiter: this.candidateForm.controls['recruiter'].value === null ? null : this.candidateForm.controls['recruiter'].value,
+      recruiter: !this.candidateForm.controls['recruiter'].value ? null : new Consultant(this.candidateForm.controls['recruiter'].value, null, null),
       preferredOfficeId: this.candidateForm.controls['preferredOffice'].value === null ? null : this.candidateForm.controls['preferredOffice'].value,
-      contactDay: new Date()
+      contactDay: new Date(),
+      profile: this.candidateForm.controls['profile'].value===null?null:new CandidateProfile(this.candidateForm.controls['profile'].value),
+      community: this.candidateForm.controls['community'].value===null?null: new Community(this.candidateForm.controls['community'].value),
+      isReferred: this.candidateForm.controls['isReferred'].value===null?null:this.candidateForm.controls['community'].value
       // contactDay: this.candidateForm.controls['contactDay'].value
     }
     newCandidate.phoneNumber.toString();

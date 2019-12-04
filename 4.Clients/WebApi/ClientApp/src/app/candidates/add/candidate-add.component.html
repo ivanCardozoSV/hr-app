@@ -119,15 +119,58 @@
                         <nz-option *ngFor="let o of _offices" nzLabel="{{o.name}}" [nzValue]="o.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="candidateForm.get('preferredOffice').dirty && candidateForm.get('preferredOffice').errors">Please input the preferred office</nz-form-explain>
+                    <nz-form-explain *ngIf="candidateForm.get('preferredOffice').dirty && candidateForm.get('preferredOffice').errors">
+                        Please input the preferred office</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
     </div>
     <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="profile">Profile</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="profile">
+                        <nz-option *ngFor="let p of profiles" nzLabel="{{p.name}}" [nzValue]="p.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="candidateForm.get('profile').dirty && candidateForm.get('profile').errors">
+                        Please input the profile</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="community">Community</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select formControlName="community">
+                        <nz-option *ngFor="let c of comms" nzLabel="{{c.name}}" [nzValue]="c.id">
+                        </nz-option>
+                    </nz-select>
+                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the community</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+
+    <div nz-row>
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isReferred">Is Referred
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <label nz-checkbox formControlName="isReferred"></label>
+                    <!--in the future we could use something like (ngModelChange)="referredBy($event)" to show an input for the referring employee.-->
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+
+    <div nz-row>
         <div nz-col nzSpan="24">
             <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="additionalInformation">Additional Information</nz-form-label>
+                <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="additionalInformation">Additional Information
+                </nz-form-label>
                 <nz-form-control>
                     <textarea rows="1" id="additionalInformation" style="width: 50%;" nz-input formControlName="additionalInformation" placeholder="Input any additional information if necessary" id="additionalInformation"></textarea>
                 </nz-form-control>
@@ -139,59 +182,6 @@
                         The input has trailing whitespace!
                     </ng-container>
                 </nz-form-explain>
-            </nz-form-item>
-        </div>
-    </div>
-    <div nz-row>
-        <div nz-col nzSpan="24">
-            <nz-form-item *ngFor="let control of controlArray;let i = index">
-                <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i==0" [nzFor]="control.controlInstance[0]">
-                    Skills
-                </nz-form-label>
-                <nz-form-control [nzXs]="24" [nzSm]="20" [nzOffset]="i==0 ? 0 : 4">
-                    <div nz-row>
-                        <div nz-col nzSpan="4">
-                            <nz-select style="width: 95%; margin-right:1%;" [formControlName]="control.controlInstance[0]" [attr.id]="control.id" id="control.id" nzShowSearch nzAllowClear [nzAllowClear]="false" nzPlaceHolder="Select a skill">
-                                <nz-option *ngFor="let skill of skills;" nzLabel="{{skill.name}}" nzValue="{{skill.id}}">
-                                </nz-option>
-                            </nz-select>
-                            <nz-form-explain *ngIf="getFormControl(control.controlInstance[0])?.dirty&&getFormControl(control.controlInstance[0])?.hasError('required')">
-                                Please input candidate's skill or delete this field.
-                            </nz-form-explain>
-                        </div>
-                        <div nz-col nzSpan="7">
-                            <nz-form-control style="text-align: center; margin-left: 10%;">
-                                <nz-slider formControlName="{{control.controlInstance[1]}}" id="control.controlInstance[1]">
-                                </nz-slider>
-                            </nz-form-control>
-                        </div>
-                        <div nz-col nzSpan="9">
-                            <nz-form-control [nzSm]="14" [nzXs]="24" style="margin-left: 10%; width: 85%;">
-                                <input type="text" nz-input formControlName="{{control.controlInstance[2]}}" style="width: 100%;" id="control.controlInstance[2]" placeholder="Please input a comment">
-                                <nz-form-explain *ngIf="candidateForm.get(control.controlInstance[2]).dirty && candidateForm.get(control.controlInstance[2]).errors">
-                                    <ng-container *ngIf="candidateForm.get(control.controlInstance[2])?.hasError('trimBeginError')">
-                                        The input has leading whitespace!
-                                    </ng-container>
-                                    <ng-container *ngIf="candidateForm.get(control.controlInstance[2])?.hasError('trimEndError')">
-                                        The input has trailing whitespace!
-                                    </ng-container>
-                                    <ng-container *ngIf="candidateForm.get(control.controlInstance[2])?.hasError('required')">
-                                        Please input a comment!
-                                    </ng-container>
-                                </nz-form-explain>
-                            </nz-form-control>
-                        </div>
-                        <div nz-col nzSpan="1">
-                            <i nz-icon type="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control,$event)"></i>
-                        </div>
-                    </div>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control [nzXs]="{span:24,offset:0}" [nzSm]="{span:20,offset:4}">
-                    <button nz-button nzType="dashed" style="width:82%" (click)="addField($event)"><i nz-icon type="plus"></i>
-            Add Skill</button>
-                </nz-form-control>
             </nz-form-item>
         </div>
     </div>

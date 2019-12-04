@@ -6,6 +6,8 @@ import { CandidateStatusEnum } from 'src/entities/enums/candidate-status.enum';
 import { DaysOffStatusEnum } from '../../entities/enums/daysoff-status.enum';
 import { DaysOffTypeEnum } from '../../entities/enums/daysoff-type.enum';
 import { EnglishLevelEnum } from '../../entities/enums/english-level.enum';
+import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
+import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
 
 @Injectable()
 export class Globals {
@@ -24,6 +26,15 @@ export class Globals {
       { id: ProcessStatusEnum.Declined, name: 'Declined' },
       { id: ProcessStatusEnum.Hired, name: 'Hired' }, { id: ProcessStatusEnum.Rejected, name: 'Rejected' },
       { id: ProcessStatusEnum.OfferAccepted, name: 'Offer Accepted' },
+    ];
+
+    processCurrentStageList: any[] = [
+      { id: ProcessCurrentStageEnum.NA, name: 'N/A' },
+      { id: ProcessCurrentStageEnum.HrStage, name: 'Hr Stage' },
+      { id: ProcessCurrentStageEnum.TechnicalStage, name: 'Technical Stage' },
+      { id: ProcessCurrentStageEnum.ClientStage, name: 'Client Stage' },
+      { id: ProcessCurrentStageEnum.OfferStage, name: 'Offer Stage' },
+      { id: ProcessCurrentStageEnum.Finished, name: 'Finished' }
     ];
 
     stageStatusList: any[] = [
@@ -63,5 +74,13 @@ export class Globals {
     daysOffStatusList: any[] = [
       { id: DaysOffStatusEnum.InReview, name: 'In Review' },
       { id: DaysOffStatusEnum.Accepted, name: 'Accepted' }
+    ];
+
+    rejectionReasonsHRList: any[] = [
+      { id: RejectionReasonsHrEnum.SalaryExpectations, name: 'Salary Expectations' },
+      { id: RejectionReasonsHrEnum.Skills, name: 'Skills' },
+      { id: RejectionReasonsHrEnum.EnglishLevel, name: 'English Level' },
+      { id: RejectionReasonsHrEnum.Residence, name: 'Residence' },
+      { id: RejectionReasonsHrEnum.Other, name: 'Other' }
     ];
 }

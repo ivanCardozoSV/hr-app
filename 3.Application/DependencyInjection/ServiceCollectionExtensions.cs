@@ -100,6 +100,7 @@ namespace DependencyInjection
             services.AddTransient<IDummyService, DummyService>();
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<ICandidateService, CandidateService>();
+            services.AddTransient<IPostulantService, PostulantService>();
             services.AddTransient<IProcessStageService, ProcessStageService>();
             services.AddTransient<IProcessService, ProcessService>();
             services.AddTransient<IConsultantService, ConsultantService>();
@@ -147,6 +148,7 @@ namespace DependencyInjection
             services.AddScoped<IUnitOfWork, UnitOfWork<DataBaseContext>>();
             services.AddScoped<IRepository<Dummy>, DummyRepository>();
             services.AddScoped<IRepository<Candidate>, CandidateRepository>();
+            services.AddScoped<IRepository<Postulant>, PostulantRepository>();
             services.AddScoped<IRepository<Stage>, ProcessStageRepository>();
             services.AddScoped<IRepository<HrStage>, HrStageRepository>();
             services.AddScoped<IRepository<TechnicalStage>, TechnicalStageRepository>();

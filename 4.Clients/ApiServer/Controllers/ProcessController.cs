@@ -125,5 +125,18 @@ namespace ApiServer.Controllers
                 return Accepted();
             });
         }
+
+        // GET api/<controller>/5
+        [HttpGet("{candidateId}")]
+        //[Authorize(Policy = SecurityClaims.CAN_LIST_CANDIDATE)]
+        public IActionResult GetActiveProcessByCandidate(int candidateId)
+        {
+            return ApiAction(() =>
+            {
+                var process = _processService.GetActiveByCandidateId(candidateId);
+
+                return Accepted(_mapper.Map<IEnumerable<ReadedProcessViewModel>>(process));
+            });
+        }
     }
 }

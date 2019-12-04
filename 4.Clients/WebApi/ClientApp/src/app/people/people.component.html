@@ -1,10 +1,10 @@
 <br /><br />
-<nz-collapse>
-  <nz-collapse-panel [nzHeader]="'Candidates'" *ngIf="isUserAuthenticated()  && isUserRole(['Admin', 'HRManagement', 'HRUser'])">
-    <app-candidates></app-candidates>
-  </nz-collapse-panel>
+<nz-tabset>
+    <nz-tab nzTitle="Candidates" *ngIf="isUserAuthenticated()  && isUserRole(['Admin', 'HRManagement', 'HRUser'])">
+        <app-candidates></app-candidates> 
+    </nz-tab>
 
-  <nz-collapse-panel [nzHeader]="'Interviewers'" *ngIf="isUserAuthenticated()  && isUserRole(['HRManagement', 'Admin'])">
-    <app-consultants></app-consultants>
-  </nz-collapse-panel>
-</nz-collapse>
+    <nz-tab nzTitle="Interviewers" *ngIf="isUserAuthenticated()  && isUserRole(['HRManagement', 'Admin'])">
+        <app-consultants></app-consultants>
+    </nz-tab>
+</nz-tabset>

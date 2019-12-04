@@ -22,6 +22,12 @@ import { StageStatusEnum } from '../../../entities/enums/stage-status.enum';
 import { HrStage } from 'src/entities/hr-stage';
 import { EnglishLevelEnum } from '../../../entities/enums/english-level.enum';
 import { Office } from 'src/entities/office';
+import { Community } from 'src/entities/community';
+import { CandidateProfile } from 'src/entities/Candidate-Profile';
+import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.enum';
+import { replaceAccent } from 'src/app/helpers/string-helpers';
+import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
+import { User } from 'src/entities/user';
 
 @Component({
   selector: 'app-processes',
@@ -31,9 +37,18 @@ import { Office } from 'src/entities/office';
 })
 
 export class ProcessesComponent implements OnInit {
+  slideConfig = {
+    slidesToShow: 1,
+    adaptiveHeight: true, //la papa
+    arrows: true,
+    infinite: false,
+    draggable: false
+  };
+
 
   @ViewChild('dropdown') nameDropdown;
   @ViewChild('dropdownStatus') statusDropdown;
+  @ViewChild('dropdownCurrentStage') currentStageDropdown;
 
   @ViewChild('processCarousel') processCarousel;
   @ViewChild(CandidateAddComponent) candidateAdd: CandidateAddComponent;
@@ -46,10 +61,13 @@ export class ProcessesComponent implements OnInit {
   filteredProcesses: Process[] = [];
 
   searchValue = '';
+  searchRecruiterValue = '';
   searchValueStatus = '';
+  searchValueCurrentStage = '';
   listOfSearchProcesses = [];
   listOfDisplayData = [...this.filteredProcesses];
-
+  currentUser: User;
+  
   sortName = null;
   sortValue = null;
 
@@ -62,15 +80,22 @@ export class ProcessesComponent implements OnInit {
   candidatesFullList: Candidate[] = [];
   consultants: Consultant[] = [];
 
-  profileSearch: string = 'ALL';
+  profileSearch: number = 0;
+  profileSearchName: string = 'ALL';
+
+  communitySearch: number =0;
+  communitySearchName: string = 'ALL';
 
   profileList: any[];
 
   statusList: any[];
+  currentStageList: any[];
 
   emptyCandidate: Candidate;
   emptyConsultant: Consultant;
   currentCandidate: Candidate;
+
+  currentConsultant: any;
 
   isEdit: boolean = false;
 
@@ -81,25 +106,35 @@ export class ProcessesComponent implements OnInit {
   selectedSeniority: SeniorityEnum;
 
   offices: Office[] = [];
+  communities: Community[] = [];
+  profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
+
+  isOwnedProcesses: boolean = false;
 
   forms: FormGroup[] = [];
   constructor(private facade: FacadeService, private formBuilder: FormBuilder, private app: AppComponent,
     private candidateDetailsModal: CandidateDetailsComponent, private consultantDetailsModal: ConsultantDetailsComponent,
-    private globals: Globals) {
-      this.profileList = globals.profileList;
-      this.statusList = globals.processStatusList;
-     }
-
-    
+    private globals: Globals, private _appComponent: AppComponent,) {
+    this.profileList = globals.profileList;
+    this.statusList = globals.processStatusList;
+    this.currentStageList = globals.processCurrentStageList;
+  }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.app.showLoading();
     this.app.removeBgImage();
     this.getProcesses();
     this.getCandidates();
     this.getConsultants();
     this.getOffices();
+    this.getCommunities();
+    this.getProfiles();
+    this.facade.consultantService.GetByEmail(this.currentUser.Email)
+      .subscribe(res => {
+        this.currentConsultant = res.body;
+    });
 
     this.rejectProcessForm = this.formBuilder.group({
       rejectionReasonDescription: [null, [Validators.required]]
@@ -108,6 +143,10 @@ export class ProcessesComponent implements OnInit {
     this.setRejectionReasonValidators();
 
     this.app.hideLoading();
+  }
+
+  isUserRole(roles: string[]): boolean {
+    return this._appComponent.isUserRole(roles);
   }
 
   setRejectionReasonValidators() {
@@ -157,12 +196,50 @@ export class ProcessesComponent implements OnInit {
       });
   }
 
+  getCommunity(community: number): string {
+    return this.communities.find(x =>x.id === community).name;
+  }
+
+  getCommunities() {
+    this.facade.communityService.get<Community>()
+      .subscribe(res => {
+        this.communities = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getProfiles() {
+    this.facade.candidateProfileService.get<CandidateProfile>()
+      .subscribe(res => {
+        this.profiles = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getProfile(profile: number): string {
+    return this.profiles.filter(x =>x.id === profile)[0].name;
+  }
+
   getProcesses() {
     this.facade.processService.get<Process>()
       .subscribe(res => {
         this.filteredProcesses = res;
         this.listOfDisplayData = res;
-
+        let newProc: Process = res[res.length - 1];
+        if (newProc && newProc.candidate) {
+          this.candidatesFullList.push(newProc.candidate);
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
+  getProcessesByConsultant() {
+    this.facade.processService.get<Process>()
+      .subscribe(res => {
+        this.filteredProcesses = res;
+        this.listOfDisplayData = res;
         let newProc: Process = res[res.length - 1];
         if (newProc && newProc.candidate) {
           this.candidatesFullList.push(newProc.candidate);
@@ -173,12 +250,17 @@ export class ProcessesComponent implements OnInit {
   }
 
   getStatus(status: number): string {
-    return this.statusList.filter(st => st.id === status)[0].name;
+    return this.statusList.find(st => st.id === status).name;
+  }
+
+  getCurrentStage(cr: number): string {
+    return this.currentStageList.find(st => st.id === cr).name;
   }
 
   showApproveProcessConfirm(processID: number): void {
     let procesToApprove: Process = this.filteredProcesses.find(p => p.id == processID);
-    let processText = procesToApprove.candidate ? procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName) : procesToApprove.profile;
+    // let processText = procesToApprove.candidate ? procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName) : procesToApprove.profile;
+    let processText = procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName);
 
     this.facade.modalService.confirm({
       nzTitle: 'Are you sure you want to approve the process for ' + processText + '? This will approve all the stages associated with the process',
@@ -255,19 +337,67 @@ export class ProcessesComponent implements OnInit {
     this.search();
   }
 
+  resetRecruiter(): void {
+    this.searchRecruiterValue = '';
+    this.searchRecruiter();
+  }
+
   resetStatus(): void {
     this.searchValueStatus = '';
     this.searchStatus();
   }
 
+  resetCurrentStage(): void {
+    this.searchValueCurrentStage = '';
+    this.searchCurrentStage();
+  }
+
   search(): void {
     const filterFunc = (item) => {
-      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.candidate.name.indexOf(p) !== -1) : true) &&
-        (item.candidate.name.toString().toUpperCase().indexOf(this.searchValue.toUpperCase()) !== -1);
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.name.toString() + " " + item.candidate.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.name.toString() + " " + item.candidate.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchValue).toUpperCase()) !== -1);
     };
     const data = this.filteredProcesses.filter(item => filterFunc(item));
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
-    this.searchValue = '';
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
+    this.nameDropdown.nzVisible = false;
+  }
+
+  searchRecruiter(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
+    };
+    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    // const data = this.filteredProcesses;
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
+    this.nameDropdown.nzVisible = false;
+  }
+
+  searchOwnRecruiter(): void {
+    this.searchRecruiterValue=this.currentConsultant.name + ' ' + this.currentConsultant.lastName;
+    this.searchRecruiter();
+    this.isOwnedProcesses = true;
+  }
+
+  searchAllProcess(){
+    this.getProcesses();
+    this.isOwnedProcesses = false;
+  }
+
+  showOwnProcessesFirst(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => (item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).indexOf(p) !== -1) : true) &&
+        (replaceAccent(item.candidate.recruiter.name.toString() + " " + item.candidate.recruiter.lastName.toString()).toUpperCase().indexOf(replaceAccent(this.searchRecruiterValue).toUpperCase()) !== -1);
+    };
+    const data = this.filteredProcesses.filter(item => filterFunc(item));
+
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.communitySearchName = 'ALL';
+    this.profileSearchName = 'ALL';
     this.nameDropdown.nzVisible = false;
   }
 
@@ -276,17 +406,51 @@ export class ProcessesComponent implements OnInit {
       return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.status.indexOf(p) !== -1) : true) &&
         (item.status === this.searchValueStatus)
     };
-    const data = this.filteredProcesses.filter(item => filterFunc(item));
+    const data = this.searchValueStatus !== '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
     this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
     this.searchValueStatus = '';
     this.statusDropdown.nzVisible = false;
   }
 
-  searchProfile(searchedProfile: string) {
+  searchCurrentStage(): void {
+    const filterFunc = (item) => {
+      return (this.listOfSearchProcesses.length ? this.listOfSearchProcesses.some(p => item.currentStage.indexOf(p) !== -1) : true) &&
+        (item.currentStage === this.searchValueCurrentStage)
+    };
+    const data =  this.searchValueCurrentStage != '' ? this.filteredProcesses.filter(item => filterFunc(item)) : this.filteredProcesses;
+    this.listOfDisplayData = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+    this.searchValueCurrentStage = '';
+    this.currentStageDropdown.nzVisible = false;
+  }
+
+  searchProfile(searchedProfile: number) {
     this.profileSearch = searchedProfile;
-    if (searchedProfile == 'ALL') this.listOfDisplayData = this.filteredProcesses;
+
+
+    if (this.profileSearch == 0) {
+    this.listOfDisplayData = this.filteredProcesses;
+      this.profileSearchName = 'ALL';
+    }
     else {
-      this.listOfDisplayData = this.filteredProcesses.filter(p => p.profile == searchedProfile);
+      this.profileSearchName = (this.profiles.find(p => p.id == this.profileSearch)).name;
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.profile.id == searchedProfile);
+      this.communitySearchName = 'ALL';
+    }
+  }
+
+  searchCommunity(searchedCommunity: number) {
+    this.communitySearch = searchedCommunity;
+
+
+    if (this.communitySearch == 0) {
+    this.listOfDisplayData = this.filteredProcesses;
+      this.communitySearchName = 'ALL';
+    }
+    else {
+      this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
+      this.communitySearchName = (this.communities.filter(p => p.id == this.communitySearch))[0].name;
+      this.listOfDisplayData = this.filteredProcesses.filter(p => p.candidate.community.id == searchedCommunity);
+      this.profileSearchName = 'ALL';
     }
   }
 
@@ -316,7 +480,7 @@ export class ProcessesComponent implements OnInit {
   newProcessStart(modalContent: TemplateRef<{}>, footer: TemplateRef<{}>, candidate: Candidate): void {
     this.app.showLoading();
     this.createEmptyProcess(candidate);
-    
+
     this.currentCandidate = candidate;
 
     const modal = this.facade.modalService.create({
@@ -361,7 +525,8 @@ export class ProcessesComponent implements OnInit {
 
   showDeleteConfirm(processID: number): void {
     let procesDelete: Process = this.filteredProcesses.find(p => p.id == processID);
-    let processText = procesDelete.candidate ? procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName) : procesDelete.profile;
+    let processText = procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName);
+    // let processText = procesDelete.candidate ? procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName) : procesDelete.profile;
 
     this.facade.modalService.confirm({
       nzTitle: 'Are you sure delete the process for ' + processText + ' ?',
@@ -414,7 +579,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   wishedStage(choosenStage: number, elementName: string) {
-    this.processCarousel.goTo(choosenStage);
+    //this.processCarousel.goTo(choosenStage);
     this.stepIndex = choosenStage;
     // if (choosenStage !== 0) {
     //   var height = document.getElementById('hrStage').style.height;
@@ -465,8 +630,9 @@ export class ProcessesComponent implements OnInit {
       let newProcess: Process;
 
       newCandidate = this.candidateAdd.getFormData();
+      newCandidate.candidateSkills=this.technicalStage.getFormDataSkills();
       newProcess = this.getProcessFormData();
-      newProcess.consultantOwnerId = newCandidate.recruiter;
+      newProcess.consultantOwnerId = newCandidate.recruiter.id;
 
       newProcess.candidate = newCandidate;
 
@@ -506,8 +672,8 @@ export class ProcessesComponent implements OnInit {
       id: !this.isEdit ? 0 : this.emptyProcess.id,
       startDate: new Date(),
       endDate: null,
-      status:  !this.isEdit ? ProcessStatusEnum.InProgress : ProcessStatusEnum[CandidateStatusEnum[this.emptyProcess.candidate.status]],
-      profile: 'Dev',
+      status: !this.isEdit ? ProcessStatusEnum.InProgress : ProcessStatusEnum[CandidateStatusEnum[this.emptyProcess.candidate.status]],
+      currentStage: ProcessCurrentStageEnum.NA,
       candidateId: !this.isEdit ? 0 : this.emptyProcess.candidate.id,
       candidate: null,
       consultantOwnerId: 0,
@@ -533,8 +699,9 @@ export class ProcessesComponent implements OnInit {
 
     // Seniority is now handled global between technical stage and offer stage. The process uses the last updated value.
     process.seniority = this.selectedSeniority ? this.selectedSeniority :
-                        (process.technicalStage.seniority ? process.technicalStage.seniority :
-                          (process.offerStage.seniority));
+      (process.technicalStage.seniority ? process.technicalStage.seniority :
+        process.technicalStage.alternativeSeniority ? process.technicalStage.alternativeSeniority :
+        (process.offerStage.seniority));
     process.englishLevel = process.englishLevel;
 
     return process;
@@ -550,8 +717,7 @@ export class ProcessesComponent implements OnInit {
     if (stages[3].status === StageStatusEnum.Accepted) { processStatus = ProcessStatusEnum.OfferAccepted; }
 
     if (stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.InProgress ||
-      stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.Declined) 
-      { processStatus = ProcessStatusEnum.Declined; }
+      stages[3].status === StageStatusEnum.Accepted && stages[4].status === StageStatusEnum.Declined) { processStatus = ProcessStatusEnum.Declined; }
 
     if (stages[4].status === StageStatusEnum.Accepted) { processStatus = ProcessStatusEnum.Hired; }
 
@@ -609,8 +775,8 @@ export class ProcessesComponent implements OnInit {
       id: 0,
       startDate: new Date(),
       endDate: null,
-      status:  ProcessStatusEnum.NA,
-      profile: 'Dev',
+      status: ProcessStatusEnum.NA,
+      currentStage: ProcessCurrentStageEnum.NA,
       candidateId: candidate.id,
       candidate: candidate,
       consultantOwnerId: 0,
@@ -628,12 +794,13 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.InProgress,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         actualSalary: 0,
         wantedSalary: 0,
-        englishLevel: EnglishLevelEnum.None
+        englishLevel: EnglishLevelEnum.None,
+        rejectionReasonsHr: null
 
       },
       technicalStage: {
@@ -641,28 +808,31 @@ export class ProcessesComponent implements OnInit {
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         seniority: SeniorityEnum.NA,
+        alternativeSeniority: SeniorityEnum.NA,
         client: ''
       },
-      clientStage: {
+    clientStage: {
         id: 0,
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
-        processId: 0
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
+        processId: 0,
+        interviewer: '',
+        delegateName: ''
       },
       offerStage: {
         id: 0,
         date: new Date(),
         status: StageStatusEnum.NA,
         feedback: '',
-        consultantOwnerId: candidate.recruiter,
-        consultantDelegateId: candidate.recruiter,
+        consultantOwnerId: candidate.recruiter.id,
+        consultantDelegateId: candidate.recruiter.id,
         processId: 0,
         agreedSalary: 0,
         seniority: SeniorityEnum.NA,

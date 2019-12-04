@@ -17,7 +17,8 @@
                         <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="hrForm.get('status').dirty && hrForm.get('status').errors">Please select a status</nz-form-explain>
+                    <nz-form-explain *ngIf="hrForm.get('status').dirty && hrForm.get('status').errors">Please select a status
+                    </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -54,13 +55,12 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="hrForm.get('consultantDelegateId').dirty && hrForm.get('consultantDelegateId').errors ">
-                        Please input the consultant</nz-form-explain>
+                    
                 </nz-form-control>
             </nz-form-item>
         </div>
     </div>
-    <div nz-row>
+    <div nz-row *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])">
         <div nz-col nzSpan="12">
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="actualSalary">Actual Salary</nz-form-label>
@@ -88,7 +88,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24 " nzFor="feedback">Feedback</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <textarea rows="1 " id="feedback" nz-input formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
+                    <textarea rows="1 " id="feedback" nz-input nzAutosize formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
                 </nz-form-control>
                 <nz-form-explain style="color: #f5222d " *ngIf="hrForm.get('feedback').dirty && hrForm.get('feedback').errors ">
                     <ng-container *ngIf="hrForm.get('feedback')?.hasError('trimBeginError') ">
@@ -100,7 +100,7 @@
                 </nz-form-explain>
             </nz-form-item>
         </div>
-        <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
+        <!-- <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -109,6 +109,27 @@
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && hrForm.get('rejectionReason').dirty && hrForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="hrForm.get('rejectionReason')?.dirty && hrForm.get('rejectionReason')?.errors ">
                         Please input rejection reason!
+                    </ng-container>
+                </nz-form-explain>
+            </nz-form-item>
+        </div> -->
+        <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
+
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-select [nzDisabled]="disable" style="width: 95%; margin-right:1%;" [formControlName]="rejectionReasonsHr" [nzDisabled]="disabled" nzShowSearch nzAllowClear [nzAllowClear]="false" nzPlaceHolder="Select a reason">
+                        <nz-option *ngFor="let reason of rejectionReasonsHRList" nzLabel="{{reason.name}}" nzValue="{{reason.id}}">
+                        </nz-option>
+                    </nz-select>
+                    <!-- <nz-radio-group formControlName="rejectionReasonsHr">
+                        <label id="radio" style="display:block; line-height: 30px; height: 30px;" *ngFor="let reason of rejectionReasonsHRList" [nzDisabled]="disabled" nz-radio [nzValue]="reason.id"><span>{{reason.name}}</span></label>
+                    </nz-radio-group> -->
+                    <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Please, briefly explain what happened."></textarea>
+                </nz-form-control>
+                <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && hrForm.get('rejectionReason').dirty && hrForm.get('rejectionReason').errors ">
+                    <ng-container *ngIf="hrForm.get('rejectionReason')?.dirty && hrForm.get('rejectionReason')?.errors ">
+                        Please tell us more about your decision!
                     </ng-container>
                 </nz-form-explain>
             </nz-form-item>

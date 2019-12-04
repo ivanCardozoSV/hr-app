@@ -12,8 +12,7 @@ namespace Domain.Model
         public DateTime? EndDate { get; set; }
       
         public ProcessStatus Status { get; set; }
-
-        public string Profile { get; set; }
+        public ProcessCurrentStage CurrentStage { get; set; }
 
         public string RejectionReason { get; set; }
 
@@ -31,7 +30,7 @@ namespace Domain.Model
         public float AgreedSalary { get { return OfferStage.AgreedSalary; } }
         public EnglishLevel EnglishLevel { get { return HrStage.EnglishLevel; } }
         public Seniority Seniority { get {
-                return (OfferStage.Status != StageStatus.NA ? OfferStage.Seniority : TechnicalStage.Seniority);
+                return (OfferStage.Status != StageStatus.NA ? OfferStage.Seniority : TechnicalStage.Seniority != 0 ? TechnicalStage.Seniority : TechnicalStage.AlternativeSeniority);
             }
         }
 

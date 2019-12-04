@@ -1,5 +1,6 @@
 ﻿using ApiServer.Contracts.Candidates;
 using ApiServer.Contracts.Consultant;
+using ApiServer.Contracts.Postulant;
 using ApiServer.Contracts.Stage;
 using Domain.Model.Enum;
 using System;
@@ -16,13 +17,13 @@ namespace ApiServer.Contracts.Process
         public DateTime? EndDate { get; set; }
 
         public ProcessStatus Status { get; set; }
-
-        public string Profile { get; set; }
+        public ProcessCurrentStage CurrentStage { get; set; }
 
         public string RejectionReason { get; set; }
 
         public int? CandidateId { get; set; }
         public ReadedCandidateViewModel Candidate { get; set; }
+        public ReadedPostulantViewModel Postulant { get; set; }
 
         public int? ConsultantOwnerId { get; set; }
         public ReadedConsultantViewModel ConsultantOwner { get; set; }

@@ -15,6 +15,8 @@ namespace Domain.Services.Repositories.EF
 
         public DbSet<Candidate> Candidates { get; set; }
 
+        public DbSet<Postulant> Postulants { get; set; }
+
         public DbSet<CandidateSkill> CandidateSkills { get; set; }
 
         public DbSet<Process> Processes { get; set; }

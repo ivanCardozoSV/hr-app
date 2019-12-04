@@ -558,3 +558,6 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 .vscode/settings.json
+/4.Clients/ApiServer/package-lock.json
+/4.Clients/WebApi/package-lock.json
+/4.Clients/package-lock.json

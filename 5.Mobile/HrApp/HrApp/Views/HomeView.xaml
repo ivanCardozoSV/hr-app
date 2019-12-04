@@ -1,20 +1,4 @@
-﻿<!--<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="HrApp.Views.HomeView"
-             Title="Home"
-             IconImageSource="HomeIcon">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="HOME!!!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>-->
+﻿
 
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
@@ -22,6 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    BindingContext="{Binding HomeVM, Source={StaticResource Locator}}"
     mc:Ignorable="d"
              x:Class="HrApp.Views.HomeView"
              Title="Home"
@@ -32,14 +17,16 @@
             <Label Text="Dashboard"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Label Text="Month hirings" />
+            <Label Text="Process Status" />
             <microcharts:ChartView x:Name="chart1"  
-                               HeightRequest="150"/>
+                               HeightRequest="300"/>
+            <Label Text="Process Succeeded" />
             <microcharts:ChartView x:Name="chart2"  
                                HeightRequest="150"  
                              />
+            <Label Text="Monthly Hirings" />
             <microcharts:ChartView x:Name="chart3"  
-                             HeightRequest="150"/>
+                             HeightRequest="190"/>
             <microcharts:ChartView x:Name="chart4"  
                              HeightRequest="150"/>
             <microcharts:ChartView x:Name="chart5"  
