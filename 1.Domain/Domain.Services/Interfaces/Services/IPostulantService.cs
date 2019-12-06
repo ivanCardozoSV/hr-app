@@ -11,5 +11,6 @@ namespace Domain.Services.Interfaces.Services
        // CreatedPostulantContract Create(CreatePostulantContract contract);
         ReadedPostulantContract Read(int id);
         IEnumerable<ReadedPostulantContract> List();
+        void Delete(int id);
     }
 }

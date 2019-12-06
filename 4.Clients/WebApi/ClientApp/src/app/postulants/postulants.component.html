@@ -24,14 +24,24 @@
                   <td>{{ postulant.cv }}</td>
                   <td>{{ postulant.createdDate| date: 'dd-MM-yyyy'}}</td>
                   <td [style.text-align]="center">
-                      <i style="cursor: pointer;" nz-icon type="info-circle" theme="outline" nzTitle="Details" nz-tooltip></i>
+                      <i (click)="showDetaisModal(postulant.id, detailModal)"style="cursor: pointer;" nz-icon type="info-circle" theme="outline" nzTitle="Details" nz-tooltip></i>
                       <nz-divider nzType="vertical"></nz-divider>
-                      <i  style="cursor: pointer;" nz-icon type="edit" theme="outline" nzTitle="Edit" nz-tooltip></i>
-                      <nz-divider nzType="vertical"></nz-divider>
-                      <i style="cursor: pointer;" nz-icon type="delete" theme="outline" nzTitle="Delete" nz-tooltip></i>
+                      <i (click)="showDeleteConfirm(postulant.id)"style="cursor: pointer;" nz-icon type="delete" theme="outline" nzTitle="Delete" nz-tooltip></i>
                   </td>
               </tr>
           </tbody>
       </nz-table>
   </div>
 </div>
+
+<ng-template #detailModal>
+    <nz-list nzBordered nzSize="large">
+        <nz-list-item><strong style="margin-right: 1%">Name:</strong>{{ emptyPostulant.name }} </nz-list-item>
+        <nz-list-item><strong style="margin-right: 1%">E-Mail:</strong>{{ emptyPostulant.emailAddress }} <div style="margin-left: 1%; margin-bottom: 1%;">
+            <nz-divider nzType="vertical" style="margin-top: 20%;"></nz-divider>
+            <a href="{{emptyPostulant.linkedInProfile}}"><i nz-icon type="linkedin" theme="fill"></i></a>
+        </div>
+    </nz-list-item>
+        <nz-list-item><strong style="margin-right: 1%;">Created Date: </strong>{{ emptyPostulant.createdDate | date: 'dd-MM-yyyy'}} </nz-list-item>
+    </nz-list>
+</ng-template>
