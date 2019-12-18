@@ -134,7 +134,7 @@ export class HrStageComponent implements OnInit {
   }
 
   showRejectionReason() {
-    if (this.hrForm.controls['status'].value === StageStatusEnum.Rejected) {
+    if (this.hrForm.controls['status'].value === StageStatusEnum.Rejected || this.hrForm.controls['status'].value === StageStatusEnum.Declined) {
       this.hrForm.controls['rejectionReason'].enable();
       this.hrForm.controls['rejectionReasonsHr'].enable();
       return true;

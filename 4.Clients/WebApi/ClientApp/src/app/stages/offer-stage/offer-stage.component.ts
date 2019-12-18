@@ -193,7 +193,7 @@ export class OfferStageComponent implements OnInit {
   }
 
   showRejectionReason() {
-    if (this.offerForm.controls['status'].value === StageStatusEnum.Rejected) {
+    if (this.offerForm.controls['status'].value === StageStatusEnum.Rejected || this.offerForm.controls['status'].value === StageStatusEnum.Declined) {
       this.offerForm.controls['rejectionReason'].enable();
       return true;
     }
