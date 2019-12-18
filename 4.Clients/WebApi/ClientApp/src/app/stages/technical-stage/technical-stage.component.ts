@@ -219,7 +219,7 @@ export class TechnicalStageComponent implements OnInit {
   }
 
   showRejectionReason() {
-    if (this.technicalForm.controls['status'].value === StageStatusEnum.Rejected) {
+    if (this.technicalForm.controls['status'].value === StageStatusEnum.Rejected || this.technicalForm.controls['status'].value === StageStatusEnum.Declined) {
       this.technicalForm.controls['rejectionReason'].enable();
       return true;
     }

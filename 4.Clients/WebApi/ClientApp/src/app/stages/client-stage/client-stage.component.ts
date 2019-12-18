@@ -115,7 +115,7 @@ export class ClientStageComponent implements OnInit {
   }
 
   showRejectionReason() {
-    if (this.clientForm.controls['status'].value === StageStatusEnum.Rejected) {
+    if (this.clientForm.controls['status'].value === StageStatusEnum.Rejected || this.clientForm.controls['status'].value === StageStatusEnum.Declined) {
       this.clientForm.controls['rejectionReason'].enable();
       return true;
     }
