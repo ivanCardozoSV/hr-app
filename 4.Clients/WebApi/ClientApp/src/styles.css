@@ -59,3 +59,7 @@ button > i {
     width: 558px;
   }
 }
+
+.ant-col-12 {
+  width: 45%;
+}

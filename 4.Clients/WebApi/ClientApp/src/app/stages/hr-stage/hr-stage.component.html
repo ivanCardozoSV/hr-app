@@ -9,9 +9,9 @@
 
     </nz-form-item>
     <div nz-row>
-        <div nz-col nzSpan="12">
+        <div nz-col nzSpan="12" >
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Status</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Status</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="status" (ngModelChange)="statusChanged()">
                         <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
@@ -24,7 +24,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24 " nzFor="date">Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24 " nzFor="date">Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="hrForm.get('date').dirty && hrForm.get( 'date').errors">
@@ -37,7 +37,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="consultantOwnerId" nzPlaceHolder="Select the owner of the process">
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}} " [nzValue]="c.id">
@@ -49,7 +49,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="consultantDelegateId">Delegate</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="consultantDelegateId">Delegate</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="consultantDelegateId" nzPlaceHolder="Select a delegate for the process">
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
@@ -63,7 +63,7 @@
     <div nz-row *ngIf="isUserRole(['Admin', 'HRManagement', 'HRUser'])">
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="actualSalary">Actual Salary</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="actualSalary">Actual Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <input type="number" nz-input formControlName="actualSalary" id="actualSalary" placeholder="Please input the actual salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="hrForm.get('actualSalary').dirty && hrForm.get('actualSalary').errors">
@@ -73,7 +73,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="wantedSalary">Wanted Salary</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="wantedSalary">Wanted Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <input type="number" nz-input formControlName="wantedSalary" id="wantedSalary" placeholder="Please input the wanted salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="hrForm.get('wantedSalary').dirty && hrForm.get('wantedSalary').errors">
@@ -86,7 +86,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24 " nzFor="feedback">Feedback</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24 " nzFor="feedback">Feedback</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <textarea rows="1 " id="feedback" nz-input nzAutosize formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
                 </nz-form-control>
@@ -115,8 +115,7 @@
         </div> -->
         <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
-
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select [nzDisabled]="disable" style="width: 95%; margin-right:1%;" [formControlName]="rejectionReasonsHr" [nzDisabled]="disabled" nzShowSearch nzAllowClear [nzAllowClear]="false" nzPlaceHolder="Select a reason">
                         <nz-option *ngFor="let reason of rejectionReasonsHRList" nzLabel="{{reason.name}}" nzValue="{{reason.id}}">
@@ -139,7 +138,7 @@
         <div nz-col nzSpan="24">
             <nz-form-item>
                 <nz-form-control>
-                    <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="englishLevel">English Level</nz-form-label>
+                    <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="englishLevel">English Level</nz-form-label>
                     <nz-radio-group formControlName="englishLevel">
                         <label *ngFor="let level of englishLevelList" [nzDisabled]="disabled" nz-radio-button [nzValue]="level.id"><span>{{level.name}}</span></label>
                     </nz-radio-group>

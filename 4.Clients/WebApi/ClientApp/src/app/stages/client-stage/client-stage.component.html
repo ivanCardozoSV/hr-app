@@ -9,7 +9,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Status</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Status</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="status" (ngModelChange)="statusChanged()">
                         <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
@@ -21,7 +21,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date">Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="date">Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="clientForm.get('date').dirty && clientForm.get('date').errors">
@@ -34,7 +34,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
         <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                             <input type="text" nz-input formControlName="interviewer" id="interviewer" placeholder="Please input the interviewer's name">
                     </nz-form-control>
@@ -42,7 +42,7 @@
         </div>
         <div nz-col nzSpan="12">
         <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="delegateName">Delegate</nz-form-label>
+            <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="delegateName">Delegate</nz-form-label>
                <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input type="text" nz-input formControlName="delegateName" id="delegateName" placeholder="Please input the delegate name">
                 </nz-form-control>
@@ -52,7 +52,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="feedback">Feedback</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="feedback">Feedback</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <textarea rows="1" id="feedback" nz-input formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
                 </nz-form-control>
@@ -68,7 +68,7 @@
         </div>
         <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Input the rejection reason"></textarea>
                 </nz-form-control>
