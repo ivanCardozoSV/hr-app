@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, Input, AfterViewChecked } from '@angular/core';
 import { Process } from 'src/entities/process';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FacadeService } from 'src/app/services/facade.service';
@@ -28,6 +28,7 @@ import { RejectionReasonsHrEnum } from 'src/entities/enums/rejection-reasons-hr.
 import { replaceAccent } from 'src/app/helpers/string-helpers';
 import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
 import { User } from 'src/entities/user';
+import { SlickComponent } from 'ngx-slick';
 
 @Component({
   selector: 'app-processes',
@@ -36,7 +37,7 @@ import { User } from 'src/entities/user';
   providers: [CandidateDetailsComponent, ConsultantDetailsComponent, AppComponent]
 })
 
-export class ProcessesComponent implements OnInit {
+export class ProcessesComponent implements OnInit, AfterViewChecked {
   slideConfig = {
     slidesToShow: 1,
     adaptiveHeight: true, //la papa
@@ -45,7 +46,7 @@ export class ProcessesComponent implements OnInit {
     draggable: false
   };
 
-
+  @ViewChild('slickModal') slickModal: SlickComponent;
   @ViewChild('dropdown') nameDropdown;
   @ViewChild('dropdownStatus') statusDropdown;
   @ViewChild('dropdownCurrentStage') currentStageDropdown;
@@ -98,6 +99,7 @@ export class ProcessesComponent implements OnInit {
   currentConsultant: any;
 
   isEdit: boolean = false;
+  openFromEdit: boolean = false;
 
   currentComponent: string;
   lastComponent: string;
@@ -143,6 +145,13 @@ export class ProcessesComponent implements OnInit {
     this.setRejectionReasonValidators();
 
     this.app.hideLoading();
+  }
+
+  ngAfterViewChecked(){
+    if(this.slickModal && this.openFromEdit){
+      this.slickModal.slickGoTo(this.stepIndex);
+      this.openFromEdit = false;
+    }
   }
 
   isUserRole(roles: string[]): boolean {
@@ -465,6 +474,8 @@ export class ProcessesComponent implements OnInit {
     if (processId > -1) {
       this.emptyProcess = this.filteredProcesses.filter(p => p.id === processId)[0];
       this.isEdit = true;
+      this.openFromEdit = true;
+      this.stepIndex = this.emptyProcess.currentStage;
     }
     else this.emptyProcess = undefined;
     const modal = this.facade.modalService.create({
