@@ -9,7 +9,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Status</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Status</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="status" (ngModelChange)="statusChanged()">
                         <nz-option *ngFor="let status of statusList" nzLabel="{{status.name}}" [nzValue]="status.id">
@@ -21,7 +21,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="date">Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="date">Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('date').dirty && offerForm.get('date').errors">
@@ -34,7 +34,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="type">Responsible</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Responsible</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select formControlName="consultantOwnerId" nzPlaceHolder="Select the owner of the process">
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
@@ -46,7 +46,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="seniority">Seniority</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="seniority">Seniority</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-select #seniority formControlName="seniority" (ngModelChange)="updateSeniority(seniority.value)">
                         <nz-option *ngFor="let seniority of seniorityList" nzLabel="{{seniority.name}}" [nzValue]="seniority.id">
@@ -60,7 +60,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="offerDate">Offer Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="offerDate">Offer Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="offerDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('offerDate').dirty && offerForm.get('offerDate').errors">
@@ -71,7 +71,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="agreedSalary">Agreed Salary</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="agreedSalary">Agreed Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <input type="number" nz-input formControlName="agreedSalary" id="agreedSalary" placeholder="Please input the agreed salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="offerForm.get('agreedSalary').dirty && offerForm.get('agreedSalary').errors">
@@ -84,7 +84,7 @@
     <div nz-row>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="hireDate">Hire Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="hireDate">Hire Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="hireDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('hireDate').dirty && offerForm.get('hireDate').errors">
@@ -95,7 +95,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="feedback">Feedback</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="feedback">Feedback</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <textarea rows="1" id="feedback" nz-input formControlName="feedback" placeholder="Input any additional information if necessary" id="feedback"></textarea>
                 </nz-form-control>
@@ -120,7 +120,7 @@
         </div>
         <div nz-col nzSpan="12">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="offerDate">Done Date</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="offerDate">Done Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="backgroundCheckDoneDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('backgroundCheckDoneDate').dirty && offerForm.get('backgroundCheckDoneDate').errors">
@@ -139,7 +139,7 @@
             </nz-form-item>
         </div>
         <div nz-col nzSpan="12">
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="preocupationalDoneDate">Done Date</nz-form-label>
+            <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="preocupationalDoneDate">Done Date</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
                 <nz-date-picker style="width: 100%;" formControlName="preocupationalDoneDate"></nz-date-picker>
                 <nz-form-explain *ngIf="offerForm.get('preocupationalDoneDate').dirty && offerForm.get('preocupationalDoneDate').errors">
@@ -151,7 +151,7 @@
     <div nz-row>
         <div nz-col nzSpan="12" *ngIf="showRejectionReason()">
             <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Input the rejection reason"></textarea>
                 </nz-form-control>
