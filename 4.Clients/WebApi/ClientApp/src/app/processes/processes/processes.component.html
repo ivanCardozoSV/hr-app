@@ -207,6 +207,7 @@
       class="carousel"
       #slickModal="slick-modal"
       [config]="slideConfig"
+      (destroy)="closeModal()"
     >
       <div ngxSlickItem class="slide">
         <candidate-add [_candidateProfiles]=profiles [_communities]=communities [_process]="emptyProcess" [_consultants]="consultants" [_candidate]="currentCandidate" [_offices]="offices">
