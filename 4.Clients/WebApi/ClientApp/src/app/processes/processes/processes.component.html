@@ -222,7 +222,7 @@
         <div ngxSlickItem class="slide">
             <client-stage [_consultants]="consultants" [clientStage]="emptyProcess.clientStage"></client-stage>
         </div>
-        <div ngxSlickItem class="slide">
+        <div ngxSlickItem class="slide" style="overflow-y: auto; height: 565px">
             <offer-stage [_consultants]="consultants" [offerStage]="emptyProcess.offerStage" (selectedSeniority)="updateSeniority($event)"></offer-stage>
         </div>
     </ngx-slick>
