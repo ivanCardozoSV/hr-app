@@ -68,7 +68,7 @@ namespace Domain.Services.Repositories.EF
             var consultant11 = new Consultant { Name = "Adrian", LastName = "Rodriguez Renda", PhoneNumber = "(+54)9876543", EmailAddress = "adrian.rodriguezrenda@softvision.com" };
             var consultant12 = new Consultant { Name = "Kevin", LastName = "Zatel", PhoneNumber = "(+54)12359742", EmailAddress = "kevin.zatel@softvision.com" };
             var consultant13 = new Consultant { Name = "Tomas", LastName = "Rebollo", PhoneNumber = "(+54)12359742", EmailAddress = "tomas.rebollo@softvision.com" };
-            var consultant14 = new Consultant { Name = "Matias", LastName = "Otero", PhoneNumber = "(+54)12359742", EmailAddress = "matias.otero@softvision.com" };
+            var consultant14 = new Consultant { Name = "Facundo", LastName = "Valeriano", PhoneNumber = "(+54)12359742", EmailAddress = "facundo.valeriano@softvision.com" };
             var consultant15 = new Consultant { Name = "Matias", LastName = "Totaro", PhoneNumber = "(+54)12359742", EmailAddress = "matias.totaro@softvision.com" };
             context.Consultants.Add(consultant1);
             context.Consultants.Add(consultant2);
