@@ -475,7 +475,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
       this.emptyProcess = this.filteredProcesses.filter(p => p.id === processId)[0];
       this.isEdit = true;
       this.openFromEdit = true;
-      this.stepIndex = this.emptyProcess.currentStage;
+      this.emptyProcess.currentStage == ProcessCurrentStageEnum.Finished ? this.stepIndex = ProcessCurrentStageEnum.OfferStage : this.stepIndex = this.emptyProcess.currentStage;
     }
     else this.emptyProcess = undefined;
     const modal = this.facade.modalService.create({
@@ -603,7 +603,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
   closeModal() {
     this.facade.modalService.openModals[0].destroy();
     this.isEdit = false;
-    this.stepIndex = 0;
+    this.stepIndex = 0;    
   }
 
   getForms() {
