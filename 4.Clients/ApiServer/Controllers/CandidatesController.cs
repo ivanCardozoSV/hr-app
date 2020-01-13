@@ -7,6 +7,9 @@ using Domain.Services.Contracts.Candidate;
 using Domain.Services.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System;
+using Domain.Model;
 
 namespace ApiServer.Controllers
 {
@@ -35,6 +38,22 @@ namespace ApiServer.Controllers
                 var candidates = _candidateService.List();
 
                 return Accepted(_mapper.Map<List<ReadedCandidateViewModel>>(candidates));
+            });
+        }
+
+        [HttpGet("filter")]
+        //[Authorize(Policy = SecurityClaims.CAN_LIST_CANDIDATE)]
+        public IActionResult Get([FromBody]Dictionary<string,IEnumerable<int>> filterData)
+        {
+         
+            Func<Candidate, bool> filter = candidate => filterData["skills"]
+            .All(val =>candidate.CandidateSkills.Select(skill => skill.SkillId).Contains(val));
+            return ApiAction(() =>
+            {
+                var candidates = _candidateService.Read(filter);
+                System.Diagnostics.Debug.WriteLine("fef");
+                return Accepted(_mapper.Map<List<ReadedCandidateViewModel>>(candidates));
+                
             });
         }
 
