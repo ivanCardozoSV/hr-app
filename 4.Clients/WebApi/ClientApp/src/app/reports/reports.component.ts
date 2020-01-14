@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Skill } from 'src/entities/skill';
 import { Candidate } from 'src/entities/candidate';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label, SingleDataSet } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -102,13 +102,33 @@ export class ReportsComponent implements OnInit {
     this.getSkills();
     this.getCandidates();
     this.getProcesses();
-
+/* 
     this.validateSkillsForm = this.fb.group({
       skillSelector: [null, [Validators.required]],
       skillRateSlidder: [[0, 100]]
+    }); */
+
+    this.validateSkillsForm = this.fb.group({
+      skillSelectors: this.fb.array([{
+        skillSelector: [null, [Validators.required]],
+        skillRateSlidder: [[0, 100]]
+      }]) 
     });
 
     this.app.hideLoading();
+  }
+
+  get skillSelectors(){
+    return this.validateSkillsForm.get('skillSelectors') as FormArray
+  }
+
+  addField(){
+    const skillSelector = this.fb.group({
+      skillSelector: [null, [Validators.required]],
+      skillRateSlidder: [[0, 100]]
+    })
+
+    this.skillSelectors.push(skillSelector);
   }
 
   showDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
