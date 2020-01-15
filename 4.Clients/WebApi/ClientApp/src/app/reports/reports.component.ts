@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Skill } from 'src/entities/skill';
 import { Candidate } from 'src/entities/candidate';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label, SingleDataSet } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -67,6 +67,7 @@ export class ReportsComponent implements OnInit {
   //CandidateFilter
   @ViewChild('dropdown') nameDropdown;
   validateSkillsForm: FormGroup;
+  listOfControl: Array<{ id: number; controlInstance: string }> = [];
 
   emptyCandidate: Candidate;
   skills: Skill[] = [];
@@ -108,27 +109,31 @@ export class ReportsComponent implements OnInit {
       skillRateSlidder: [[0, 100]]
     }); */
 
-    this.validateSkillsForm = this.fb.group({
-      skillSelectors: this.fb.array([{
-        skillSelector: [null, [Validators.required]],
-        skillRateSlidder: [[0, 100]]
-      }]) 
-    });
-
+    this.validateSkillsForm =  this.fb.group({});
+    this.addField()
     this.app.hideLoading();
   }
 
-  get skillSelectors(){
+/*   get skillSelectors(){
     return this.validateSkillsForm.get('skillSelectors') as FormArray
-  }
+  } */
 
-  addField(){
-    const skillSelector = this.fb.group({
-      skillSelector: [null, [Validators.required]],
-      skillRateSlidder: [[0, 100]]
-    })
+  addField(e?: MouseEvent): void {
+    if (e) {
+      e.preventDefault();
+    }
+    const id = this.listOfControl.length > 0 ? this.listOfControl[this.listOfControl.length - 1].id + 1 : 0;
 
-    this.skillSelectors.push(skillSelector);
+    const control = {
+      id,
+      controlInstance: `skill${id}`
+    };
+    const index = this.listOfControl.push(control);
+    console.log(this.listOfControl[this.listOfControl.length - 1]);
+    this.validateSkillsForm.addControl(
+      this.listOfControl[index - 1].controlInstance,
+      new FormControl(null, Validators.required)
+    );
   }
 
   showDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
