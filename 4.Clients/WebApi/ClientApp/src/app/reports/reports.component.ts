@@ -67,7 +67,7 @@ export class ReportsComponent implements OnInit {
   //CandidateFilter
   @ViewChild('dropdown') nameDropdown;
   validateSkillsForm: FormGroup;
-  listOfControl: Array<{ id: number; controlInstance: string }> = [];
+  listOfControl: Array<{ id: number; controlInstance: string[] }> = [];
 
   emptyCandidate: Candidate;
   skills: Skill[] = [];
@@ -126,14 +126,12 @@ export class ReportsComponent implements OnInit {
 
     const control = {
       id,
-      controlInstance: `skill${id}`
+      controlInstance: [`skill${id}`, `rate${id}`]
     };
     const index = this.listOfControl.push(control);
     console.log(this.listOfControl[this.listOfControl.length - 1]);
-    this.validateSkillsForm.addControl(
-      this.listOfControl[index - 1].controlInstance,
-      new FormControl(null, Validators.required)
-    );
+    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[0],new FormControl(null, Validators.required));
+    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[1],new FormControl(null, Validators.required));
   }
 
   showDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
