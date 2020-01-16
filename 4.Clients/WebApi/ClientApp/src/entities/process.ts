@@ -23,6 +23,7 @@ export class Process {
     consultantDelegateId: number;
     consultantDelegate: Consultant;
     rejectionReason: string;
+    declineReason: string;
     actualSalary: number;
     wantedSalary: number;
     agreedSalary: number;

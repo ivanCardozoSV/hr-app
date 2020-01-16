@@ -20,7 +20,7 @@ namespace ApiServer.Contracts.Process
         public ProcessCurrentStage CurrentStage { get; set; }
 
         public string RejectionReason { get; set; }
-
+        public string DeclineReason { get; set; }
         public int? CandidateId { get; set; }
         public ReadedCandidateViewModel Candidate { get; set; }
         public ReadedPostulantViewModel Postulant { get; set; }

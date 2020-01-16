@@ -22,7 +22,7 @@ namespace Domain.Services.Contracts.Process
         public string Profile { get; set; }
 
         public string RejectionReason { get; set; }
-
+        public string DeclineReason { get; set; }
         public int? CandidateId { get; set; }
 
         public UpdateCandidateContract Candidate { get; set; }

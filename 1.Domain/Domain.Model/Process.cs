@@ -15,7 +15,7 @@ namespace Domain.Model
         public ProcessCurrentStage CurrentStage { get; set; }
 
         public string RejectionReason { get; set; }
-
+        public string DeclineReason { get; set; }
         public int? CandidateId { get; set; }
         public Candidate Candidate { get; set; }
 
