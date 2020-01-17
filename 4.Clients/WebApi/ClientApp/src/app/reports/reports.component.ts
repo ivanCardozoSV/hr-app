@@ -241,20 +241,20 @@ export class ReportsComponent implements OnInit {
     this.facade.candidateService.getCandidatesBySkills(selectedSkills)
       .subscribe(res => {
         this.listOfDisplayData = res;
+        let skilledCandidates: number = this.listOfDisplayData.filter(candidate => candidate.candidateSkills[0].rate >= 50).length;
+        let totalCandidates: number = this.listOfDisplayData.length;
+
+        //Cards de porcentajes
+        this.stadisticAbove = (skilledCandidates * 100) / totalCandidates;
+        if (this.stadisticAbove === 100) this.stadisticBelow = 0;
+        else this.stadisticBelow = ((totalCandidates - skilledCandidates) * 100) / totalCandidates;
+        if (this.stadisticBelow === 100) this.stadisticAbove = 0;
+        if (this.stadisticAbove.toString() == 'NaN') this.stadisticAbove = 0;
+        if (this.stadisticBelow.toString() == 'NaN') this.stadisticBelow = 0;
+        this.app.hideLoading();
       }, err => {
         console.log(err);
       });
-
-    let skilledCandidates: number = this.listOfDisplayData.filter(candidate => candidate.candidateSkills[0].rate >= 50).length;
-    let totalCandidates: number = this.listOfDisplayData.length;
-    //Cards de porcentajes
-    this.stadisticAbove = (skilledCandidates * 100) / totalCandidates;
-    if (this.stadisticAbove === 100) this.stadisticBelow = 0;
-    else this.stadisticBelow = ((totalCandidates - skilledCandidates) * 100) / totalCandidates;
-    if (this.stadisticBelow === 100) this.stadisticAbove = 0;
-    if (this.stadisticAbove.toString() == 'NaN') this.stadisticAbove = 0;
-    if (this.stadisticBelow.toString() == 'NaN') this.stadisticBelow = 0;
-    this.app.hideLoading();
   }
 
   reset(): void {
