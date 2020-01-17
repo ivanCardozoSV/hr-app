@@ -33,4 +33,21 @@ export class CandidateService extends BaseService {
         catchError(this.handleErrors)
       );
   }
+
+  public getCandidatesBySkills(candidatesFilters: Array<{ skillId: number; minRate: number; maxRate: number }>): Observable<any>{
+
+    const skills = {
+      skills : candidatesFilters
+    }
+
+console.log(skills);
+    
+    return this.http.post(this.apiUrl + '/filter/' , skills ,{
+      headers: this.headersWithAuth
+    })
+      .pipe(
+        tap(data => {}),
+        catchError(this.handleErrors)
+      );
+  }
 }

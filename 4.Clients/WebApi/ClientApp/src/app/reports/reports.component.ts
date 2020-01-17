@@ -103,21 +103,10 @@ export class ReportsComponent implements OnInit {
     this.getSkills();
     this.getCandidates();
     this.getProcesses();
-/* 
-    this.validateSkillsForm = this.fb.group({
-      skillSelector: [null, [Validators.required]],
-      skillRateSlidder: [[0, 100]]
-    }); */
-
-    this.validateSkillsForm =  this.fb.group({});
+    this.validateSkillsForm = this.fb.group({});
     this.addField()
     this.app.hideLoading();
   }
-
-/*   get skillSelectors(){
-    return this.validateSkillsForm.get('skillSelectors') as FormArray
-  } */
-
   addField(e?: MouseEvent): void {
     if (e) {
       e.preventDefault();
@@ -129,9 +118,8 @@ export class ReportsComponent implements OnInit {
       controlInstance: [`skill${id}`, `rate${id}`]
     };
     const index = this.listOfControl.push(control);
-    console.log(this.listOfControl[this.listOfControl.length - 1]);
-    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[0],new FormControl(null, Validators.required));
-    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[1],new FormControl(null, Validators.required));
+    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[0], new FormControl(null, Validators.required));
+    this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[1], new FormControl([0, 100]));
   }
 
   showDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
@@ -211,15 +199,18 @@ export class ReportsComponent implements OnInit {
   }
 
   getCandidatesBySkill(): void {
+
     this.app.showLoading();
     for (const i in this.validateSkillsForm.controls) {
       this.validateSkillsForm.controls[i].markAsDirty();
       this.validateSkillsForm.controls[i].updateValueAndValidity();
     }
 
-    this.filteredCandidates = [];
-    let selectedSkill: number = this.validateSkillsForm.controls['skillSelector'].value;
-    let rateRange: string[] = this.validateSkillsForm.controls['skillRateSlidder'].value.toString().split(',');
+    /* this.filteredCandidates = [];
+    let selectedSkill: number = this.validateSkillsForm.get("skill0").value;
+    let selectedSkills: number[] = this.listOfControl.map(control => this.validateSkillsForm.get(control.controlInstance[1]).value);
+    
+    let rateRange: string[] = this.validateSkillsForm.get("rate0").value.toString().split(',');
     let skilledCandidates: number = 0;
     let totalCandidates: number = 0;
     this.candidates.forEach(candidate => {
@@ -232,9 +223,30 @@ export class ReportsComponent implements OnInit {
           }
         }
       })
-    });
-    this.listOfDisplayData = this.filteredCandidates;
+    }); */
 
+    //this.listOfDisplayData = this.filteredCandidates;
+
+    let selectedSkills: Array<{ skillId: number; minRate: number; maxRate: number }> =
+      this.listOfControl.map(control => {
+        const result = {
+          skillId: parseInt(this.validateSkillsForm.get(control.controlInstance[0]).value),
+          minRate: this.validateSkillsForm.get(control.controlInstance[1]).value[0],
+          maxRate: this.validateSkillsForm.get(control.controlInstance[1]).value[1]
+        }
+
+        return result;
+      });
+
+    this.facade.candidateService.getCandidatesBySkills(selectedSkills)
+      .subscribe(res => {
+        this.listOfDisplayData = res;
+      }, err => {
+        console.log(err);
+      });
+
+    let skilledCandidates: number = this.listOfDisplayData.filter(candidate => candidate.candidateSkills[0].rate >= 50).length;
+    let totalCandidates: number = this.listOfDisplayData.length;
     //Cards de porcentajes
     this.stadisticAbove = (skilledCandidates * 100) / totalCandidates;
     if (this.stadisticAbove === 100) this.stadisticBelow = 0;
