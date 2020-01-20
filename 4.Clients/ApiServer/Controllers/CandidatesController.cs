@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ApiServer.Contracts.Candidates;
+using ApiServer.Contracts.CandidateSkill;
 using AutoMapper;
 using Core;
 using Domain.Model.Enum;
@@ -41,17 +42,20 @@ namespace ApiServer.Controllers
             });
         }
 
-        [HttpGet("filter")]
+        [HttpPost("filter")]
         //[Authorize(Policy = SecurityClaims.CAN_LIST_CANDIDATE)]
-        public IActionResult Get([FromBody]Dictionary<string,IEnumerable<int>> filterData)
+        public IActionResult Get([FromBody]Dictionary<string,IEnumerable<FilterCandidateSkillViewModel>> filterData)
         {
          
             Func<Candidate, bool> filter = candidate => filterData["skills"]
-            .All(val =>candidate.CandidateSkills.Select(skill => skill.SkillId).Contains(val));
+            .All(requiredSkill =>
+            candidate.CandidateSkills
+            .Where(skill => skill.Rate >= requiredSkill.MinRate && skill.Rate <= requiredSkill.MaxRate)
+            .Select(skill => skill.SkillId)
+            .Contains(requiredSkill.SkillId));
             return ApiAction(() =>
             {
                 var candidates = _candidateService.Read(filter);
-                System.Diagnostics.Debug.WriteLine("fef");
                 return Accepted(_mapper.Map<List<ReadedCandidateViewModel>>(candidates));
                 
             });
