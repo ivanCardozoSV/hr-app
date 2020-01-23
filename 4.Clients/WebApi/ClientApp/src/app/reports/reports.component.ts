@@ -11,6 +11,8 @@ import { Process } from 'src/entities/process';
 import { AppComponent } from '../app.component';
 import { ProcessStatusEnum } from 'src/entities/enums/process-status.enum';
 import { replaceAccent } from 'src/app/helpers/string-helpers'
+import { Community } from 'src/entities/community';
+import { Office } from 'src/entities/office';
 
 
 
@@ -74,6 +76,8 @@ export class ReportsComponent implements OnInit {
   candidates: Candidate[] = [];
   processes: Process[] = [];
   filteredCandidates: Candidate[] = [];
+  communities: Community[] = [];
+  _offices: Office[] = [];
   isLoadingResults = false;
   selectedSkill: number;
   searchValue = '';
@@ -103,7 +107,12 @@ export class ReportsComponent implements OnInit {
     this.getSkills();
     this.getCandidates();
     this.getProcesses();
-    this.validateSkillsForm = this.fb.group({});
+    this.getCommunities();
+    this.getOffices();
+    this.validateSkillsForm = this.fb.group({
+      community: '',
+      preferredOffice: ''
+    });
     this.addField()
     this.app.hideLoading();
   }
@@ -142,6 +151,24 @@ export class ReportsComponent implements OnInit {
     this.facade.candidateService.get<Candidate>()
       .subscribe(res => {
         this.candidates = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getCommunities() {
+    this.facade.communityService.get<Community>()
+    .subscribe(res => {
+      this.communities = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getOffices() {
+    this.facade.OfficeService.get<Office>()
+      .subscribe(res => {
+        this._offices = res;
       }, err => {
         console.log(err);
       });
@@ -238,6 +265,7 @@ export class ReportsComponent implements OnInit {
         return result;
       });
 
+     
     this.facade.candidateService.getCandidatesBySkills(selectedSkills)
       .subscribe(res => {
         this.listOfDisplayData = res;
