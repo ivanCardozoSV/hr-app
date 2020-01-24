@@ -710,6 +710,21 @@ namespace Domain.Services.Repositories.EF
             context.Reservation.Add(Reservation4);
             context.SaveChanges();
             #endregion
+
+            #region DeclineReason
+            var declineReason1 = new DeclineReason { Name = "Salary", Description = "Didn't like the offered figure." };
+            var declineReason2 = new DeclineReason { Name = "Different Job", Description = "Took an offer from another employer." };
+            var declineReason3 = new DeclineReason { Name = "Position", Description = "Didn't like the offered position." };
+            var declineReason4 = new DeclineReason { Name = "Other", Description = "Was on vacation and couldn't join." };
+            var declineReason5 = new DeclineReason { Name = "Other", Description = "Disagreed with the political views of the company." };
+            context.DeclineReasons.Add(declineReason1);
+            context.DeclineReasons.Add(declineReason2);
+            context.DeclineReasons.Add(declineReason3);
+            context.DeclineReasons.Add(declineReason4);
+            context.DeclineReasons.Add(declineReason5);
+            context.SaveChanges();
+            #endregion
+
         }
     }
 }

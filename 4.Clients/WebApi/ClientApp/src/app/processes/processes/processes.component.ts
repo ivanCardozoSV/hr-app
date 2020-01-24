@@ -29,6 +29,7 @@ import { replaceAccent } from 'src/app/helpers/string-helpers';
 import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
 import { User } from 'src/entities/user';
 import { SlickComponent } from 'ngx-slick';
+import { DeclineReason } from 'src/entities/declineReason';
 
 @Component({
   selector: 'app-processes',
@@ -85,7 +86,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
   profileSearch: number = 0;
   profileSearchName: string = 'ALL';
 
-  communitySearch: number =0;
+  communitySearch: number = 0;
   communitySearchName: string = 'ALL';
 
   profileList: any[];
@@ -113,6 +114,9 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
   profiles: CandidateProfile[] = [];
   stepIndex: number = 0;
 
+  declineReasons: DeclineReason[] = [];
+  isDeclineReasonOther: boolean = false;
+
   isOwnedProcesses: boolean = false;
 
   forms: FormGroup[] = [];
@@ -134,6 +138,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     this.getOffices();
     this.getCommunities();
     this.getProfiles();
+    this.getDeclineReasons();
     this.facade.consultantService.GetByEmail(this.currentUser.Email)
       .subscribe(res => {
         this.currentConsultant = res.body;
@@ -227,6 +232,15 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     this.facade.candidateProfileService.get<CandidateProfile>()
       .subscribe(res => {
         this.profiles = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  getDeclineReasons() {
+    this.facade.declineReasonService.get<DeclineReason>("Named")
+      .subscribe(res => {
+        this.declineReasons = res;
       }, err => {
         console.log(err);
       });
@@ -353,7 +367,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzCancelText: 'No',
-      nzZIndex: 2,
+      nzZIndex: 5,
       nzOnOk: () => {
         this.app.showLoading();
         let isCompleted: boolean = true;
@@ -363,7 +377,13 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
           if ((!this.declineProcessForm.controls[i].valid)) isCompleted = false;
         }
         if (isCompleted) {
-          let declineReason = this.declineProcessForm.controls['declineReasonDescription'].value.toString();
+          //let a :number = this.declineProcessForm.controls['declineReasonName'].value
+          let declineReason : DeclineReason = { 
+              id: this.declineProcessForm.controls['declineReasonName'].value,
+              name: "",
+              description: this.declineProcessForm.controls['declineReasonDescription'].value.toString()
+            }
+          //this.declineProcessForm.controls['declineReasonDescription'].value.toString();
           process.declineReason = declineReason;
           this.facade.processService.update(process.id, process)
             .subscribe(res => {
@@ -930,5 +950,13 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
           return true
         }
     return false
+  }
+
+  declineReasonNameChanged() {
+    if (this.declineProcessForm.controls['declineReasonName'].value === -1) {
+      this.isDeclineReasonOther = true
+    } else {
+      this.isDeclineReasonOther = false
+    }
   }
 }

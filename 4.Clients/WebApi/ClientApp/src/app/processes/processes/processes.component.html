@@ -187,28 +187,6 @@
     </form>
 </ng-template>
 
-<ng-template #declineProcessModal>
-    <form nz-form [formGroup]="declineProcessForm" [nzLayout]="'horizontal'">
-        <nz-form-item>
-            <div nz-row>
-                <div nz-col nzSpan="24">
-                    <nz-form-label [nzSm]="9" [nzXs]="24" nzFor="type">Decline reason</nz-form-label>
-                </div>
-            </div>
-            <div nz-row>
-                <div nz-col nzSpan="24">
-                    <nz-form-control [nzSm]="22" [nzXs]="24">
-                        <textarea rows="5" id="declineReasonDescription" nz-input formControlName="declineReasonDescription" placeholder="Please enter the decline reason" id="declineReasonDescription"></textarea>
-                        <nz-form-explain *ngIf="declineProcessForm.get('declineReasonDescription').dirty && declineProcessForm.get('declineReasonDescription').errors">
-                            Please specify why the process was declined
-                        </nz-form-explain>
-                    </nz-form-control>
-                </div>
-            </div>
-        </nz-form-item>
-    </form>
-</ng-template>
-
 <ng-template #processStart>
     <div nz-col nzSpan="24">
         <nz-steps [nzCurrent]="stepIndex">
@@ -245,6 +223,38 @@
             <offer-stage [_consultants]="consultants" [offerStage]="emptyProcess.offerStage" (selectedSeniority)="updateSeniority($event)"></offer-stage>
         </div>
     </ngx-slick>
+</ng-template>
+
+<ng-template #declineProcessModal>
+    <form nz-form [formGroup]="declineProcessForm" [nzLayout]="'horizontal'">
+        <div nz-row>
+            <div nz-col>
+                <nz-form-item>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select name="declineReasonName" formControlName="declineReasonName" (ngModelChange)="declineReasonNameChanged()">
+                            <nz-option *ngFor="let declineReason of declineReasons" nzLabel="{{declineReason.name}}" nzValue="{{declineReason.id}}">
+                            </nz-option>
+                            <nz-option nzLabel="Other" [nzValue]="-1">
+                            </nz-option>
+                        </nz-select>
+                        <nz-form-explain *ngIf="declineProcessForm.get('status').dirty && declineProcessForm.get('status').errors">Please select a decline reason</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col>
+                <nz-form-item>
+                    <nz-form-control *ngIf="isDeclineReasonOther" [nzSm]="22" [nzXs]="24">
+                        <textarea rows="5" id="declineReasonDescription" nz-input formControlName="declineReasonDescription" placeholder="Please enter the decline reason" id="declineReasonDescription"></textarea>
+                        <nz-form-explain *ngIf="declineProcessForm.get('declineReasonDescription').dirty && declineProcessForm.get('declineReasonDescription').errors">
+                            Please specify why the process was declined
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
 </ng-template>
 
 <ng-template #startModalButtons>
