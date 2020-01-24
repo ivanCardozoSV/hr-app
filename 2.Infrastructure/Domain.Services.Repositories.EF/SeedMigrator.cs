@@ -437,7 +437,7 @@ namespace Domain.Services.Repositories.EF
                 HrStage = new HrStage { ProcessId = 1, ConsultantDelegateId = 1, ConsultantOwnerId = 1, Status = StageStatus.Accepted, Date = DateTime.Today.AddDays(-14), EnglishLevel = EnglishLevel.HighIntermediate, WantedSalary = 10000, ActualSalary = 5000 },
                 TechnicalStage = new TechnicalStage { ProcessId = 1, ConsultantDelegateId = 2, ConsultantOwnerId = 1, Status = StageStatus.Accepted, Date = DateTime.Today.AddDays(-12), Seniority = Seniority.SemiSenior2, Client = "EY" },
                 ClientStage = new ClientStage { ProcessId = 1, ConsultantDelegateId = 2, Interviewer = "", ConsultantOwnerId = 1, DelegateName = "", Status = StageStatus.InProgress, Date = DateTime.Today.AddDays(-12) },
-                OfferStage = new OfferStage { ProcessId = 1, ConsultantDelegateId = 4, ConsultantOwnerId = 1, Status = StageStatus.NA, Date = DateTime.Today.AddDays(-12), OfferDate = DateTime.Today.AddDays(-12), AgreedSalary = 0, HireDate = DateTime.Today.AddDays(-12), Seniority = Seniority.Senior1 }
+                OfferStage = new OfferStage { ProcessId = 1, ConsultantDelegateId = 4, ConsultantOwnerId = 1, Status = StageStatus.NA, Date = DateTime.Today.AddDays(-12), HireDate = DateTime.Today.AddDays(-12), Seniority = Seniority.Senior1 }
             };
 
             var process2 = new Process
@@ -508,7 +508,7 @@ namespace Domain.Services.Repositories.EF
                 HrStage = new HrStage { ProcessId = 6, ConsultantDelegateId = 1, ConsultantOwnerId = 1, Status = StageStatus.Accepted, Date = DateTime.Today.AddDays(-14) },
                 TechnicalStage = new TechnicalStage { ProcessId = 6, ConsultantDelegateId = 2, ConsultantOwnerId = 1, Status = StageStatus.Accepted, Date = DateTime.Today.AddDays(-12), Client = "EY" },
                 ClientStage = new ClientStage { ProcessId = 6, ConsultantDelegateId = 2, ConsultantOwnerId = 1, Status = StageStatus.InProgress, Date = DateTime.Today.AddDays(-12) },
-                OfferStage = new OfferStage { ProcessId = 6, ConsultantDelegateId = 4, ConsultantOwnerId = 1, Status = StageStatus.NA, Date = DateTime.Today.AddDays(-12) }
+                OfferStage = new OfferStage { ProcessId = 6, ConsultantDelegateId = 4, ConsultantOwnerId = 1, Status = StageStatus.NA, Date = DateTime.Today.AddDays(-12), Offers = new List<Offer> { new Offer { Id = 2, OfferDate = new DateTime(), Salary = 50, RejectionReason = "Not enough" } } }
             };
 
             context.Processes.Add(process1);
@@ -516,7 +516,7 @@ namespace Domain.Services.Repositories.EF
             context.Processes.Add(process3);
             context.Processes.Add(process4);
             context.Processes.Add(process5);
-            context.Processes.Add(process6);
+            context.Processes.Add(process6);            
             context.SaveChanges();
             #endregion
 

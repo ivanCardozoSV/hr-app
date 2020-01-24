@@ -126,6 +126,7 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { SlickModule } from "ngx-slick";
 import { PostulantsComponent } from './postulants/postulants.component';
 import { PostulantsService } from './services/postulants.service';
+import { HistoryOfferPopupComponent } from './stages/history-offer-popup/history-offer-popup.component';
 
 
 
@@ -153,6 +154,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
       ProcessesComponent,
       ProcessDetailComponent,
       StageDetailComponent,
+      HistoryOfferPopupComponent,
       StageEditComponent,
       ReportsComponent,
       LoginComponent,
@@ -199,7 +201,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
       NoticeCalendarComponent,
       LocationsComponent,
       ProfilesComponent,
-      PostulantsComponent
+      PostulantsComponent,
+      HistoryOfferPopupComponent
    ],
    imports: [
       BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

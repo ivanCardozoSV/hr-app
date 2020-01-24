@@ -29,6 +29,7 @@ import { replaceAccent } from 'src/app/helpers/string-helpers';
 import { ProcessCurrentStageEnum } from 'src/entities/enums/process-current-stage';
 import { User } from 'src/entities/user';
 import { SlickComponent } from 'ngx-slick';
+import { Offer } from 'src/entities/offer';
 
 @Component({
   selector: 'app-processes',
@@ -527,6 +528,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
   showCandidateDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
     this.emptyCandidate = this.candidatesFullList.filter(candidate => candidate.id == candidateID)[0];
     this.candidateDetailsModal.showModal(modalContent, this.emptyCandidate.name + ' ' + this.emptyCandidate.lastName);
+    console.log(this.emptyProcess);
   }
 
   showConsultantDetailsModal(consultantID: number, modalContent: TemplateRef<{}>): void {
@@ -844,16 +846,16 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
         feedback: '',
         consultantOwnerId: candidate.recruiter.id,
         consultantDelegateId: candidate.recruiter.id,
-        processId: 0,
-        agreedSalary: 0,
-        seniority: SeniorityEnum.NA,
-        offerDate: new Date(),
-        hireDate: new Date(),
+        processId: 0,        
+        seniority: SeniorityEnum.NA,        
+        hireDate: new Date(),        
         backgroundCheckDone: false,
         backgroundCheckDoneDate: new Date(),
         preocupationalDone: false,
-        preocupationalDoneDate: new Date()
+        preocupationalDoneDate: new Date(),
+        offers : new Array<Offer>()
       },
     };
+    this.emptyProcess.offerStage.offers = [];
   }
 }

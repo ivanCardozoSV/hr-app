@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { trimValidator } from 'src/app/directives/trim.validator';
 import { Consultant } from 'src/entities/consultant';
@@ -8,11 +8,15 @@ import { Globals } from '../../app-globals/globals';
 import { StageStatusEnum } from '../../../entities/enums/stage-status.enum';
 import { OfferStage } from 'src/entities/offer-stage';
 import { ProcessService } from '../../services/process.service';
+import { HistoryOfferPopupComponent } from '../history-offer-popup/history-offer-popup.component';
+import { Offer } from 'src/entities/offer';
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'offer-stage',
   templateUrl: './offer-stage.component.html',
-  styleUrls: ['./offer-stage.component.css']
+  styleUrls: ['./offer-stage.component.css'],
+  providers: [HistoryOfferPopupComponent]
 })
 export class OfferStageComponent implements OnInit {
 
@@ -33,8 +37,8 @@ export class OfferStageComponent implements OnInit {
     consultantDelegateId: 0,
     feedback: '',
     seniority: [0, [Validators.required]],
-    offerDate: [new Date(), [Validators.required]],
-    agreedSalary: [null, [Validators.required]],
+    offerDate: new Date(),
+    agreedSalary: 0,
     hireDate: [new Date(), [Validators.required]],
     backgroundCheckDone: false,
     backgroundCheckDoneDate: [new Date(), [Validators.required]],
@@ -49,18 +53,22 @@ export class OfferStageComponent implements OnInit {
   backDateEnabled: boolean;
   preocupationalCheckEnabled: boolean = false;
   preocupationalDateEnabled: boolean;
+  temporalOffers : Offer[] = [];
 
   @Input() offerStage: OfferStage;
-
+  @ViewChild(HistoryOfferPopupComponent) historyOffer: HistoryOfferPopupComponent ;
   @Output() selectedSeniority = new EventEmitter();
 
   //selectedSeniorities: any[2];
 
-  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals, private processService: ProcessService) {
-    this.statusList = globals.stageStatusList;
+  constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals, private processService: ProcessService, private historyOfferModal: HistoryOfferPopupComponent) {    
+    this.statusList = globals.stageStatusList;    
     //this.seniorityList = globals.seniorityList;
-   }
+  }
 
+  showOfferHistoryModal(modalContent: TemplateRef<{}>){    
+    this.historyOfferModal.showModal(modalContent);
+  }
 
   ngOnInit() {
     this.processService.selectedSeniorities.subscribe(sr => {
@@ -68,7 +76,8 @@ export class OfferStageComponent implements OnInit {
       this.offerForm.controls['seniority'].setValue(this.seniorityList[0].id);
     });
     this.changeFormStatus(false);
-    if (this.offerStage) { this.fillForm(this.offerStage); }
+    if (this.offerStage) { this.fillForm(this.offerStage); }    
+    this.temporalOffers = cloneDeep(this.offerStage.offers);
   }
 
   updateSeniority(seniorityId) {
@@ -83,13 +92,15 @@ export class OfferStageComponent implements OnInit {
     for (const i in this.offerForm.controls) {
       if (this.offerForm.controls[i] != this.offerForm.controls['status'] &&
       this.offerForm.controls[i] != this.offerForm.controls.backgroundCheckDoneDate &&
-      this.offerForm.controls[i] != this.offerForm.controls.preocupationalDoneDate) {
+      this.offerForm.controls[i] != this.offerForm.controls.preocupationalDoneDate &&
+      this.offerForm.controls[i] != this.offerForm.controls['agreedSalary'] &&
+      this.offerForm.controls[i] != this.offerForm.controls['offerDate']){
         if (enable) { this.offerForm.controls[i].enable(); }
         else { 
           this.offerForm.controls[i].disable();
         }
       }
-    }
+    }  
     this.backCheckEnabled = enable;
     this.preocupationalCheckEnabled = enable;
     this.enableBackDate();
@@ -117,9 +128,9 @@ export class OfferStageComponent implements OnInit {
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
     stage.processId = processId;
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
-    stage.seniority = this.getControlValue(form.controls.seniority);
-    stage.offerDate = this.getControlValue(form.controls.offerDate);
-    stage.agreedSalary = this.getControlValue(form.controls.agreedSalary);
+    stage.seniority = this.getControlValue(form.controls.seniority);    
+    stage.offers = this.temporalOffers;
+    // this.offerStage.offers = this.temporalOffers;
     stage.hireDate = this.getControlValue(form.controls.hireDate);
     stage.backgroundCheckDone = this.getControlValue(form.controls.backgroundCheckDone);
     stage.backgroundCheckDoneDate = stage.backgroundCheckDone ? this.getControlValue(form.controls.backgroundCheckDoneDate) : null;
@@ -142,9 +153,10 @@ export class OfferStageComponent implements OnInit {
     if (offerStage.consultantOwnerId != null) {
       this.offerForm.controls['consultantOwnerId'].setValue(offerStage.consultantOwnerId);
     }
-    if (offerStage.seniority != null) { this.offerForm.controls['seniority'].setValue(offerStage.seniority); }
-    if (offerStage.offerDate != null) { this.offerForm.controls['offerDate'].setValue(offerStage.offerDate); }
-    if (offerStage.agreedSalary != null) { this.offerForm.controls['agreedSalary'].setValue(offerStage.agreedSalary); }
+    if (offerStage.seniority != null) { this.offerForm.controls['seniority'].setValue(offerStage.seniority); }    
+    // if(this.temporalOffers != null && this.temporalOffers[length-1].offerDate != null)  {this.offerForm.controls['offerDate'].setValue(this.temporalOffers[length-1].offerDate); }
+    // if(this.temporalOffers != null && this.temporalOffers[length-1].salary != null)  {this.offerForm.controls['agreedSalary'].setValue(this.temporalOffers[length-1].salary); }
+
     if (offerStage.hireDate != null) { this.offerForm.controls['hireDate'].setValue(offerStage.hireDate); }
     if (offerStage.feedback != null) { this.offerForm.controls['feedback'].setValue(offerStage.feedback); }
     if (offerStage.backgroundCheckDone != null) {
