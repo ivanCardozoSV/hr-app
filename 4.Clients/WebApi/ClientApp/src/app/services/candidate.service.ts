@@ -34,15 +34,12 @@ export class CandidateService extends BaseService {
       );
   }
 
-  public getCandidatesBySkills(candidatesFilters: Array<{ skillId: number; minRate: number; maxRate: number }>): Observable<any>{
+  public getCandidatesBySkills(candidatesFilters): Observable<any>{
 
-    const skills = {
-      skills : candidatesFilters
-    }
+  console.log(candidatesFilters);
+  
 
-console.log(skills);
-    
-    return this.http.post(this.apiUrl + '/filter/' , skills ,{
+    return this.http.post(this.apiUrl + '/filter/' , candidatesFilters ,{
       headers: this.headersWithAuth
     })
       .pipe(

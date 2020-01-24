@@ -265,8 +265,18 @@ export class ReportsComponent implements OnInit {
         return result;
       });
 
+      const filteredCandidateRequest : { community : number
+        , preferredOffice : number
+        , selectedSkills:  Array<{ skillId: number; minRate: number; maxRate: number }> } = 
+        {
+          community : parseInt(this.validateSkillsForm.get('community').value),
+          preferredOffice : parseInt(this.validateSkillsForm.get('preferredOffice').value),
+          selectedSkills : selectedSkills
+        }
+
+      
      
-    this.facade.candidateService.getCandidatesBySkills(selectedSkills)
+    this.facade.candidateService.getCandidatesBySkills(filteredCandidateRequest)
       .subscribe(res => {
         this.listOfDisplayData = res;
         let skilledCandidates: number = this.listOfDisplayData.filter(candidate => candidate.candidateSkills[0].rate >= 50).length;
