@@ -44,15 +44,18 @@ namespace ApiServer.Controllers
 
         [HttpPost("filter")]
         //[Authorize(Policy = SecurityClaims.CAN_LIST_CANDIDATE)]
-        public IActionResult Get([FromBody]Dictionary<string,IEnumerable<FilterCandidateSkillViewModel>> filterData)
+        public IActionResult Get([FromBody] FilterCandidateViewModel filterData)
         {
-         
-            Func<Candidate, bool> filter = candidate => filterData["skills"]
+
+            Func<Candidate, bool> filter = candidate => candidate.PreferredOffice.Id.Equals(filterData.PreferredOffice)
+            && candidate.Community.Id.Equals(filterData.Community)
+            && filterData.SelectedSkills
             .All(requiredSkill =>
             candidate.CandidateSkills
             .Where(skill => skill.Rate >= requiredSkill.MinRate && skill.Rate <= requiredSkill.MaxRate)
             .Select(skill => skill.SkillId)
             .Contains(requiredSkill.SkillId));
+
             return ApiAction(() =>
             {
                 var candidates = _candidateService.Read(filter);

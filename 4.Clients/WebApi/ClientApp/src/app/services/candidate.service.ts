@@ -36,9 +36,6 @@ export class CandidateService extends BaseService {
 
   public getCandidatesBySkills(candidatesFilters): Observable<any>{
 
-  console.log(candidatesFilters);
-  
-
     return this.http.post(this.apiUrl + '/filter/' , candidatesFilters ,{
       headers: this.headersWithAuth
     })
