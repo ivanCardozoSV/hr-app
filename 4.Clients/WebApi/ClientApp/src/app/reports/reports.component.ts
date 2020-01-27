@@ -131,6 +131,16 @@ export class ReportsComponent implements OnInit {
     this.validateSkillsForm.addControl(this.listOfControl[index - 1].controlInstance[1], new FormControl([0, 100]));
   }
 
+  removeField(i: { id: number; controlInstance: string[] }, e: MouseEvent): void {
+    e.preventDefault();
+    if (this.listOfControl.length > 1) {
+      const index = this.listOfControl.indexOf(i);
+      this.listOfControl.splice(index, 1);
+      this.validateSkillsForm.removeControl(i.controlInstance[0]);
+      this.validateSkillsForm.removeControl(i.controlInstance[1]);
+    }
+  }
+
   showDetailsModal(candidateID: number, modalContent: TemplateRef<{}>): void {
     this.emptyCandidate = this.filteredCandidates.filter(candidate => candidate.id == candidateID)[0];
     this.detailsModal.showModal(modalContent, this.emptyCandidate.name + " " + this.emptyCandidate.lastName);

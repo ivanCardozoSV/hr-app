@@ -41,9 +41,15 @@
           </nz-form-control>
         </nz-form-item>
         <nz-form-item [style.width.%]="35">
-          <nz-form-control [style.width.%]="100" style="text-align: center;">
+          <nz-form-control [style.width.%]="90" style="text-align: center;">
             <nz-form-label style="text-align: left; float:left" nzFor="skillRateSlidder">Rate</nz-form-label><br />
             <nz-slider nzRange [formControlName]="control.controlInstance[1]"></nz-slider>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item [style.width.%]="20">
+          <nz-form-control [style.width.%]="90" style="text-align: center;">
+          <br>
+            <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
           </nz-form-control>
         </nz-form-item>
       </div>
