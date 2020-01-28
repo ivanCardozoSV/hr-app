@@ -49,7 +49,7 @@
             <nz-form-control [nzSm]="14" [nzXs]="24">
                 <nz-month-picker formControlName="month" (ngModelChange)="onMonthChange($event)" nzPlaceHolder="Select a month">
                 </nz-month-picker>
-                <nz-form-explain *ngIf="casualtyForm.get('month').dirty && casualtyForm.get('month').errors && !exists(casualtyForm.get('month').errors)">Please input the month</nz-form-explain>
+                <nz-form-explain *ngIf="casualtyForm.get('month').dirty && casualtyForm.get('month').errors && !exists(casualtyForm.get('month').errors)">Please enter the month</nz-form-explain>
                 <nz-form-explain *ngIf="casualtyForm.get('month').dirty && exists(casualtyForm.get('month').errors)">
                     This month is already projected
                 </nz-form-explain>
@@ -58,8 +58,8 @@
         <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="value">Value</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-                <input numbersOnly type="number" pattern="[0-9]*" nz-input formControlName="value" id="value" placeholder="Please input the value">
-                <nz-form-explain *ngIf="casualtyForm.get('value').dirty && casualtyForm.get('value').errors">Please input the value</nz-form-explain>
+                <input numbersOnly type="number" pattern="[0-9]*" nz-input formControlName="value" id="value" placeholder="Please enter the value">
+                <nz-form-explain *ngIf="casualtyForm.get('value').dirty && casualtyForm.get('value').errors">Please enter the value</nz-form-explain>
             </nz-form-control>
         </nz-form-item>
     </form>

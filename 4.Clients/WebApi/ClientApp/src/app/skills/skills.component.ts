@@ -139,7 +139,7 @@ export class SkillsComponent implements OnInit {
             .subscribe(res => {
               this.getSkills();
               this.app.hideLoading();
-              this.facade.toastrService.success('Skill was successfully created !');
+              this.facade.toastrService.success('Skill was successfully created!');
               modal.destroy();
             }, err => {
               this.app.hideLoading();
@@ -205,7 +205,7 @@ export class SkillsComponent implements OnInit {
             .subscribe(res => {
               this.getSkills();
               this.app.hideLoading();
-              this.facade.toastrService.success('Skill was successfully created !');
+              this.facade.toastrService.success('Skill was successfully created!');
               modal.destroy();
             }, err => {
               this.app.hideLoading();
@@ -224,7 +224,7 @@ export class SkillsComponent implements OnInit {
   showDeleteConfirm(skillID: number): void {
     let skillDelete: Skill = this.filteredSkills.find(skill => skill.id == skillID);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + skillDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + skillDelete.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -232,7 +232,7 @@ export class SkillsComponent implements OnInit {
       nzOnOk: () => this.facade.skillService.delete<Skill>(skillID)
         .subscribe(res => {
           this.getSkills();
-          this.facade.toastrService.success('Skill was deleted !');
+          this.facade.toastrService.success('Skill was deleted!');
         }, err => {
           if(err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

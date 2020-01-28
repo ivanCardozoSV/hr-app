@@ -56,8 +56,8 @@
         <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Name</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-                <input type="text" nz-input formControlName="name" id="name" placeholder="Please input the Name">
-                <nz-form-explain *ngIf="skillForm.get('name').dirty && skillForm.get('name')?.hasError('required')">Please input the name</nz-form-explain>
+                <input type="text" nz-input formControlName="name" id="name" placeholder="Please enter the Name">
+                <nz-form-explain *ngIf="skillForm.get('name').dirty && skillForm.get('name')?.hasError('required')">Please enter the name</nz-form-explain>
                 <nz-form-explain *ngIf="skillForm.get('name')?.hasError('trimBeginError')">
                     The input has leading whitespace!
                 </nz-form-explain>
@@ -69,8 +69,8 @@
         <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-                <input type="text" nz-input formControlName="description" id="description" placeholder="Please input the description">
-                <nz-form-explain *ngIf="skillForm.get('description').dirty && skillForm.get('description')?.hasError('required')">Please input the description</nz-form-explain>
+                <input type="text" nz-input formControlName="description" id="description" placeholder="Please enter a description">
+                <nz-form-explain *ngIf="skillForm.get('description').dirty && skillForm.get('description')?.hasError('required')">Please enter the description</nz-form-explain>
                 <nz-form-explain *ngIf="skillForm.get('description')?.hasError('trimBeginError')">
                     The input has leading whitespace!
                 </nz-form-explain>
@@ -86,7 +86,7 @@
                     <nz-option *ngFor="let option of skillTypes" [nzLabel]="option.name" [nzValue]="option.id">
                     </nz-option>
                 </nz-select>
-                <nz-form-explain *ngIf="skillForm.get('type').dirty && skillForm.get('type').errors">Please input the type</nz-form-explain>
+                <nz-form-explain *ngIf="skillForm.get('type').dirty && skillForm.get('type').errors">Please enter the type</nz-form-explain>
             </nz-form-control>
         </nz-form-item>
 

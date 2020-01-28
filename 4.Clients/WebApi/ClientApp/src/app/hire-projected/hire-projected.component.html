@@ -49,7 +49,7 @@
             <nz-form-control [nzSm]="14" [nzXs]="24">
                 <nz-month-picker formControlName="month" (ngModelChange)="onMonthChange($event)" nzPlaceHolder="Select a month">
                 </nz-month-picker>
-                <nz-form-explain *ngIf="projectionForm.get('month').dirty && projectionForm.get('month').errors && !exists(projectionForm.get('month').errors)">Please input the month</nz-form-explain>
+                <nz-form-explain *ngIf="projectionForm.get('month').dirty && projectionForm.get('month').errors && !exists(projectionForm.get('month').errors)">Please enter the month</nz-form-explain>
                 <nz-form-explain *ngIf="projectionForm.get('month').dirty && exists(projectionForm.get('month').errors)">
                     This month is already projected
                 </nz-form-explain>
@@ -58,8 +58,8 @@
         <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="value">Value</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-                <input numbersOnly pattern="[0-9]*" type="number" nz-input formControlName="value" id="value" placeholder="Please input the value">
-                <nz-form-explain *ngIf="projectionForm.get('value').dirty && projectionForm.get('value').errors">Please input the value</nz-form-explain>
+                <input numbersOnly pattern="[0-9]*" type="number" nz-input formControlName="value" id="value" placeholder="Please enter a value">
+                <nz-form-explain *ngIf="projectionForm.get('value').dirty && projectionForm.get('value').errors">Please enter the value</nz-form-explain>
             </nz-form-control>
         </nz-form-item>
     </form>

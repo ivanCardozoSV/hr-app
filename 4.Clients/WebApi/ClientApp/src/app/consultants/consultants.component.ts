@@ -93,7 +93,7 @@ export class ConsultantsComponent implements OnInit {
     this.validateForm.reset();
     this.validateForm.controls['phoneNumberPrefix'].setValue('+54'); 
     const modal = this.facade.modalService.create({
-      nzTitle: 'Add New Interviewer',
+      nzTitle: 'Add new Interviewer',
       nzContent: modalContent,
       nzClosable: true,
       nzWrapClassName: 'vertical-center-modal',
@@ -130,7 +130,7 @@ export class ConsultantsComponent implements OnInit {
             .subscribe(res => {
               this.getConsultants();
               this.app.hideLoading();
-              this.facade.toastrService.success("Interviewer successfully created !");
+              this.facade.toastrService.success("Interviewer successfully created!");
               modal.destroy();
             }, err => {
               this.app.hideLoading();
@@ -219,7 +219,7 @@ export class ConsultantsComponent implements OnInit {
   showDeleteConfirm(consultantID: number): void {
     let consultantDelete: Consultant = this.filteredConsultants.filter(consultant => consultant.id == consultantID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure you want to delete ' + consultantDelete.lastName + ', ' + consultantDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + consultantDelete.name + ' ' + consultantDelete.lastName + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -227,7 +227,7 @@ export class ConsultantsComponent implements OnInit {
       nzOnOk: () => this.facade.consultantService.delete<Consultant>(consultantID)
         .subscribe(res => {
           this.getConsultants();
-          this.facade.toastrService.success('Interviewer was deleted !');
+          this.facade.toastrService.success('Interviewer was deleted!');
         }, err => {
           if(err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

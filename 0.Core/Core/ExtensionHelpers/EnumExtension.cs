@@ -41,7 +41,7 @@ namespace Core.ExtensionHelpers
             }
             else
             {
-                throw new Exception($"No se encontró el tipo {typeof(T).Name} ingresado");
+                throw new Exception($"Couldn't find the type {typeof(T).Name}");
             }
         }
     }

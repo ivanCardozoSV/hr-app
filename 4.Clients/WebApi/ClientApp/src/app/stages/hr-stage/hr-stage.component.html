@@ -28,7 +28,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="hrForm.get('date').dirty && hrForm.get( 'date').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -43,7 +43,7 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}} " [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="hrForm.get( 'consultantOwnerId').dirty && hrForm.get( 'consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="hrForm.get( 'consultantOwnerId').dirty && hrForm.get( 'consultantOwnerId').errors">Please enter the recruiter</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -65,9 +65,9 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="actualSalary">Actual Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input type="number" nz-input formControlName="actualSalary" id="actualSalary" placeholder="Please input the actual salary" pattern="[0-9]+([\.,][0-9]+)?">
+                    <input type="number" nz-input formControlName="actualSalary" id="actualSalary" placeholder="Please enter the actual salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="hrForm.get('actualSalary').dirty && hrForm.get('actualSalary').errors">
-                        Please input the salary</nz-form-explain>
+                        Please enter the salary</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -75,9 +75,9 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="wantedSalary">Wanted Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input type="number" nz-input formControlName="wantedSalary" id="wantedSalary" placeholder="Please input the wanted salary" pattern="[0-9]+([\.,][0-9]+)?">
+                    <input type="number" nz-input formControlName="wantedSalary" id="wantedSalary" placeholder="Please enter the wanted salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="hrForm.get('wantedSalary').dirty && hrForm.get('wantedSalary').errors">
-                        Please input the salary
+                        Please enter the salary
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -108,7 +108,7 @@
                 </nz-form-control>
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && hrForm.get('rejectionReason').dirty && hrForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="hrForm.get('rejectionReason')?.dirty && hrForm.get('rejectionReason')?.errors ">
-                        Please input rejection reason!
+                        Please enter rejection reason!
                     </ng-container>
                 </nz-form-explain>
             </nz-form-item>

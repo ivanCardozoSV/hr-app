@@ -107,7 +107,7 @@ export class SkillTypeComponent implements OnInit {
                       .subscribe(res => {
                         this.getSkillTypes();
                         this.app.hideLoading();
-                        this.facade.toastrService.success("SkillType was successfuly created !");
+                        this.facade.toastrService.success("Skill Type was successfuly created!");
                         modal.destroy();
                       }, err => {
                         this.app.hideLoading();
@@ -182,7 +182,7 @@ export class SkillTypeComponent implements OnInit {
   showDeleteConfirm(skillTypeID: number): void {
     let skillTypeDelete: SkillType = this.filteredSkillTypes.find(skillType => skillType.id == skillTypeID);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure to delete ' + skillTypeDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + skillTypeDelete.name + '?',
       nzContent: 'This action will delete all skills associated with this type',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -190,7 +190,7 @@ export class SkillTypeComponent implements OnInit {
       nzOnOk: () => this.facade.skillTypeService.delete<SkillType>(skillTypeID)
         .subscribe(res => {
           this.getSkillTypes();
-          this.facade.toastrService.success('SkillType was deleted !');
+          this.facade.toastrService.success('SkillType was deleted!');
         }, err => {
           if(err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

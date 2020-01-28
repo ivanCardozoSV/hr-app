@@ -100,8 +100,8 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title">Title</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="title" id="title" placeholder="Please input the Name">
-                        <nz-form-explain *ngIf="stageForm.get('title').dirty && stageForm.get('title').errors">Please input the title</nz-form-explain>
+                        <input type="text" nz-input formControlName="title" id="title" placeholder="Please enter a name">
+                        <nz-form-explain *ngIf="stageForm.get('title').dirty && stageForm.get('title').errors">Please enter the title</nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -113,7 +113,7 @@
                         <nz-select formControlName="status">
                             <nz-option *ngFor="let status of statusList" nzValue="{{status.id}}" nzLabel="{{status.name}}"></nz-option>
                         </nz-select>
-                        <nz-form-explain *ngIf="stageForm.get('status').dirty && stageForm.get('status').errors">Please input the status
+                        <nz-form-explain *ngIf="stageForm.get('status').dirty && stageForm.get('status').errors">Please enter the status
                         </nz-form-explain>
                     </nz-form-control>
                     <nz-form-control [nzSm]="14" [nzXs]="24" *ngIf="!isEdit">
@@ -134,7 +134,7 @@
                             <nz-option *ngFor="let c of consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                             </nz-option>
                         </nz-select>
-                        <nz-form-explain *ngIf="stageForm.get('consultantOwnerId').dirty && stageForm.get('consultantOwnerId').errors">Please input the owner</nz-form-explain>
+                        <nz-form-explain *ngIf="stageForm.get('consultantOwnerId').dirty && stageForm.get('consultantOwnerId').errors">Please enter the owner</nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -146,7 +146,7 @@
                             <nz-option *ngFor="let c of consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                             </nz-option>
                         </nz-select>
-                        <nz-form-explain *ngIf="stageForm.get('consultantDelegateId').dirty && stageForm.get('consultantDelegateId').errors">Please input the consultant</nz-form-explain>
+                        <nz-form-explain *ngIf="stageForm.get('consultantDelegateId').dirty && stageForm.get('consultantDelegateId').errors">Please enter the consultant</nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -159,7 +159,7 @@
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <nz-date-picker formControlName="startDate"></nz-date-picker>
                         <nz-form-explain *ngIf="stageForm.get('startDate').dirty && stageForm.get('startDate').errors">
-                            Please input the start date
+                            Please enter the start date
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
@@ -170,7 +170,7 @@
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <nz-date-picker formControlName="endDate"></nz-date-picker>
                         <nz-form-explain *ngIf="stageForm.get('endDate').dirty && stageForm.get('endDate').errors">
-                            Please input the end date
+                            Please enter the end date
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
@@ -187,7 +187,7 @@
                         <textarea rows="5" id="feedback" nz-input formControlName="feedback" placeholder="Input feedback for the stage">
             </textarea>
                         <nz-form-explain *ngIf="stageForm.get('feedback').dirty && stageForm.get('feedback').errors">
-                            Please input the feedback for the stage
+                            Please enter the feedback for the stage
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
@@ -199,7 +199,7 @@
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input type="text" nz-input formControlName="description" id="description" placeholder="Stage Description">
                         <nz-form-explain *ngIf="stageForm.get('description').dirty && stageForm.get('description').errors">
-                            Please input the description
+                            Please enter the description
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>

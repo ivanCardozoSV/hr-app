@@ -34,7 +34,7 @@ namespace Domain.Services.Repositories.EF
 
             #region CandidateProfiles
             var Profile1 = new CandidateProfile { Name = "Devs", Description = "Developers" };
-            var Profile2 = new CandidateProfile { Name = "RRHH", Description = "Recursos Humanos" };
+            var Profile2 = new CandidateProfile { Name = "HR", Description = "Human Resources" };
             var Profile3 = new CandidateProfile { Name = "MKT", Description = "Marketing" };
             context.Profiles.Add(Profile1);
             context.Profiles.Add(Profile2);
@@ -43,10 +43,10 @@ namespace Domain.Services.Repositories.EF
             #endregion
 
             #region Community
-            var Community1 = new Community { Name = ".NET", Description = "Comunidad de .Net", ProfileId = 1, Profile = Profile1 };
-            var Community2 = new Community { Name = "Devs", Description = "Comunidad de Developers", ProfileId = 1, Profile = Profile1 };
-            var Community3 = new Community { Name = "RRHH", Description = "Comunidad de Recursos Humanos", ProfileId = 2, Profile = Profile2 };
-            var Community4 = new Community { Name = "Marketing", Description = "Comunidad de Marketing", ProfileId = 3, Profile = Profile3 };
+            var Community1 = new Community { Name = ".NET", Description = ".NET Community", ProfileId = 1, Profile = Profile1 };
+            var Community2 = new Community { Name = "Devs", Description = "Developer Community", ProfileId = 1, Profile = Profile1 };
+            var Community3 = new Community { Name = "HR", Description = "Human Resources Community", ProfileId = 2, Profile = Profile2 };
+            var Community4 = new Community { Name = "Marketing", Description = "Marketing Community", ProfileId = 3, Profile = Profile3 };
             context.Community.Add(Community1);
             context.Community.Add(Community2);
             context.Community.Add(Community3);
@@ -97,9 +97,9 @@ namespace Domain.Services.Repositories.EF
             #endregion
 
             #region Rooms
-            var Room1 = new Room { Name = "Grande", Description = "Sala Grande", OfficeId = 2, Office = Office2 };
-            var Room2 = new Room { Name = "Chica", Description = "Sala Chica", OfficeId = 2, Office = Office2 };
-            var Room3 = new Room { Name = "Salita", Description = "Salita", OfficeId = 1, Office = Office1 };
+            var Room1 = new Room { Name = "Big", Description = "Big Room", OfficeId = 2, Office = Office2 };
+            var Room2 = new Room { Name = "Small", Description = "Small Room", OfficeId = 2, Office = Office2 };
+            var Room3 = new Room { Name = "Tiny", Description = "Tiny Room", OfficeId = 1, Office = Office1 };
             context.Room.Add(Room1);
             context.Room.Add(Room2);
             context.Room.Add(Room3);
@@ -149,15 +149,15 @@ namespace Domain.Services.Repositories.EF
             #region SkillType
             var skillType1 = new SkillType { Name = ".NET", Description = ".NET Framework, .NET Core, .NET languages" };
             var skillType2 = new SkillType { Name = "Java platform", Description = "Programming language and related frameworks and tools" };
-            var skillType3 = new SkillType { Name = "Databases", Description = "Knowledge of databases" };
-            var skillType4 = new SkillType { Name = "English", Description = "Level of english" };
-            var skillType5 = new SkillType { Name = "Spanish", Description = "Level of spanish" };
+            var skillType3 = new SkillType { Name = "Databases", Description = "Database knowledge" };
+            var skillType4 = new SkillType { Name = "English", Description = "English level" };
+            var skillType5 = new SkillType { Name = "Spanish", Description = "Spanish level" };
             var skillType6 = new SkillType { Name = "Soft skills", Description = "Leadership, communication, teamwork..." };
             var skillType7 = new SkillType { Name = "Front-end", Description = "Javascript, HTML, HTTP" };
             var skillType8 = new SkillType { Name = "Back-end", Description = "Programming languages, frameworks, tools" };
             var skillType9 = new SkillType { Name = "DevOps", Description = "SysAdmin, Containers, Azure..." };
             var skillType10 = new SkillType { Name = "Project management", Description = "Project management" };
-            var skillType11 = new SkillType { Name = "Mobile", Description = "Knowledge of mobile development" };
+            var skillType11 = new SkillType { Name = "Mobile", Description = "Mobile development knowledge" };
             context.SkillTypes.Add(skillType1);
             context.SkillTypes.Add(skillType2);
             context.SkillTypes.Add(skillType3);
@@ -177,22 +177,22 @@ namespace Domain.Services.Repositories.EF
 
             var skill2a = new Skill { Name = "Spring Framework", Type = skillType2, Description = "Application framework and inversion of control container for the Java platform" };
 
-            var skill3a = new Skill { Name = "SQL server", Type = skillType3, Description = "Lenguaje de programación funcional" };
-            var skill3b = new Skill { Name = "Oracle database", Type = skillType3, Description = "Lenguaje de programación funcional" };
+            var skill3a = new Skill { Name = "SQL server", Type = skillType3, Description = "Functional programming language" };
+            var skill3b = new Skill { Name = "Oracle database", Type = skillType3, Description = "Functional programming language" };
             var skill3c = new Skill { Name = "MongoDB", Type = skillType3, Description = "NoSQL Database" };
 
-            var skill4a = new Skill { Name = "Reading", Type = skillType4, Description = "Level of reading" };
-            var skill4b = new Skill { Name = "Writing", Type = skillType4, Description = "Level of writing" };
-            var skill4c = new Skill { Name = "Speaking", Type = skillType4, Description = "Level of speaking" };
-            var skill4d = new Skill { Name = "Listening", Type = skillType4, Description = "Level of listening" };
+            var skill4a = new Skill { Name = "Reading", Type = skillType4, Description = "Reading level" };
+            var skill4b = new Skill { Name = "Writing", Type = skillType4, Description = "Writing level" };
+            var skill4c = new Skill { Name = "Speaking", Type = skillType4, Description = "Speaking level" };
+            var skill4d = new Skill { Name = "Listening", Type = skillType4, Description = "Listening level" };
 
-            var skill5a = new Skill { Name = "Reading", Type = skillType5, Description = "Level of reading" };
-            var skill5b = new Skill { Name = "Writing", Type = skillType5, Description = "Level of writing" };
-            var skill5c = new Skill { Name = "Speaking", Type = skillType5, Description = "Level of speaking" };
-            var skill5d = new Skill { Name = "Listening", Type = skillType5, Description = "Level of listening" };
+            var skill5a = new Skill { Name = "Reading", Type = skillType5, Description = "Reading level" };
+            var skill5b = new Skill { Name = "Writing", Type = skillType5, Description = "Writing level" };
+            var skill5c = new Skill { Name = "Speaking", Type = skillType5, Description = "Speaking level" };
+            var skill5d = new Skill { Name = "Listening", Type = skillType5, Description = "Listening level" };
 
             var skill6a = new Skill { Name = "Leadership", Type = skillType6, Description = "Leadership" };
-            var skill6b = new Skill { Name = "Problem Solving", Type = skillType6, Description = "Problem Solving Skills" };
+            var skill6b = new Skill { Name = "Problem Solving", Type = skillType6, Description = "Problem solving skills" };
             var skill6c = new Skill { Name = "Teamwork", Type = skillType6, Description = "Teamwork" };
             var skill6d = new Skill { Name = "Work Ethic", Type = skillType6, Description = "Work Ethic" };
 
@@ -200,14 +200,14 @@ namespace Domain.Services.Repositories.EF
             var skill7b = new Skill { Name = "HTTP", Type = skillType7, Description = "HTTP" };
             var skill7c = new Skill { Name = "HTML5", Type = skillType7, Description = "Markup language" };
 
-            var skill8a = new Skill { Name = "Entity framework", Type = skillType8, Description = "EF y EF Core" };
+            var skill8a = new Skill { Name = "Entity framework", Type = skillType8, Description = "EF and EF Core" };
             var skill8b = new Skill { Name = "Async programming", Type = skillType8, Description = "Async" };
             var skill8c = new Skill { Name = "LINQ", Type = skillType8, Description = "LINQ" };
 
-            var skill9a = new Skill { Name = "Azure", Type = skillType9, Description = "Microsoft's clould computing service" };
+            var skill9a = new Skill { Name = "Azure", Type = skillType9, Description = "Microsoft's cloud computing service" };
 
-            var skill10a = new Skill { Name = "Leadership", Type = skillType10, Description = "PM skill" };
-            var skill10b = new Skill { Name = "Team managment", Type = skillType10, Description = "PM skill" };
+            var skill10a = new Skill { Name = "Leadership", Type = skillType10, Description = "PM skills" };
+            var skill10b = new Skill { Name = "Team management", Type = skillType10, Description = "PM skills" };
 
             var skill11a = new Skill { Name = "Xamarin", Type = skillType11, Description = "Multiplatform mobile development" };
 
@@ -521,12 +521,12 @@ namespace Domain.Services.Repositories.EF
             #endregion
 
             #region Tasks
-            var task1 = new Task { Title = "Búsqueda de DevOps", CreatedDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), ConsultantId = 1, IsApprove = false };
-            var task2 = new Task { Title = "Contactar candidato José Pérez", CreatedDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(1), ConsultantId = 2, IsApprove = false };
-            var task3 = new Task { Title = "Envío de mail con feriados", CreatedDate = DateTime.Now, EndDate = DateTime.Now.AddDays(11), ConsultantId = 3, IsApprove = false, IsNew = true };
-            var task4 = new Task { Title = "Búsqueda de .Net", CreatedDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), ConsultantId = 7, IsApprove = false, IsNew = false };
-            var task5 = new Task { Title = "Contactar candidato Juan", CreatedDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(1), ConsultantId = 7, IsApprove = false, IsNew = false };
-            var task6 = new Task { Title = "Envío de mail con WHF", CreatedDate = DateTime.Now, EndDate = DateTime.Now.AddDays(11), ConsultantId = 7, IsApprove = false, IsNew = true };
+            var task1 = new Task { Title = "DevOps search", CreatedDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), ConsultantId = 1, IsApprove = false };
+            var task2 = new Task { Title = "Contact candidate John Doe", CreatedDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(1), ConsultantId = 2, IsApprove = false };
+            var task3 = new Task { Title = "Send mail with holidays", CreatedDate = DateTime.Now, EndDate = DateTime.Now.AddDays(11), ConsultantId = 3, IsApprove = false, IsNew = true };
+            var task4 = new Task { Title = ".Net search", CreatedDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), ConsultantId = 7, IsApprove = false, IsNew = false };
+            var task5 = new Task { Title = "Contact candidate Jeff", CreatedDate = DateTime.Now.AddDays(-2), EndDate = DateTime.Now.AddDays(1), ConsultantId = 7, IsApprove = false, IsNew = false };
+            var task6 = new Task { Title = "WHF mail", CreatedDate = DateTime.Now, EndDate = DateTime.Now.AddDays(11), ConsultantId = 7, IsApprove = false, IsNew = true };
             context.Tasks.Add(task1);
             context.Tasks.Add(task2);
             context.Tasks.Add(task3);
@@ -537,18 +537,18 @@ namespace Domain.Services.Repositories.EF
             #endregion
 
             #region TasktItems
-            var taskItem1 = new TaskItem { Text = "Búsqueda en LinkedIn", TaskId = 1, Checked = false, Task = task1 };
-            var taskItem2 = new TaskItem { Text = "Contacto con candidatos", TaskId = 1, Checked = false, Task = task1 };
-            var taskItem3 = new TaskItem { Text = "Elección de 3 candidatos más sobresalientes", TaskId = 1, Checked = false, Task = task1 };
-            var taskItem4 = new TaskItem { Text = "Agendar entrevistas", Checked = false, Task = task1 };
-            var taskItem5 = new TaskItem { Text = "Agendar entrevista", TaskId = 2, Checked = false, Task = task2 };
-            var taskItem6 = new TaskItem { Text = "Confección de oferta", TaskId = 2, Checked = false, Task = task2 };
-            var taskItem7 = new TaskItem { Text = "Acordar elección de banco y vacaciones", TaskId = 2, Checked = false, Task = task2 };
-            var taskItem8 = new TaskItem { Text = "Acordar fecha de ingreso", TaskId = 2, Checked = false, Task = task2 };
-            var taskItem9 = new TaskItem { Text = "Confeccionar mail", TaskId = 3, Checked = false, Task = task3 };
-            var taskItem10 = new TaskItem { Text = "Crear lista de destinatarios", TaskId = 3, Checked = false, Task = task3 };
-            var taskItem11 = new TaskItem { Text = "Validar lista de feriados con HR", TaskId = 3, Checked = false, Task = task3 };
-            var taskItem12 = new TaskItem { Text = "Envío de mail con feriados", TaskId = 3, Checked = false, Task = task3 };
+            var taskItem1 = new TaskItem { Text = "LinkedIn search", TaskId = 1, Checked = false, Task = task1 };
+            var taskItem2 = new TaskItem { Text = "Candidate contact", TaskId = 1, Checked = false, Task = task1 };
+            var taskItem3 = new TaskItem { Text = "Choose 3 best candidates", TaskId = 1, Checked = false, Task = task1 };
+            var taskItem4 = new TaskItem { Text = "Schedule interviews", Checked = false, Task = task1 };
+            var taskItem5 = new TaskItem { Text = "Schedule interview", TaskId = 2, Checked = false, Task = task2 };
+            var taskItem6 = new TaskItem { Text = "Create offer", TaskId = 2, Checked = false, Task = task2 };
+            var taskItem7 = new TaskItem { Text = "Settle bank and vacations choice", TaskId = 2, Checked = false, Task = task2 };
+            var taskItem8 = new TaskItem { Text = "Settle first day", TaskId = 2, Checked = false, Task = task2 };
+            var taskItem9 = new TaskItem { Text = "Create e-mail", TaskId = 3, Checked = false, Task = task3 };
+            var taskItem10 = new TaskItem { Text = "Create contact list", TaskId = 3, Checked = false, Task = task3 };
+            var taskItem11 = new TaskItem { Text = "Validate holiday list with HR", TaskId = 3, Checked = false, Task = task3 };
+            var taskItem12 = new TaskItem { Text = "Send e-mail with holidays", TaskId = 3, Checked = false, Task = task3 };
 
 
             context.TaskItems.Add(taskItem1);
@@ -587,8 +587,8 @@ namespace Domain.Services.Repositories.EF
             #endregion
 
             #region Role
-            var Role1 = new Role { Name = "Junior Software Engenering", isActive = true };
-            var Role2 = new Role { Name = "UX Developer Senior ", isActive = true };
+            var Role1 = new Role { Name = "Junior Software Engineer", isActive = true };
+            var Role2 = new Role { Name = "Senior UX Developer", isActive = true };
             context.Roles.Add(Role1);
             context.Roles.Add(Role2);
             #endregion
@@ -635,17 +635,17 @@ namespace Domain.Services.Repositories.EF
 
             #region Employees
             var employee1 = new Employee { Name = "Without", LastName = "Reviewer" };
-            var employee2 = new Employee { Name = "Cristian", LastName = "Rodríguez", DNI = 38888888, PhoneNumber = "(+54)12312312", EmailAddress = "critian.rodriguez@softvision.com", LinkedInProfile = "cristianlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant1, Role = Role2, isReviewer = true, Status = EmployeeStatus.Hired, Reviewer = employee1 };
-            var employee3 = new Employee { Name = "Kevin", LastName = "Zatel", DNI = 38999999, PhoneNumber = "(+54)32132132", EmailAddress = "kevin.zatel@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee4 = new Employee { Name = "Tomas", LastName = "Rebollo", DNI = 40000000, PhoneNumber = "(+54)32132132", EmailAddress = "tomas.rebollo@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee5 = new Employee { Name = "Matias", LastName = "Zatz", DNI = 41111111, PhoneNumber = "(+54)32132132", EmailAddress = "matias.zatz@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee6 = new Employee { Name = "Thomas", LastName = "Nazar", DNI = 42222222, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee7 = new Employee { Name = "Ivan", LastName = "Cardozo", DNI = 43333333, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee8 = new Employee { Name = "Karen", LastName = "Ono", DNI = 44444444, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee9 = new Employee { Name = "Javier", LastName = "Benavente", DNI = 42222223, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee10 = new Employee { Name = "Facundo", LastName = "Valeriano", DNI = 42222278, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee11 = new Employee { Name = "Matias", LastName = "Otero", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
-            var employee12 = new Employee { Name = "Matias", LastName = "Totaro", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "matias.totaro@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee2 = new Employee { Name = "Cristian", LastName = "Rodríguez", DNI = 38888888, PhoneNumber = "(+54)12312312", EmailAddress = "critian.rodriguez@softvision.com", LinkedInProfile = "cristianlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant1, Role = Role2, isReviewer = true, Status = EmployeeStatus.Hired, Reviewer = employee1 };
+            var employee3 = new Employee { Name = "Kevin", LastName = "Zatel", DNI = 38999999, PhoneNumber = "(+54)32132132", EmailAddress = "kevin.zatel@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee4 = new Employee { Name = "Tomas", LastName = "Rebollo", DNI = 40000000, PhoneNumber = "(+54)32132132", EmailAddress = "tomas.rebollo@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee5 = new Employee { Name = "Matias", LastName = "Zatz", DNI = 41111111, PhoneNumber = "(+54)32132132", EmailAddress = "matias.zatz@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee6 = new Employee { Name = "Thomas", LastName = "Nazar", DNI = 42222222, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee7 = new Employee { Name = "Ivan", LastName = "Cardozo", DNI = 43333333, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee8 = new Employee { Name = "Karen", LastName = "Ono", DNI = 44444444, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee9 = new Employee { Name = "Javier", LastName = "Benavente", DNI = 42222223, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee10 = new Employee { Name = "Facundo", LastName = "Valeriano", DNI = 42222278, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee11 = new Employee { Name = "Matias", LastName = "Otero", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "thomas.nazar@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
+            var employee12 = new Employee { Name = "Matias", LastName = "Totaro", DNI = 42222452, PhoneNumber = "(+54)32132132", EmailAddress = "matias.totaro@softvision.com", LinkedInProfile = "kevinlinkedin.com", AdditionalInformation = "Some aditional info", Recruiter = consultant2, Role = Role1, isReviewer = false, Reviewer = employee2, Status = EmployeeStatus.Hired };
 
             context.Employees.Add(employee1);
             context.Employees.Add(employee2);
@@ -696,10 +696,10 @@ namespace Domain.Services.Repositories.EF
 
 
             #region Reservation
-            var Reservation1 = new Reservation { Description = "Comunidad de .Net", RoomId = 1, Room = Room1, SinceReservation = new DateTime(2019, 8, 1, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 10, 50, 0), Recruiter = consultant1 };
-            var Reservation2 = new Reservation { Description = "Comunidad de Developers", RoomId = 1, Room = Room1, SinceReservation = new DateTime(2019, 8, 1, 12, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 12, 50, 0), Recruiter = consultant1 };
-            var Reservation3 = new Reservation { Description = "Comunidad de Recursos Humanos", RoomId = 2, Room = Room2, SinceReservation = new DateTime(2019, 8, 1, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 10, 50, 0), Recruiter = consultant1 };
-            var Reservation4 = new Reservation { Description = "Comunidad de Marketing", RoomId = 3, Room = Room3, SinceReservation = new DateTime(2019, 8, 5, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 5, 10, 50, 0), Recruiter = consultant1 };
+            var Reservation1 = new Reservation { Description = ".NET Community", RoomId = 1, Room = Room1, SinceReservation = new DateTime(2019, 8, 1, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 10, 50, 0), Recruiter = consultant1 };
+            var Reservation2 = new Reservation { Description = "Developer Community", RoomId = 1, Room = Room1, SinceReservation = new DateTime(2019, 8, 1, 12, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 12, 50, 0), Recruiter = consultant1 };
+            var Reservation3 = new Reservation { Description = "Human Resources Community", RoomId = 2, Room = Room2, SinceReservation = new DateTime(2019, 8, 1, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 1, 10, 50, 0), Recruiter = consultant1 };
+            var Reservation4 = new Reservation { Description = "Marketing Community", RoomId = 3, Room = Room3, SinceReservation = new DateTime(2019, 8, 5, 10, 47, 0), UntilReservation = new DateTime(2019, 8, 5, 10, 50, 0), Recruiter = consultant1 };
             context.Reservation.Add(Reservation1);
             context.Reservation.Add(Reservation2);
             context.Reservation.Add(Reservation3);

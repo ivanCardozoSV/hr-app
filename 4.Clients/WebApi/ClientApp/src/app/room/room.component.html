@@ -44,7 +44,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Name</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="name" id="name" placeholder="Please input the Name">
+                        <input type="text" nz-input formControlName="name" id="name" placeholder="Please enter a name">
                         <nz-form-explain *ngIf="roomForm.get('name').dirty && roomForm.get('name').errors">
                             <ng-container *ngIf="roomForm.get('name')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -53,7 +53,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="roomForm.get('name')?.hasError('required')">
-                                Please input the name!
+                                Please enter the name!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -65,7 +65,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="description" id="description" placeholder="Please input the description">
+                        <input type="text" nz-input formControlName="description" id="description" placeholder="Please enter a description">
                         <nz-form-explain *ngIf="roomForm.get('description').dirty && roomForm.get('description').errors">
                             <ng-container *ngIf="roomForm.get('description')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -74,7 +74,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="roomForm.get('description')?.hasError('required')">
-                                Please input the description!
+                                Please enter the description!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>

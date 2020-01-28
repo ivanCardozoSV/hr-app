@@ -286,7 +286,7 @@ export class CandidatesComponent implements OnInit {
                 .subscribe(res => {
                   this.getCandidates();
                   this.app.hideLoading();
-                  this.facade.toastrService.success('Candidate was successfully edited !');
+                  this.facade.toastrService.success('Candidate was successfully edited!');
                   modal.destroy();
                 }, err => {
                   this.app.hideLoading();
@@ -310,7 +310,7 @@ export class CandidatesComponent implements OnInit {
   showDeleteConfirm(candidateID: number): void {
     let candidateDelete: Candidate = this.filteredCandidates.filter(candidate => candidate.id == candidateID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + candidateDelete.lastName + ', ' + candidateDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + candidateDelete.name + ' ' + candidateDelete.lastName + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -318,7 +318,7 @@ export class CandidatesComponent implements OnInit {
       nzOnOk: () => this.facade.candidateService.delete<Candidate>(candidateID)
         .subscribe(res => {
           this.getCandidates();
-          this.facade.toastrService.success('Candidate was deleted !');
+          this.facade.toastrService.success('Candidate was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error('The service is not available now. Try again later.');

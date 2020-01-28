@@ -163,7 +163,7 @@ export class CandidateAddComponent implements OnInit {
       .subscribe((res: Process[]) => {
         if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
+            nzTitle: 'A process for ' + res[0].candidate.name + ' ' + res[0].candidate.lastName + ' already exists. Would you like to open a new one?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',

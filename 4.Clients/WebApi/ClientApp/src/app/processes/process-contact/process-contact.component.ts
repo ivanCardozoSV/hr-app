@@ -221,7 +221,7 @@ export class ProcessContactComponent implements OnInit {
   showDeleteConfirm(CandidateID: number): void {
     let CandidateDelete: Candidate = this.candidates.filter(c => c.id == CandidateID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + CandidateDelete.name + ' ' + CandidateDelete.lastName + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + CandidateDelete.name + ' ' + CandidateDelete.lastName + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -229,7 +229,7 @@ export class ProcessContactComponent implements OnInit {
       nzOnOk: () => this.facade.candidateService.delete<Candidate>(CandidateID)
         .subscribe(res => {
           this.getCandidates();
-          this.facade.toastrService.success('Candidate was deleted !');
+          this.facade.toastrService.success('Candidate was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -316,7 +316,7 @@ export class ProcessContactComponent implements OnInit {
       this.facade.candidateService.update<Candidate>(idCandidate, editedCandidate)
         .subscribe(res => {
           this.getCandidates();
-          this.facade.toastrService.success('Candidate was successfully edited !');
+          this.facade.toastrService.success('Candidate was successfully edited!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -352,7 +352,7 @@ export class ProcessContactComponent implements OnInit {
     this.facade.candidateService.update<Candidate>(idCandidate, editedCandidate)
       .subscribe(res => {
         this.getCandidates();
-        this.facade.toastrService.success('Candidate was successfully edited !');
+        this.facade.toastrService.success('Candidate was successfully edited!');
       }, err => {
         if (err.message != undefined) this.facade.toastrService.error(err.message);
         else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -394,7 +394,7 @@ export class ProcessContactComponent implements OnInit {
       }
       this.facade.candidateService.add<Candidate>(newCandidate)
         .subscribe(res => {
-          this.facade.toastrService.success('Candidate was successfully created !');
+          this.facade.toastrService.success('Candidate was successfully created!');
           this.isNewCandidate = false;
           this.visible = false;
           this.app.hideLoading();
@@ -415,7 +415,7 @@ export class ProcessContactComponent implements OnInit {
       .subscribe((res: Process[]) => {
         if (res.length > 0) {
           this.facade.modalService.confirm({
-            nzTitle: 'There is already another process of ' + res[0].candidate.lastName + ', ' + res[0].candidate.name + '. Do you want to open a new one ?',
+            nzTitle: 'A process for ' + res[0].candidate.name + ' ' + res[0].candidate.lastName + ' already exists. Would you like to open a new one?',
             nzContent: '',
             nzOkText: 'Yes',
             nzOkType: 'danger',

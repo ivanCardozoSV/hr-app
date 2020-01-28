@@ -13,7 +13,7 @@ namespace Core
         public int ErrorCode => MainErrorCode + SubErrorCode;
 
         public BusinessException(string message)
-            : base(string.IsNullOrWhiteSpace(message) ? "There is an business related error" : message) { }
+            : base(string.IsNullOrWhiteSpace(message) ? "Business related error" : message) { }
 
         public BusinessException(string message, Exception exception) : base(message, exception) { }
     }

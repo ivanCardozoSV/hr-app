@@ -136,7 +136,7 @@ export class CommunitiesComponent implements OnInit {
                   //this.settings.getCommunities();        
                   this.settings.refresh();
                   this.controlArray = [];
-                  this.facade.toastrService.success('Community was successfully created !');
+                  this.facade.toastrService.success('Community was successfully created!');
                   
                   modal.destroy();
                 }, err => {
@@ -196,7 +196,7 @@ export class CommunitiesComponent implements OnInit {
               this.facade.communityService.update<Community>(id, editedCommunity)
                 .subscribe(res => {
                   this.settings.getCommunities();
-                  this.facade.toastrService.success('Community was successfully edited !');
+                  this.facade.toastrService.success('Community was successfully edited!');
                   modal.destroy();
                 }, err => {
                   modal.nzFooter[1].loading = false;
@@ -213,7 +213,7 @@ export class CommunitiesComponent implements OnInit {
   showDeleteConfirm(communityID: number): void {
   let communityDelete: Community = this._detailedCommunity.filter(c => c.id == communityID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + communityDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + communityDelete.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -221,7 +221,7 @@ export class CommunitiesComponent implements OnInit {
       nzOnOk: () => this.facade.communityService.delete<Community>(communityID)
         .subscribe(res => {
           this.settings.getCommunities();
-          this.facade.toastrService.success('Community was deleted !');
+          this.facade.toastrService.success('Community was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

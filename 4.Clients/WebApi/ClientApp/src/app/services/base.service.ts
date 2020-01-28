@@ -83,7 +83,7 @@ export class BaseService {
         errorMessage = errorMessage.concat(msg);
       }
     }
-    else errorMessage = "Ha ocurrido un error";
+    else errorMessage = "An error has occurred";
 
     return errorMessage;
   }

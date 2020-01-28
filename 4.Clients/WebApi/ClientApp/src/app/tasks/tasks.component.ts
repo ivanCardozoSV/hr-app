@@ -109,7 +109,7 @@ export class TasksComponent implements OnInit {
 
   deleteTask(id: number) {
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete this task?',
+      nzTitle: 'Are you sure you want to delete this task?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -200,7 +200,7 @@ export class TasksComponent implements OnInit {
         });
     }
     else {
-      this.facade.toastrService.error('You must enter a valid text.');
+      this.facade.toastrService.error('You must enter valid text.');
     }
   }
 
@@ -315,7 +315,7 @@ export class TasksComponent implements OnInit {
                   newTask.id = res.id;
                   this.toDoList.push(newTask);
                   console.log(newTask);
-                  this.facade.toastrService.success('Task was successfully created !');
+                  this.facade.toastrService.success('Task was successfully created!');
                   modal.destroy();
                 }, err => {
                   modal.nzFooter[1].loading = false;

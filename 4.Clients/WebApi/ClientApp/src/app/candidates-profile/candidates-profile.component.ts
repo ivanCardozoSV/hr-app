@@ -131,7 +131,7 @@ export class CandidatesProfileComponent implements OnInit {a
                 .subscribe(res => {
                   this.settings.getCandidatesProfile();
                   this.controlArray = [];
-                  this.facade.toastrService.success('Candidate Profile was successfully created !');
+                  this.facade.toastrService.success('Candidate Profile was successfully created!');
                   modal.destroy();
                 }, err => {
                   modal.nzFooter[1].loading = false;
@@ -188,7 +188,7 @@ export class CandidatesProfileComponent implements OnInit {a
               this.facade.candidateProfileService.update<CandidateProfile>(id, editedCandidateProfile)
                 .subscribe(res => {                  
                   this.settings.getCandidatesProfile();
-                  this.facade.toastrService.success('Candidate was successfully edited !');
+                  this.facade.toastrService.success('Candidate was successfully edited!');
                   modal.destroy();
                 }, err => {
                   modal.nzFooter[1].loading = false;
@@ -210,7 +210,7 @@ export class CandidatesProfileComponent implements OnInit {a
   showDeleteConfirm(CandidateProfileID: number): void {    
   let CandidateProfileDelete: CandidateProfile = this._detailedCandidateProfile.filter(c => c.id == CandidateProfileID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + CandidateProfileDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + CandidateProfileDelete.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -218,7 +218,7 @@ export class CandidatesProfileComponent implements OnInit {a
       nzOnOk: () => this.facade.candidateProfileService.delete<CandidateProfile>(CandidateProfileID)
         .subscribe(res => {          
           this.settings.getCandidatesProfile();
-          this.facade.toastrService.success('Candidate was deleted !');
+          this.facade.toastrService.success('Candidate was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

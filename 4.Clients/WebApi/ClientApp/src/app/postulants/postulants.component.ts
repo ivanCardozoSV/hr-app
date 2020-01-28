@@ -54,7 +54,7 @@ export class PostulantsComponent implements OnInit {
   showDeleteConfirm(postulantID: number): void {
     let postulantDelete: Postulant = this.filteredPostulant.filter(postulant => postulant.id == postulantID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + postulantDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + postulantDelete.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -62,7 +62,7 @@ export class PostulantsComponent implements OnInit {
       nzOnOk: () => this.facade.postulantService.delete<Postulant>(postulantID)
         .subscribe(res => {
           this.getPostulants();
-          this.facade.toastrService.success('Postulant was deleted !');
+          this.facade.toastrService.success('Postulant was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error('The service is not available now. Try again later.');

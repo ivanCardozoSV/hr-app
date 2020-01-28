@@ -128,7 +128,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title">Title</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="title" id="title" placeholder="Please input the Title of the task">
+                        <input type="text" nz-input formControlName="title" id="title" placeholder="Please enter the title of the task">
                         <nz-form-explain *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors">
                             <ng-container *ngIf="validateForm.get('title')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -137,7 +137,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('title')?.hasError('required')">
-                                Please input the title!
+                                Please enter the title!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -175,10 +175,10 @@
 
                         <nz-form-explain *ngIf="validateForm.get('endDate').dirty && validateForm.get('endDate').errors">
                             <ng-container *ngIf="validateForm.get('endDate')?.hasError('required')">
-                                Please input the date
+                                Please enter the date
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('endDate')?.hasError('pastDateError')">
-                                Please input a date greater than today
+                                Please enter a date greater than today
                             </ng-container>
                         </nz-form-explain>
 
@@ -199,7 +199,7 @@
                     getFormControl(control.controlInstance)?.dirty &&
                     getFormControl(control.controlInstance)?.hasError('required')
                   ">
-                            Please input any text or delete this field.
+                            Please enter any text or delete this field.
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>

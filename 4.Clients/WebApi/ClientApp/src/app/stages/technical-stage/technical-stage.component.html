@@ -25,7 +25,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="technicalForm.get('date').dirty && technicalForm.get('date').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -40,7 +40,7 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="technicalForm.get('consultantOwnerId').dirty && technicalForm.get('consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="technicalForm.get('consultantOwnerId').dirty && technicalForm.get('consultantOwnerId').errors">Please enter the recruiter</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -53,7 +53,7 @@
                         </nz-option>
                     </nz-select>
                     <nz-form-explain *ngIf="technicalForm.get('consultantDelegateId').dirty && technicalForm.get('consultantDelegateId').errors">
-                        Please input the consultant</nz-form-explain>
+                        Please enter the consultant</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -119,7 +119,7 @@
                 </nz-form-control>
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && technicalForm.get('rejectionReason').dirty && technicalForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="technicalForm.get('rejectionReason')?.dirty && technicalForm.get('rejectionReason')?.errors ">
-                        Please input rejection reason!
+                        Please enter rejection reason!
                     </ng-container>
                 </nz-form-explain>
             </nz-form-item>
@@ -140,7 +140,7 @@
                                 </nz-option>
                             </nz-select>
                             <nz-form-explain *ngIf="getFormControl(control.controlInstance[0])?.dirty&&getFormControl(control.controlInstance[0])?.hasError('required')">
-                                Please input candidate's skill or delete this field.
+                                Please enter candidate's skill or delete this field.
                             </nz-form-explain>
                         </div>
                         <div nz-col nzSpan="7">
@@ -151,7 +151,7 @@
                         </div>
                         <div nz-col nzSpan="9">
                             <nz-form-control [nzSm]="14" [nzXs]="24" style="margin-left: 10%; width: 85%;">
-                                <input type="text" nz-input formControlName="{{control.controlInstance[2]}}" style="width: 100%;" id="control.controlInstance[2]" placeholder="Please input a comment">
+                                <input type="text" nz-input formControlName="{{control.controlInstance[2]}}" style="width: 100%;" id="control.controlInstance[2]" placeholder="Please enter a comment">
                                 <nz-form-explain *ngIf="technicalForm.get(control.controlInstance[2]).dirty && technicalForm.get(control.controlInstance[2]).errors">
                                     <ng-container *ngIf="technicalForm.get(control.controlInstance[2])?.hasError('trimBeginError')">
                                         The input has leading whitespace!
@@ -160,7 +160,7 @@
                                         The input has trailing whitespace!
                                     </ng-container>
                                     <ng-container *ngIf="technicalForm.get(control.controlInstance[2])?.hasError('required')">
-                                        Please input a comment!
+                                        Please enter a comment!
                                     </ng-container>
                                 </nz-form-explain>
                             </nz-form-control>

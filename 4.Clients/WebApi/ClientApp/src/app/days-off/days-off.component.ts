@@ -142,7 +142,7 @@ export class DaysOffComponent implements OnInit {
             if (this.compareTwoDates()) {
               this.app.showLoading();
               if (this.validateForm.controls.DNI.valid == false) {
-                this.facade.toastrService.error('Please input a valid DNI.');
+                this.facade.toastrService.error('Please enter a valid DNI.');
                 this.app.hideLoading();
               }
               else {
@@ -176,7 +176,7 @@ export class DaysOffComponent implements OnInit {
                           .subscribe(res => {
                             this.app.hideLoading()
                             this.getDaysOff();
-                            this.facade.toastrService.success("Day off was successfuly created !");
+                            this.facade.toastrService.success("Day off was successfuly created!");
                             modal.destroy();
                           }, err => {
                             this.app.hideLoading();
@@ -256,7 +256,7 @@ export class DaysOffComponent implements OnInit {
                   .subscribe(res => {
                     this.getDaysOff();
                     // this.app.hideLoading();
-                    this.facade.toastrService.success('Day off was successfully edited !');
+                    this.facade.toastrService.success('Day off was successfully edited!');
                     modal.destroy();
                   }, err => {
                     // this.app.hideLoading();
@@ -276,7 +276,7 @@ export class DaysOffComponent implements OnInit {
   showDeleteConfirm(dayOffId: number): void {
     let dayOff: DaysOff = this.listOfDaysOff.find(_ => _.id == dayOffId);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure to delete ?',
+      nzTitle: 'Are you sure you want to delete this day off?',
       nzContent: 'This action will delete the day off',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -284,7 +284,7 @@ export class DaysOffComponent implements OnInit {
       nzOnOk: () => this.facade.daysOffService.delete<DaysOff>(dayOff.id)
         .subscribe(res => {
           this.getDaysOff();
-          this.facade.toastrService.success('Day off was deleted !');
+          this.facade.toastrService.success('Day off was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -316,7 +316,7 @@ export class DaysOffComponent implements OnInit {
       .subscribe(res => {
         this.getDaysOff();
         // this.app.hideLoading();
-        this.facade.toastrService.success('Petition was succesfully accepted !');
+        this.facade.toastrService.success('Petition was succesfully accepted!');
       }, err => {
         // this.app.hideLoading();
         // modal.nzFooter[1].loading = false;

@@ -80,7 +80,7 @@ export class OfficeComponent implements OnInit {
   showDeleteConfirm(officeId: number) {
     let deleteOffice = this._detailedOffice.filter(office => office.id === officeId)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure you want to delete ' + deleteOffice.name + ' office?',
+      nzTitle: 'Are you sure you want to delete ' + deleteOffice.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -88,7 +88,7 @@ export class OfficeComponent implements OnInit {
       nzOnOk: () => this.facade.OfficeService.delete<Office>(officeId)
         .subscribe(res => {
           this.settings.getOffices();
-          this.facade.toastrService.success('Office was deleted !');
+          this.facade.toastrService.success('Office was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -139,7 +139,7 @@ export class OfficeComponent implements OnInit {
               .subscribe(res => {
                 this.settings.getOffices();
                 this.app.hideLoading();
-                this.facade.toastrService.success("Office successfully created !");
+                this.facade.toastrService.success("Office successfully created!");
                 modal.destroy();
               }, err => {
                 this.app.hideLoading();
@@ -188,7 +188,7 @@ export class OfficeComponent implements OnInit {
               editOffice.description = this.officeForm.controls['description'].value;
               this.facade.OfficeService.update<Office>(officeId, editOffice).subscribe(res => {
                 this.settings.getOffices();
-                this.facade.toastrService.success('Office was successfully edited !');
+                this.facade.toastrService.success('Office was successfully edited!');
                 modal.destroy();
               }, err => {
                 modal.nzFooter[1].loading = false;

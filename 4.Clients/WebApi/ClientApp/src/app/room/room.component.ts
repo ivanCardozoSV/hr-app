@@ -123,7 +123,7 @@ export class RoomComponent implements OnInit {
                 .subscribe(res => {          
                   this.settings.getRooms();
                   this.controlArray = [];
-                  this.facade.toastrService.success('Room was successfully created !');
+                  this.facade.toastrService.success('Room was successfully created!');
                   
                   modal.destroy();
                 }, err => {
@@ -184,7 +184,7 @@ export class RoomComponent implements OnInit {
               this.facade.RoomService.update<Room>(id, editedRoom)
                 .subscribe(res => {
                   this.settings.getRooms();
-                  this.facade.toastrService.success('Room was successfully edited !');
+                  this.facade.toastrService.success('Room was successfully edited!');
                   modal.destroy();
                 }, err => {
                   modal.nzFooter[1].loading = false;
@@ -201,7 +201,7 @@ export class RoomComponent implements OnInit {
   showDeleteConfirm(RoomID: number): void {
   let RoomDelete: Room = this._detailedRoom.filter(c => c.id == RoomID)[0];
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete ' + RoomDelete.name + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + RoomDelete.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -209,7 +209,7 @@ export class RoomComponent implements OnInit {
       nzOnOk: () => this.facade.RoomService.delete<Room>(RoomID)
         .subscribe(res => {
           this.settings.getRooms();
-          this.facade.toastrService.success('Room was deleted !');
+          this.facade.toastrService.success('Room was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");
