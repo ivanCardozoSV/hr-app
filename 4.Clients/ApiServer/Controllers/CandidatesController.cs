@@ -47,8 +47,12 @@ namespace ApiServer.Controllers
         public IActionResult Get([FromBody] FilterCandidateViewModel filterData)
         {
 
-            Func<Candidate, bool> filter = candidate => candidate.PreferredOffice.Id.Equals(filterData.PreferredOffice)
-            && candidate.Community.Id.Equals(filterData.Community)
+            Func<Candidate, bool> filterByPrefferedOffice = candidate => filterData.PreferredOffice == null ? true : candidate.PreferredOffice.Id.Equals(filterData.PreferredOffice);
+            Func<Candidate, bool> filterByCommunity = candidate => filterData.Community == null ? true : candidate.Community.Id.Equals(filterData.Community);
+
+
+            Func<Candidate, bool> filter = candidate => filterByPrefferedOffice(candidate)
+            && filterByCommunity(candidate)
             && filterData.SelectedSkills
             .All(requiredSkill =>
             candidate.CandidateSkills
