@@ -231,13 +231,13 @@
             <div nz-col>
                 <nz-form-item>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <nz-select name="declineReasonName" formControlName="declineReasonName" (ngModelChange)="declineReasonNameChanged()">
+                        <nz-select name="declineReasonName" formControlName="declineReasonName" (ngModelChange)="declineReasonNameChanged()" nzPlaceHolder="Choose a decline reason">
                             <nz-option *ngFor="let declineReason of declineReasons" nzLabel="{{declineReason.name}}" nzValue="{{declineReason.id}}">
                             </nz-option>
                             <nz-option nzLabel="Other" [nzValue]="-1">
                             </nz-option>
                         </nz-select>
-                        <nz-form-explain *ngIf="declineProcessForm.get('status').dirty && declineProcessForm.get('status').errors">Please select a decline reason</nz-form-explain>
+                        <nz-form-explain *ngIf="declineProcessForm.get('declineReasonName').dirty && declineProcessForm.get('declineReasonName').errors">Please select a decline reason</nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
             </div>

@@ -149,7 +149,8 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     });
 
     this.declineProcessForm = this.formBuilder.group({
-      declineReasonDescription: [null, [Validators.required]]
+      declineReasonDescription: [null, [Validators.required]],
+      declineReasonName : [null, [Validators.required]]
     });
 
     this.setRejectionReasonValidators();
@@ -361,27 +362,73 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
   openDeclineModal(process: Process, modalContent: TemplateRef<{}>) {
     this.declineProcessForm.reset();
 
-    const modal = this.facade.modalService.confirm({
+    const modal = this.facade.modalService.create({
       nzTitle: 'Are you sure you want to decline the process for ' + process.candidate.name + ' ' + process.candidate.lastName + '?',
       nzContent: modalContent,
-      nzOkText: 'Yes',
-      nzOkType: 'danger',
-      nzCancelText: 'No',
+      //nzOkText: 'Yes',
+      //nzOkType: 'danger',
+      //nzCancelText: 'No',
       nzZIndex: 5,
-      nzOnOk: () => {
+      nzFooter: [
+        {
+          label: 'Cancel',
+          shape: 'default',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Submit',
+          type: 'primary',
+          onClick: () => {
+            this.app.showLoading();
+            let isCompleted: boolean = true;
+            for (const i in this.declineProcessForm.controls) {
+              this.declineProcessForm.controls[i].markAsDirty();
+              this.declineProcessForm.controls[i].updateValueAndValidity();
+              if (!this.declineProcessForm.controls[i].valid && this.declineProcessForm.controls[i].enabled) {
+                isCompleted = false;
+              }
+            }
+            if (isCompleted) {
+              //let a :number = this.declineProcessForm.controls['declineReasonName'].value
+              let declineReason : DeclineReason = { 
+                  id: this.declineProcessForm.controls['declineReasonName'].value,
+                  name: "",
+                  description: this.declineProcessForm.controls['declineReasonDescription'].enabled ? this.declineProcessForm.controls['declineReasonDescription'].value.toString() : ""
+                }
+              //this.declineProcessForm.controls['declineReasonDescription'].value.toString();
+              process.declineReason = declineReason;
+              this.facade.processService.update(process.id, process)
+                .subscribe(res => {
+                  //this.getCandidates();
+                  //this.getProcesses();
+                  this.app.hideLoading();
+                  modal.destroy();
+                  this.facade.toastrService.success('Process and associated candidate were declined');
+                }, err => {
+                  this.app.hideLoading();
+                  this.facade.toastrService.error(err.message);
+                })
+            }
+            this.app.hideLoading();
+          }          
+        }
+      ]
+      /*nzOnOk: () => {
         this.app.showLoading();
         let isCompleted: boolean = true;
         for (const i in this.declineProcessForm.controls) {
           this.declineProcessForm.controls[i].markAsDirty();
           this.declineProcessForm.controls[i].updateValueAndValidity();
-          if ((!this.declineProcessForm.controls[i].valid)) isCompleted = false;
+          if (!this.declineProcessForm.controls[i].valid && this.declineProcessForm.controls[i].enabled) {
+            isCompleted = false;
+          }
         }
         if (isCompleted) {
           //let a :number = this.declineProcessForm.controls['declineReasonName'].value
           let declineReason : DeclineReason = { 
               id: this.declineProcessForm.controls['declineReasonName'].value,
               name: "",
-              description: this.declineProcessForm.controls['declineReasonDescription'].value.toString()
+              description: this.declineProcessForm.controls['declineReasonDescription'].enabled ? this.declineProcessForm.controls['declineReasonDescription'].value.toString() : ""
             }
           //this.declineProcessForm.controls['declineReasonDescription'].value.toString();
           process.declineReason = declineReason;
@@ -398,7 +445,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
             })
         }
         this.app.hideLoading();
-      }
+      }*/
     });
     return modal;
   }
@@ -730,8 +777,8 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
               let modal = this.openDeclineModal(newProcess, declineProcessModal).afterClose
                 .subscribe(sel => {
                   if (declineReason !== newProcess.declineReason) {
-                    this.getProcesses();
                     this.getCandidates();
+                    this.getProcesses();
                     this.app.hideLoading();
                     this.facade.toastrService.success('The process was successfully saved!');
                     this.createEmptyProcess(newCandidate);
@@ -947,16 +994,18 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
         process.technicalStage.status === StageStatusEnum.Declined ||
         process.clientStage.status === StageStatusEnum.Declined ||
         process.offerStage.status === StageStatusEnum.Declined) {
-          return true
+          return true;
         }
-    return false
+    return false;
   }
 
   declineReasonNameChanged() {
     if (this.declineProcessForm.controls['declineReasonName'].value === -1) {
-      this.isDeclineReasonOther = true
+      this.isDeclineReasonOther = true;
+      this.declineProcessForm.controls['declineReasonDescription'].enable();
     } else {
-      this.isDeclineReasonOther = false
+      this.isDeclineReasonOther = false;
+      this.declineProcessForm.controls['declineReasonDescription'].disable();
     }
   }
 }

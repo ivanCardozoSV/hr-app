@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Model.Exceptions.DeclineReason
+namespace Domain.Model.Exceptions
 {
     public enum DeclineReasonErrorSubCodes
     {

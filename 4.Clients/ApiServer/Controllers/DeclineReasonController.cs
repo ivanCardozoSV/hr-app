@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using ApiServer.Contracts.DeclineReason;
+using ApiServer.Contracts;
 using AutoMapper;
 using Core;
-using Domain.Services.Contracts.DeclineReason;
+using Domain.Services.Contracts;
 using Domain.Services.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

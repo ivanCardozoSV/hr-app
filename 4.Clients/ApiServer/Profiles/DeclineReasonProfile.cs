@@ -1,6 +1,6 @@
-﻿using ApiServer.Contracts.DeclineReason;
+﻿using ApiServer.Contracts;
 using AutoMapper;
-using Domain.Services.Contracts.DeclineReason;
+using Domain.Services.Contracts;
 using System;
 using System.Collections;
 using System.Collections.Generic;

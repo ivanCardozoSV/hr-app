@@ -47,7 +47,7 @@ export class DeclineReasonComponent implements OnInit {
   }
 
   getDeclineReasons(){
-    this.facade.declineReasonService.get<DeclineReason>()
+    this.facade.declineReasonService.get<DeclineReason>("Named")
       .subscribe(res => {
         this.filteredDeclineReasons = res;
         this.listOfDisplayData = res;

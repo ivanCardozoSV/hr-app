@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Model;
-using Domain.Services.Contracts.DeclineReason;
+using Domain.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;

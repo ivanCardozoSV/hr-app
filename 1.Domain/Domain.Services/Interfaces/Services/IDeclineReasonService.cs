@@ -1,4 +1,4 @@
-﻿using Domain.Services.Contracts.DeclineReason;
+﻿using Domain.Services.Contracts;
 using System.Collections.Generic;
 
 namespace Domain.Services.Interfaces.Services

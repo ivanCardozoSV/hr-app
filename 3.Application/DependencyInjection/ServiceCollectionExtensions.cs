@@ -35,7 +35,7 @@ using Domain.Services.Impl.Validators.Employee;
 using Domain.Services.Impl.Validators.DaysOff;
 using Domain.Services.Impl.Validators.Role;
 using Domain.Services.Impl.Validators.CompanyCalendar;
-using Domain.Services.Impl.Validators.DeclineReason;
+using Domain.Services.Impl.Validators;
 
 namespace DependencyInjection
 {

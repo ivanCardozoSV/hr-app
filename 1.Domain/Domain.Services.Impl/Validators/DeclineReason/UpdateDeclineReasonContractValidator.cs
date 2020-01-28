@@ -1,7 +1,7 @@
-﻿using Domain.Services.Contracts.DeclineReason;
+﻿using Domain.Services.Contracts;
 using FluentValidation;
 
-namespace Domain.Services.Impl.Validators.DeclineReason
+namespace Domain.Services.Impl.Validators
 {
     public class UpdateDeclineReasonContractValidator : AbstractValidator<UpdateDeclineReasonContract>
     {

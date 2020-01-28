@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApiServer.Contracts.DeclineReason
+namespace ApiServer.Contracts
 {
     public class ReadedDeclineReasonViewModel
     {

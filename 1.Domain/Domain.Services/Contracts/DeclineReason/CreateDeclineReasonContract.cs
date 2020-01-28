@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Services.Contracts.DeclineReason
+namespace Domain.Services.Contracts
 {
     public class CreateDeclineReasonContract
     {
