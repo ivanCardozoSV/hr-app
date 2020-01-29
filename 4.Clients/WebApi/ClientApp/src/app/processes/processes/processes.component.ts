@@ -272,7 +272,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     let processText = procesToApprove.candidate.name.concat(' ').concat(procesToApprove.candidate.lastName);
 
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure you want to approve the process for ' + processText + '? This will approve all the stages associated with the process',
+      nzTitle: 'Are you sure you want to approve the process ' + processText + '? This will approve all stages associated with the process',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -288,7 +288,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
         this.getProcesses();
         this.getCandidates();
         this.app.hideLoading();
-        this.facade.toastrService.success('Process was approved !');
+        this.facade.toastrService.success('Process was approved!');
       }, err => {
         this.app.hideLoading();
         console.log(err);
@@ -306,7 +306,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     let process: Process = this.filteredProcesses.filter(p => p.id === processID)[0];
 
     const modal = this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete the process for ' + process.candidate.name + '' + process.candidate.lastName + ' ?',
+      nzTitle: 'Are you sure you want to delete the process for ' + process.candidate.name + ' ' + process.candidate.lastName + '?',
       nzContent: modalContent,
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -540,7 +540,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     // let processText = procesDelete.candidate ? procesDelete.candidate.name.concat(' ').concat(procesDelete.candidate.lastName) : procesDelete.profile;
 
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete the process for ' + processText + ' ?',
+      nzTitle: 'Are you sure you want to delete the process ' + processText + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -548,7 +548,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
       nzOnOk: () => this.facade.processService.delete<Process>(processID)
         .subscribe(res => {
           this.getProcesses();
-          this.facade.toastrService.success('Process was deleted !');
+          this.facade.toastrService.success('Process was deleted!');
         }, err => {
           this.facade.toastrService.error(err.message);
         })
@@ -652,7 +652,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
           .subscribe(res => {
             this.getProcesses();
             this.app.hideLoading();
-            this.facade.toastrService.success('The process was successfully saved !');
+            this.facade.toastrService.success('The process was successfully saved!');
             this.createEmptyProcess(newCandidate);
             this.closeModal();
           }, err => {
@@ -666,7 +666,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
             this.getProcesses();
             this.getCandidates();
             this.app.hideLoading();
-            this.facade.toastrService.success('The process was successfully saved !');
+            this.facade.toastrService.success('The process was successfully saved!');
             this.createEmptyProcess(newCandidate);
             this.closeModal();
           }, err => {

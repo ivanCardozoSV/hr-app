@@ -10,7 +10,7 @@ namespace Domain.Model.Exceptions.CandidateProfile
         protected override int MainErrorCode => (int)ApplicationErrorMainCodes.CandidateProfile;
 
         public CandidateProfileException(string message)
-            : base(string.IsNullOrEmpty(message) ? "There is a skill related error" : message)
+            : base(string.IsNullOrEmpty(message) ? "Skill related error" : message)
         {
         }
     }
@@ -18,7 +18,7 @@ namespace Domain.Model.Exceptions.CandidateProfile
     public class InvalidCandidateProfileException : CandidateProfileException
     {
         public InvalidCandidateProfileException(string message)
-            : base(string.IsNullOrEmpty(message) ? "The skill is not valid" : message)
+            : base(string.IsNullOrEmpty(message) ? "Skill is not valid" : message)
         {
         }
     }
@@ -76,7 +76,7 @@ namespace Domain.Model.Exceptions.CandidateProfile
     {
         protected override int SubErrorCode => (int)CandidateProfileErrorSubCodes.UpdateHasNotChanges;
         public UpdateHasNotChangesException(int profileId, Guid clientSystemId, string name)
-            : base($"Profile {name} has not changes.")
+            : base($"Profile {name} has no changes.")
         {
             ProfileId = profileId;
             ClientSystemId = clientSystemId;

@@ -42,19 +42,19 @@ export class RoleComponent implements OnInit {
   showDeleteConfirm(role: Role) {
     this.getEmployeesWithDeleteRole(role);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure you want to delete  ' + role.name + ' role?',
+      nzTitle: 'Are you sure you want to delete  ' + role.name + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzCancelText: 'No',
       nzOnOk: () => {
         if (this.employeesWithDeleteRole.length > 0) {
-          this.facade.toastrService.error("The are some employees with this associated role.");
+          this.facade.toastrService.error("Unable to delete: there are employees with this role assigned");
         }
         else {
           this.facade.RoleService.delete<Role>(role.id).subscribe(res => {
             this.getRoles();
-            this.facade.toastrService.success('Role was deleted !');
+            this.facade.toastrService.success('Role was deleted!');
           }, err => {
             if (err.message != undefined) this.facade.toastrService.error(err.message);
             else this.facade.toastrService.error("The service is not available now. Try again later.");
@@ -107,7 +107,7 @@ export class RoleComponent implements OnInit {
               }
               this.facade.RoleService.add<Role>(addRole).subscribe(res => {
                 this.getRoles();
-                this.facade.toastrService.success('Role was successfully created !');
+                this.facade.toastrService.success('Role was successfully created!');
                 modal.destroy();
               }, err => {
                 if (err.message != undefined) this.facade.toastrService.error(err.message);
@@ -154,7 +154,7 @@ export class RoleComponent implements OnInit {
               editRole.isActive = this.roleForm.controls["isActive"].value;
               this.facade.RoleService.update<Role>(role.id, editRole).subscribe(res => {
                 this.getRoles();
-                this.facade.toastrService.success('Role was successfully edited !');
+                this.facade.toastrService.success('Role was successfully edited!');
                 modal.destroy();
               }, err => {
                 if (err.message != undefined) this.facade.toastrService.error(err.message);

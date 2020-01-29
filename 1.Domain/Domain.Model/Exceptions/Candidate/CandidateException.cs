@@ -10,7 +10,7 @@ namespace Domain.Model.Exceptions.Candidate
         protected override int MainErrorCode => (int)ApplicationErrorMainCodes.Candidate;
 
         public CandidateException(string message)
-            : base(string.IsNullOrEmpty(message) ? "There is a candidate related error" : message)
+            : base(string.IsNullOrEmpty(message) ? "Candidate related error" : message)
         {
         }
     }
@@ -18,7 +18,7 @@ namespace Domain.Model.Exceptions.Candidate
     public class InvalidCandidateException : CandidateException
     {
         public InvalidCandidateException(string message)
-            : base(string.IsNullOrEmpty(message) ? "The candidate is not valid" : message)
+            : base(string.IsNullOrEmpty(message) ? "Candidate is not valid" : message)
         {
         }
     }
@@ -89,7 +89,7 @@ namespace Domain.Model.Exceptions.Candidate
     public class CandidateNotFoundException : InvalidCandidateException
     {
         protected override int SubErrorCode => (int)CandidateErrorSubCodes.CandidateNotFound;
-        public CandidateNotFoundException(int candidateId) : base($"The Candidate {candidateId} was not found.")
+        public CandidateNotFoundException(int candidateId) : base($"Candidate {candidateId} was not found.")
         {
             CandidateId = candidateId;
         }

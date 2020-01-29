@@ -25,7 +25,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('date').dirty && offerForm.get('date').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -40,7 +40,7 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="offerForm.get('consultantOwnerId').dirty && offerForm.get('consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="offerForm.get('consultantOwnerId').dirty && offerForm.get('consultantOwnerId').errors">Please enter the recruiter</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -64,7 +64,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="offerDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('offerDate').dirty && offerForm.get('offerDate').errors">
-                        Please input a offer date
+                        Please enter a offer date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -73,9 +73,9 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="agreedSalary">Agreed Salary</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input type="number" nz-input formControlName="agreedSalary" id="agreedSalary" placeholder="Please input the agreed salary" pattern="[0-9]+([\.,][0-9]+)?">
+                    <input type="number" nz-input formControlName="agreedSalary" id="agreedSalary" placeholder="Please enter the agreed salary" pattern="[0-9]+([\.,][0-9]+)?">
                     <nz-form-explain *ngIf="offerForm.get('agreedSalary').dirty && offerForm.get('agreedSalary').errors">
-                        Please input the salary
+                        Please enter the salary
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -88,7 +88,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="hireDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('hireDate').dirty && offerForm.get('hireDate').errors">
-                        Please input a hire date
+                        Please enter a hire date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -124,7 +124,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="backgroundCheckDoneDate"></nz-date-picker>
                     <nz-form-explain *ngIf="offerForm.get('backgroundCheckDoneDate').dirty && offerForm.get('backgroundCheckDoneDate').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -143,7 +143,7 @@
             <nz-form-control [nzSm]="14" [nzXs]="24">
                 <nz-date-picker style="width: 100%;" formControlName="preocupationalDoneDate"></nz-date-picker>
                 <nz-form-explain *ngIf="offerForm.get('preocupationalDoneDate').dirty && offerForm.get('preocupationalDoneDate').errors">
-                    Please input a date
+                    Please enter a date
                 </nz-form-explain>
             </nz-form-control>
         </div>
@@ -157,7 +157,7 @@
                 </nz-form-control>
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && offerForm.get('rejectionReason').dirty && offerForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="offerForm.get('rejectionReason')?.dirty && offerForm.get('rejectionReason')?.errors ">
-                        Please input rejection reason!
+                        Please enter rejection reason!
                     </ng-container>
                 </nz-form-explain>
             </nz-form-item>

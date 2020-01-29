@@ -15,7 +15,7 @@ export class EmployeeCasualtiesComponent implements OnInit {
   employeecasualties: EmployeeCasualty[] = [];
   listOfDisplayData = [...this.employeecasualties];
 
-  monthList: string[] = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+  monthList: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   yearList: number[] = [];
 
@@ -87,7 +87,7 @@ export class EmployeeCasualtiesComponent implements OnInit {
                 .subscribe(res => {
                   this.getEmployeeCasualties();
                   this.app.hideLoading();
-                  this.facade.toastrService.success("Casualty was successfuly created !");
+                  this.facade.toastrService.success("Casualty was successfuly created!");
                   modal.destroy();
                 }, err => {
                   this.app.hideLoading();
@@ -140,7 +140,7 @@ export class EmployeeCasualtiesComponent implements OnInit {
                 .subscribe(res => {
                   this.getEmployeeCasualties();
                   this.app.hideLoading();
-                  this.facade.toastrService.success('Casualty was successfully edited !');
+                  this.facade.toastrService.success('Casualty was successfully edited!');
                   modal.destroy();
                 }, err => {
                   this.app.hideLoading();
@@ -159,7 +159,7 @@ export class EmployeeCasualtiesComponent implements OnInit {
   showDeleteConfirm(employeeCasualtyId: number): void {
     let employeeCasualtyDelete: EmployeeCasualty = this.employeecasualties.find(employeeCasualty => employeeCasualty.id == employeeCasualtyId);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure to delete ' + this.monthList[employeeCasualtyDelete.month - 1] + ' of ' + employeeCasualtyDelete.year + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + this.monthList[employeeCasualtyDelete.month - 1] + ' ' + employeeCasualtyDelete.year + '?',
       nzContent: 'This action will delete the casualty associated with this month',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -167,7 +167,7 @@ export class EmployeeCasualtiesComponent implements OnInit {
       nzOnOk: () => this.facade.employeeCasulatyService.delete<EmployeeCasualty>(employeeCasualtyId)
         .subscribe(res => {
           this.getEmployeeCasualties();
-          this.facade.toastrService.success('Casualty was deleted !');
+          this.facade.toastrService.success('Casualty was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

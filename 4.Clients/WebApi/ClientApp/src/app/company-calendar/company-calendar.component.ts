@@ -99,7 +99,7 @@ export class CompanyCalendarComponent implements OnInit {
     this.resetForm();
   
     const modal = this.facade.modalService.create({
-      nzTitle: 'Add New festivity/reminder day',
+      nzTitle: 'Add new festivity/reminder day',
       nzContent: modalContent,
       nzClosable: true,
       nzWidth: '90%',
@@ -132,7 +132,7 @@ export class CompanyCalendarComponent implements OnInit {
                 .subscribe(res => {
                   this.getCompanyCalendar();
                   this.controlArray = [];
-                  this.facade.toastrService.success('festivity/reminder day was successfully created !');
+                  this.facade.toastrService.success('Festivity/reminder day was successfully created!');
                   this.getCompanyCalendar();
                   modal.destroy();
                 }, err => {
@@ -196,7 +196,7 @@ export class CompanyCalendarComponent implements OnInit {
               this.facade.companyCalendarService.update<CompanyCalendar>(id, editedCompanyCalendar)
                 .subscribe(res => {
                   this.getCompanyCalendar();
-                  this.facade.toastrService.success('festivity/reminder day was successfully edited !');
+                  this.facade.toastrService.success('Festivity/reminder day was successfully edited!');
                   modal.destroy();
                   this.getCompanyCalendar();
                 }, err => {
@@ -218,7 +218,7 @@ export class CompanyCalendarComponent implements OnInit {
 
   showDeleteConfirm(CompanyCalendarID: number): void {
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete?',
+      nzTitle: 'Are you sure you want to delete this festivity/reminder day?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -226,7 +226,7 @@ export class CompanyCalendarComponent implements OnInit {
       nzOnOk: () => this.facade.companyCalendarService.delete<CompanyCalendar>(CompanyCalendarID)
         .subscribe(res => {
           this.getCompanyCalendar();
-          this.facade.toastrService.success('festivity/reminder day was deleted !');
+          this.facade.toastrService.success('Festivity/reminder day was deleted!');
         }, err => {
           if (err.message !== undefined) {
             this.facade.toastrService.error(err.message);

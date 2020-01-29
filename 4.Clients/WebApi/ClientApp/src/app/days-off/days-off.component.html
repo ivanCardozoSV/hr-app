@@ -95,7 +95,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="DNI">D.N.I.</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input #DNI type="number" nz-input formControlName="DNI" id="DNI" placeholder="Please input the DNI">
+                        <input #DNI type="number" nz-input formControlName="DNI" id="DNI" placeholder="Please enter the DNI">
                         <nz-form-explain *ngIf="validateForm.get('DNI').dirty && validateForm.get('DNI').errors">
                             <ng-container *ngIf="validateForm.get('DNI')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -104,7 +104,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('DNI')?.hasError('required')">
-                                Please input the DNI!
+                                Please enter the DNI!
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('DNI')?.hasError('dniTooLongError')">
                                 The DNI has more than 8 characters!
@@ -128,7 +128,7 @@
                         </nz-select>
                         <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
                             <ng-container *ngIf="validateForm.get('type')?.hasError('required')">
-                                Please input the reason!
+                                Please enter the reason!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -151,7 +151,7 @@
                                 </nz-date-picker>
                             </div>
                             <nz-form-explain *ngIf="validateForm.get('date').dirty && validateForm.get('date').errors">
-                                Please input a date
+                                Please enter a date
                             </nz-form-explain>
                         </nz-form-control>
                     </nz-form-item>
@@ -169,7 +169,7 @@
                                 </nz-date-picker>
                             </div>
                             <nz-form-explain *ngIf="validateForm.get('endDate').dirty && validateForm.get('endDate').errors">
-                                Please input a final date
+                                Please enter a final date
                             </nz-form-explain>
                         </nz-form-control>
                     </nz-form-item>
@@ -187,7 +187,7 @@
                         </nz-radio-group>
                         <nz-form-explain>
                             <ng-container *ngIf="validateForm.get('status')?.hasError('required')">
-                                Please input the status!
+                                Please enter the status!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>

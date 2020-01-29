@@ -15,7 +15,7 @@ export class HireProjectedComponent implements OnInit {
   hireProjections: HireProjection[] = [];
   listOfDisplayData = [...this.hireProjections];
 
-  monthList: string[] = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+  monthList: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   yearList: number[] = [];
 
@@ -87,7 +87,7 @@ export class HireProjectedComponent implements OnInit {
                 .subscribe(res => {
                   this.getHireProjections();
                   this.app.hideLoading();
-                  this.facade.toastrService.success("Projection was successfuly created !");
+                  this.facade.toastrService.success("Projection was successfuly created!");
                   modal.destroy();
                 }, err => {
                   this.app.hideLoading();
@@ -140,7 +140,7 @@ export class HireProjectedComponent implements OnInit {
                 .subscribe(res => {
                   this.getHireProjections();
                   this.app.hideLoading();
-                  this.facade.toastrService.success('Projection was successfully edited !');
+                  this.facade.toastrService.success('Projection was successfully edited!');
                   modal.destroy();
                 }, err => {
                   this.app.hideLoading();
@@ -159,7 +159,7 @@ export class HireProjectedComponent implements OnInit {
   showDeleteConfirm(hireProjectionId: number): void {
     let hireProjectionDelete: HireProjection = this.hireProjections.find(hireProjection => hireProjection.id == hireProjectionId);
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure to delete ' + this.monthList[hireProjectionDelete.month - 1] + ' of ' + hireProjectionDelete.year + ' ?',
+      nzTitle: 'Are you sure you want to delete ' + this.monthList[hireProjectionDelete.month - 1] + ' ' + hireProjectionDelete.year + '?',
       nzContent: 'This action will delete the projection associated with this month',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -167,7 +167,7 @@ export class HireProjectedComponent implements OnInit {
       nzOnOk: () => this.facade.hireProjectionService.delete<HireProjection>(hireProjectionId)
         .subscribe(res => {
           this.getHireProjections();
-          this.facade.toastrService.success('Projection was deleted !');
+          this.facade.toastrService.success('Projection was deleted!');
         }, err => {
           if (err.message != undefined) this.facade.toastrService.error(err.message);
           else this.facade.toastrService.error("The service is not available now. Try again later.");

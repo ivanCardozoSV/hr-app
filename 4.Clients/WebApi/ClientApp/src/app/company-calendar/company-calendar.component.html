@@ -65,7 +65,7 @@
                         </nz-radio-group>
                         <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
                             <ng-container *ngIf="validateForm.get('type')?.hasError('required')">
-                                Please input the type!
+                                Please enter the type!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -81,7 +81,7 @@
                         <nz-date-picker style="width: 100%;" formControlName="date" nzFormat="yyyy-MM-dd" [nzDisabledDate]="disabledDate">
                         </nz-date-picker>
                         <nz-form-explain *ngIf="validateForm.get('date').dirty && validateForm.get('date').errors">
-                            Please input a date
+                            Please enter a date
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
@@ -93,7 +93,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="comments">Comments</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="comments" id="comments" placeholder="Please input a comment regarding the festivity or reminder">
+                        <input type="text" nz-input formControlName="comments" id="comments" placeholder="Please enter a comment regarding the festivity or reminder">
                         <nz-form-explain *ngIf="validateForm.get('comments').dirty && validateForm.get('comments').errors">
                             <ng-container *ngIf="validateForm.get('comments')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -102,7 +102,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="validateForm.get('comments')?.hasError('required')">
-                                Please input the Comments!
+                                Please enter the Comments!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>

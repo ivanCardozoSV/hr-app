@@ -25,7 +25,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="hireForm.get('date').dirty && hireForm.get('date').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -40,7 +40,7 @@
                         <nz-option *ngFor="let c of _consultants" nzLabel="{{c.name}} {{c.lastName}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="hireForm.get('consultantOwnerId').dirty && hireForm.get('consultantOwnerId').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="hireForm.get('consultantOwnerId').dirty && hireForm.get('consultantOwnerId').errors">Please enter the recruiter</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -53,7 +53,7 @@
                         </nz-option>
                     </nz-select>
                     <nz-form-explain *ngIf="hireForm.get('consultantDelegateId').dirty && hireForm.get('consultantDelegateId').errors">
-                        Please input the consultant</nz-form-explain>
+                        Please enter the consultant</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>

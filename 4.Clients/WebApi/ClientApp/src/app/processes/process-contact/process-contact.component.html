@@ -6,7 +6,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="12" nzFor="name">Name</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input type="text" nz-input formControlName="name" id="name" placeholder="Please input the Name">
+                    <input type="text" nz-input formControlName="name" id="name" placeholder="Please enter the Name">
                     <nz-form-explain *ngIf="candidateForm.get('name').dirty && candidateForm.get('name').errors">
                         <ng-container *ngIf="candidateForm.get('name')?.hasError('trimBeginError')">
                             The input has leading whitespace!
@@ -15,7 +15,7 @@
                             The input has trailing whitespace!
                         </ng-container>
                         <ng-container *ngIf="candidateForm.get('name')?.hasError('required')">
-                            Please input the name!
+                            Please enter the name!
                         </ng-container>
                     </nz-form-explain>
                 </nz-form-control>
@@ -29,7 +29,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstName" [hidden]="!visible">First Name</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <input type="text" nz-input formControlName="firstName" id="FirstName" placeholder="Please input the First Name">
+                    <input type="text" nz-input formControlName="firstName" id="FirstName" placeholder="Please enter a first name">
                     <nz-form-explain *ngIf="candidateForm.get('firstName').dirty && candidateForm.get('firstName').errors">
                         <ng-container *ngIf="candidateForm.get('firstName')?.hasError('trimBeginError')">
                             The input has leading whitespace!
@@ -38,7 +38,7 @@
                             The input has trailing whitespace!
                         </ng-container>
                         <ng-container *ngIf="candidateForm.get('firstName')?.hasError('required')">
-                            Please input the First name!
+                            Please enter the First name!
                         </ng-container>
                     </nz-form-explain>
                 </nz-form-control>
@@ -48,7 +48,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" [hidden]="!visible">Last Name</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <input type="text" nz-input formControlName="lastName" id="lastName" placeholder="Please input the last name">
+                    <input type="text" nz-input formControlName="lastName" id="lastName" placeholder="Please enter a last name">
                     <nz-form-explain *ngIf="candidateForm.get('lastName').dirty && candidateForm.get('lastName').errors">
                         <ng-container *ngIf="candidateForm.get('lastName')?.hasError('trimBeginError')">
                             The input has leading whitespace!
@@ -57,7 +57,7 @@
                             The input has trailing whitespace!
                         </ng-container>
                         <ng-container *ngIf="candidateForm.get('lastName')?.hasError('required')">
-                            Please input the last name!
+                            Please enter the last name!
                         </ng-container>
                     </nz-form-explain>
                 </nz-form-control>
@@ -78,7 +78,7 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" [hidden]="!visible">E-mail</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <input nz-input formControlName="email" id="email" placeholder="Please input the email">
+                    <input nz-input formControlName="email" id="email" placeholder="Please enter an email">
                     <nz-form-explain *ngIf="candidateForm.get('email').dirty && candidateForm.get('email').errors">The input is not valid E-mail!</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -95,10 +95,10 @@
                                 <nz-option nzLabel="+1" nzValue="+1"></nz-option>
                             </nz-select>
                         </ng-template>
-                        <input formControlName="phoneNumber" id="'phoneNumber'" type="number" nz-input placeholder="Please input a phone number">
+                        <input formControlName="phoneNumber" id="'phoneNumber'" type="number" nz-input placeholder="Please enter a phone number">
                     </nz-input-group>
                     <!-- <nz-form-explain *ngIf="candidateForm.get('phoneNumber').dirty && candidateForm.get('phoneNumber').errors">
-                        Please input your phone number!</nz-form-explain> -->
+                        Please enter your phone number!</nz-form-explain> -->
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -111,7 +111,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
                     <nz-date-picker formControlName="contactDay" [nzSize]="size" nzPlaceHolder="Select a date">
                     </nz-date-picker>
-                    <!-- <nz-form-explain *ngIf="candidateForm.get('contactDay').dirty && candidateForm.get('contactDay').errors && !exists(candidateForm.get('contactDay').errors)">Please input
+                    <!-- <nz-form-explain *ngIf="candidateForm.get('contactDay').dirty && candidateForm.get('contactDay').errors && !exists(candidateForm.get('contactDay').errors)">Please enter
                       the date</nz-form-explain> -->
                 </nz-form-control>
             </nz-form-item>
@@ -124,7 +124,7 @@
                         <nz-option *ngFor="let r of recruiters" nzLabel="{{r.name}} {{r.lastName}}" [nzValue]="r.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="candidateForm.get('recruiter').dirty && candidateForm.get('recruiter').errors">Please input the recruiter</nz-form-explain>
+                    <nz-form-explain *ngIf="candidateForm.get('recruiter').dirty && candidateForm.get('recruiter').errors">Please enter the recruiter</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -139,7 +139,7 @@
                         </nz-option>
                     </nz-select>
                     <nz-form-explain *ngIf="candidateForm.get('profile').dirty && candidateForm.get('profile').errors">
-                        Please input the profile</nz-form-explain>
+                        Please enter the profile</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -151,7 +151,7 @@
                         <nz-option *ngFor="let c of filteredCommunity" nzLabel="{{c.name}}" [nzValue]="c.id">
                         </nz-option>
                     </nz-select>
-                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please input the community</nz-form-explain>
+                    <nz-form-explain *ngIf="candidateForm.get('community').dirty && candidateForm.get('community').errors">Please enter the community</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -162,7 +162,7 @@
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="linkedInProfile" [hidden]="!visible">LinkedIn Profile
                 </nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" [hidden]="!visible">
-                    <input nz-input formControlName="linkedInProfile" id="linkedInProfile" placeholder="Please input the LinkedIn's profile URL">
+                    <input nz-input formControlName="linkedInProfile" id="linkedInProfile" placeholder="Please enter a LinkedIn profile URL">
                     <nz-form-explain *ngIf="candidateForm.get('linkedInProfile').dirty && candidateForm.get('linkedInProfile').errors">
                         <ng-container *ngIf="candidateForm.get('linkedInProfile')?.hasError('trimBeginError')">
                             The input has leading whitespace!
@@ -171,7 +171,7 @@
                             The input has trailing whitespace!
                         </ng-container>
                         <ng-container *ngIf="candidateForm.get('linkedInProfile')?.hasError('required')">
-                            Please input a the URL, or mark the N/A option!
+                            Please enter a the URL, or mark the N/A option!
                         </ng-container>
                     </nz-form-explain>
                 </nz-form-control>

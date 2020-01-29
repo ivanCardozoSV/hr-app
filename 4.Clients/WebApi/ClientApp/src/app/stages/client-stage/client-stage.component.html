@@ -25,7 +25,7 @@
                 <nz-form-control [nzSm]="14" [nzXs]="24">
                     <nz-date-picker style="width: 100%;" formControlName="date"></nz-date-picker>
                     <nz-form-explain *ngIf="clientForm.get('date').dirty && clientForm.get('date').errors">
-                        Please input a date
+                        Please enter a date
                     </nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
@@ -36,7 +36,7 @@
         <nz-form-item>
                 <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="type">Interviewer</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                            <input type="text" nz-input formControlName="interviewer" id="interviewer" placeholder="Please input the interviewer's name">
+                            <input type="text" nz-input formControlName="interviewer" id="interviewer" placeholder="Please enter the interviewer's name">
                     </nz-form-control>
         </nz-form-item>
         </div>
@@ -44,7 +44,7 @@
         <nz-form-item>
             <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="delegateName">Delegate</nz-form-label>
                <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input type="text" nz-input formControlName="delegateName" id="delegateName" placeholder="Please input the delegate name">
+                        <input type="text" nz-input formControlName="delegateName" id="delegateName" placeholder="Please enter the delegate name">
                 </nz-form-control>
         </nz-form-item>
         </div>
@@ -70,11 +70,11 @@
             <nz-form-item>
                 <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="rejectionReason">Rejection Reason</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Input the rejection reason"></textarea>
+                    <textarea rows="1 " nz-input id="rejectionReason" formControlName="rejectionReason" placeholder="Input a rejection reason"></textarea>
                 </nz-form-control>
                 <nz-form-explain style="color: #f5222d " *ngIf="showRejectionReason() && clientForm.get('rejectionReason').dirty && clientForm.get('rejectionReason').errors ">
                     <ng-container *ngIf="clientForm.get('rejectionReason')?.dirty && clientForm.get('rejectionReason')?.errors ">
-                        Please input rejection reason!
+                        Please enter rejection reason!
                     </ng-container>
                 </nz-form-explain>
             </nz-form-item>

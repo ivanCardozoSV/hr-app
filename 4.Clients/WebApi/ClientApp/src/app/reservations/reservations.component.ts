@@ -174,7 +174,7 @@ export class ReservationsComponent implements OnInit {
         .subscribe(async res => {
           await this.getReservations();
           this.getCurrentDayReservations();
-          this.facade.toastrService.success('Reservation deleted !');
+          this.facade.toastrService.success('Reservation deleted!');
         }, err => {
           if (err.message != undefined) { this.facade.toastrService.error(err.message); }
           else { this.facade.toastrService.error('The service is not available now. Try again later.'); }
@@ -261,7 +261,7 @@ export class ReservationsComponent implements OnInit {
         }
         let overlap = this.checkOverlap(0, newReservation);
         if (overlap) {
-          this.facade.toastrService.error('There is already a reservation for this moment.');
+          this.facade.toastrService.error('A reservation for this time already exists.');
         }
         else {
           this.facade.ReservationService.add<Reservation>(newReservation)
@@ -293,7 +293,7 @@ export class ReservationsComponent implements OnInit {
       }
       let overlap = this.checkOverlap(reservation.id, editReservation);
       if (overlap) {
-        this.facade.toastrService.error('There is already a reservation for this moment.');
+        this.facade.toastrService.error('A reservation for this time already exists.');
       }
       else {
         let editReservationSince = new Date(Date.parse(editReservation.sinceReservation.toString())).getDate();

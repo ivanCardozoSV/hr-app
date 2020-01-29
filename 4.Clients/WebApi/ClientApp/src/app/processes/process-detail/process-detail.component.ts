@@ -117,7 +117,7 @@ export class ProcessDetailComponent implements OnInit {
   showAddModal(modalContent: TemplateRef<{}>): void {
 
     if (this.process && this.process.status && (this.process.status === ProcessStatusEnum.Hired || this.process.status === ProcessStatusEnum.Declined || this.process.status === ProcessStatusEnum.Rejected)) {
-      this.facade.toastrService.error('You cannot add new stages to a finished process. You can re open the process by changing its status', 'Process finished');
+      this.facade.toastrService.error('You cannot add new stages to a finished process. You can re-open the process by changing its status', 'Process finished');
       return;
     }
 
@@ -260,7 +260,7 @@ export class ProcessDetailComponent implements OnInit {
     // let stageText = stageDelete.title;
     let stageText = '';
     this.facade.modalService.confirm({
-      nzTitle: 'Are you sure delete the stage called ' + stageText + ' ?',
+      nzTitle: 'Are you sure you want to delete stage ' + stageText + '?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
@@ -268,7 +268,7 @@ export class ProcessDetailComponent implements OnInit {
       nzOnOk: () => this.facade.stageService.delete<Stage>(stageID)
         .subscribe(res => {
           this.getProcessByID(this.processID);
-          this.facade.toastrService.success('Stage was deleted !')
+          this.facade.toastrService.success('Stage was deleted!')
         }, err => {
           this.facade.toastrService.error(err.message);
         })

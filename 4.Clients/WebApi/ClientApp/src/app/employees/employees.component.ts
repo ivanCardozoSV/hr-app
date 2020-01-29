@@ -433,7 +433,7 @@ export class EmployeesComponent implements OnInit {
   showNoReviewersAvailablesModal() {
     const modal = this.facade.modalService.create({
       nzTitle: "New Reviewer",
-      nzContent: "There are no availables reviewers to reeplace " + this.editEmployee.name + " " + this.editEmployee.lastName + " as reviewer.",
+      nzContent: "There are no available reviewers to replace " + this.editEmployee.name + " " + this.editEmployee.lastName + ".",
       nzClosable: true,
       nzFooter: [
         {

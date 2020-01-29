@@ -57,7 +57,7 @@
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">First Name</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input type="text" nz-input formControlName="name" id="name"
-                            placeholder="Please input the name">
+                            placeholder="Please enter a name">
                         <nz-form-explain *ngIf="employeeForm.get('name').dirty && employeeForm.get('name').errors">
                             <ng-container *ngIf="employeeForm.get('name')?.hasError('trimBeginError')">
                                 The input has leading whitespace!
@@ -66,7 +66,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="employeeForm.get('name')?.hasError('required')">
-                                Please input the name!
+                                Please enter the name!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -77,7 +77,7 @@
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName">Last Name</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input type="text" nz-input formControlName="lastName" id="lastName"
-                            placeholder="Please input the last name">
+                            placeholder="Please enter a last name">
                         <nz-form-explain
                             *ngIf="employeeForm.get('lastName').dirty && employeeForm.get('lastName').errors">
                             <ng-container *ngIf="employeeForm.get('lastName')?.hasError('trimBeginError')">
@@ -87,7 +87,7 @@
                                 The input has trailing whitespace!
                             </ng-container>
                             <ng-container *ngIf="employeeForm.get('lastName')?.hasError('required')">
-                                Please input the last name!
+                                Please enter the last name!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -99,9 +99,9 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">DNI</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <input formControlName="dni" id="'dni'" type="number" nz-input placeholder="Please input a DNI">
+                        <input formControlName="dni" id="'dni'" type="number" nz-input placeholder="Please enter a DNI">
                         <nz-form-explain *ngIf="employeeForm.get('dni').dirty && employeeForm.get('dni').errors">
-                            Please input the DNI!
+                            Please enter the DNI!
                         </nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
@@ -113,7 +113,7 @@
                     <nz-form-label [nzSm]="6" [nzXs]="12" nzFor="emailAddress">E-mail</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input nz-input formControlName="emailAddress" id="emailAddress"
-                            placeholder="Please input the email">
+                            placeholder="Please enter an e-mail address">
                         <nz-form-explain
                             *ngIf="employeeForm.get('emailAddress').dirty && employeeForm.get('emailAddress').errors">
                             The
@@ -133,11 +133,11 @@
                                 </nz-select>
                             </ng-template>
                             <input formControlName="phoneNumber" id="phoneNumber" type="number" nz-input
-                                placeholder="Please input the phone number">
+                                placeholder="Please enter a phone number">
                         </nz-input-group>
                         <nz-form-explain
                             *ngIf="employeeForm.get('phoneNumber').dirty && employeeForm.get('phoneNumber').errors">
-                            Please input your phone number!</nz-form-explain>
+                            Please enter your phone number!</nz-form-explain>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -148,7 +148,7 @@
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="linkedInProfile">LinkedIn</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <input nz-input formControlName="linkedInProfile" id="linkedInProfile"
-                            placeholder="Please input the LinkedIn URL">
+                            placeholder="Please enter a LinkedIn URL">
                         <nz-form-explain
                             *ngIf="employeeForm.get('linkedInProfile').dirty && employeeForm.get('linkedInProfile').errors">
                             <ng-container *ngIf="employeeForm.get('linkedInProfile')?.hasError('trimBeginError')">
@@ -171,7 +171,7 @@
                         </nz-select>
                         <nz-form-explain *ngIf="employeeForm.get('roleId').dirty && employeeForm.get('roleId').errors">
                             <ng-container *ngIf="employeeForm.get('roleId')?.hasError('required')">
-                                Please input the role!
+                                Please enter the role!
                             </ng-container>
                         </nz-form-explain>
                     </nz-form-control>
@@ -220,11 +220,11 @@
                         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Reviewer">Reviewer</nz-form-label>
                         <nz-form-control *ngIf="!editMode; else editReviewersFilter" [nzSm]="14" [nzXs]="24">
                             <input nz-input [nzAutocomplete]="auto" formControlName="reviewerName" id="Reviewer"
-                                placeholder="Please input the Reviewer" (input)="filterReviewers($event)">
+                                placeholder="Please enter a reviewer" (input)="filterReviewers($event)">
                             <nz-autocomplete [nzDataSource]="filteredReviewersNames" #auto> </nz-autocomplete>
                             <nz-form-explain style="color: #f5222d">
                                 <ng-container *ngIf="showInputReviewerMessage">
-                                    Please input the Reviewer!
+                                    Please enter the Reviewer!
                                 </ng-container>
                                 <ng-container *ngIf="showReviewerNotFoundMessage">
                                     Reviewer not found!
@@ -264,11 +264,11 @@
     <div [formGroup]="employeeForm">
         <nz-form-control [nzSm]="14" [nzXs]="24">
             <input nz-input [nzAutocomplete]="auto" formControlName="reviewerName" id="Reviewer"
-                placeholder="Please input the Reviewer" (input)="filterEditReviewers($event)">
+                placeholder="Please enter a reviewer" (input)="filterEditReviewers($event)">
             <nz-autocomplete [nzDataSource]="filteredEditReviewersNames" #auto> </nz-autocomplete>
             <nz-form-explain style="color: #f5222d">
                 <ng-container *ngIf="showInputReviewerMessage">
-                    Please input the Reviewer!
+                    Please enter the Reviewer!
                 </ng-container>
                 <ng-container *ngIf="showReviewerNotFoundMessage">
                     Reviewer not found!
@@ -297,7 +297,7 @@
             <nz-form-explain
                 *ngIf="newReviewerForm.get('reviewerId').dirty && newReviewerForm.get('reviewerId').errors">
                 <ng-container *ngIf="newReviewerForm.get('reviewerId')?.hasError('required')">
-                    Please input the reviewer!
+                    Please enter the reviewer!
                 </ng-container>
             </nz-form-explain>
         </nz-form-control>

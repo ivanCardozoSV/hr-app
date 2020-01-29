@@ -72,7 +72,7 @@
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Description</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input formControlName="description" id="description" placeholder="Please input the description">
+            <input nz-input formControlName="description" id="description" placeholder="Please enter a description">
             <nz-form-explain
               *ngIf="reservationForm.get('description').dirty && reservationForm.get('description').errors">
               Please
