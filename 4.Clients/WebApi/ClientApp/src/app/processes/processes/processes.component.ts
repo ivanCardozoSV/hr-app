@@ -774,7 +774,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
             if (res.status !== ProcessStatusEnum.Declined && this.isDeclined(newProcess)) {
               // Used for verifying whether user pressed OK or Cancel on decline modal.
               let declineReason = newProcess.declineReason;
-              let modal = this.openDeclineModal(newProcess, declineProcessModal).afterClose
+              this.openDeclineModal(newProcess, declineProcessModal).afterClose
                 .subscribe(sel => {
                   if (declineReason !== newProcess.declineReason) {
                     this.getCandidates();
