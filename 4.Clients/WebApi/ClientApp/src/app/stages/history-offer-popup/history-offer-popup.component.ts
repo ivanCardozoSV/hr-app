@@ -23,24 +23,8 @@ export class HistoryOfferPopupComponent implements OnInit {
       this._offerHistory = value;
   }
 
-  private _temporalOffers : Offer[] = [];
-  public get temporalOffers():  Offer[] {
-    return this._temporalOffers;
-  }
-  public set temporalOffers(value: Offer[]) {
-      this._temporalOffers = value;
-  }
-
   editForm: FormGroup;
   offerStatusList: any[];
-
-  recordForm: FormGroup = this.fb.group({
-    id: [0],
-    rejectionReason: [null, [Validators.required]],
-    offerDate: [new Date(), [Validators.required]],
-    salaryOffer: [null, [Validators.required]],
-    status: [OfferStatusEnum.Pending, [Validators.required]]
-    });
 
   constructor(private fb: FormBuilder, private facade: FacadeService, private globals: Globals) {    
     this.offerStatusList = globals.offerStatusList;
@@ -60,29 +44,50 @@ export class HistoryOfferPopupComponent implements OnInit {
     })
   }
 
-  doSomething(){    
-    // this.datepipe.transform(this.offerHistory[0].offerDate, 'yyyy-MM-dd'); 
+  doSomething(){        
     console.log(this._offerHistory);
-    console.log("TemporalOffers");
-    console.log(this.temporalOffers);
   }
 
-  addOffer(){
-    let isCompleted: boolean = true;
-    for (const i in this.recordForm.controls) {
-      this.recordForm.controls[i].markAsDirty();
-      this.recordForm.controls[i].updateValueAndValidity();
-      if (!this.recordForm.controls[i].valid) isCompleted = false;
-    }
-    if (isCompleted){
-      this.offerHistory.push({
-        id: 0,
-        offerDate: this.recordForm.controls['offerDate'].value,
-        salary: this.recordForm.controls['salaryOffer'].value,
-        rejectionReason: this.recordForm.controls['rejectionReason'].value,
-        status: this.recordForm.controls['status'].value,
-      });
-    }    
+  addOffer(modalContent: TemplateRef<{}>){
+    this.resetEditForm();     
+    const modal = this.facade.modalService.create({
+      nzTitle: 'Add Offer',
+      nzContent: modalContent,
+      nzClosable: true,
+      nzWidth: '90%',
+      nzFooter: [
+        {
+          label: 'Cancel',
+          shape: 'default',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Save',
+          type: 'primary',
+          loading: false,
+          onClick: () => {
+            modal.nzFooter[1].loading = true;
+            let isCompleted: boolean = true;
+            for (const i in this.editForm.controls) {
+              this.editForm.controls[i].markAsDirty();
+              this.editForm.controls[i].updateValueAndValidity();
+              if (!this.editForm.controls[i].valid) isCompleted = false;
+            }
+            if (isCompleted) {
+              this.offerHistory.push({
+                id : 0,
+                offerDate: this.editForm.controls['offerDate'].value,
+                salary: this.editForm.controls['salaryOffer'].value,
+                rejectionReason: this.editForm.controls['rejectionReason'].value,
+                status: this.editForm.controls['status'].value,
+              });
+              this.facade.toastrService.success('Offer was successfully edited !');
+              modal.destroy();
+            }              
+            else modal.nzFooter[1].loading = false;
+          }
+        }],
+    });
   }
 
   showEditModal(modalContent: TemplateRef<{}>, id: number): void {    
@@ -117,7 +122,7 @@ export class HistoryOfferPopupComponent implements OnInit {
               this.offerHistory[id].salary = this.editForm.controls['salaryOffer'].value;
               this.offerHistory[id].rejectionReason = this.editForm.controls['rejectionReason'].value;
               this.offerHistory[id].status = this.editForm.controls['status'].value;
-              this.facade.toastrService.success('Community was successfully edited !');
+              this.facade.toastrService.success('Offer was successfully edited !');
               modal.destroy();
             }              
             else modal.nzFooter[1].loading = false;

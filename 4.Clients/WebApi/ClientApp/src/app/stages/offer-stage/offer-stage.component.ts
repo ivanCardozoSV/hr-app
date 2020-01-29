@@ -10,7 +10,6 @@ import { OfferStage } from 'src/entities/offer-stage';
 import { ProcessService } from '../../services/process.service';
 import { HistoryOfferPopupComponent } from '../history-offer-popup/history-offer-popup.component';
 import { Offer } from 'src/entities/offer';
-import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'offer-stage',
@@ -77,7 +76,9 @@ export class OfferStageComponent implements OnInit {
     });
     this.changeFormStatus(false);
     if (this.offerStage) { this.fillForm(this.offerStage); }    
-    this.temporalOffers = cloneDeep(this.offerStage.offers);
+    // this.temporalOffers = cloneDeep(this.offerStage.offers);    
+    this.temporalOffers = [...this.offerStage.offers];
+    console.log(this.offerStage);
   }
 
   updateSeniority(seniorityId) {
@@ -129,7 +130,7 @@ export class OfferStageComponent implements OnInit {
     stage.processId = processId;
     stage.consultantDelegateId = this.getControlValue(form.controls.consultantDelegateId);
     stage.seniority = this.getControlValue(form.controls.seniority);    
-    stage.offers = this.temporalOffers;
+    stage.offers = this.temporalOffers;    
     // this.offerStage.offers = this.temporalOffers;
     stage.hireDate = this.getControlValue(form.controls.hireDate);
     stage.backgroundCheckDone = this.getControlValue(form.controls.backgroundCheckDone);

@@ -1,14 +1,13 @@
-﻿using Domain.Model.Enum;
+﻿using Core;
+using Domain.Model.Enum;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Domain.Model
 {
-    public class Offer
-    {        
-        public int Id { get; set; }
-
+    public class Offer: Entity<int>
+    {                
         public DateTime? OfferDate { get; set; }
 
         public float Salary { get; set; }

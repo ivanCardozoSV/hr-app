@@ -529,6 +529,7 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
     this.emptyCandidate = this.candidatesFullList.filter(candidate => candidate.id == candidateID)[0];
     this.candidateDetailsModal.showModal(modalContent, this.emptyCandidate.name + ' ' + this.emptyCandidate.lastName);
     console.log(this.emptyProcess);
+    console.log(this.emptyProcess.offerStage.offers);
   }
 
   showConsultantDetailsModal(consultantID: number, modalContent: TemplateRef<{}>): void {
@@ -855,7 +856,6 @@ export class ProcessesComponent implements OnInit, AfterViewChecked {
         preocupationalDoneDate: new Date(),
         offers : new Array<Offer>()
       },
-    };
-    this.emptyProcess.offerStage.offers = [];
+    };    
   }
 }
